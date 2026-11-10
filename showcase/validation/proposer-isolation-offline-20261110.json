@@ -33,6 +33,10 @@
     "invariants_failed": [],
     "utc": "2026-11-10T17:30:04.372902Z"
   },
-  "full_suite": "running; not yet claimed",
+  "full_suite": {
+    "count": 1125,
+    "passed": true,
+    "seconds": 335.521
+  },
   "live_proposer": "pending; not yet claimed"
 }

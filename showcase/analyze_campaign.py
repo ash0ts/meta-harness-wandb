@@ -12,6 +12,7 @@ import random
 from pathlib import Path
 
 from mhforge import controls, util
+from mhforge.paths import StatePaths
 
 
 def paired(left, right, *, repeats=10000, seed=20261110):
@@ -61,7 +62,36 @@ def read_arm(root, name, expected):
     if name == 'fewshot_vote5':
         p = root/'controls/result.json'
         doc = util.read_json(p)
+        if any(doc['plan'].get(k) != v for k, v in controls.PLAN.items()):
+            raise ValueError('control plan differs from predeclared protocol')
+        grader = controls.load_grader(StatePaths(root))
         for ds, result in doc['datasets'].items():
+            samples, seen = [], set()
+            for number, record in enumerate(result['evidence'], 1):
+                key = util.safe_component(record['job_key'])
+                job = util.read_json(root/'jobs'/key/'job.json')
+                if (key in seen or job.get('sample') != number or job.get('candidate') != controls.PLAN['system']
+                        or job.get('split') != 'test' or job.get('phase') != 'controls'
+                        or job.get('dataset') != ds or job.get('status') != 'succeeded'):
+                    raise ValueError('invalid or duplicate control sample evidence')
+                argv = job['inner_argv']
+                if float(argv[argv.index('--temperature')+1]) != controls.PLAN['temperature']:
+                    raise ValueError('control sample temperature differs')
+                if type(record['attempt']) is not int or record['attempt'] < 1:
+                    raise ValueError('invalid control attempt')
+                seen.add(key)
+                sidecar = root/'jobs'/key/('a'+str(record['attempt']))/'out/sidecar.jsonl'
+                if util.sha256_file(sidecar) != record['sidecar_sha256']:
+                    raise ValueError('control sidecar digest changed')
+                attempt = next(a for a in job['attempts'] if a['attempt'] == record['attempt'])
+                if attempt.get('outcome') != 'ok' or attempt['outputs']['sidecar.jsonl'] != record['sidecar_sha256']:
+                    raise ValueError('control job evidence differs')
+                samples.append(controls.final_evals(util.read_jsonl(sidecar)))
+                evidence.append(dict(path=str(sidecar.relative_to(root)), sha256=record['sidecar_sha256'],
+                                     job_key=key, attempt=record['attempt']))
+            rebuilt = controls.aggregate(ds, samples, grader, expected_count=expected[ds])
+            if any(result.get(k) != v for k, v in rebuilt.items()):
+                raise ValueError('control aggregate does not reproduce from its sample evidence')
             arm[ds] = {r['index']:r for r in result['rows']}
         evidence.append(dict(path=str(p.relative_to(root)), sha256=util.sha256_file(p)))
     else:
@@ -93,20 +123,44 @@ def read_arm(root, name, expected):
     return arm, evidence
 
 
+def compatible_campaigns(left, right):
+    """A cross-campaign comparison must retain task, worker and solver pins.
+
+    Proposer settings, campaign names and service bookkeeping may differ;
+    the five-vote arm's predeclared temperature is verified in its own plan.
+    """
+    keys = ('upstream.commit', 'upstream.tree_sha256', 'upstream.worker_lock_sha256', 'upstream.expect',
+            'provider.kind', 'provider.base_url', 'provider.wire_model', 'provider.expected_response_model',
+            'gateway.max_output_tokens', 'sandbox.base_image', 'sandbox.image', 'sandbox.wheelhouse')
+    for key in keys:
+        try:
+            a, b = util.lookup(left, key), util.lookup(right, key)
+        except KeyError:
+            raise ValueError('cross-campaign input is missing: '+key) from None
+        if a != b:
+            raise ValueError('cross-campaign input differs: '+key)
+
+
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--state', type=Path, required=True)
     p.add_argument('--left', required=True)
     p.add_argument('--right', required=True)
+    p.add_argument('--right-state', type=Path, help='Separate frozen campaign for the right arm; pins must match')
     p.add_argument('--output', type=Path, required=True)
     p.add_argument('--split-audit', type=Path, help='Frozen audit for the separately labelled overlap sensitivity')
     args=p.parse_args()
     m=util.read_json(args.state/'manifest.json')
     expected={ds:sizes[2] for ds,sizes in m['upstream']['expect']['sizes'].items()}
     left, le=read_arm(args.state,args.left,expected)
-    right, re=read_arm(args.state,args.right,expected)
+    right_state=args.right_state or args.state
+    right_manifest=util.read_json(right_state/'manifest.json')
+    compatible_campaigns(m,right_manifest)
+    right, re=read_arm(right_state,args.right,expected)
     result=dict(schema='mhforge.paired-analysis/1',campaign=m['campaign'],left=args.left,right=args.right,
                 source_manifest_sha256=util.sha256_file(args.state/'manifest.json'),
+                right_campaign=right_manifest['campaign'],
+                right_manifest_sha256=util.sha256_file(right_state/'manifest.json'),
                 analysis_sha256=util.sha256_file(Path(__file__)),evidence=dict(left=le,right=re),
                 **paired(left,right))
     if args.split_audit:

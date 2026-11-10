@@ -1,0 +1,14 @@
+{
+  "schema": "mhforge.analysis-validation/1",
+  "passed": true,
+  "provider": "in_process_stub; no quality claim",
+  "checks": [
+    "recomputed_412_votes_from_15_sample_sidecars",
+    "wrong_correctness_rejected",
+    "wrong_digest_rejected",
+    "duplicate_sample_rejected",
+    "actual_two_frozen_campaign_inputs_compatible"
+  ],
+  "paired_unit_tests": 5,
+  "analysis_sha256": "ad8aa489bdf49ae047779deb5aa35092b59bbd1a28704392f1a20ee03c782794"
+}
