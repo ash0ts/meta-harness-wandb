@@ -249,6 +249,8 @@ CHECKS = (
 # Opt-in experiments may run while proposer access is unavailable. They never
 # mint qualification/passed.json and are excluded from full qualification.
 DIAGNOSTICS = (
+    Check('EXP-E', 'engineering_controls', True, True, False, 'fixed context and sampling arms',
+          'Measure 0/5/all examples and nested 1/3/5 samples without adaptive selection.', _probe('engineering_controls')),
     Check('EXP-N', 'baseline_noise', True, True, False, 'fresh baseline repeats',
           'Measure repeated-run variation with distinct provider call identities.', _probe('baseline_noise')),
     Check('EXP-K', 'sampling_controls', True, True, False, 'five fresh test samples per dataset',

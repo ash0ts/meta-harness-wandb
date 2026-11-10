@@ -256,6 +256,7 @@ def _runner(args, m, paths, keys, base_env, home, hostname):
                             'proposer_probes': lambda ctx: run('run_proposer_probe'),
                             'baseline_noise': lambda ctx: diagnostic('run_noise'),
                             'sampling_controls': lambda ctx: diagnostic('run_controls'),
+                            'engineering_controls': lambda ctx: diagnostic('run_engineering'),
                             'rehearsal_review': lambda ctx: live_probes.rehearsal_review(ctx, export_check)})
                 if args.teardown:
                     current.rt.executor.cleanup_orphans(current.rt.journal.open_handles())

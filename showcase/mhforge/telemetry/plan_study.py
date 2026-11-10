@@ -117,14 +117,73 @@ def voting(paths, manifest, lens_url):
             rows, evidence, summary)
 
 
+def engineering(paths, manifest, lens_url):
+    from .. import engineering as experiment
+    stored = util.read_json(paths.root / 'engineering/result.json')
+    if stored['plan']['arms'] != {k:list(v) for k,v in experiment.ARMS.items()}:
+        raise ValueError('engineering arm definitions differ')
+    grader = controls.load_grader(paths)
+    rows, evidence, summary = [], [], {}
+    for system, (_, temperature) in experiment.ARMS.items():
+        ds_means = []; policy_scores = {k:[] for k in (1,3,5)}
+        for ds in manifest['upstream']['expect']['datasets']:
+            samples, urls = [], []
+            for sample in range(1,6):
+                key = f'test.{system}.{ds}.s{sample}'
+                job, source, result, ev = _job(paths, key, system=system, dataset=ds, split='test', sample=sample)
+                if float(job['inner_argv'][job['inner_argv'].index('--temperature')+1]) != temperature:
+                    raise ValueError('engineering temperature differs')
+                final = controls.final_evals(source)
+                n = manifest['upstream']['expect']['sizes'][ds][2]
+                if set(final) != set(range(n)):
+                    raise ValueError('engineering task membership differs')
+                evaluator = grader.get_evaluator(ds)
+                for row in final.values():
+                    grade = evaluator(row['prediction'], row['target'])
+                    correct = grade['was_correct'] if isinstance(grade,dict) else grade
+                    if bool(correct) != row['was_correct']:
+                        raise ValueError('engineering grader mismatch')
+                if sum(r['was_correct'] for r in final.values()) != result['correct']:
+                    raise ValueError('engineering result total differs')
+                url = lens_url(f"{key}.a{ev['attempt']}")
+                if not url:
+                    raise ValueError('engineering trace is not verified')
+                urls.append(url); samples.append(final); evidence.append(ev)
+            means = []; scores = {k:[] for k in (1,3,5)}
+            for i in range(n):
+                group = [s[i] for s in samples]
+                if len({(r['example_sha256'],r['target_sha256']) for r in group}) != 1:
+                    raise ValueError('engineering sample identity differs')
+                labels = [controls.vote_label(ds,r['prediction'],grader.extract_final_answer) for r in group]
+                correct = [r['was_correct'] for r in group]
+                selected = [experiment.vote_indices(labels,k) for k in (1,3,5)]
+                mean = sum(correct)/5; means.append(mean)
+                for k,idx in zip((1,3,5),selected): scores[k].append(correct[idx])
+                rows.append([system,ds,i,mean,json.dumps(correct),*[correct[idx] for idx in selected],
+                             json.dumps([idx+1 for idx in selected]),json.dumps(urls)])
+            ds_means.append(sum(means)/n)
+            summary[f'engineering/{system}/{ds}/mean_accuracy'] = sum(means)/n
+            for k in scores:
+                value = sum(scores[k])/n; policy_scores[k].append(value)
+                summary[f'engineering/{system}/{ds}/vote{k}_accuracy'] = value
+        summary[f'engineering/{system}/macro_mean_accuracy'] = sum(ds_means)/len(ds_means)
+        for k,values in policy_scores.items():
+            summary[f'engineering/{system}/macro_vote{k}_accuracy'] = sum(values)/len(values)
+    if sorted(evidence,key=lambda x:x['job_key']) != sorted(stored['evidence'],key=lambda x:x['job_key']):
+        raise ValueError('engineering source evidence differs')
+    return (['system','dataset','index','mean_accuracy','sample_correct','vote1_correct','vote3_correct',
+             'vote5_correct','selected_samples','trace_urls'],rows,evidence,summary)
+
+
 def plan(name, paths, manifest, lens_url, *, export_attempt):
-    columns, rows, evidence, summary = (noise if name == 'noise' else voting)(paths, manifest, lens_url)
+    columns, rows, evidence, summary = {'noise':noise,'vote5':voting,'engineering':engineering}[name](paths, manifest, lens_url)
     unit, key = f'study:{name}', f'study/{name}'
     digest = hashlib.sha256(util.canonical_json(evidence)).hexdigest()
     campaign = manifest['campaign']
     table = {'key': key, 'columns': columns, 'rows': rows,
              'backend': plan_tables.table_backend(manifest), 'input_columns': [], 'output_columns': [],
-             'score_columns': ['accuracy'] if name == 'noise' else ['was_correct']}
+             'score_columns': ['mean_accuracy','vote1_correct','vote3_correct','vote5_correct'] if name == 'engineering'
+                              else ['accuracy'] if name == 'noise' else ['was_correct']}
     table_doc = {'schema': 'mhforge.study-tables/1', 'backend': table['backend'], 'tables': [table]}
     artifact = {'op': 'log', 'name': f'{campaign}-{name}-evidence', 'type': 'study-evidence',
                 'aliases': [campaign], 'files': [], 'metadata': {'sources': evidence, 'sha256': digest}}

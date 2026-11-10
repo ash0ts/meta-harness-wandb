@@ -1,0 +1,27 @@
+{
+  "schema": "mhforge.smoke/1",
+  "passed": true,
+  "engine_sha256": "1364a77188d2b7fda1c2e45e190d44aadf80cfc09f7b4d0b1a682d714b5f9e10",
+  "executor": "local_relay",
+  "worker_network_guard": "sandbox-exec",
+  "provider_calls": 260,
+  "resume_provider_calls": 0,
+  "jobs": 6,
+  "dry_run_units": 9,
+  "audit": {
+    "ok": true,
+    "problems": [],
+    "calls": 260,
+    "observed_micro": 46499,
+    "bounded_unknown_micro": 0,
+    "listed": {
+      "reconciled": [],
+      "limit_exceeded": [],
+      "repeatable_provider_failure": [],
+      "admission_only": [],
+      "open_meters": []
+    }
+  },
+  "invariants_failed": [],
+  "utc": "2026-11-10T20:43:57.111329Z"
+}

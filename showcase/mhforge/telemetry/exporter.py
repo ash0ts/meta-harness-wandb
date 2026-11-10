@@ -288,7 +288,8 @@ class Exporter:
                 deps.append(f"propose:{candidate}")
             add(ExportUnit(f"eval:{split}.{candidate}", "eval", ("wandb",), tuple(deps)))
         for op, name, path in (("noise", "noise", self.paths.noise),
-                              ("controls", "vote5", self.paths.root / "controls/result.json")):
+                              ("controls", "vote5", self.paths.root / "controls/result.json"),
+                              ("engineering", "engineering", self.paths.root / "engineering/result.json")):
             if path.exists() and any(e.get("op") == op and e.get("status") == "complete" for e in entries):
                 deps = tuple(u.unit for u in units.values() if u.kind == "job")
                 add(ExportUnit(f"study:{name}", "study", ("wandb",), deps))
@@ -383,7 +384,9 @@ class Exporter:
         tables_doc, sent, skipped = None, [], []
         withheld: dict[str, dict] = {}
         if u.kind == "study":
-            runs, tables_doc = plan_study.plan(u.unit[6:], self.paths, m, self._lens_url, export_attempt=k)
+            # Dry plans explicitly carry unverified placeholders; live study export still requires readback.
+            lens_url = (lambda jid: self._lens_url(jid) or 'dry-run:unverified:' + jid) if self.dry_run else self._lens_url
+            runs, tables_doc = plan_study.plan(u.unit[6:], self.paths, m, lens_url, export_attempt=k)
             sent = tables_doc["tables"]
         elif u.kind == "propose":
             cand = u.unit[8:]

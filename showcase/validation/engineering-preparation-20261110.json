@@ -1,0 +1,15 @@
+{
+  "schema": "mhforge.engineering-preparation/1",
+  "unused_campaign": "mh-engineering-20261110",
+  "stopped_campaign": "mh-engineering-b-20261110",
+  "reason": "Offline end-to-end resume exposed omission of completed preparation jobs by upstream planning. Corrected in campaign C.",
+  "completed_preparation_jobs": 4,
+  "measured_test_jobs": 0,
+  "completed_provider_attempts": 160,
+  "usage_priced_inference_usd": 0.026605,
+  "agent_lens_verified_units": 4,
+  "cleanup_verified": true,
+  "source_engine_sha256": "9afa61dc7d35209642a1981366de52bf6add1e5ded3961bba27fff93c8c36ed3",
+  "status": "failed setup evidence, excluded from quality comparisons; costs retained",
+  "usage_priced_sandbox_usd": 0.040651
+}

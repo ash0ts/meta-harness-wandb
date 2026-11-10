@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "provider": "stub",
+  "remote_readback_verified": false,
+  "scored_outcomes": 8760,
+  "test_outcomes_regraded": 8240,
+  "identical_request_groups": 1648,
+  "resume_new_calls": 0,
+  "dry_export_units": 73,
+  "engine_sha256": "1364a77188d2b7fda1c2e45e190d44aadf80cfc09f7b4d0b1a682d714b5f9e10",
+  "utc": "2026-11-10T20:51:13.511008Z"
+}

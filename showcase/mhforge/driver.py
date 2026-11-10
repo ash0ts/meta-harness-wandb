@@ -465,6 +465,10 @@ class Driver:
             return {'status': 'complete', 'noise': doc}
         return self._execute('noise', action)
 
+    def run_engineering(self):
+        from . import engineering
+        return engineering.run(self)
+
     def run_controls(self):
         from . import controls
         def action(up, runner):
