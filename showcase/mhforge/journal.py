@@ -6,7 +6,8 @@
 # continue; executor handles for orphan cleanup; candidate-budget counting with operator resets.
 """Append-only operation journal (spec 2.7, 3.16). Standard library only.
 
-One writer (the runner); one ``os.write`` of whole lines per record on an ``O_APPEND`` descriptor, ``fsync`` per line.
+Cooperating writers serialize sequence allocation with a file lock; one ``os.write`` of whole lines per record on an
+``O_APPEND`` descriptor, ``fsync`` per line. Readers refresh their view instead of trusting an instance-local counter.
 The file is never rewritten or truncated. A torn last line (a crash in the middle of a write) is ignored by readers; when
 the writer appends after one it first terminates the torn bytes with a newline followed by a ``("journal", "torn_tail",
 "terminated")`` marker that names the torn line's length and hash, so :func:`read_journal` can tell that line from
@@ -17,6 +18,8 @@ parsing without the entry checks) when they may not import this module; ``util.r
 from __future__ import annotations
 
 import hashlib
+import contextlib
+import fcntl
 import json
 import os
 import threading
@@ -103,6 +106,10 @@ class Journal:
         self.path = Path(path)
         self.clock = clock or util.SystemClock()
         self._lock = threading.RLock()
+        self._reload()
+        self._own_from = self._seq + 1
+
+    def _reload(self) -> None:
         try:
             with open(self.path, "rb") as fh:
                 data = fh.read()
@@ -111,7 +118,17 @@ class Journal:
         self._entries, self._torn = _parse(data)
         self._needs_newline = bool(data) and not data.endswith(b"\n")
         self._seq = self._entries[-1]["seq"] if self._entries else 0
-        self._own_from = self._seq + 1                       # entries with seq >= this were written by this instance
+
+    @contextlib.contextmanager
+    def _write_lock(self):
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        fd = os.open(str(self.path) + '.write.lock', os.O_WRONLY | os.O_CREAT | os.O_NOFOLLOW, 0o600)
+        try:
+            fcntl.flock(fd, fcntl.LOCK_EX)
+            self._reload()
+            yield
+        finally:
+            os.close(fd)
 
     # ------------------------------------------------------------ writing
 
@@ -138,7 +155,7 @@ class Journal:
         if isinstance(attempt, bool) or not isinstance(attempt, int) or attempt < 0:
             raise ValueError("journal attempt must be a non-negative integer")
         body = _copy_detail(detail)
-        with self._lock:
+        with self._lock, self._write_lock():
             prefix = b""
             pending: list[dict] = []
             if self._needs_newline:
@@ -172,6 +189,7 @@ class Journal:
 
     def _instances(self) -> list[dict]:
         """Every started instance in order: {"op","key","attempt","started","entries":[...],"terminal": entry|None}."""
+        self._reload()
         instances: list[dict] = []
         open_by_triple: dict[tuple, list[dict]] = {}
         by_seq: dict[int, dict] = {}
@@ -222,6 +240,7 @@ class Journal:
 
     def last(self, op: str, key: str, *, attempt: int | None = None) -> dict | None:
         with self._lock:
+            self._reload()
             for entry in reversed(self._entries):
                 if entry["status"] == "handle":                  # internal row of add_handle, not a 2.7 status
                     continue
@@ -233,6 +252,7 @@ class Journal:
         """One summary per attempt number that reached "started", in the order of its first start:
         {"attempt", "seq" (of the first start), "status" and "detail" (of the latest entry), "started_detail"}."""
         with self._lock:
+            self._reload()
             summaries: dict[int, dict] = {}
             for entry in self._entries:
                 if entry["op"] != op or entry["key"] != key:
@@ -250,6 +270,7 @@ class Journal:
         """Job attempts started after the latest ("job", job_key, "reset") entry whose started detail carries this
         candidate_sha256: the attempts that count against the candidate budget (3.18)."""
         with self._lock:
+            self._reload()
             reset_seq = 0
             for entry in self._entries:
                 if entry["op"] == "job" and entry["key"] == job_key and entry["status"] == "reset":
@@ -260,6 +281,7 @@ class Journal:
     def next_attempt(self, op: str, key: str) -> int:
         """1 + the highest attempt number any entry of (op, key) carries; an attempt number is never reused."""
         with self._lock:
+            self._reload()
             highest = 0
             for entry in self._entries:
                 if entry["op"] == op and entry["key"] == key:
@@ -269,11 +291,13 @@ class Journal:
     def entries(self, op: str | None = None, *, since_seq: int = 0) -> list[dict]:
         """Entries with seq > since_seq (all by default), optionally of one op, in order."""
         with self._lock:
+            self._reload()
             rows = [e for e in self._entries if e["seq"] > since_seq and (op is None or e["op"] == op)]
             return json.loads(json.dumps(rows))
 
     def session_start_seq(self) -> int:
         with self._lock:
+            self._reload()
             for entry in reversed(self._entries):
                 if entry["op"] == "run" and entry["status"] == "started":
                     return entry["seq"]

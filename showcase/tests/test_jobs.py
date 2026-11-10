@@ -647,6 +647,27 @@ class CandidateBytesTests(JobsBase):
         rec = r.runner.run_job(planned[0], phase="qualification", iteration=None, publish=False)
         self.assertEqual((rec["job_key"], rec["published"]), ("qual.val.no_memory.USPTO", None))
 
+    def test_unpublished_resume_reuses_complete_outputs_but_not_another_sample(self):
+        r = self.rig()
+        scratch = r.paths.scratch_root / 'logs'
+        planned, _, _ = jobs.plan_jobs(r.facade, 'no_memory', test=False, logs_dir=scratch,
+                                       results_dir=scratch/'results', manifest=r.manifest)
+        for phase, sample in [('qualification', None), ('controls', 1)]:
+            first = r.runner.run_job(planned[0], phase=phase, iteration=None, publish=False, sample=sample)
+            before = len(r.executor.runs)
+            r.new_runner()
+            again = r.runner.run_job(planned[0], phase=phase, iteration=None, publish=False, sample=sample)
+            self.assertEqual(len(r.executor.runs),before)
+            self.assertEqual(again['attempts'],first['attempts'])
+            self.assertIsNone(again['published'])
+        r.runner.run_job(planned[0], phase='controls', iteration=None, publish=False, sample=2)
+        self.assertEqual(len(r.executor.runs),3)
+        # A changed stored output cannot be treated as a successful resume.
+        path=r.paths.attempt_dir('qual.val.no_memory.USPTO',1)/'out/memory.json'
+        path.write_text('{"changed":true}')
+        r.runner.run_job(planned[0],phase='qualification',iteration=None,publish=False)
+        self.assertEqual(len(r.executor.runs),4)
+
 
 # ---------------------------------------------------------------- publication and launcher logs
 

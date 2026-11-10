@@ -177,14 +177,15 @@ def _qualification(ctx):
         return {'passed': False, 'reason': 'driver unavailable'}
     result = ctx.run_qualification_job()
     job = result.get('job') or {}
+    attempts = [a for a in job.get('attempts', []) if a.get('outcome') == 'ok']
+    selected = attempts[-1]['job_id'] if attempts else None
     calls = [util.read_json(p) for p in ctx.paths.calls_root.glob('**/*.json') if p.name.endswith('.json')]
-    calls = [c for c in calls if (c.get('job') or {}).get('job_key') == job.get('job_key')]
+    calls = [c for c in calls if selected and (c.get('job') or {}).get('job_id') == selected]
     obs = qualification.observations(calls, job_record=job)
     fc = qualification.forecast(ctx.manifest, obs)
     # Full qualification is recorded by run_checks only after all required probes pass.
     check = audit.audit(ctx.manifest, ctx.paths)
     from .telemetry.join import parse_sidecar, join_examples
-    attempts = [a for a in job.get('attempts', []) if a.get('outcome') == 'ok']
     sidecar_rows = util.read_jsonl(ctx.paths.attempt_dir(job['job_key'], attempts[-1]['attempt']) /
                                   'out' / 'sidecar.jsonl') if attempts else []
     examples = join_examples(parse_sidecar(sidecar_rows), calls,

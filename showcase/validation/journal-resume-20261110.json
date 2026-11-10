@@ -1,0 +1,49 @@
+{
+  "schema": "mhforge.validation/1",
+  "engine_sha256": "f6adec3adb99ec5ab6ac915b3ba35be99e6d5ee2bae63ed701d845dab3edd977",
+  "full_suite": {
+    "tests": 1121,
+    "passed": true,
+    "seconds": 329.379,
+    "engine_sha256": "6f0db3272d0ef0976cf94d3670eeedf1391d1082cb11e693c9e79ff9e82f030f",
+    "log_sha256": "1394df37c7431a2b0c5f7ae96ecb3082bf9b6a1c756e15eedd9d52fd5a578f73"
+  },
+  "post_suite_resume_fix": {
+    "tests": 83,
+    "passed": true,
+    "seconds": 17.456,
+    "changes": [
+      "Reuse hash-verified completed private qualification/control jobs; fresh sample identities still execute.",
+      "Qualification observations select the successful attempt rather than mixing earlier attempts."
+    ]
+  },
+  "smoke": {
+    "schema": "mhforge.smoke/1",
+    "passed": true,
+    "engine_sha256": "f6adec3adb99ec5ab6ac915b3ba35be99e6d5ee2bae63ed701d845dab3edd977",
+    "executor": "local_relay",
+    "worker_network_guard": "sandbox-exec",
+    "provider_calls": 260,
+    "resume_provider_calls": 0,
+    "jobs": 6,
+    "dry_run_units": 9,
+    "audit": {
+      "ok": true,
+      "problems": [],
+      "calls": 260,
+      "observed_micro": 46499,
+      "bounded_unknown_micro": 0,
+      "listed": {
+        "reconciled": [],
+        "limit_exceeded": [],
+        "repeatable_provider_failure": [],
+        "admission_only": [],
+        "open_meters": []
+      }
+    },
+    "invariants_failed": [],
+    "utc": "2026-11-10T17:13:34.156385Z"
+  },
+  "journal_regression": "Independent objects in one thread, four concurrent writer threads, and two separate processes allocate strictly increasing sequences. Failed original journal was not rewritten.",
+  "export_diagnostics": "Exporter child stdout and stderr retained privately under ignored campaign state."
+}

@@ -165,9 +165,10 @@ class ExportSpawner:
         log_dir = self.paths.export_root / "children"
         log_dir.mkdir(parents=True, exist_ok=True)
         try:
-            with open(log_dir / f"{unit_slug(unit)}.stderr.txt", "ab") as err:
+            with open(log_dir / f"{unit_slug(unit)}.stderr.txt", "ab") as err, \
+                    open(log_dir / f"{unit_slug(unit)}.stdout.txt", "ab") as out:
                 proc = subprocess.Popen(argv, cwd=str(home), env=env, pass_fds=(read_fd,),
-                                        stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=err,
+                                        stdin=subprocess.DEVNULL, stdout=out, stderr=err,
                                         start_new_session=True)
         except BaseException:
             os.close(write_fd)

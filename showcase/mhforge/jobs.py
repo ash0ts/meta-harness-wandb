@@ -728,6 +728,19 @@ class JobRunner:
                 repeat: int | None = None, sample: int | None = None) -> dict:
         """Attempts of one job until ok, a candidate failure with no attempt left, or an infrastructure stop. With
         publish and search.partial_candidate_policy "upstream" the outputs are published to the paths upstream named."""
+        job_key = self._identity(planned, 1, phase, iteration, repeat, sample).job_key
+        prep = self._prepare(planned)
+        rec = None if prep.problem else self._reusable(planned, job_key, prep)
+        if rec is not None and rec.get('inner_argv') == list(planned.inner_argv):
+            att = next(a for a in rec['attempts'] if a['attempt'] == rec['_att'])
+            out = self.paths.attempt_dir(job_key, att['attempt']) / 'out'
+            if all(_sha_file(out / name) == digest for name, digest in att['outputs'].items()):
+                rec['status'] = 'succeeded'
+                self._save(rec)
+                if publish:
+                    self._publish(planned, rec, include_result=True)
+                rec.pop('_att', None)
+                return rec
         rec, _ = self._run_job(planned, phase=phase, iteration=iteration, publish=publish, repeat=repeat, sample=sample)
         rec.pop("_published_now", None)
         return rec

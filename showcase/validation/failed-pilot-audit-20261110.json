@@ -1,0 +1,151 @@
+{
+  "schema": "mhforge.failed-pilot-audit/1",
+  "campaign": "mh-forge-preflight-20261110",
+  "instrumentation_status": "failed: non-monotonic journal; original file retained, exports never verified",
+  "journal_sha256": "82041fc6d7624101a3147e46844ae8a113a6be0d844984ac3e60387fb5eed145",
+  "results": {
+    "LawBench": {
+      "result": {
+        "accuracy": 0.04,
+        "correct": 2,
+        "total": 50,
+        "memory_context_chars": 191
+      },
+      "regraded_examples": 50,
+      "all_matched": true,
+      "evidence": {
+        "job_sha256": "cc50a5dc7cb121583d09b32e03fbc8d6b2fbe37cd8d907e26e8b9b13640eb8da",
+        "sidecar_sha256": "5b6bc53d7b8c8e2d874ab6d0d100416dd4061676b8be0e44275a61ff9c54f729"
+      },
+      "success_and_failure_cases": [
+        {
+          "index": 18,
+          "example_sha256": "1ddc7e036275bc077fbc1a6a679cde71674fb67275a04cd8fc9890e86e8b3e87",
+          "prediction_sha256": "ec52329f3365e927cd223de98adf6ba41757a344552ea49181521278b9b56653",
+          "target_sha256": "bd4f3cc48148953b7d0145b5d90cc86e5c5fb6fbf724b56ee0e8b4c0bb83eb65",
+          "was_correct": true,
+          "matched": true,
+          "n_calls": 1
+        },
+        {
+          "index": 0,
+          "example_sha256": "efe10a0e376b0b727efaaf3db4770cb4cad199208508d563fe0782115c222a47",
+          "prediction_sha256": "6890513f1b49774a5e113787e66f3f0987e79303a1111973607101325924fa5a",
+          "target_sha256": "fa0ca2ec9ed2530a380a5df97bc96e2b64ec41a99856c576540d8dd51cbcb19b",
+          "was_correct": false,
+          "matched": true,
+          "n_calls": 1
+        }
+      ]
+    },
+    "USPTO": {
+      "result": {
+        "accuracy": 0.1,
+        "correct": 3,
+        "total": 30,
+        "memory_context_chars": 191
+      },
+      "regraded_examples": 30,
+      "all_matched": true,
+      "evidence": {
+        "job_sha256": "6fcc3fdff1ff5e2166ef887b1dbde8b16a3c9572de23090e5383e91ba12436c9",
+        "sidecar_sha256": "8c0cf0b578d42e90cb2676c2198e941f0ad68058f899143da7e8ff8d4940e20b"
+      },
+      "success_and_failure_cases": [
+        {
+          "index": 1,
+          "example_sha256": "1cc7469a742dc02194ab775450b08b65a758fa5086fd70033d0a6162a44dbc8a",
+          "prediction_sha256": "374eec01e75f07606875e24dd9157263da3fbd266ae325e0a90902de00f27f0f",
+          "target_sha256": "374eec01e75f07606875e24dd9157263da3fbd266ae325e0a90902de00f27f0f",
+          "was_correct": true,
+          "matched": true,
+          "n_calls": 1
+        },
+        {
+          "index": 0,
+          "example_sha256": "30ff67859be23be2f3853c21cb636ba94b3a4518d79c58299c90a7a64cf87f40",
+          "prediction_sha256": "7149d3b0e7e0999eee64f354fd09cef3dafc03d6dd41bcae141e19b7496b0d5d",
+          "target_sha256": "01fffaa443ed20259d568e77eb1bf540dc82af453cba30470641d21fb2584d63",
+          "was_correct": false,
+          "matched": true,
+          "n_calls": 1
+        }
+      ]
+    },
+    "Symptom2Disease": {
+      "result": {
+        "accuracy": 0.62,
+        "correct": 31,
+        "total": 50,
+        "memory_context_chars": 191
+      },
+      "regraded_examples": 50,
+      "all_matched": true,
+      "evidence": {
+        "job_sha256": "1cdfb90064827c29aaf8a8ac5b462a9727f7fef87ed9ed88f295231c0be1bec1",
+        "sidecar_sha256": "6802137810b0ae0d99012c4dba211667202809aedafdd6257576e9169fa38040"
+      },
+      "success_and_failure_cases": [
+        {
+          "index": 1,
+          "example_sha256": "b3a6fe8ea1d9b811fdc0cbf8b8c32987d0cd18a6de0aa3b1d2c1ac9654793842",
+          "prediction_sha256": "15a3713d18972b4c53f291362952f1f70e50adf99b390f9501d98cd7f2df3802",
+          "target_sha256": "077bc740f18ec39f5a966f7c07bc0b4289c9cea1747e3cfcd676c3b6ba55e0d3",
+          "was_correct": true,
+          "matched": true,
+          "n_calls": 1
+        },
+        {
+          "index": 0,
+          "example_sha256": "fd43046a44161e0b2d7bc7865ca98e4831a9355fce9ccab03c69d143e3a37b66",
+          "prediction_sha256": "bb9d410b49f47ce010174fb7622ab998841ee7b3f531e68c29f5014b3e90f1d3",
+          "target_sha256": "582777fae0e48751f614e3ab746238396705850efc45cb18bf21209e9f75ff67",
+          "was_correct": false,
+          "matched": true,
+          "n_calls": 1
+        }
+      ]
+    }
+  },
+  "interpretation": "Released string/set graders only; not expert semantic or domain validation. Scores are diagnostic pilot evidence, not a qualified article comparison.",
+  "completed_calls": 136,
+  "completed_call_usage_cost_usd": 0.01824,
+  "journal_sequence_collisions": [
+    {
+      "line": 25,
+      "seq": 20,
+      "previous_seq": 24,
+      "op": "export"
+    },
+    {
+      "line": 27,
+      "seq": 21,
+      "previous_seq": 25,
+      "op": "export"
+    },
+    {
+      "line": 30,
+      "seq": 22,
+      "previous_seq": 27,
+      "op": "export"
+    },
+    {
+      "line": 32,
+      "seq": 23,
+      "previous_seq": 28,
+      "op": "export"
+    },
+    {
+      "line": 35,
+      "seq": 24,
+      "previous_seq": 30,
+      "op": "export"
+    },
+    {
+      "line": 38,
+      "seq": 25,
+      "previous_seq": 32,
+      "op": "export"
+    }
+  ]
+}

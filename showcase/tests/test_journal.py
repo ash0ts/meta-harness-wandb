@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import multiprocessing
 import os
 import tempfile
 import threading
@@ -17,6 +18,13 @@ from tests.helpers import FakeClock
 
 SHA_A = "a" * 64
 SHA_B = "b" * 64
+
+
+def _process_writer(path, barrier, name):
+    journal = Journal(Path(path))
+    barrier.wait(timeout=15)
+    for i in range(10):
+        journal.record('export', f'{name}:{i}', 'complete')
 
 
 class JournalTestCase(unittest.TestCase):
@@ -34,6 +42,50 @@ class JournalTestCase(unittest.TestCase):
 
 
 class TestJournal(JournalTestCase):
+    def test_separate_processes_allocate_unique_sequences(self):
+        ctx = multiprocessing.get_context('spawn')
+        barrier = ctx.Barrier(3)
+        processes = [ctx.Process(target=_process_writer,args=(str(self.path),barrier,str(i))) for i in range(2)]
+        try:
+            for p in processes:p.start()
+            barrier.wait(timeout=15)
+            for p in processes:p.join(timeout=20)
+            self.assertEqual([p.exitcode for p in processes],[0,0])
+            self.assertEqual([r['seq'] for r in read_journal(self.path)],list(range(1,21)))
+        finally:
+            for p in processes:
+                if p.is_alive():p.terminate();p.join(timeout=5)
+
+    def test_independent_runner_and_exporter_instances_share_sequence(self):
+        runner, exporter = self.open(), self.open()
+        runner.record('run', 'baselines', 'started')
+        exporter.record('export', 'job:a', 'requested')
+        runner.record('job', 'b', 'started', attempt=1)
+        exporter.record('export', 'job:a', 'complete')
+        self.assertEqual([e['seq'] for e in read_journal(self.path)], [1,2,3,4])
+        self.assertEqual(runner.last('export','job:a')['status'], 'complete')
+        self.assertEqual(exporter.next_attempt('job','b'), 2)
+
+    def test_independent_concurrent_instances_allocate_unique_sequences(self):
+        writers = [self.open() for _ in range(4)]
+        barrier = threading.Barrier(len(writers))
+        errors = []
+        def write(n):
+            try:
+                barrier.wait()
+                for i in range(20):
+                    writers[n].record('export', f'{n}:{i}', 'complete')
+            except Exception as exc:
+                errors.append(exc)
+        threads = [threading.Thread(target=write,args=(n,)) for n in range(len(writers))]
+        for t in threads:t.start()
+        for t in threads:t.join(timeout=20)
+        self.assertFalse(any(t.is_alive() for t in threads))
+        self.assertEqual(errors, [])
+        rows = read_journal(self.path)
+        self.assertEqual([r['seq'] for r in rows], list(range(1,81)))
+        self.assertEqual(len({r['key'] for r in rows}),80)
+
     def test_seq_continues_after_reopen(self) -> None:
         j = self.open()
         first = j.record("run", "search", "started", detail={"argv": ["search"]})
