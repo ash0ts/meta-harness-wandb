@@ -9,6 +9,15 @@ from tests.helpers import make_manifest
 
 
 class PairedAnalysisTests(unittest.TestCase):
+    def test_every_sample_score_is_checked_even_when_not_selected(self):
+        from types import SimpleNamespace
+        grader = SimpleNamespace(get_evaluator=lambda ds: lambda pred, target: {'was_correct':pred == target})
+        rows = {i: {'prediction':str(i), 'target':str(i), 'was_correct':True} for i in range(5)}
+        analysis.regrade_rows('fixture', rows, grader)
+        rows[4]['was_correct'] = False
+        with self.assertRaisesRegex(ValueError, 'host grader'):
+            analysis.regrade_rows('fixture', rows, grader)
+
     def arm(self, flags):
         return {'small': {i: {'example_sha256': str(i), 'was_correct': flag}
                           for i, flag in enumerate(flags)}}

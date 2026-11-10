@@ -1,0 +1,11 @@
+system,repeat,macro_validation_accuracy_percent
+fewshot_all,1,43.777778
+fewshot_all,2,40.888889
+fewshot_all,3,40.888889
+fewshot_all,4,41.111111
+fewshot_all,5,42.0
+no_memory,1,22.666667
+no_memory,2,22.888889
+no_memory,3,25.333333
+no_memory,4,24.666667
+no_memory,5,24.0

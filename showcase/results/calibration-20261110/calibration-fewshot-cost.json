@@ -1,0 +1,1797 @@
+{
+  "schema": "mhforge.inference-cost-analysis/1",
+  "campaign": "mh-forge-preflight-b-20261110",
+  "system": "fewshot_all",
+  "phases": [
+    "calibration"
+  ],
+  "frozen_manifest_sha256": "a578d63baceedac3c7cb3130a052ed7e05750f9a4ece21f2e047d81f2a41761a",
+  "prices": {
+    "cached_per_million": "0.03",
+    "checked_utc": "2026-11-10T00:03:00.000000Z",
+    "input_per_million": "0.03",
+    "model": "openai/gpt-oss-120b",
+    "output_per_million": "0.17",
+    "source_url": "https://coreweave.com/forge-pricing/inference-agents"
+  },
+  "jobs": [
+    {
+      "job_key": "test.fewshot_all.LawBench",
+      "dataset": "LawBench",
+      "phase": "calibration",
+      "sample": null,
+      "repeat": null,
+      "attempt_count": 1,
+      "logical_call_outcomes": {
+        "completed": 100
+      },
+      "provider_attempts": {
+        "complete": 100,
+        "rejected": 19
+      },
+      "usage_priced_micro_usd": 82752,
+      "unknown_cost_upper_micro_usd": 0,
+      "cost_range_micro_usd": [
+        82752,
+        82752
+      ],
+      "known_usage": {
+        "prompt_tokens": 2476933,
+        "completion_tokens": 49369,
+        "cached_tokens": 6784
+      }
+    },
+    {
+      "job_key": "test.fewshot_all.Symptom2Disease",
+      "dataset": "Symptom2Disease",
+      "phase": "calibration",
+      "sample": null,
+      "repeat": null,
+      "attempt_count": 1,
+      "logical_call_outcomes": {
+        "completed": 211,
+        "replayed": 1
+      },
+      "provider_attempts": {
+        "complete": 211,
+        "rejected": 22
+      },
+      "usage_priced_micro_usd": 61584,
+      "unknown_cost_upper_micro_usd": 0,
+      "cost_range_micro_usd": [
+        61584,
+        61584
+      ],
+      "known_usage": {
+        "prompt_tokens": 1575422,
+        "completion_tokens": 83610,
+        "cached_tokens": 13888
+      }
+    },
+    {
+      "job_key": "test.fewshot_all.USPTO",
+      "dataset": "USPTO",
+      "phase": "calibration",
+      "sample": null,
+      "repeat": null,
+      "attempt_count": 1,
+      "logical_call_outcomes": {
+        "completed": 100
+      },
+      "provider_attempts": {
+        "complete": 100,
+        "rejected": 20
+      },
+      "usage_priced_micro_usd": 43079,
+      "unknown_cost_upper_micro_usd": 0,
+      "cost_range_micro_usd": [
+        43079,
+        43079
+      ],
+      "known_usage": {
+        "prompt_tokens": 476189,
+        "completion_tokens": 169083,
+        "cached_tokens": 8032
+      }
+    }
+  ],
+  "datasets": {
+    "LawBench": {
+      "usage_priced_micro_usd": 82752,
+      "unknown_cost_upper_micro_usd": 0
+    },
+    "Symptom2Disease": {
+      "usage_priced_micro_usd": 61584,
+      "unknown_cost_upper_micro_usd": 0
+    },
+    "USPTO": {
+      "usage_priced_micro_usd": 43079,
+      "unknown_cost_upper_micro_usd": 0
+    }
+  },
+  "totals": {
+    "provider_attempts": {
+      "complete": 411,
+      "rejected": 61
+    },
+    "usage_priced_micro_usd": 187415,
+    "unknown_cost_upper_micro_usd": 0,
+    "cost_range_micro_usd": [
+      187415,
+      187415
+    ],
+    "known_usage": {
+      "prompt_tokens": 4528544,
+      "completion_tokens": 302062,
+      "cached_tokens": 28704
+    }
+  },
+  "source_evidence": [
+    {
+      "path": "jobs/test.fewshot_all.LawBench/job.json",
+      "sha256": "75c8f49059e60bb090e54bf87d3eb9a6e2687fecfb5d86f46896dc6e223a0c89"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175513-1014c4efc2a9.json",
+      "sha256": "117da3b95cfe12a7146b68b144ce9b890793afaabf1855608cf555982f21b132"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175513-15137c15be39.json",
+      "sha256": "cfb13b0b588f4ac2cb09abcfd115cd5762bfab9b8dc793b2f6bd4f2e5d8f11e1"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175513-74c627e2b589.json",
+      "sha256": "ffe1a3f7beaba4c659e5bb014a473d4aa2b736eb0a95525bafeb5ad81d13fcea"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175513-a7ece67ffc4d.json",
+      "sha256": "865ff06583efa8ec2d2077df3ff43df2b4fddb83602d82b1ea72a6daa03af5dc"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175513-b7b7a044a7fc.json",
+      "sha256": "510eb04d291d35fcfb80010b60568bf1f551354cd22e37e7c815d68b5cfe3613"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175514-02867fb73c5f.json",
+      "sha256": "f3346dfe502100031aab6927306d3fffbc654a59ae8aa4efa32713a32479eb45"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175514-0cdce4c60118.json",
+      "sha256": "3775362ecf6f14bd7485934eec6271be6cfb42be98494f40f02c13daebd5c5ff"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175514-16973bdcf11f.json",
+      "sha256": "0a74aca4c17cb32eb82b52fb1dc36f8bb13f76d92b522dc1b6d18ca898ee5d84"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175514-189d848868a3.json",
+      "sha256": "3b33f12c9f08d9ce8a961dce9af2b5849bfc57695d6d2eecc9c3b41edc0678d2"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175514-27931750e2a1.json",
+      "sha256": "41aca366fdbc3eed1b7a3ec8420ecf789b4049ddebda1d9273403d01434354e2"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175514-27cb3b7732ef.json",
+      "sha256": "27e5c0c26ab0d1ed0faa0785252c2bd11e36889447670a516aa5fe7916b05a74"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175514-2a29777ad183.json",
+      "sha256": "5fdcce53e6510be1253c8f9586faf2fe63568da307d062be070ab33e29ea9497"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175514-2bf64afbbb4f.json",
+      "sha256": "0c949f6eb0e77363c650250c1d4f7355d5a38ee63b46d2578a4fe5ed2e63cc3f"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175514-3a564e05fc12.json",
+      "sha256": "98d52bdd1aa43af8264acbe4bada48dd07b226b59945dc17cd74e049c0d39f8c"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175514-3ca214b16abb.json",
+      "sha256": "33ed1b81665b89fc23b183ac8ca8812574d3494bd45a19d6508d403770df1a8f"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175514-49a07c0ba62b.json",
+      "sha256": "a715dc01115667f23826004572d60751aaedfbec036ed7fb45472fe9a288470c"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175514-4db23095b536.json",
+      "sha256": "b2dcbba990378ec59e9b88262b745eae9d0255165be71efee0414372a5536f26"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175514-650682199792.json",
+      "sha256": "f982fd9cf31e76cafe59ae89c3b7d5a488c2b89e8e99976eb469922b5776faae"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175514-6968e18bd520.json",
+      "sha256": "a32f9fffeb73ecb098ab0c1bdb2a72107f409ca1226e3c052556320dcbcf4de3"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175514-72a1fdf7f09c.json",
+      "sha256": "28a193d4249d9ee024fd3a4784ec97e6293bb258cfe5abf9169a0bdf6c0ffc12"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175514-b32a14adcdef.json",
+      "sha256": "ff3bc20b28c79141c9e49bea3946c84855e41d8e3f384de771c0d7fdd51cb248"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175514-ba21b565117f.json",
+      "sha256": "a781f9b0727d248f1111c734321d5d6eba7a6c645c60ef803e525ea26103453e"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175514-bb526248fe56.json",
+      "sha256": "73d44e37f428544b2d7de12467c86e9564ca64ff37ffbf57db7f970b31c746cc"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175514-bb71aafa94e8.json",
+      "sha256": "d3664334ddbd2b53d0874a91629cceca15863aff48dcb0b39efe9e98fe3bdfcc"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175514-bf9f49200075.json",
+      "sha256": "2056c3d079bec8d0e3a0d2748e8c8ceb3c4f623b0974d8ff493dbd46a957d317"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175514-cb37296c54e0.json",
+      "sha256": "7c7b713d37ff2d7abe64cb9d8e62e2d7e8d731a0de6b4c66af0a9692bc89cc99"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175514-d1cdd18c99d8.json",
+      "sha256": "ac47d09f232647f2013838b350f01b8eeab34cb8afe9c511ef1480a2dadadca8"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175514-d47fd7bc8483.json",
+      "sha256": "5794e9ff2fd5a7711e81ee2a59afb9650f2df6cd1959305ced0528a59cd402a0"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175514-d564eaeeed5e.json",
+      "sha256": "e873114baf1e81cf2bc60dcfcb4b483f6f3cc86f52c889168388fc95af837a6b"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175514-e255eb95b0ef.json",
+      "sha256": "d8152865fc0ad4e239e2e212d1caf5edcc975bdc35bc2103846b39452afe7eae"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175514-e82bbe41d6b3.json",
+      "sha256": "54ab9947236fccb5cc0637b3598a9af293589f75552bb2ccfefb4b7143fdb67a"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175514-fa3637016857.json",
+      "sha256": "d42a4c14c1da6d4380f8dfd9eb2998b38aa0c2e2156ccc3d3025361cebaae34b"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175518-31fffd983572.json",
+      "sha256": "13de921c662d20f15a929afe64c6d06a6771e597d7f3b7626e7cbee4053b7327"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175519-29faaa5c4614.json",
+      "sha256": "e033470b77b442e3d3ca35d8fa728d9f8a55f75cd61413caa7dcea960eb56772"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175519-4ba9883e930d.json",
+      "sha256": "811e1badf7e8402a7c003d637710766d0f667bbb3a983785d973b1e208dcd17f"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175519-62b9f5705777.json",
+      "sha256": "ddb4d0c883b22dc3feb6b9f1ca52c07bd1a813d6a4f21218c3acb4d66141d1ab"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175519-641d1df66935.json",
+      "sha256": "bdbf733ceacbf8bbb50da74f3aefd3310bbe59316528ec0e5b8bc0680031a792"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175519-7ed337ec4191.json",
+      "sha256": "59d9db8215fd2a9d48f7c8630b2f70c1b3e70e8fe136e43917d35652440b06c1"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175519-a70b35dffbba.json",
+      "sha256": "ccc9cdc0785dfdfafc0d4d21af51e202cdd98822f5171f69d711ca4bab119398"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175520-47d1fa227408.json",
+      "sha256": "ce85f327996041dee8b4cb22928214c9e376ca9a8c1793e086a8ed0b8ad676bb"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175520-570813d658ca.json",
+      "sha256": "debf564348d03c6ce93a629efe2c8bf06531900de30a2392da8c2d5ac485aa64"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175520-6c80ed754736.json",
+      "sha256": "7a4176d911b8f17b2fc67a837d4ddfef0716cdbda4a7910933a92ab85d929480"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175520-9bb90efa8100.json",
+      "sha256": "bad61a5323a23ec2a8445462d78e1dc1ced34f731af8c7e8a4212d4cbe6cbb07"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175520-e13ff5767783.json",
+      "sha256": "fff41bb8324e33e81f44193bd628631d840afae9b8f5958b3d3a0766935100da"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175522-146cc8a75c88.json",
+      "sha256": "cc8628236516f0f81c48e6d89a761b8afa130e965c0d091d7aa6ead18bd7f485"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175522-703d7e9829ca.json",
+      "sha256": "ca15a92a53c25f4c6c60781a00b39b314366c9fc4c34d8bd11f9e09e0b35a9fb"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175523-11e6b1c22fc3.json",
+      "sha256": "64af390b94b6f701d76c934c47652694ae0c95b7b1b47190e1eaecf1ad661bed"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175523-4b147c09c41d.json",
+      "sha256": "a44b96c410bdab87b73a8ff2a324179f92dafbb4d2984caffe5f6685359ed2fb"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175523-5e9eafd46ca2.json",
+      "sha256": "fa20005f6d2624aa8f6697e0f07bad5d7423f9908686c3e4e01903dea601c869"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175524-37d89a413547.json",
+      "sha256": "d7fed777ae3f0eb21df061fc3b3ae0cacf799ec2a2a2fd8aa16d906a52ba64f9"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175524-869df5867460.json",
+      "sha256": "34d6b480cd1d8827dfa24fcb25c0ccd49e8c11415d74af830b4db9534de4aec7"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175525-8b62cadbc6b6.json",
+      "sha256": "b31b8b0b426816ddd8293743d7a7c0d6fedcb0f4e0cb7c7b4c90a62149f24c8b"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175525-a56326695c77.json",
+      "sha256": "fcf231967f5c60063964b6e58d043cc2367c234fddb0f843b82aa229c671018c"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175525-b6c430ea0044.json",
+      "sha256": "60052d0229c7c0d909eefc88db4745b7a31c2726e6dedcf5e6f91088abfdc23b"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175525-d5e1676f4d75.json",
+      "sha256": "4e85612f82d0b61a4a52a88ced69abbfe19a2144c0d3b67c9ffda8c48baf34ce"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175525-fce285ca57e9.json",
+      "sha256": "21be940b708579b0237bd1d40c9db65583dd669554af0021336e2e1ab79c50ba"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175526-599d5e0db7d0.json",
+      "sha256": "2ed10d18567c9ae7b2304ce7c4a042ee81c479d896ee5285aa42f37832b290e3"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175526-b743ff209afa.json",
+      "sha256": "a34708590aa06540072dfe2410f3f52893739d5e52cb42fac0e4878a6bba0e7c"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175526-cdc13c8cd207.json",
+      "sha256": "ed5b847b19b7ee10c21e176f5c56c1d298411c5a280db2b1ff18720f4990fac7"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175526-dd31ab85aff7.json",
+      "sha256": "683ae1e7a8cf74a1a6b2e642e691179355151b0b35024c95906a48806d037bcc"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175527-f8d6e65ac8a9.json",
+      "sha256": "edcbe41fedd5535dc42c0e374076f55fe32d5d3e870197b470307bc33e05b52b"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175528-4c19ee9c91d0.json",
+      "sha256": "facc35295e63a8f36d964e9e7b158e7e9b4fbfe2548cdd64d90b5d270409bbaf"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175529-511e5e38dd67.json",
+      "sha256": "cc5a31802c5462f8f9a579d3778f727e2f7a082c3211ef3489ad2e5baec44988"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175529-60ece3611143.json",
+      "sha256": "a496fe399715d7434ebfd6dd9b830741247cc276a8693a88cdf84571188a2e66"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175529-7b2456838080.json",
+      "sha256": "e647cb5d285667ad38e1e0119496b3b38528e17f4f51ba6e907361e48f5c51d1"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175529-8e12ebe791d0.json",
+      "sha256": "4135a4b31e0a0a68b88678157500eb757af9a9a081b6f57f8119a7d63a73a28f"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175529-b6ce6a78c29b.json",
+      "sha256": "9935b449a753568388cb78b57b8fc98bbb800fca77a826df5aec7de442597a83"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175530-002b60d89090.json",
+      "sha256": "33382899c099b7adb0e853ec53f2909c6a46ec90d7cccdd5aa1620cbf482e435"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175530-640ee10c14d6.json",
+      "sha256": "c6a8a3fe3106595a66aa80fa7efca7fa4e954c9d553ec912d128e60f78414934"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175530-779446528acd.json",
+      "sha256": "243e1243df09ca716c89f2e6583c880b9ff8eb7319a4cd56510a07cfc781727e"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175531-c1aaa998964f.json",
+      "sha256": "83582b2186bd4bd6a0f00999791d1a0e69275a29cc5625e1d3d9ae82bcaf2137"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175531-e0565cdbe2c3.json",
+      "sha256": "c5036738d2841585dd9ec3048884fbdd07097e5143cc73ad426b4377308f7f6e"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175532-2d0a962d6a3b.json",
+      "sha256": "6506eed0f882148b44bcb68c069498248b90de83243e04b29d5bcb648b11dafc"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175532-380df299ed08.json",
+      "sha256": "d1281f78fc501b84f37ff9a94216f3a237848f7f80c502b0fdeb0b7ae6ab9fe2"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175532-3f064062370e.json",
+      "sha256": "2180b166b017aa3fdbf64fd12698f9a434a7f1f700d9f61dfaab0f587ba451f6"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175532-6349ded4e3a0.json",
+      "sha256": "96618f99e391ffe40b7f27e3097522fc6cc0984fe3af3850b586f2f08ade956b"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175533-5bfd9483bf72.json",
+      "sha256": "612945c0e2a161fca982774c950e054322172b43c43456781bb6a635cde9e869"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175533-85e6cf09e9ce.json",
+      "sha256": "1858d37e8df723932515773a8f99bd44db680ba4372218ea3ef13509574d13bf"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175533-946411db0f33.json",
+      "sha256": "606810fedbb0aebafcb55bfdf964adc72cb15e504addebee917eb3a199e2535c"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175534-bb5b025855e3.json",
+      "sha256": "c1660dd8ea7126ef5d91838a957c47b7801b68f8b9527f043372992ccdcb3121"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175534-dd5215d01a78.json",
+      "sha256": "0338f1950f7a2750711f6057ddffd9c75d024d4b5b8b05c2fbded0d20aed4731"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175535-10a930ccaf52.json",
+      "sha256": "9a5dec3665f822e9ce92602725a4cf9bcc05e0c9fea5cec5882a74f416c37df9"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175535-5a86ce97e128.json",
+      "sha256": "e9939a983513e1455b8ddf6576a77602b144c75c2c932a4b6373a470f14e251e"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175536-07f7c07853fa.json",
+      "sha256": "dad6bab381b6fbd49658b11058afcf4dc369331b5fde0dc716278d1acd48a986"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175536-2015cabcb9ae.json",
+      "sha256": "dbf4b8589fc87e102a6259c0e6eaeb990171b41483dde4a09c71d579f6ea0c6f"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175537-cc8f6526615a.json",
+      "sha256": "320e650256d2e31d175c9d5e72b70bc6dcf2080c0595f1b813286a6ff5392944"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175538-02aa7af52d2f.json",
+      "sha256": "ec82d5eaeeb2c440b2e971d46002dce81826bc771876d78f75cb319c91f47198"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175538-172c05386987.json",
+      "sha256": "3a691f02422314c08c1f24e2821cd7ceae47a63d3452f9da52ae73a43322e612"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175538-761ee5b77c0f.json",
+      "sha256": "3ae61aafa88d3676749c902d1e791417a22a74c6149a5cb65f89e8d68e67267e"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175538-8a53459a21eb.json",
+      "sha256": "edf413e3a1d3628c30ce3c2fd37a9279a489a1bd3158f6acc6d104fee2d5d97e"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175539-8ed2febaeeac.json",
+      "sha256": "421a33066a0ffe432ad77c8feb187a93d34d6ce32070415c955143eda977b72e"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175540-ae99648badec.json",
+      "sha256": "4e35ea6b544ff34c0b56488ec76a071f01cd0898b593f89b6d11372d0b47dda2"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175541-28f25e85b3f9.json",
+      "sha256": "432dc844e4cf19f487c1ce8f363be612aa91cadaff0d27bfac9d3e844dc7debe"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175541-4db713ad2729.json",
+      "sha256": "a5f29a97bbf96e5e739c6b5523d206aa9d87c50a8d5770320bfc353e234f5e7a"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175541-799444e0f39f.json",
+      "sha256": "417ed3f1f2bc28b06b072aacb17fa29299a4007f66e2ac71932f74abeca37f38"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175541-c215785bb6e0.json",
+      "sha256": "fafecfb709ceecba6ba390bdafbfb17fd4aaf19ca045b1d064f6a2971b360a8b"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175542-0e6fcc42c48e.json",
+      "sha256": "5306196ba5c8b91882d1368c02bf5956e01a96a29b08cfc9db03eb537ddd877f"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175542-f16eb7f10f7d.json",
+      "sha256": "3e991172b470ca096aeffca0f9a1d8f28e4d5c0e83d1f6c2d71603bdb6d9452d"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175543-3eba2eb27d80.json",
+      "sha256": "6815b0266a01286538879909f244092bd3e049461a8d69a440c1c5aa27b7577f"
+    },
+    {
+      "path": "calls/test.fewshot_all.LawBench.a1/c-20261110T175543-5e97fe910c68.json",
+      "sha256": "f4fe44879aa300ffb2c2377097a97e7ad42dbd3faa9e34aabdda24461e04e24c"
+    },
+    {
+      "path": "jobs/test.fewshot_all.Symptom2Disease/job.json",
+      "sha256": "803a27cd98144ae1a30857481c90c5f38aeefe8f34a5c90d48c86fe8f13968f6"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175257-0613385d62e9.json",
+      "sha256": "4d08ebbf47874e159e6f049478e954c67ac991d0807d49a529320fbbf5e4a2f3"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175257-06b96287c741.json",
+      "sha256": "9b3f3b336ac0a397a382acc05fff04accde080521f55cd4fcb82b9227216ab8d"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175257-0a073a97dc91.json",
+      "sha256": "3078d6314a2356f21a87e359c8613f7b73b9a00ffb6f8c6be464c776cfe1fcd6"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175257-0a5447cdab31.json",
+      "sha256": "aa2d403b981c95e5fe2a1fdc580b6a72a026934570cc398874959fb2ee78685a"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175257-162c5f30baf9.json",
+      "sha256": "938a710fb92024fcfe809066014404ead85e2b7b74c42c26b48edf3d7e90a32b"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175257-1cf44704d185.json",
+      "sha256": "81f9f8336017578465c8eae4d6edcd0689949f50a3516fe4fe6024c357d1a2e0"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175257-22712bef9ceb.json",
+      "sha256": "92731c2dffe3846978b6295728be148efda71dae3ab132ce2639baf0f9d8f523"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175257-26c8743991b5.json",
+      "sha256": "11f7c718c5cefefea3a49073920e5cb13616fe0c48d07022851a30ff0a693208"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175257-2cb0f2c61ece.json",
+      "sha256": "17b1c745fe0f65cb2dab07e0e16a39d9148ac72f456517b7dfd5730bf7c20dad"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175257-360043780495.json",
+      "sha256": "5f4a0edfc4ad0a46bd4c9c6a5ae0f33f2eb1e7290878f25cd3b306a2e1ecaed7"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175257-3ea1b252b8f6.json",
+      "sha256": "a918f083865c4e87ac91810ef91af4165c883b9c0a792f662e83ad0454757af9"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175257-4c2789497cd9.json",
+      "sha256": "785d3d49b90c74f901f37dedcc8de540b8b91797ceea7042e97fadf1d3e4d182"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175257-4f060d27e8c1.json",
+      "sha256": "e0d0dff0523b79cbb9ab3d78f3f4894ed78a6a7cc88d9aa482a5ae19a473c1a3"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175257-514cd6fe15fd.json",
+      "sha256": "1ef2e454932887505d941a11ee5c1ab818f1ac2b0a519a44e915e651036b22b0"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175257-6b8f69ca63c6.json",
+      "sha256": "9e0dfcc465b1de727adb45defb6593b7c5322846b8202d5b75835dd6f7909a93"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175257-708715032797.json",
+      "sha256": "469cdadda97d035a30fb0f0f93e363aaa72f14f49c4af3260185b7956269de48"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175257-74e184b68300.json",
+      "sha256": "0a37a3e0535d3caa729e2ebfc999ad975a72364ee4592000a82893ff8c1562fd"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175257-755858046d93.json",
+      "sha256": "d0159660451dd01603b49aba652d36e15a5e8f02b30f61250249fc9ad8abf108"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175257-78c6bb53cd7b.json",
+      "sha256": "4d683678910bb354c01c1653424997ae0e787abbc4c26d011cefaa332f164bac"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175257-7a5fad5def70.json",
+      "sha256": "1b572788c92ba2fde35a706adbeebb5f703fe99a27b63edfc36df85263912b2c"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175257-8be9484d6d14.json",
+      "sha256": "dd836cb23507612e735cfa35d7bf8bde43c090437198061b2838deda55e4823c"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175257-91f88a7b52bd.json",
+      "sha256": "3906c377f2c352f06dd092058a68dbf8f2c70768327f37367950f9866f8c83e9"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175257-b1aa1a41990c.json",
+      "sha256": "dee668eb0ec5d55fc55560b58b7a3aac8683af16e2596726013c059e4a866e70"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175257-b69b42b39c70.json",
+      "sha256": "97769a0c932f3c45687fc190d85f281a8ec20dbd1ed7a66d10f5171a4beb2884"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175257-be2a3271251f.json",
+      "sha256": "12d031f7254ff3315ac6cecc74840d95d7ce176975e91436f5a9b48527be3347"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175257-c2598c6b130c.json",
+      "sha256": "0c22f708336f19536ca83d94deb826bf8bebd7a0e570632ac9baabf9832e7e12"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175257-c2a8ae6bb26f.json",
+      "sha256": "300b2c6b1a9128f6195f4c42a23a5381745728c1cd759d318757d3479dcbdd92"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175257-c6be5aecf8a0.json",
+      "sha256": "cb335000445ef2bdd03a0c217e5202fa9e4ade08be20873b74fdc534b4ce04a7"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175257-cc559effa944.json",
+      "sha256": "7af0d63f04c3bdae4edca87f84ad980e5a572218c98e3424a4f7056b25ff18e8"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175257-eaadd7727593.json",
+      "sha256": "e5744e56a50964694f1302f77bb6b71f4fef11087c96cb7fc1c8b55f62eb0730"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175257-ed04440a0b9f.json",
+      "sha256": "d165581fc5f9d540a7408242cce7cc88e5e384bd1674e258217a935fbdf9a6f6"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175257-f32af93b3798.json",
+      "sha256": "f13fddfac2619090ee085393d4ab56f801757bf5d36284217ba347c5d7b4e5df"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175258-edff7638f5f1.json",
+      "sha256": "1e93471982d1985cc37406ddcec100d9507494bfadf5bc1a5b19cb9e89b9b4dd"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175300-17194bae7336.json",
+      "sha256": "57922d63b743c091240a14209dd8f90ba7f3cc6a79effc399d80fa1b463afc12"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175300-21eabb71c542.json",
+      "sha256": "f47b8eb58008ef9b54a49a99a317972d46b4e057c2cfa672455b83f4391b8593"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175301-0f9e21883858.json",
+      "sha256": "2d8a8692677890719993271c3717ca8995c5695ef05a85a009426a7f51290da3"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175301-1483fd45df1f.json",
+      "sha256": "d8ae9bc7193903254205d2ec16922c7ddba27db58738b70ee79ccfac7107d20e"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175301-1d4d543961d5.json",
+      "sha256": "33c74d28ebfa9af368eb758b3c5b08d8ea0dbec796151dcf4ddca2209c2f8d5c"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175301-2d3e8eee158b.json",
+      "sha256": "7bfd3c8fc4cd14084bd33c6133066701908ea99042d55c3780ccbbc4aa6f158b"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175301-3d58a9c92520.json",
+      "sha256": "6c306b61750221c38d7dbfaebc6799fea323aa4c52a0a1544f5b54952dfca4b4"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175301-84cfe4ed2fc0.json",
+      "sha256": "e681b8d1dcc6f65f0c078cf5769751d14d4b0f045f96cbccb6af478da57f6ba8"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175301-b13d216cdd52.json",
+      "sha256": "249e05de6d76e77ce71e6a9f768aab37b3c3ceaafab643472d1beb33295eccb6"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175301-c120e4295b03.json",
+      "sha256": "c2458fadc9699d6c8374b494c2da1517e1948952ce7de89be7387ae5cb7df81b"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175301-ccbc5086180a.json",
+      "sha256": "154c60b935ac3a8d4616570b0284584bcaea9c4bb73d60487f6532a7d19c9601"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175301-dd35913c0a7f.json",
+      "sha256": "6f3ef206a13b69dd600556e4c14c2fd366e17d29be5566ef0d0864bc727daaca"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175301-eea1759fcd40.json",
+      "sha256": "109830f33e1be73dffcfffe5cb5e68833d8b537b18dc2f0fa1b7a16e7925bf95"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175302-2fe085f966a5.json",
+      "sha256": "279be0794dfc9e517d587e483144b24a886cd609c118e66a634758e1e06ba3a1"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175302-5281b9898beb.json",
+      "sha256": "d38436066f66f1b873544ad51ba8e7885349db4aaaa19799812774c1fe9b70fc"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175302-5c3539b59fde.json",
+      "sha256": "3d042f3c08cb1a572a59f50998cd3b19df3146c98c5bb5b79762006a55f50c82"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175303-0a04cace9831.json",
+      "sha256": "8ed833f22c19f41f14ab74c0009f7ece9f6384cfd42b485a4a28720fb78b4f76"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175303-1474707ee791.json",
+      "sha256": "fa9169e539ab5e622bf47d8c163340d5d437118ddb3aa5c42f8e6ac20ba0602e"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175303-3d19b691d8a7.json",
+      "sha256": "e7774a13bbb622b6d1bc155ec4fa0721bf239f27fec3ad058aa26aaafb7dcbb5"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175303-c836fcc9c92e.json",
+      "sha256": "bb4ad4b09dc8cce0c8c9d3ca10aef2f0eae4683d9f836b696feae0a81fe2757e"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175303-c853fb6cc4ca.json",
+      "sha256": "bb0730071ef0119b77152fa3ded4a131871d6011a55654873ae9836cc661b45d"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175303-daedd554dddc.json",
+      "sha256": "8e062cabb932988aaf3946be6bc86f93de3200fe7736e3910d45146a4fff7ce7"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175303-fe73a3356b17.json",
+      "sha256": "a764586fc8f02792059df22e4ae12af471153b3f6f6c4425649167ee3bb0b6a0"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175304-4e8587a26528.json",
+      "sha256": "538b5c86fac80b4a15db89895af07c4343970ce777924f18503c0acfc8445374"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175304-70896b8a9a08.json",
+      "sha256": "907f0b306ddb091f14073b6b7791740a128f8124bc7b195d0bd2e7719da560b6"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175304-e0b57d265e3f.json",
+      "sha256": "d7e704e73206b6abd8a8a4727594d676c501592215d08228193747a0b8ea648c"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175305-09d046e2e5b3.json",
+      "sha256": "ea440553ee7c6ca4188403b9bc28fddc3ce44b5a8deaed06a710ad95f9432831"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175305-82f76fc5c171.json",
+      "sha256": "60942a5fcf3bb1a0fb3aa832c676f23246d34b9e9c2af13487659a397b43308c"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175305-bdce76d820bc.json",
+      "sha256": "601bf99a1c62dc41fcd9ddea16d2d5a500c79fa65cb099127ad3dc49897c1405"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175305-c52080fec825.json",
+      "sha256": "9cf785e1a9748a586123bbd9f955ca12ba7ffebb343c471f08710547a87d8ea1"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175305-d3993cf723c3.json",
+      "sha256": "e48e19d87f0bfba1daeed96139fc8a3436104c199d4c29980d439b620bcad500"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175306-0af81d01c88e.json",
+      "sha256": "9286a969f5075b7d2cc6ca0c87d8486275deb78e2145001630c7b0a8072aba6b"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175306-4e9b0d9cd779.json",
+      "sha256": "6c7971d48831bf442a508fbb14093860a1849e497707fe603a5388a3fb4f63f3"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175306-629ff44bee0f.json",
+      "sha256": "71655d17499f1c933385f47428acb7e87ba64b9a33aefce403db2c63469b84fd"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175306-a048adcbdaf4.json",
+      "sha256": "6de415502fb642b2ede9816ee0ff00042163abd8672ff1429227ef889d87bcd6"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175306-c7ba2cf88829.json",
+      "sha256": "67acca211cb0eba17c66011357b86d09abf4583ff9a44f78d246a23be5977012"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175306-f7a03a15762e.json",
+      "sha256": "83fe5937f68e6082010ec24576835bcf4c7c57f07c73f21c7fbab9799fb52e1d"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175307-e866255546ec.json",
+      "sha256": "e6097c622a9ad9108bc0e533acab0c790e47a7175580b6ee1f1c9ba086018eb1"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175307-fe660cb020f6.json",
+      "sha256": "63cf158b93a6ce679f5c1ed3211fb7347832fe98eedf5efcc9c9e2aee6e15ea3"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175308-08e80ba69441.json",
+      "sha256": "0f7d9ad54ef9a1d9cec046beabdb9538f07a8d382bd05228e0daf50884222400"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175308-336d37f6dd7c.json",
+      "sha256": "43d46f2d2a6447bd4768024a40917999062305a1d2db21343a095090e49d00d2"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175308-35899afa126d.json",
+      "sha256": "ad61eb3c0f6aa3bb7ba738165334da002bd436ca144b13f3fe1c0e16adc2ef7a"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175308-6a022c5f15af.json",
+      "sha256": "24aee800db7a471371d0110df0ca9d2770028e768171fdc732f9442f62522351"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175308-86a92a5eec80.json",
+      "sha256": "e690c017686a5db64b8d790de84b9ba68c7f1181529265d7b05cd9dca45c6af1"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175308-9349138f8960.json",
+      "sha256": "f8b8c1ce0b3c0977d0fcf2b1d3853d9965b4ed840a1bab41aa9d540493183966"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175308-9f813a16e2f1.json",
+      "sha256": "195ecb898946450d298f120c4b2da780f52ff963f4cea389cddbbd4b90d2173f"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175309-d05a33b88011.json",
+      "sha256": "03e2897dc13d41085bee77d4e6d0cce554eade928ff8c09caaf5ee96ddac7e5b"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175309-d4be843b8533.json",
+      "sha256": "d5bbf0fe8a9b8aa9fd0d05d8bb11bdaf03e8d439df15f2ff35612790af20bd2c"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175310-54754d27addc.json",
+      "sha256": "ddfa9e53b1f7894d343e55b3c36a5280df1de2aab9a08bc33b897a6c82b22ced"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175310-b44ab3cda2a7.json",
+      "sha256": "b305e6995b321e79fcc347438e7bfe503fd1d0737e92b840e8b2252f493624b4"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175310-ea886db1969f.json",
+      "sha256": "fd1e02380ca3426d5382ad321036bb2ccbf022b36c591d3c4ed7d2148c6519c0"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175310-ec6d61c1bfee.json",
+      "sha256": "809d24bdc45dee67db8b9296e05c101716855ad9582cfb8883320ea7ffc7b173"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175311-08d094f66e07.json",
+      "sha256": "b7080303007d0972c5fc5cd2a7eafc346737858d601d459142af0d7c1f9b2bb1"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175311-3fff19c5eaee.json",
+      "sha256": "1bbcaafc9acef8ce0d414bc971a8f85be68dc76c5441bbed1d341efbe90a409f"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175311-61e48b15182e.json",
+      "sha256": "f63fd789778d0d0344677dcc7439eef3f9d33d66d283646cae8c82f444a71e15"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175311-ca228392ab6e.json",
+      "sha256": "9d7b1598023cb8df4deeb9f381a3b86725f8be4c2fcb2d3ab06f844793594ec6"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175312-2b27c9f404fa.json",
+      "sha256": "70ba59e659c44518785e7a65d80e3a2287b53600a8e476e96b42a1d25f8194a6"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175312-3fbb6170b5c0.json",
+      "sha256": "e32c480b0fc0a047049631df280566c1acb0072ad917cf0cb0eae1bb785ffea5"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175312-5acecd4d5456.json",
+      "sha256": "2c8903e929bac0c334c4968dddc88b1978a8e7fa5c737c2283c09c74f6948b67"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175312-7cac924f8874.json",
+      "sha256": "41fec0a0ea68508da6a0e8c00122e747c9e8807944a5f5add6242a87e9564830"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175312-a9b2d92b7e8c.json",
+      "sha256": "9fc57be6f0764b9150d349555c831e5cddef5d31558ece51f4734739f6612b40"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175313-72b646133359.json",
+      "sha256": "12fc3c6731acc49efb8b6ae4ae12d970605de63c993ce5e461549c4a0fc9b0f3"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175313-8d2f3c9f3981.json",
+      "sha256": "d546d3937f33346e3e3814b5aa9b652bc2b8219c45fef9e89d73c9c3169ed1e0"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175313-b410d390e965.json",
+      "sha256": "b71fc42037ed34664a0561b5d3f770782e0a4a202fd91421f9112f8877220d56"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175314-00a041515bec.json",
+      "sha256": "0ef5250dfbe466ee96bd539a64138eb4ed3095be522ef186cb2bd65656a3fa91"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175314-0337f85a8f6f.json",
+      "sha256": "6c8fed72827f7ca4cded0d5b3ef791dbf3c60a8243cfea58037794cc195e1293"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175314-32fc20f67474.json",
+      "sha256": "059f7d3baeda7f364259870508edeb5533582bbf1ee6587ee8817f9926a5c3e9"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175314-6be2051fe686.json",
+      "sha256": "bc1e16bed32058a43f8bc4abd277403a15e147a24b13f88fa92b5942ab763a69"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175314-73f2f1f17de5.json",
+      "sha256": "e2152acbe85a7f1442685cb5f5bc4579cc1ee4084ba49a69c816a8b278ceeecc"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175314-b0648e805e5b.json",
+      "sha256": "cf6338affd14cd7ec2a3974d1df462ca0d65c5ef89a6864ee8cf630e5d928d68"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175315-04c60bfa0782.json",
+      "sha256": "e826d36b268db739579b105d9a5800811b00a37e4f1fde61ecf4f4edb840f3f7"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175315-3b44a85e7c97.json",
+      "sha256": "09348673a389c95a3392c9e8f253edbb3dae79592645fbe534d7aa9a89a79277"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175315-5be19d4fe60f.json",
+      "sha256": "6513e4143085b071fbf4ccd55910554002c34624b9849d2079bc3d0d952171e5"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175315-ad127d9081c8.json",
+      "sha256": "febe2211da54d84e5a8c4249fdffbee6728177fa641f87c21817826f16bc094e"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175315-d5350d860bee.json",
+      "sha256": "4999ff29ad4425e24edffadfdce388bb846a61beca2672fc5d992c80cda279c6"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175316-2856e797d368.json",
+      "sha256": "c1d408e43c333c9c3d83b43b1fee629e9e06fadb8f7d94a23c0f23b8475a79a9"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175316-44030b3ee873.json",
+      "sha256": "5548326401bad2a612604a3bf716f1c5731a9430c716fbfd0a5f87443b502ba8"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175316-5a80427dda41.json",
+      "sha256": "4fbfc122eee4d3aae8351427feee4b4b56e4163f224793a4d3f3cf19589bbe3f"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175317-4954da36f541.json",
+      "sha256": "f7ba0d2b8fd0ddb93ace240cac39b6043b2f9ef00befa8d25ef3a4ef0ff5baac"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175317-5185dbf3029c.json",
+      "sha256": "1731918f2ca70079de28e356cd04ad84a50405dd0818f911e141979b5f529510"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175317-81d79bad24ed.json",
+      "sha256": "bac0958e5e71f127b180f1817e56b847571f926e22f82e52d8d62e296866ced8"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175317-aae153b41042.json",
+      "sha256": "516e3a3df592b51f05ed618f8dae96e65f1336bb2bc334f36e7861bf0e6377a7"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175317-dc34b1c75b86.json",
+      "sha256": "44b5f279057c9b40b6e33130008d49add72f20c7e4ecb4a7107b3cef97a451bc"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175318-07965f214000.json",
+      "sha256": "dc8bbbc2bdc2fcde09857bd020de82356a2e67be20bc880f42651ac573110379"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175318-4dae7accff94.json",
+      "sha256": "f184db158e4934f6872c05f65430e125d702e7066e9f13408557ce15912fa84c"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175318-cc49e78d41a5.json",
+      "sha256": "56323e2041b20260cc7c7b0672aeccb51a263565ae0a4a94c3b645aa81eeed61"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175318-dc14e3f64a63.json",
+      "sha256": "1e05013bdbe86799a8bec288138aed7213414edf7607a4e944052076c374b338"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175320-24ade91be63d.json",
+      "sha256": "8a648503f4dcef7e5bff1fc693ee0558b1707cd8795a2d25dfd8068e6a48a8f0"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175320-25df01a64442.json",
+      "sha256": "1aea6798431eaa894063a98d6efe8fc4c55ce76aa8eaa1dd2ca62fe144df3633"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175320-570e2a80b256.json",
+      "sha256": "33cdee772e30ccd6bc6e23ac75813db40d9f93c630dd1b4fecc6ee1c5e76939d"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175320-710eb2a83c0e.json",
+      "sha256": "4bc0c60ff02262e22d8f332d1e2412bc2759c3e38f2507211c6fbca3151ad02f"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175320-73a81ebb9fbb.json",
+      "sha256": "cb70008d2a0d897548d4ea32ff5453271126b0aae0bedadc2f684f80c370cd54"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175320-75c238fbabd9.json",
+      "sha256": "aa66a9588c997b9fca6cd93cc40dcb5dad2a6c60a9470b0708ee115c527ea6af"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175320-d3c5c10f19e9.json",
+      "sha256": "caa15ed9db9272140b52aa042f6211870289ee36c6847123638412d396223979"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175321-3a1c279e4e67.json",
+      "sha256": "e739315facc3424e0ca887e7e2a9822936f0e337f8721804fa4a946b219ce28f"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175321-3a25a9cef625.json",
+      "sha256": "fa4739ca0d2b8ccbcca5f8fcd4d8f701c04b1cb80195eea967fbfd5f230ffcda"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175321-65b83f7bbda3.json",
+      "sha256": "b2e8dfb3903ae14eee3d32ab84d111fc860e7a5d04796898ab0448aca51a8f06"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175321-6fec21d4441a.json",
+      "sha256": "8d12948eb35f56061615d84dccf6f791389e1bdac84499bccf8d2bdf34483302"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175322-19edd5cd0eba.json",
+      "sha256": "91c324c7d25b89264b81398ce8f095be1a4d6f1ead283e8eb3256b0378127f02"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175323-10bf1610d268.json",
+      "sha256": "bf6d8d2b368897993a063d473bc0a9e35ffcb17e6acc4e2095dd50ad2ca5cfbf"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175323-c976e26c44df.json",
+      "sha256": "b2b5b80c710b50a2ed16c96ba5918a81125cf1c27790793e366fc0e48ec2f696"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175324-4c954f89a8c7.json",
+      "sha256": "743f8b6a9ec0e50133acbb93ed7a7d0fc780b8a7e1ceb2c7fd7ac8e7a08bf094"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175324-7b0a4c326a07.json",
+      "sha256": "c6aa70a0de839d7a867fff30b8c3e8eb7b40dc970710aee6b35f8516e5c1a339"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175324-a856b477fd49.json",
+      "sha256": "c360dfed0f7910e0708dc8321e1927d060dde5853c50eba12320bcb146e1b3b8"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175324-dc65fd575a83.json",
+      "sha256": "850f84fe4e6ed5232d5e2091621cc4893b8fd345bfe5b51972d2082882e21fe2"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175324-f697e97f9cbd.json",
+      "sha256": "8fd4dfb80ab6a571cc8539250226255bead1fcb1eae62d384c4a36b2270325d3"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175324-fbf74e4ff9b6.json",
+      "sha256": "7edaf77f056b7c79bcee1d4567adca69a865b231eaf41c7fac881bae56f02a12"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175325-60aadb392823.json",
+      "sha256": "ff287457ca46e0f323d92fc8393c7614f0aa4215f00c92e786c9bf3e2d8159ae"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175325-68bad5d916c4.json",
+      "sha256": "8d3b224f788b6265b3eb86e122aaa4e05da4e44c4cc34f5302a598b7b1a701a9"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175325-9e19db500edd.json",
+      "sha256": "42b551c1bc7a7fd23cd4cff3c012f17254cd15924fdbf03d2be804bd12cbb2f3"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175325-d771cbfee7cb.json",
+      "sha256": "c7b6d9d4af662c1119b5769aa303e26a9cb686c0294e6f00cdedcbab0ccbc8f2"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175326-1e247866249e.json",
+      "sha256": "ecf84ddad39f9e92fc435c91d73c387d53b437e8e373c041ef0cbc2d82b8c01e"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175326-777c65a341d9.json",
+      "sha256": "25bebd48f008a061b7f45c44fa8c803df6168142d7f135e6fa194975ca77652e"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175326-7aa681ee9116.json",
+      "sha256": "393c6db329bce9a577ac58a2c109d4522202bb2ab29e691b0198f7793eb33c6b"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175326-aaf31f813138.json",
+      "sha256": "b15d96f7c39d103f2da8f4676ab71f074d0fd76820d6915e62664d8f93f3ceee"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175326-b85d053e0918.json",
+      "sha256": "6d7f2c853ffd86ebe62963d5e8956d2ee40b3585a25c5108e251859182f06666"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175326-bfc4e6cb82c4.json",
+      "sha256": "2ea8b03315518c2a2f9e9d223e2f870e593e4cad62d38de505ff2b868eec84e4"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175326-e6df0a953147.json",
+      "sha256": "291e336137685788f877bce6fa4933d42ba59e124214ee2dd6eb247acf8ec3c5"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175327-6aee68d089d7.json",
+      "sha256": "7dbda1786a7957dd9ba1a20ae493813b8e3cb9ae4c20afbbc834ecf48fa0c528"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175327-c99ac68371cd.json",
+      "sha256": "a24602401b8b75d56381d1cb3ae774476170531c72ffd749b7de5b27df1868ee"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175327-fe0e6311171a.json",
+      "sha256": "cc358b7e5601ed8a645b4bb5a88ecee25432d0d0a3be7dc288f2752d6e326159"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175328-02322bdcb61c.json",
+      "sha256": "42702d5db5077a793459b1c1facebf50a8f0580d4bfaaa27692546361c6d2360"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175328-02a0dfba7389.json",
+      "sha256": "a3596c49de3e7c958f59db9190e698b447473458e88dc4145dccb5a0c8283450"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175328-039c65a0f941.json",
+      "sha256": "02682f7d0ebbceaa059871c19c306b336795d629ddc6e3f732e6931a274bbe5e"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175328-27c24fc0f163.json",
+      "sha256": "17bcd58ae2e7de4a107f7196104c18d50beb5539d445bfe57f3c0f6410c50cb4"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175328-7a7f5f5d3ad0.json",
+      "sha256": "3ea8f09103f8ee22aabfd2c5dddc25fe51aac8acc556ff5260e507758e1eb8da"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175328-a4b3b58aabc1.json",
+      "sha256": "a03517e64618f46293891f29b7a1922218b432374fe0e92237d004d621708326"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175328-c8b65bf8c7be.json",
+      "sha256": "3244e4969ca4f77d72cbd2fe7a73c08c542d8cc8371ed8f1ef7e419b93c3134b"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175328-d8503e7ba596.json",
+      "sha256": "a8f1cb4ec5a59890115ed729e5ad5c23726d09f62ddb5b69fb3a6e7905167cbf"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175329-0c92c4d01741.json",
+      "sha256": "9ba9c1a3b5f4658571d51b9181b47356c607d30f1a399bfea910f3d923e58aeb"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175329-38b6d413d23c.json",
+      "sha256": "15bb813dbf9352250622c55bd8c8c8ef25add3a7ba156ea81a170ad8625ab218"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175329-7368f7f396a5.json",
+      "sha256": "94333853e55c87c48202c6f4aeb5a4500a15448780c82dae79251c2292e45ab0"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175329-935dd79c3245.json",
+      "sha256": "ffb4bde9b0343a564cd6e452123d5f292ed232ca0f7ba2b6027236bb86f1dc66"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175330-04ee8e0de56c.json",
+      "sha256": "6e1095accc2be7b01ffdb86e52526bf57e61c71613b7fbd422f17a96ac832bec"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175330-5340ca79c05d.json",
+      "sha256": "9a5d0796ac1162efec3a02cbd545d86173824b44d057030f6a7c84c5dc4dde3b"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175330-660d6e761ded.json",
+      "sha256": "5fc9919a8c4d8dd3b03df0e4db6bf63fd664ed4cd446f4d9a6fda91862d2c162"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175330-850d49b9dc77.json",
+      "sha256": "9325ce29a6142c668aee25b8d9fcd48e90bc1d84d8e73eaebe3904d8e2002f7a"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175330-f28dc7695328.json",
+      "sha256": "618b96f2a28cfa05a32b7d69bfcaba05710b6dc04ffe8ecb40ca0ce10f463d0d"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175331-9547508ddc19.json",
+      "sha256": "6729ba17512bf4257db626e2b6f3463252592b9e7396889ee68bb19e5bacd558"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175331-b27d016e67bc.json",
+      "sha256": "cc57d4f4ba78891dc65c95abe476dac24d8a897ca686cf3b82f3b9b26405261a"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175331-ba9abe085ca0.json",
+      "sha256": "32ef9432802bcf68103bde58a592a38a38d5151bc9a38a0f3c8e480d9fabcf2a"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175332-16e5c01a7249.json",
+      "sha256": "8dd3ea1b38c4f63a2db4e9c14c54c4f80078db592ddf8f1adbb0cf9881b781ac"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175332-6bbbf1eec315.json",
+      "sha256": "15b44a2ccfc420c0f10debb59c0671d77ce56f3c9c70e565f158f388c267709d"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175333-18aa801ff986.json",
+      "sha256": "b2cea406402f528a1d8d8f1734b23dfa0694ae83ba111c5339b8d8bc3bbe44ed"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175333-6a453baa5c23.json",
+      "sha256": "e01effd275566785a511175d4e3649fea1c159fb859c08038c7d607e66e9783c"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175334-7a3af2ab916d.json",
+      "sha256": "1f9351bd14b23cd039721f45fac4a4cbe0cbdaa1f4279f6d95d3e720a1226980"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175334-c8708b149acd.json",
+      "sha256": "2015e9deaa3269cfcb90be52791d125e65764e367a6ad8a75de572a0250677c5"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175334-cf15a8868de5.json",
+      "sha256": "828ec4cfea206e846f8d9e494781cb0a6e188f750ac6407be7a70412204169c9"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175335-1a0a7fbbd556.json",
+      "sha256": "57005e81ee777c6bfb1abbc2caea9d91fe9cf38e1561acbf5c8de27721565275"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175335-1c41e03ce84f.json",
+      "sha256": "89cb6ef279ddcc7088af763a8a32ba620396d1def095e743fc0a50bf6729f19b"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175335-54b60338e2b1.json",
+      "sha256": "a1a02cd7dabd773b6ecb24a7013f40524a656785b1837bf99e5ead0374134586"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175335-82ddd3d4c670.json",
+      "sha256": "28822b3047d8677cfadf3e04d169d40e30fe491c9233b7650832d76184076206"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175335-8d497273c2af.json",
+      "sha256": "cc66452892a9af468df51f3020c8fc3e24492f45d096165b2bb394304ce34ea2"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175335-bb482d0ba0f5.json",
+      "sha256": "0fa48a6ac8c05d2630371fca43876550638403ab8744258c73773b12d4b386e2"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175335-c1219f8a05e8.json",
+      "sha256": "55c1e5cad99afe88f46db0b52b9256ea21837a1b6c60f933501533c3e8706d1a"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175335-ea42aa895749.json",
+      "sha256": "bcc51756e81c307e1f174b6ac8cba874d3e996796a230b17c406cf5e49d62888"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175336-53a2d4156105.json",
+      "sha256": "17d25d48a807301fe590265ff76fbaea85890d6874de5a135dbf9a3746a640ff"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175336-7995f6edf584.json",
+      "sha256": "75585f9f216d64ed3f035f69e512c0aefcb4bb7be01587e1f977552919896308"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175336-8c930d6f92e6.json",
+      "sha256": "24129f0b1b62a4b26d6b42e2d476e89fca21b0650599124c5755594b3c515329"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175336-c60aa9120dd7.json",
+      "sha256": "7cf7728ca33e760b20050d9b63bbc5a300a4547049a7c8ea01c3e91e67a38f01"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175336-e0b4bc31a533.json",
+      "sha256": "627023eed0c7197c78857aed273b7374790d485c8376c97b57c092b6532d6992"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175337-2522f70f2468.json",
+      "sha256": "3ef6cba52112b7990b19ccfa744c9155f6c0407da5ea36f891c1a00fe46ff2a0"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175337-756fd5788504.json",
+      "sha256": "1786fe6d5d6b5fda5bf2a07dbb0c878ccd2fb2e5907887c070e4b3cec4edbe14"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175337-bf4be794667d.json",
+      "sha256": "8e692462eed4e6bd7cdd783a0c7176af55b359672ac639f14adf567d694fb542"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175338-315fe18f4ac4.json",
+      "sha256": "25843854d485ce56f1fe0b12b27adaf2056dce24bda74c0a27b996b2c49e4167"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175338-4f98f37591f7.json",
+      "sha256": "078a581f49ecc3b8bf46da5cfca1bb79694436506647a9899017e141248bdc32"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175338-597d60894601.json",
+      "sha256": "ed8fbf7561b4761d718da04d292bfd0f99613153f659d4b36a0ace95a060d5f4"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175338-6cc5f29036ad.json",
+      "sha256": "0c522de2356776a8c164ffb704cdfcdd8571bdd754a0fe9c03cc0167b9d84887"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175338-91af7dc4a16d.json",
+      "sha256": "c0de49a696ea61e96e3628a05424a77f4980e763d5edbff1dbf92f649b13888d"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175338-b60d9362c4e7.json",
+      "sha256": "6365c17636af715097451fec3ac9a3f56070e4f4ebcf57bf7313978f3dc9f533"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175338-f0cedb31fa0b.json",
+      "sha256": "687c8900f08f398d50b82a24f015fec91adf07881a78ae8a0a0ebe19585f425b"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175338-f985c2ae9b3c.json",
+      "sha256": "fa5a1147db3f45e39d2f269dafd15d60b03f6e88036f9833dc05a6c2634d95fd"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175339-8f601ea75d5b.json",
+      "sha256": "a7fca2d85e8b9c9097f5665af3a6533b2aa0f83fe8bdc5a9abcc7814a59f8bb0"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175339-ed610b21929e.json",
+      "sha256": "4eb652cf2d6cf534097da25be94345acc3f327863165f5a7a6a952f5a91b4d9b"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175340-538c8b307209.json",
+      "sha256": "04503f8f02a8257db8ff5d652a5ce5a351fa0dab693b504b888a153b24a25485"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175340-8f3b0e0f5607.json",
+      "sha256": "f4c038c92837320d47acf56d0125f20d0b4031ef043fb03431b8c1f5e7a1cd20"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175340-adedb51e786a.json",
+      "sha256": "7d46c212388f91b3538732b121eeb09af1394c780b8022941cc3db84989dfb4f"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175340-c12519775492.json",
+      "sha256": "b33556f7d7a2411e0b71a926eaf4e99331984356121da2a8c848049c23c93e48"
+    },
+    {
+      "path": "calls/test.fewshot_all.Symptom2Disease.a1/c-20261110T175340-c1c8e975b7f8.json",
+      "sha256": "1cde624d4ee2c85c4900ec5ee8e51595bf631f30cd97b1732158b1231d800264"
+    },
+    {
+      "path": "jobs/test.fewshot_all.USPTO/job.json",
+      "sha256": "b6ded7f1e45861531c37eed738730494511adfdd7fb657dade450a677b7794ce"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175016-0082c418fbb3.json",
+      "sha256": "fe55e8bf86e25b39e3bc77908cbeba9969283339ef23831d0ad1d302daafd062"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175016-1ee8023f6bd8.json",
+      "sha256": "10e45c1291e22c8b961d967145a9894173b1c1b46d074e31a7a759d8b1558386"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175016-2439d7e301ca.json",
+      "sha256": "6e089b93f5302a0c32e8e684df9f289912e6ed36116cef13b09fbcb60ab81a2f"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175016-2abcb5d849a6.json",
+      "sha256": "a65c419fa03913b99ec0148fcd2730a1a3347c391954326e8c00f6e672c28287"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175016-364abfe6b12c.json",
+      "sha256": "4ad36eba64d26460fad89fca3668b042b55ee4fa3ae30dababd2daaccbcae715"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175016-43caf1add644.json",
+      "sha256": "079a3f07cb4206cf3c5dbca44b3b98080925386ff0761f359147c2359891a1f8"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175016-467e4e6a8db6.json",
+      "sha256": "687a9a40546dd2f89eab895e97a5364199f1d334e9e282f96c588c26a8706547"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175016-49115f252363.json",
+      "sha256": "d4efae8213d4dca3413e56fbd31a7a901e1c8e8459d882fec15f1b067e7eb2ac"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175016-4be8b075ce8d.json",
+      "sha256": "242347648ecc2c020745d13717ced1efa8241c2d8d3b7609d324291fecdc5dba"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175016-4d15790f0931.json",
+      "sha256": "62b5e7c15d0c550e394ba5ee8eee83b82bde108b40ee0195a9b51b3a1d5f28e8"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175016-51338b740640.json",
+      "sha256": "ee8c49ffc797d2902f999438c85bee4c1ad43343e30d85635caaeff4fae13bd6"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175016-6f43bcce24dc.json",
+      "sha256": "323482456b5c5365c8399020288d0317492e05cdf1e7802f7d18cab2e370110f"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175016-74ac8b9d8f51.json",
+      "sha256": "0eceb8dfe1b4e0b6ebaa4b1564a3b5492ccc8db737c18396f7a2cc0445ab7815"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175016-768bf16ebdff.json",
+      "sha256": "f9fed10a696ef8ab5321964cc316ddf18c05ab3d41ae60943c67bc4deddacab1"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175016-77b52fe40f5f.json",
+      "sha256": "5ce42a61cd8a62fc9d4b40189509158a56270bb355569402eadbb265ce627082"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175016-8120ea39b526.json",
+      "sha256": "58319a86d3f7d3d7d72c17bfef8cec373b5722e34fd95eecc09d803e154c4a3f"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175016-8e467c93931c.json",
+      "sha256": "abbf4e22ebc11e268ec9fdddd25c017ad8fca624dd004d59b97ca8fac0bb2e84"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175016-981d7e42e534.json",
+      "sha256": "a321cfe9a691067ac2d31770e0df08d783214484033283c0dabecedf4dc2a37c"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175016-9a71a1549bfb.json",
+      "sha256": "5e0a3340b01ab7daa80b88b7be9c9309665f014e124e583d9c75043cf06d52f6"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175016-a7f1ba9ffd49.json",
+      "sha256": "ae201ca4918e0e464b49148f33ecac042b3af72bc03a4fc62b5ba454ae361278"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175016-b10fb8a51433.json",
+      "sha256": "1f5741096134a6c2156cd5386a1cc18be9d202decd8bd0af617fee3158aed8b0"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175016-b8f1e3a938ce.json",
+      "sha256": "a482a48675125a191328607a2829a342289d404de2a806b080b0a3dd2d05a39e"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175016-bb39e829caa7.json",
+      "sha256": "fa3c05d392b5828b558d422fc0302a08118cdab327f124ebe58bb8eb9879e528"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175016-c1e32509c97b.json",
+      "sha256": "045f110e8136dce60054e86deb2df56dacf3e4ddf63794f72af3b978e9d4fe34"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175016-cdce6862641e.json",
+      "sha256": "3c702f2d9c659bf0b1977ab07635414473f9bb5ba55b3d2e6971b644ada21787"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175016-e003c7154c5b.json",
+      "sha256": "2ab0ea325a19ac4980acfccf823904b5d1de5a6f0aee0935706db8261782e395"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175016-ed620f6c01aa.json",
+      "sha256": "2a925dd635c74dde4595e666879d2296cfc8c10ec586be1cd449d2e27ef8e4e3"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175016-f0a01ae36c5a.json",
+      "sha256": "f4e82219bb73d23d2747622acc948f3632db37281abcf06e68926185d72773f6"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175016-f11a40bf7522.json",
+      "sha256": "a11ec718496eaccce745e0ff0b10666152f8d7af8a8a21acd989b7c70af0a546"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175016-f2fc0dbe0023.json",
+      "sha256": "88c834ce67ab138598dc8cd0b60a15ecd38c26ab61d9a818c8d78d0d7825543c"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175016-f49546733c23.json",
+      "sha256": "6c1296e8f2909eea9e26055454c7c8652aab4e1d6d78af2acccaaa070a0dedf9"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175016-f78804c3e938.json",
+      "sha256": "14175fd21943519f065dd301f0149dbd886253d309eeb3dabc86630bac98d36b"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175022-c47ef4288272.json",
+      "sha256": "8dbfc2e2ece5ff5175e5c7f01f0718e1070b261b2011ce89b8df2bf67ee58ed3"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175022-cf0ab236941e.json",
+      "sha256": "91f54623acdd9f5eb0d8d9260dc8745ee518b683f973b1d295fded467dc87ba5"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175022-d496a66d1aea.json",
+      "sha256": "dfb7d27a6ea957b2b3ba75637545816f8ec5a5ac7aaa51165e824bae48697b62"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175022-df3d6b22e680.json",
+      "sha256": "0dd8ecc99831566a73c8f6d7736ee0183657e418d03b2ffa5f16503143646274"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175023-faaf3f6ed31b.json",
+      "sha256": "12ba9f15f76e7556464f4f3173b044ca2e8702a7f97a59d3c040cd0c7fc1cd6d"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175024-0ea3333bc3d4.json",
+      "sha256": "f921b071507269ea066098d32b0d51270b84072b1228cb29fd1406b0ae37c072"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175024-d3a350b92796.json",
+      "sha256": "f3b8775c9e0769de9d6af6e4d30537f786093e2288644c55f5ea14f0582bf9cc"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175025-945e7cc4baed.json",
+      "sha256": "44f90dceeb61058d76fe03786819d89ca3a3e3a7d45c941c2e7b613e5d410250"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175026-93e445ca4e6e.json",
+      "sha256": "58b50b03ca43a7ffaed3f6b3e09f7c6bad69f9d11e767c4b27149c127b9c7ad1"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175026-ee220166e245.json",
+      "sha256": "42da87217574ed52578d64b4869dffb3119eab27fd7791b3facf4c21f6d1f266"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175027-194b94246a85.json",
+      "sha256": "7ef29dac73c79c6f85945947a9893a67ff4392d20155858b9a8548de7d55c38d"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175027-21b467dfd3f7.json",
+      "sha256": "3676264bc1f77a5fb5ac5fa586fa65ef6e234db46d3c6b4d84519a6b7703e831"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175027-5dc0917b9f5c.json",
+      "sha256": "447ffdb8ec4a686dfd7b5c832ee4051f4ab3344ed61f44a500cdc20dd5162fc6"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175028-31a9dc0ad20a.json",
+      "sha256": "793e039266ccacfeaf1d8b736d195f623cd3c93ebdb6249c667fa6fb6ea90d30"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175029-e3932b2f9cdc.json",
+      "sha256": "10249b82f0ad18883dae8daff2a68f20eaa5db3f9084740287e0d94f15ef758d"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175029-ffb4bd89ff5d.json",
+      "sha256": "f14e69bf5fe70b26fd22ca7a2161771216a354716d083f5228a9998f8913e0c7"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175031-b83fe735548b.json",
+      "sha256": "5eb1abc6b07e67fab3e94da6b1a1a8bf80083f21a3b7f47cb3b68815adacae70"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175032-40743d95f545.json",
+      "sha256": "89e4cc6fc1dcde56019351b02dddeb66ea7406f22402874c9341f3fa64c5f500"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175033-33f0edd3b064.json",
+      "sha256": "2675a3dd39c1a183621cb14ae0e8d2f15146d6b35a115c00719c7b27cda95da0"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175033-c4d826840502.json",
+      "sha256": "c3d43d6d99613095b387ba24579ca9477ee3f753cdd2abd213e649ab7ab1a908"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175033-ea07bec8eb8e.json",
+      "sha256": "ec874d806e0e784d8b523ac4cb358a7d75c9cc82d3612c1f63c1b46f9374b59f"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175034-14471b0c0184.json",
+      "sha256": "a2d92a164c42a21cd31deaba501c2b9b51a267801e1032b4874b8c07bb70dba0"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175034-22f44e98e9e2.json",
+      "sha256": "d77b1cf12a4a1962930a19766098aca115acf45f995aca6c20b352fd677665ca"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175035-6d3c0dad4c8e.json",
+      "sha256": "dc237a2663e1bed1377a29d3c94d79854bd2ed6955763f8af42df057bde78baf"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175036-0ac80d6a4b56.json",
+      "sha256": "45f6cc0cd2ac36c01c5793766affc979bfa534cce866c59a5c374157799d269c"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175036-f521014f5f6c.json",
+      "sha256": "e2e598660ac3c183ffcfff5a1adbe78bb6f53c67b4177abce97a8e6d00b71674"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175038-173fbf215caf.json",
+      "sha256": "d3cfc21b52031054f900b0ed6c584a17d7c9c31191714e221c13affb1bd845ea"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175039-f0b059de4ec9.json",
+      "sha256": "9c1ad1167f5bae36027aab67006a245b7fb98644dfe108925cb9ac6c96fcad59"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175040-064793e5b3bc.json",
+      "sha256": "6a672cf293143e7f38ec3a727a2591c0d8350fff2ff2dbef16ed617f706ac684"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175040-3f70e5ddc2d9.json",
+      "sha256": "1091d49eb2cd9369aad13a0fbb1896213b244119b2369ef4c1b7d7051639b820"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175041-b0813f5dab37.json",
+      "sha256": "f885e84bc94fc620089c9d95562392d33ea6324e4fb72d21adb306bd474b4e86"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175042-a9a425633aa0.json",
+      "sha256": "32940b270cb20b2e667ba385441ac5b5e82dfa617fb2ffe68db290f47edd7799"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175042-bfa956f280ef.json",
+      "sha256": "26e0a7103d01ab427bf8e1b23d0c35dd21bd50b2928d1f322b3a21dbd3bf7f64"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175043-0f5836054cc0.json",
+      "sha256": "2c7f3c3c41e2e8b7074e39685cf3facb91c6bb614f9dbcfe56383218a541322b"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175043-93c7b7c64fd0.json",
+      "sha256": "7b7a7c5be3e931a326b62aa7b77821fabeb734732197794272ea40505bab3c5e"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175044-da7f5d073884.json",
+      "sha256": "599cd4f48d926188d0b95a8d6b9069499a4cc153d722061a8d8c2a3c6a5078ce"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175046-f76915c00736.json",
+      "sha256": "456799c13b406a5ef349398ee657a6b3d13b536b795bbaa806987ff8eb52517f"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175047-e8da8ae1b0f4.json",
+      "sha256": "e34c0d2a1b2786843db48eb5050bf7abb8ba0d7e886ccb73c4700bfdf71fd371"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175050-0c691c146e34.json",
+      "sha256": "5d1713fc87327267205ed00573b13d4d46736fee883a5145874c742a1ce90de1"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175050-c0b234358418.json",
+      "sha256": "b6ec15d4656ea1bfe92d4985d61ccf011809f62b58778ec2736987aae9a57544"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175052-86872f172ac6.json",
+      "sha256": "5e5f7ae8de1d7dadc2f74661dc65db40f26874b2a990aca0c1c203c8929e1c85"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175052-8a8d04118b3c.json",
+      "sha256": "bf1d4e53d2f5ba7f5affe98b932fecbc8337ee9703c951fa9dc307c719415e49"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175053-7162f8af0a20.json",
+      "sha256": "94a2d04e5f1fa5c4947293ea4a4d22d254556834b1264ea65af396dddcdffa89"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175054-3186cc6f3c55.json",
+      "sha256": "bdd2c7dbf94662d1e1874eb9728ebd33ffdb8340d0ccc0a82b22855a078af543"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175054-ae91da17963e.json",
+      "sha256": "309096f490c818cad9d8bb93c0666f3dec6548bce0affe3cd9183f55784304f5"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175054-ee4718fe0ce6.json",
+      "sha256": "1ae6b176e8727325522661d70dd2c37a0d5c624ca6e89d0b1ad1071e7c171ff4"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175057-447509eb80e5.json",
+      "sha256": "342dd713867ea1e35d8f9739d7f0bfd3086fe0b59edb60dc49c1239b77310983"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175057-b8e22d0572c6.json",
+      "sha256": "10df7a80051b04def634e361f80c51e68c119489ebe5fdc4190509b16ed33c06"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175059-025eacdfbf3a.json",
+      "sha256": "19e67b61bf5642528cefb6ae50ea97b78c003d03cb859f543f007179f963ff3e"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175059-ff45afa74167.json",
+      "sha256": "1fea11ccc4617dddaef4df4cc1538b3eb755c317ed2ac6e66b235f9b2b05da41"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175101-0a3d66481699.json",
+      "sha256": "28186c83f05cd5974774972868784f41556ba3b2ff34a3b1f0ba1fc67085aff5"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175101-5dbfee1af962.json",
+      "sha256": "f623b0dc545abfb4c314426466725aa2fcfb0da7bafecdf12ad0ce620a89cc6f"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175102-08b7f61fcce5.json",
+      "sha256": "2bbc82a48af978ba67ac332be553e4c94b9248384635ca7b1e96adc0ccb24f86"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175102-3aae18d6e673.json",
+      "sha256": "a2c4e638f1c1578eb4ec1824ccc4e4e21e2e37d0349684fb0d964e5de3888731"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175102-585aadc514be.json",
+      "sha256": "a940ffdb76efd015a463ae5e0c58a2d856e7b224565c92988299295c635ed382"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175103-6000ed0cdf4b.json",
+      "sha256": "c2a2818005700ce961c93946d3742f33d1950d88591e30f47399927dad3ecaf6"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175103-9293dd732e2f.json",
+      "sha256": "20f442489ada04edd12438811392b882bd136e3f59736adae6fc9091a34e42b2"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175104-2d7c39b771c9.json",
+      "sha256": "2c66f0981fb1d4a933d665d81d8b85ce23178dbcd4bb7a3310a5f59d95cb04ed"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175104-f43ac17231b1.json",
+      "sha256": "9ff3c2013e0ca11aa9e67611789f7d0af8ea8454ea02e72a80f07f301c3c758e"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175105-142f8de5250c.json",
+      "sha256": "4e430144b901b9d1d3a2f760440f482435bf3320c2d2bdccc1cfb9864fa31b04"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175105-879833715f55.json",
+      "sha256": "925fe07bb3842e65785bbb4e892214d5b13cf7f385216e6f889807ee97c80ca2"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175107-777d4e8b6aaa.json",
+      "sha256": "427b865703bc38e669a6ae5df1ca8095aaa9b5fc45b8165eb45a7a88b0df51e8"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175108-7dfd485633ed.json",
+      "sha256": "c5d0201dc215a9155103e04b4bd7801ca21a1321f5a0fd1dbd0ba028df68ed87"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175109-f60f2249dff8.json",
+      "sha256": "89677a21221b15fb896e59f0a03b558b24981e0d76e90184621f579856ea6695"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175110-2ad13800d098.json",
+      "sha256": "1d85ba81b1717d7c523aeab315b5a6eb9295eb10c0e64592d49afc6d7fd8ac26"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175110-554b3baa86aa.json",
+      "sha256": "1124086e43925cbc3ae643d30fc92c38306974bb1fc305876d955202917bf436"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175111-651bc9856b62.json",
+      "sha256": "7bd4cbd810e0147124c997f30d4665b14c38a441dadd281466033693d0ace519"
+    },
+    {
+      "path": "calls/test.fewshot_all.USPTO.a1/c-20261110T175112-ba6922e8ed17.json",
+      "sha256": "2f946c048a4f3c7744c905cb97491da2f94fa46b5692c5347b1e2a9312bf1ed2"
+    }
+  ],
+  "source_evidence_sha256": "3c03fb79e6e1e7aab4e2ed7355a3efa6f56f211de9d85c814b72be3645e792b1",
+  "script_sha256": "de15df98d7e9d7332c3c4fabd0f817dd38a601c983e0e2e39d5d0066790103d5",
+  "scope": "Marginal inference for every recorded attempt of these jobs, including failures and retries.",
+  "excluded": "Earlier sources of replays, sandbox compute, proposer, telemetry and development costs.",
+  "invoice_reconciliation": "Unavailable. Costs are computed from observed usage and frozen prices; unknown usage remains bounded, never zero.",
+  "latency_comparison": "Not estimated: campaigns overlapped and experienced provider throttling and transport interruptions."
+}

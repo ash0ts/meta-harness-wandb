@@ -101,6 +101,16 @@ def paired(left, right, *, repeats=10000, seed=20261110):
                 tasks=tasks)
 
 
+def regrade_rows(dataset, rows, grader):
+    """Check every prediction, including samples that the voting rule did not select."""
+    judge = grader.get_evaluator(dataset)
+    for row in rows.values():
+        scored = judge(row['prediction'], row['target'])
+        correct = scored['was_correct'] if isinstance(scored, dict) else scored
+        if type(row['was_correct']) is not bool or bool(correct) != row['was_correct']:
+            raise ValueError('host grader disagrees with the stored task score')
+
+
 def read_arm(root, name, expected):
     evidence, arm = [], {}
     grader = controls.load_grader(StatePaths(root))
@@ -130,7 +140,9 @@ def read_arm(root, name, expected):
                 attempt = next(a for a in job['attempts'] if a['attempt'] == record['attempt'])
                 if attempt.get('outcome') != 'ok' or attempt['outputs']['sidecar.jsonl'] != record['sidecar_sha256']:
                     raise ValueError('control job evidence differs')
-                samples.append(controls.final_evals(util.read_jsonl(sidecar)))
+                sample_rows = controls.final_evals(util.read_jsonl(sidecar))
+                regrade_rows(ds, sample_rows, grader)
+                samples.append(sample_rows)
                 evidence.append(dict(path=str(sidecar.relative_to(root)), sha256=record['sidecar_sha256'],
                                      job_key=key, attempt=record['attempt']))
             rebuilt = controls.aggregate(ds, samples, grader, expected_count=expected[ds])
@@ -155,12 +167,7 @@ def read_arm(root, name, expected):
                 raise ValueError('sidecar digest changed')
             rows = controls.final_evals(util.read_jsonl(sidecar))
             ds = job['dataset']
-            judge = grader.get_evaluator(ds)
-            for row in rows.values():
-                scored = judge(row['prediction'], row['target'])
-                correct = scored['was_correct'] if isinstance(scored, dict) else scored
-                if bool(correct) != row['was_correct']:
-                    raise ValueError('host grader disagrees with the stored task score')
+            regrade_rows(ds, rows, grader)
             # Calibration reuse can produce two records. Accept only identical task outcomes.
             compact = {i:{k:r[k] for k in ('example_sha256','prediction_sha256','was_correct')} for i,r in rows.items()}
             if ds in arm and arm[ds] != compact:

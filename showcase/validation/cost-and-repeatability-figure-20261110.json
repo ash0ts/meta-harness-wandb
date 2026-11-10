@@ -1,0 +1,21 @@
+{
+  "schema": "mhforge.analysis-validation/1",
+  "checks": {
+    "campaign_and_cost_analysis_tests": 11,
+    "passed": true,
+    "repeatability_figure_full_size_reviewed": true,
+    "repeatability_figure_600px_reviewed": true,
+    "figure_xlabel_footer_overlap_fixed": true,
+    "calibration_cost_calls_reconciled": 822,
+    "calibration_rejected_attempts_reconciled": 111,
+    "calibration_unknown_usage": 0
+  },
+  "cost_caveat": "Frozen-price estimates from observed token usage; no platform invoice access. Includes failed/retried attempts; earlier replay sources and compute/proposer/telemetry costs excluded.",
+  "figure_hashes": {
+    "png": "d4f47db9d0ce056b527f41a7143e420e5401899f1ff15e364113fc08b3269593",
+    "svg": "af91587881b8735be6033e17fedee4406699bbf0ee1fd092abf213ba39ba7f4f",
+    "pdf": "19a271e4b342d427cb978ebfad43776a04dc3fb7e35bc57fff555c65fcb9b378",
+    "csv": "8f81aa77c4379e835545ca39b364c827857ad3cf3e535c1bf4bfcc03f1f33e14",
+    "evidence.json": "cc4ecba9591ac060057ffabc530a786f733346a9216d8c9592cc494d5bb095d9"
+  }
+}

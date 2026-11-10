@@ -1,0 +1,19 @@
+{
+  "question": "Do identical temperature-zero requests produce repeatable scores?",
+  "takeaway": "Observed correctness varied despite identical request bodies; repeats are not new independent tasks.",
+  "analysis_sha256": "7c52652727202becdcfc94aca3b7a41128d3fd7c11c2ca2bb8c6afc0b9271270",
+  "noise_sha256": "da93703ed40236f0bb0d45fbd658c5b58307c7e2f8a4b8b84ab9dc6e6978020e",
+  "renderer": {
+    "name": "matplotlib",
+    "version": "3.10.8",
+    "font": "DejaVu Sans"
+  },
+  "metric": "Equal-dataset macro validation accuracy; five repeats of the same 130 tasks per baseline.",
+  "privacy": "Aggregate values only; no questions, answers or prediction text.",
+  "forbidden_claims": [
+    "universal nondeterminism rate",
+    "1,300 independent tasks",
+    "population confidence interval"
+  ],
+  "text_alternative": "Full few-shot ranged [43.777778, 40.888889, 40.888889, 41.111111, 42.0]; no memory ranged [22.666667, 22.888889, 25.333333, 24.666667, 24.0]. Correctness changed in 31 of 260 task/system groups."
+}
