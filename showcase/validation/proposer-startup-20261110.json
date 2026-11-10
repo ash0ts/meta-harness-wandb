@@ -1,0 +1,59 @@
+{
+  "schema": "mhforge.proposer-startup-evidence/1",
+  "campaign": "mh-forge-proposer-check-20261110",
+  "started_utc": "2026-11-10T17:19:30.966890Z",
+  "ended_utc": "2026-11-10T17:19:32.432311Z",
+  "session_sha256": "8472fb54f4ae992e575708c2511e65c8535dc6400cd9e6cf9db7cfacb7b8e70e",
+  "outcome": "failed_before_model_inference",
+  "observed_error": "OAuth session expired and could not be refreshed",
+  "observed_plugins": [
+    {
+      "name": "cc-plugin-agents-md",
+      "path": "builtin",
+      "source": "cc-plugin-agents-md@builtin"
+    },
+    {
+      "name": "cc-plugin-telemetry",
+      "path": "builtin",
+      "source": "cc-plugin-telemetry@builtin"
+    },
+    {
+      "name": "cc-plugin-privacy",
+      "path": "builtin",
+      "source": "cc-plugin-privacy@builtin"
+    },
+    {
+      "name": "cc-plugin-plugin-authoring",
+      "path": "builtin",
+      "source": "cc-plugin-plugin-authoring@builtin"
+    }
+  ],
+  "model_resolved_by_inference": false,
+  "result_cost_usd": "0",
+  "result_usage": {
+    "output_tokens_details": {
+      "thinking_tokens": 0
+    },
+    "input_tokens": 0,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "output_tokens": 0,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "",
+    "iterations": [],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "ledger_micro": 10000000,
+  "ledger_basis": "estimate",
+  "interpretation": "Original ledger retains its conservative $10 estimate. Explicit stream evidence reports zero API duration, empty model usage and zero tokens. No successful proposer or isolation claim. Do not rewrite the original attempt.",
+  "remediation_status": "Revised isolation and auth accounting passed targeted tests and offline smoke; live proposer proof still pending."
+}

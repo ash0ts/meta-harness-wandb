@@ -2,7 +2,7 @@
 
 This package instruments the pinned Stanford Meta-Harness text-classification example with a budgeted inference gateway, isolated job execution, a durable journal, and independently verified telemetry exports. The upstream source remains unchanged.
 
-The driver, controls, CLI and real-worker offline smoke are implemented. Live preflight work started on 2026-11-10: account/private-project checks and two Forge inference calls passed. Sandbox setup failures remain separate attempts; these are not model-quality results. The live probes cover sandbox imports, relay soak and expiration, telemetry readback, restricted proposer access, and baseline resume. Every required check still needs its own passing receipt before measured search. Public visibility, Report and saved-view operations remain an explicitly unverified publication skeleton.
+The driver, controls, CLI and real-worker offline smoke are implemented. Live evidence now includes a passing 600-second reconnect/rotation soak and a 30-task qualification job whose 31 Agent Lens spans were read back without mismatch. The original 130-task pilot remains failed instrumentation evidence because its journal had sequence collisions; the fresh engine fixes allocation and resume. Full baselines, calibration, W&B artifacts/EvalTables and proposer isolation still require their own passing receipts before measured search. Public visibility, Report and saved-view operations remain an explicitly unverified publication skeleton.
 
 ## Local verification
 
@@ -66,3 +66,13 @@ The first signal requests a stop at the iteration boundary; the second interrupt
 Final test scoring uses `evaluate --test`; calibration uses `evaluate --calibration`. `evaluate --noise` runs fresh validation repeats. `evaluate --controls` runs five independent temperature-1 fewshot_all samples on each test task, chooses the most frequent normalized label (earliest sample breaks ties), and regrades the selected raw prediction with the pinned evaluator. All 15 sample jobs use the normal gateway, ledger, sandbox, sidecar and export path. Private `controls/` records retain the plan, task identities and selected-sample evidence. This is a five-sample control; its measured costs must be compared before calling it cost matched. Finalization blocks future search in that campaign. Export plans apply dataset content policy; publication bundles exclude raw prompts, transcripts, sidecars, memory, account facts and credentials, and scan final bytes before exposing a bundle. Publication approval remains false by default.
 
 See `design/showcase-spec.md`, `design/lead-decisions.md` and `design/continuation.md` for the contracts and remaining work. `protocol.md` records the delegated stage 1 choices; stage 2 remains gated on live evidence.
+
+
+Independent diagnostics can continue while Claude authentication is unavailable:
+
+```sh
+python -m mhforge preflight --live --manifest manifest.preflight.json --only baseline_noise sampling_controls
+python -m mhforge preflight --live --manifest manifest.preflight.json --only telemetry
+```
+
+Run baselines before baseline noise. Selected diagnostics do not qualify a campaign, waive calibration, or authorize search. Live keys use the same credential channel as other commands. Proposer settings disable optional built-ins; the exact hash-pinned privacy component stays enabled and runtime permission probes remain mandatory.

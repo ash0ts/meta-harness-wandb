@@ -12,7 +12,8 @@ class PreflightTests(unittest.TestCase):
     def test_describe_preserves_order_without_calls(self):
         rows = preflight.describe()
         self.assertEqual(rows[0]['step'], 'PF1')
-        self.assertEqual(rows[-1]['step'], 'PF-R')
+        self.assertEqual(rows[len(preflight.ACCOUNT_STEPS + preflight.CHECKS)-1]['step'], 'PF-R')
+        self.assertEqual(rows[-1]['step'], 'EXP-K')
         self.assertTrue(all('run' not in r for r in rows))
         self.assertEqual(len({r['name'] for r in rows}), len(rows))
 
@@ -45,6 +46,18 @@ class PreflightTests(unittest.TestCase):
             self.assertTrue(out['passed'])
             self.assertFalse(out['qualified'])
             self.assertFalse(st.paths.qualification_passed.exists())
+
+    def test_diagnostic_success_never_qualifies_search(self):
+        with helpers.tmp_state(manifest=True) as st:
+            called = []
+            ctx = preflight.Context(st.manifest, st.paths, {}, st.sc,
+                probes={'sampling_controls': lambda _: called.append(1) or {'passed': True}})
+            out = preflight.run_checks(ctx, ['sampling_controls'])
+            self.assertEqual(called, [1])
+            self.assertTrue(out['passed'])
+            self.assertFalse(out['qualified'])
+            self.assertFalse(st.paths.qualification_passed.exists())
+            self.assertNotIn('sampling_controls', [c.name for c in preflight.CHECKS])
 
     def test_unavailable_probe_is_failed_and_receipted(self):
         with helpers.tmp_state(manifest=True) as st:

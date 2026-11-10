@@ -38,7 +38,16 @@ __all__ = ["COMMON_SETTINGS", "CREDENTIAL_PATHS", "RESTRICTED_ADDENDUM", "Settin
 
 # ================================================================ generated settings
 
-COMMON_SETTINGS = {"autoMemoryEnabled": False, "switchModelsOnFlag": False, "disableAllHooks": True}
+# Built-in privacy enforcement stays enabled. Optional built-ins must not add
+# project instructions, skills, or analytics to the experiment.
+COMMON_SETTINGS = {"autoMemoryEnabled": False, "switchModelsOnFlag": False, "disableAllHooks": True,
+    "syncClaudeAiPlugins": False,
+    "enabledPlugins": {name + "@builtin": False for name in
+        ("agents-md", "telemetry", "plugin-authoring", "cc-plugin-agents-md",
+         "cc-plugin-telemetry", "cc-plugin-plugin-authoring")}}
+# This is part of the hash-pinned CLI, not an installed extension. A different
+# binary, version, source, path, or extra plugin still fails closed.
+PINNED_PRIVACY_PLUGIN = ("2.1.317", "577c8ac6411ef57dd741e3c491e89f57ff6f42bb835a5ac5d4f496c29f14c5d5")
 CREDENTIAL_PATHS = ("~/.netrc", "~/.ssh", "~/.gnupg", "~/.aws", "~/.config/gh", "~/.config/gcloud", "~/.config/wandb",
                     "~/.docker", "~/.kube", "~/.npmrc", "~/.pypirc", "~/.git-credentials", "~/.cache/huggingface",
                     "~/Library/Keychains", "~/.claude/.credentials.json", "~/Documents/common_tools/.env")
@@ -130,7 +139,7 @@ def generate_settings(inputs: SettingsInputs, override: Mapping | None = None) -
     i = inputs
     if i.mode not in MODES:
         raise ValueError(f"unknown permission mode {i.mode!r}")
-    settings: dict = dict(COMMON_SETTINGS)
+    settings: dict = json.loads(json.dumps(COMMON_SETTINGS))
     if i.mode == "upstream":
         return settings
     ws, logs, state = Path(i.ws), Path(i.logs_dir), Path(i.state_root)
@@ -257,7 +266,10 @@ def check_settings(settings: Mapping, mode: str, *, base: Mapping | None = None)
     if mode not in MODES:
         return [f"unknown permission mode {mode!r}"]
     for key, value in COMMON_SETTINGS.items():
-        if settings.get(key) is not value:
+        got = settings.get(key)
+        same = (isinstance(got, Mapping) and got.keys() == value.keys()
+                and all(got[k] is v for k, v in value.items())) if isinstance(value, Mapping) else got is value
+        if not same:
             problems.append(f"{key} must be {json.dumps(value)}")
     if base is not None:
         problems += _override_problems(settings, base)
@@ -456,11 +468,15 @@ def _plugin_path(entry: object) -> str | None:
 
 
 def integrity_violations(init: Mapping | None, drift: Mapping, *, mode: str, ws: Path, cli_version: str,
-                         memory_dir_changed: bool, memory_saved_events: int) -> list[str]:
+                         memory_dir_changed: bool, memory_saved_events: int, cli_sha256: str | None = None) -> list[str]:
     out: list[str] = []
     if init:
         own = os.path.abspath(Path(ws) / ".empty_plugins")
         for entry in init.get("plugins") or []:
+            if ((cli_version, cli_sha256) == PINNED_PRIVACY_PLUGIN and isinstance(entry, Mapping)
+                    and dict(entry) == {"name": "cc-plugin-privacy", "path": "builtin",
+                                        "source": "cc-plugin-privacy@builtin"}):
+                continue
             path = _plugin_path(entry)
             if path is None or os.path.abspath(path) != own:
                 out.append("init.plugins holds a plugin other than the empty plugin directory")
@@ -540,7 +556,8 @@ def classify_session(facts: SessionFacts, manifest: dict) -> tuple[str, str | No
     status = _int_status(result.get("api_error_status")) if result is not None else None
     text = (f.stderr_text or "").lower() + "\n" + (str(result.get("result") or "").lower() if result else "")
     prop = manifest.get("proposer", {})
-    if status == 401 or any(p.lower() in text for p in prop.get("auth_patterns") or []):
+    if status == 401 or "oauth session expired" in text or "failed to authenticate" in text or any(
+            p.lower() in text for p in prop.get("auth_patterns") or []):
         return "auth", "status" if status == 401 else "text"
     if status in (402, 429):
         return "spend_limit", "status"
@@ -695,8 +712,23 @@ def _usd_micro(value: object) -> int | None:
 
 def session_cost(result_event: Mapping | None, session: "tx.NormalizedSession | None", manifest: dict,
                  fallback_micro: int) -> tuple[int, str]:
-    """(micro-dollars, basis): result_event, cost_state, usage_sum, estimate; a zero from any source falls through."""
+    """(micro-dollars, basis). Zero needs explicit evidence of a pre-API failure.
+
+    A generic zero still falls through: some CLI versions report zero on paid
+    failures. An authentication failure before any API time with all token
+    counters present and zero is a distinct, observed no-inference outcome.
+    """
     if isinstance(result_event, Mapping):
+        usage = result_event.get("usage") or {}
+        token_keys = ("input_tokens", "output_tokens", "cache_creation_input_tokens", "cache_read_input_tokens")
+        text = str(result_event.get("result") or "").lower()
+        if (result_event.get("is_error") is True and result_event.get("terminal_reason") == "api_error"
+                and result_event.get("duration_api_ms") == 0 and result_event.get("total_cost_usd") == 0
+                and ("oauth session expired" in text or "failed to authenticate" in text)
+                and isinstance(usage, Mapping) and all(usage.get(k) == 0 for k in token_keys)
+                and result_event.get("modelUsage") == {}
+                and (session is None or not tx.usage_by_model(session))):
+            return 0, "no_api_auth_failure"
         micro = _usd_micro(result_event.get("total_cost_usd"))
         if micro:
             return micro, "result_event"
@@ -1120,7 +1152,7 @@ class ProposerRunner:
             memory_saved = sum(1 for ev in parsed["system"] if ev.get("subtype") == "memory_saved")
             violations = integrity_violations(parsed["init"], drift, mode=mode, ws=ws, cli_version=prop.get("cli_version"),
                                               memory_dir_changed=mem_before != mem_after,
-                                              memory_saved_events=memory_saved)
+                                              memory_saved_events=memory_saved, cli_sha256=prop.get("cli_sha256"))
             # step 13: cost
             estimate = max(self.ledger.meter_max("proposer_list_price"),
                            util.micros(prop["session_estimate_usd"]) if prop.get("session_estimate_usd") else 0)

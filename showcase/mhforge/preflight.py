@@ -246,6 +246,16 @@ CHECKS = (
     Check('PF-R', 'reconciliation', False, True, False, 'operator billing figures', 'Reconcile platform usage with the local ledger.',
           lambda ctx: reconciliation(ctx.ledger.snapshot(), ctx.user_figures, ctx.manifest)),
 )
+# Opt-in experiments may run while proposer access is unavailable. They never
+# mint qualification/passed.json and are excluded from full qualification.
+DIAGNOSTICS = (
+    Check('EXP-N', 'baseline_noise', True, True, False, 'fresh baseline repeats',
+          'Measure repeated-run variation with distinct provider call identities.', _probe('baseline_noise')),
+    Check('EXP-K', 'sampling_controls', True, True, False, 'five fresh test samples per dataset',
+          'Measure fixed five-sample voting with released graders.', _probe('sampling_controls')),
+)
+
+
 TEARDOWN = (
     {'item': 'sandboxes', 'how': 'Stop campaign-tagged sandboxes; require two empty lists.', 'automated': True},
     {'item': 'credential', 'how': 'Revoke the dedicated key when no longer needed.', 'automated': False},
@@ -255,7 +265,7 @@ TEARDOWN = (
 
 
 def describe():
-    return [{k: v for k, v in asdict(c).items() if k != 'run'} for c in ACCOUNT_STEPS + CHECKS]
+    return [{k: v for k, v in asdict(c).items() if k != 'run'} for c in ACCOUNT_STEPS + CHECKS + DIAGNOSTICS]
 
 
 def _invoke(check, ctx):
@@ -295,7 +305,8 @@ def account_check(ctx, *, create_project=False):
 
 
 def run_checks(ctx, only=None):
-    names = {c.name for c in CHECKS}
+    available = CHECKS + DIAGNOSTICS if only else CHECKS
+    names = {c.name for c in available}
     if only and set(only) - names:
         raise ValueError('unknown preflight check')
     engine = qualification.engine_snapshot(Path(__file__).parent)
@@ -305,7 +316,7 @@ def run_checks(ctx, only=None):
         problems = qualification.import_problems(ctx.manifest, ctx.paths, engine)
         if problems:
             return {'passed': False, 'problems': problems}
-    chosen = [c for c in CHECKS if (not only or c.name in only) and (not imported or c.per_project)]
+    chosen = [c for c in available if (not only or c.name in only) and (not imported or c.per_project)]
     receipts = []
     for check in chosen:
         result = _invoke(check, ctx)

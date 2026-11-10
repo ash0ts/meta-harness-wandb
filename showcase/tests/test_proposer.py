@@ -345,6 +345,19 @@ class TestChecks(unittest.TestCase):
         self.assertEqual(len(P.integrity_violations(dict(init, claude_code_version="2.1.318"), {}, mode="upstream",
                                                     **kw)), 1)
 
+    def test_only_exact_hash_pinned_builtin_privacy_plugin_is_accepted(self) -> None:
+        ws = Path('/tmp/ws')
+        plugin = {'name': 'cc-plugin-privacy', 'path': 'builtin', 'source': 'cc-plugin-privacy@builtin'}
+        init = {'plugins': [plugin], 'claude_code_version': '2.1.317'}
+        kw = dict(mode='restricted', ws=ws, cli_version='2.1.317', memory_dir_changed=False,
+                  memory_saved_events=0, cli_sha256=P.PINNED_PRIVACY_PLUGIN[1])
+        self.assertEqual(P.integrity_violations(init, {}, **kw), [])
+        for changed in (dict(plugin, path='/tmp/builtin'), dict(plugin, source='privacy@other'),
+                        dict(plugin, name='cc-plugin-telemetry')):
+            self.assertTrue(P.integrity_violations(dict(init, plugins=[changed]), {}, **kw))
+        self.assertTrue(P.integrity_violations(init, {}, **dict(kw, cli_sha256='0'*64)))
+        self.assertTrue(P.integrity_violations(init, {}, **dict(kw, cli_version='different')))
+
     def test_init_with_plugins_skills_mcp_or_memory_paths_halts(self) -> None:
         kw = dict(drift={}, mode="upstream", ws=Path("/w"), cli_version="2.1.317", memory_dir_changed=False,
                   memory_saved_events=0)
@@ -479,7 +492,7 @@ class TestSettings(unittest.TestCase):
         for mode in ("upstream", "restricted", "contained"):
             s = json.loads(util.canonical_json(P.generate_settings(_inputs(mode=mode))).decode("utf-8"))
             for key, value in P.COMMON_SETTINGS.items():
-                self.assertIs(s[key], value, mode)
+                self.assertEqual(s[key], value, mode) if isinstance(value, dict) else self.assertIs(s[key], value, mode)
         with self.assertRaises(ValueError):
             P.generate_settings(_inputs(mode="bogus"))
 
@@ -593,6 +606,17 @@ class TestSettings(unittest.TestCase):
 # ================================================================ cost, transcripts, signals
 
 class TestCostAndTranscripts(unittest.TestCase):
+    def test_proven_pre_api_auth_failure_is_observed_zero(self) -> None:
+        result = {'is_error': True, 'terminal_reason': 'api_error', 'duration_api_ms': 0,
+            'total_cost_usd': 0, 'result': 'Failed to authenticate: OAuth session expired and could not be refreshed',
+            'modelUsage': {}, 'usage': dict.fromkeys(('input_tokens', 'output_tokens',
+                'cache_creation_input_tokens', 'cache_read_input_tokens'), 0)}
+        self.assertEqual(P.session_cost(result, None, make_manifest(), 10_000_000), (0, 'no_api_auth_failure'))
+        for key in ('duration_api_ms', 'usage', 'modelUsage', 'terminal_reason'):
+            missing = dict(result); missing.pop(key)
+            self.assertEqual(P.session_cost(missing, None, make_manifest(), 10), (10, 'estimate'))
+        self.assertEqual(P.session_cost(result, _fixture_session(), make_manifest(), 10), (197859, 'cost_state'))
+
     def test_cost_fallback_chain_never_zero(self) -> None:
         m = make_manifest()
         self.assertEqual(P.session_cost({"total_cost_usd": 12.31}, None, m, 5), (12310000, "result_event"))

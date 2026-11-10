@@ -239,6 +239,10 @@ def _runner(args, m, paths, keys, base_env, home, hostname):
                         current.shutdown()
                     current = make_driver()
                     return getattr(current, method)()
+                def diagnostic(method):
+                    result = run(method)
+                    return {'passed': result.get('status') == 'complete',
+                            'research_status': 'diagnostic; does not qualify search', **result}
                 current = make_driver()
                 from .telemetry import probe as telemetry_probe
                 export_check = lambda ctx: telemetry_probe.run(ctx, keys, drain=spawner.drain if spawner else None)
@@ -250,6 +254,8 @@ def _runner(args, m, paths, keys, base_env, home, hostname):
                     user_figures={k: v for k, v in vars(args).items() if k.startswith(('platform_', 'waive_')) and v},
                     probes={'sandbox': live_probes.sandbox, 'telemetry': export_check,
                             'proposer_probes': lambda ctx: run('run_proposer_probe'),
+                            'baseline_noise': lambda ctx: diagnostic('run_noise'),
+                            'sampling_controls': lambda ctx: diagnostic('run_controls'),
                             'rehearsal_review': lambda ctx: live_probes.rehearsal_review(ctx, export_check)})
                 if args.teardown:
                     current.rt.executor.cleanup_orphans(current.rt.journal.open_handles())
