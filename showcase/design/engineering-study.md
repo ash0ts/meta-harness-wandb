@@ -33,3 +33,10 @@ Acceptance: 72 complete jobs (12 preparation,60 test), 8,760 scored outcomes; tr
 Pre-live revision: the inherited search-wide replay scope could share identical prompts between arms. Revision B freezes job-only replay. Original frozen manifest is retained as preparation evidence and performed no live inference.
 
 Revision C: the full offline rehearsal exposed a resume-discovery defect. Upstream omits already-completed preparation jobs; the runner now verifies their saved evidence. B was halted during preparation before any measured test. All B attempts and cost remain retained. No scientific arm or setting changed.
+
+
+## Execution amendment before measured tests
+
+Campaign D (mh-engineering-d-20261110) completes the same scientific protocol with local relay workers because CoreWeave Sandboxes began rejecting list requests with PERMISSION_DENIED. C created no job, sandbox handle or inference call. The credential digest was unchanged; W&B project remained PRIVATE and writable, and the inference model-list endpoint returned HTTP200. No remote access restriction was bypassed.
+
+D explicitly selects local execution of the fixed, reviewed candidates. The launcher is hash-bound in the frozen manifest and requires macOS sandbox-exec to deny worker network access outside loopback. It refuses proposer search and non-engineering diagnostics. This is a host process with a network guard, not cloud sandbox isolation. Provider calls and Agent Lens/W&B exports remain on the authorized Forge services. All compared D arms use the same worker environment; source, prompts, task splits, scoring, sample counts, temperature, gateway concurrency and randomized job order are unchanged. One local job runs at a time. Local hardware cost is not priced as cloud compute. The article must name this execution boundary.

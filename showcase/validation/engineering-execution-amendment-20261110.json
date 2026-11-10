@@ -1,0 +1,13 @@
+{
+  "schema": "mhforge.execution-amendment/1",
+  "before_campaign": "mh-engineering-c-20261110",
+  "after_campaign": "mh-engineering-d-20261110",
+  "sandbox_read": "PERMISSION_DENIED: access denied",
+  "credential_changed": false,
+  "private_project_writable": true,
+  "inference_models_http_status": 200,
+  "before_jobs_created": 0,
+  "before_provider_attempts": 0,
+  "execution": "local_relay; macOS worker network guard; fixed reviewed candidates only; no proposer",
+  "scientific_conditions_changed": false
+}
