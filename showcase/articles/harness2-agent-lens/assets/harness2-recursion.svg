@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="1112" viewBox="0 0 640 1112" role="img" aria-labelledby="title desc">
+<title id="title">Two levels of harness improvement</title><desc id="desc">Model weights and stage rules stay fixed. Within a task, initial execution evidence guides proposals, candidate probes, and composition with a further probe. Sequential recursion can repeat from the checkpoint, including KEEP or fallback. Across tasks, an improvement library retains adopted files and supported lessons; each new task starts with the original execution harness and uses the library to guide editing.</desc>
+<rect width="640" height="1112" fill="#fbfaf7"/>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#116e64"/></marker><marker id="violet" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#61528b"/></marker></defs>
+<g font-family="system-ui, -apple-system, sans-serif">
+<text x="28" y="44" fill="#193b45" font-size="29" font-weight="700" text-anchor="start">Two levels of harness improvement</text>
+<rect x="28" y="68" width="584" height="90" rx="12" fill="#eef0ee" stroke="#a8b5af" stroke-width="1.5"/>
+<text x="48" y="99" fill="#536769" font-size="19" font-weight="700" text-anchor="start">FIXED</text>
+<text x="48" y="134" fill="#193b45" font-size="25" font-weight="600" text-anchor="start">Model weights and stage rules</text>
+<text x="28" y="204" fill="#116e64" font-size="21" font-weight="700" text-anchor="start">1  REFINE WITHIN THE CURRENT TASK</text>
+<rect x="164" y="228" width="448" height="76" rx="12" fill="#e8f2ee" stroke="#116e64" stroke-width="1.5"/>
+<text x="188" y="260" fill="#193b45" font-size="25" font-weight="650" text-anchor="start">Execute the task</text>
+<text x="188" y="289" fill="#193b45" font-size="22" font-weight="400" text-anchor="start">Collect behavior and outputs</text>
+<path d="M 388 304 L 388 330" fill="none" stroke="#116e64" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="164" y="338" width="448" height="92" rx="12" fill="#e8f2ee" stroke="#116e64" stroke-width="1.5"/>
+<text x="188" y="371" fill="#193b45" font-size="25" font-weight="650" text-anchor="start">Propose two candidates</text>
+<text x="188" y="405" fill="#193b45" font-size="22" font-weight="400" text-anchor="start">Procedure edits / domain edits</text>
+<path d="M 388 430 L 388 456" fill="none" stroke="#116e64" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="164" y="464" width="448" height="92" rx="12" fill="#e8f2ee" stroke="#116e64" stroke-width="1.5"/>
+<text x="188" y="498" fill="#193b45" font-size="25" font-weight="650" text-anchor="start">Probe each candidate</text>
+<text x="188" y="532" fill="#193b45" font-size="22" font-weight="400" text-anchor="start">Run the same task again</text>
+<path d="M 388 556 L 388 582" fill="none" stroke="#116e64" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="164" y="590" width="448" height="128" rx="12" fill="#e8f2ee" stroke="#116e64" stroke-width="1.5"/>
+<text x="188" y="625" fill="#193b45" font-size="25" font-weight="650" text-anchor="start">Compose, then probe</text>
+<text x="188" y="661" fill="#193b45" font-size="22" font-weight="400" text-anchor="start">Combine supported changes.</text>
+<text x="188" y="690" fill="#193b45" font-size="22" font-weight="400" text-anchor="start">KEEP or fallback remains valid.</text>
+<path d="M 164 655 L 76 655 L 76 384 L 154 384" fill="none" stroke="#116e64" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="30" y="465" width="94" height="72" fill="#fbfaf7"/>
+<text x="77" y="491" fill="#116e64" font-size="22" font-weight="600" text-anchor="middle">Next</text>
+<text x="77" y="521" fill="#116e64" font-size="22" font-weight="600" text-anchor="middle">round</text>
+<path d="M 388 718 L 388 756" fill="none" stroke="#116e64" stroke-width="2.5" marker-end="url(#arrow)"/>
+<text x="28" y="802" fill="#61528b" font-size="21" font-weight="700" text-anchor="start">2  RETAIN EXPERIENCE BETWEEN TASKS</text>
+<rect x="28" y="824" width="584" height="102" rx="12" fill="#f0edf7" stroke="#61528b" stroke-width="1.5"/>
+<text x="48" y="860" fill="#193b45" font-size="25" font-weight="650" text-anchor="start">Improvement library</text>
+<text x="48" y="897" fill="#193b45" font-size="22" font-weight="400" text-anchor="start">Adopted files + evidence-supported lessons</text>
+<path d="M 320 926 L 320 952" fill="none" stroke="#61528b" stroke-width="2.5" marker-end="url(#violet)"/>
+<rect x="28" y="960" width="584" height="122" rx="12" fill="#f0edf7" stroke="#61528b" stroke-width="1.5"/>
+<text x="48" y="996" fill="#193b45" font-size="25" font-weight="650" text-anchor="start">Next task</text>
+<text x="48" y="1031" fill="#193b45" font-size="22" font-weight="400" text-anchor="start">Start with the original execution harness.</text>
+<text x="48" y="1060" fill="#193b45" font-size="22" font-weight="400" text-anchor="start">Use the library to guide new edits.</text>
+</g></svg>

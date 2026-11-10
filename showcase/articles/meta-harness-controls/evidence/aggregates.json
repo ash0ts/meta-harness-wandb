@@ -1,0 +1,448 @@
+{
+  "baseline_paired": {
+    "datasets": {
+      "LawBench": {
+        "total": 100,
+        "left_correct": 6,
+        "right_correct": 28,
+        "both_correct": 5,
+        "gain": 23,
+        "loss": 1,
+        "both_wrong": 71,
+        "delta": 0.22
+      },
+      "Symptom2Disease": {
+        "total": 212,
+        "left_correct": 144,
+        "right_correct": 177,
+        "both_correct": 136,
+        "gain": 41,
+        "loss": 8,
+        "both_wrong": 27,
+        "delta": 0.15566037735849056
+      },
+      "USPTO": {
+        "total": 100,
+        "left_correct": 13,
+        "right_correct": 18,
+        "both_correct": 11,
+        "gain": 7,
+        "loss": 2,
+        "both_wrong": 80,
+        "delta": 0.05
+      }
+    },
+    "macro_delta": 0.14188679245283017,
+    "macro_delta_ci95": [
+      0.10244811320754717,
+      0.18232704402515723
+    ],
+    "bootstrap": {
+      "method": "paired task bootstrap stratified by dataset; equal dataset weighting",
+      "repeats": 10000,
+      "seed": 20261110,
+      "interval": "percentile",
+      "limitation": "conditional on selected harness and fixed datasets; excludes search and model-sampling uncertainty"
+    }
+  },
+  "voting_paired": {
+    "datasets": {
+      "LawBench": {
+        "total": 100,
+        "left_correct": 28,
+        "right_correct": 34,
+        "both_correct": 26,
+        "gain": 8,
+        "loss": 2,
+        "both_wrong": 64,
+        "delta": 0.06
+      },
+      "Symptom2Disease": {
+        "total": 212,
+        "left_correct": 177,
+        "right_correct": 177,
+        "both_correct": 171,
+        "gain": 6,
+        "loss": 6,
+        "both_wrong": 29,
+        "delta": 0.0
+      },
+      "USPTO": {
+        "total": 100,
+        "left_correct": 18,
+        "right_correct": 20,
+        "both_correct": 15,
+        "gain": 5,
+        "loss": 3,
+        "both_wrong": 77,
+        "delta": 0.02
+      }
+    },
+    "macro_delta": 0.02666666666666667,
+    "macro_delta_ci95": [
+      -0.0019654088050314335,
+      0.05647798742138365
+    ],
+    "bootstrap": {
+      "method": "paired task bootstrap stratified by dataset; equal dataset weighting",
+      "repeats": 10000,
+      "seed": 20261110,
+      "interval": "percentile",
+      "limitation": "conditional on selected harness and fixed datasets; excludes search and model-sampling uncertainty"
+    }
+  },
+  "overlap_sensitivity": {
+    "baseline": {
+      "datasets": {
+        "LawBench": {
+          "total": 100,
+          "left_correct": 6,
+          "right_correct": 28,
+          "both_correct": 5,
+          "gain": 23,
+          "loss": 1,
+          "both_wrong": 71,
+          "delta": 0.22
+        },
+        "Symptom2Disease": {
+          "total": 211,
+          "left_correct": 143,
+          "right_correct": 176,
+          "both_correct": 135,
+          "gain": 41,
+          "loss": 8,
+          "both_wrong": 27,
+          "delta": 0.15639810426540285
+        },
+        "USPTO": {
+          "total": 100,
+          "left_correct": 13,
+          "right_correct": 18,
+          "both_correct": 11,
+          "gain": 7,
+          "loss": 2,
+          "both_wrong": 80,
+          "delta": 0.05
+        }
+      },
+      "macro_delta": 0.14213270142180096,
+      "macro_delta_ci95": [
+        0.1015955766192733,
+        0.18213704581358606
+      ],
+      "bootstrap": {
+        "method": "paired task bootstrap stratified by dataset; equal dataset weighting",
+        "repeats": 10000,
+        "seed": 20261110,
+        "interval": "percentile",
+        "limitation": "conditional on selected harness and fixed datasets; excludes search and model-sampling uncertainty"
+      }
+    },
+    "voting": {
+      "datasets": {
+        "LawBench": {
+          "total": 100,
+          "left_correct": 28,
+          "right_correct": 34,
+          "both_correct": 26,
+          "gain": 8,
+          "loss": 2,
+          "both_wrong": 64,
+          "delta": 0.06
+        },
+        "Symptom2Disease": {
+          "total": 211,
+          "left_correct": 176,
+          "right_correct": 176,
+          "both_correct": 170,
+          "gain": 6,
+          "loss": 6,
+          "both_wrong": 29,
+          "delta": 0.0
+        },
+        "USPTO": {
+          "total": 100,
+          "left_correct": 18,
+          "right_correct": 20,
+          "both_correct": 15,
+          "gain": 5,
+          "loss": 3,
+          "both_wrong": 77,
+          "delta": 0.02
+        }
+      },
+      "macro_delta": 0.02666666666666667,
+      "macro_delta_ci95": [
+        -0.0028120063191153233,
+        0.057898894154818324
+      ],
+      "bootstrap": {
+        "method": "paired task bootstrap stratified by dataset; equal dataset weighting",
+        "repeats": 10000,
+        "seed": 20261110,
+        "interval": "percentile",
+        "limitation": "conditional on selected harness and fixed datasets; excludes search and model-sampling uncertainty"
+      }
+    }
+  },
+  "voting_vs_first_temperature_one_sample": {
+    "datasets": {
+      "LawBench": {
+        "total": 100,
+        "left_correct": 31,
+        "right_correct": 34,
+        "both_correct": 29,
+        "gain": 5,
+        "loss": 2,
+        "both_wrong": 64,
+        "delta": 0.03
+      },
+      "Symptom2Disease": {
+        "total": 212,
+        "left_correct": 177,
+        "right_correct": 177,
+        "both_correct": 174,
+        "gain": 3,
+        "loss": 3,
+        "both_wrong": 32,
+        "delta": 0.0
+      },
+      "USPTO": {
+        "total": 100,
+        "left_correct": 19,
+        "right_correct": 20,
+        "both_correct": 17,
+        "gain": 3,
+        "loss": 2,
+        "both_wrong": 78,
+        "delta": 0.01
+      }
+    },
+    "macro_delta": 0.013333333333333334,
+    "macro_delta_ci95": [
+      -0.010188679245283019,
+      0.038238993710691824
+    ],
+    "bootstrap": {
+      "method": "paired task bootstrap stratified by dataset; equal dataset weighting",
+      "repeats": 10000,
+      "seed": 20261110,
+      "interval": "percentile",
+      "limitation": "conditional on selected harness and fixed datasets; excludes search and model-sampling uncertainty"
+    }
+  },
+  "voting_cost_ratio_to_single_fewshot_bounds": [
+    5.0842035055892,
+    5.3801670090441
+  ],
+  "repeatability": {
+    "repeats": 5,
+    "task_system_groups": 260,
+    "task_outcomes_regraded": 1300,
+    "groups_with_identical_requests": 260,
+    "groups_with_correctness_changes": 31,
+    "groups_with_normalized_label_changes": 126,
+    "macro_validation_accuracy": {
+      "fewshot_all": {
+        "macro_min": 40.888889,
+        "macro_max": 43.777778,
+        "macro_std": 1.23128
+      },
+      "no_memory": {
+        "macro_min": 22.666667,
+        "macro_max": 25.333333,
+        "macro_std": 1.139634
+      }
+    }
+  },
+  "voting_diagnostics": {
+    "LawBench": {
+      "total": 100,
+      "both_wrong": 64,
+      "any_correct": 40,
+      "all_wrong": 60,
+      "all_correct": 19,
+      "vote_missed_available_correct": 6,
+      "unanimous_wrong": 14,
+      "tied": 8,
+      "correct": 34,
+      "both_correct": 29,
+      "loss": 2,
+      "gain": 5,
+      "agreement": {
+        "3": {
+          "tasks": 23,
+          "correct": 5
+        },
+        "5": {
+          "tasks": 33,
+          "correct": 19
+        },
+        "2": {
+          "tasks": 16,
+          "correct": 4
+        },
+        "4": {
+          "tasks": 24,
+          "correct": 5
+        },
+        "1": {
+          "tasks": 4,
+          "correct": 1
+        }
+      },
+      "sample_correct": [
+        31,
+        31,
+        29,
+        26,
+        30
+      ]
+    },
+    "Symptom2Disease": {
+      "total": 212,
+      "both_wrong": 32,
+      "any_correct": 192,
+      "all_wrong": 20,
+      "all_correct": 165,
+      "vote_missed_available_correct": 15,
+      "unanimous_wrong": 15,
+      "tied": 1,
+      "correct": 177,
+      "both_correct": 174,
+      "gain": 3,
+      "loss": 3,
+      "agreement": {
+        "5": {
+          "tasks": 180,
+          "correct": 165
+        },
+        "4": {
+          "tasks": 22,
+          "correct": 8
+        },
+        "3": {
+          "tasks": 9,
+          "correct": 4
+        },
+        "2": {
+          "tasks": 1,
+          "correct": 0
+        }
+      },
+      "sample_correct": [
+        177,
+        175,
+        178,
+        179,
+        179
+      ]
+    },
+    "USPTO": {
+      "total": 100,
+      "both_wrong": 78,
+      "any_correct": 24,
+      "all_wrong": 76,
+      "all_correct": 11,
+      "vote_missed_available_correct": 4,
+      "unanimous_wrong": 4,
+      "tied": 27,
+      "correct": 20,
+      "loss": 2,
+      "both_correct": 17,
+      "gain": 3,
+      "agreement": {
+        "1": {
+          "tasks": 21,
+          "correct": 0
+        },
+        "3": {
+          "tasks": 19,
+          "correct": 3
+        },
+        "2": {
+          "tasks": 35,
+          "correct": 2
+        },
+        "5": {
+          "tasks": 15,
+          "correct": 11
+        },
+        "4": {
+          "tasks": 10,
+          "correct": 4
+        }
+      },
+      "sample_correct": [
+        19,
+        17,
+        14,
+        18,
+        21
+      ]
+    }
+  },
+  "limitations": [
+    "Equal-dataset macro accuracy, not pooled task accuracy; 412 released test tasks and 130 unique validation tasks.",
+    "Primary voting comparison changes both temperature and sample count. The sample-one comparison is a secondary within-draw analysis.",
+    "Paired bootstrap intervals condition on these datasets and runs; they exclude search and model-sampling uncertainty.",
+    "Exact-label graders do not establish chemical, clinical or legal validity.",
+    "Inference costs are marginal observed-usage estimates at frozen prices, not invoices or total experiment cost. Earlier replay sources, compute, proposer, telemetry and development are excluded.",
+    "Unknown provider usage remains a separate bounded amount. Campaigns overlapped and experienced throttling, so no clean latency comparison is claimed.",
+    "Native CES creation failed. Verified W&B Tables are an explicitly amended fallback; full proposer qualification and optimized search are not established."
+  ],
+  "comparison": [
+    {
+      "system": "no_memory",
+      "temperature": 0,
+      "samples_per_task": 1,
+      "test_tasks": 412,
+      "macro_accuracy_percent": 28.9748427672956,
+      "per_dataset_accuracy_percent": {
+        "LawBench": 6.0,
+        "Symptom2Disease": 67.9245283018868,
+        "USPTO": 13.0
+      },
+      "usage_priced_inference_usd": 0.055287,
+      "unknown_inference_upper_usd": 0.0,
+      "new_provider_completions": 411,
+      "rejected_provider_attempts": 50,
+      "bounded_unknown_attempts": 0
+    },
+    {
+      "system": "fewshot_all",
+      "temperature": 0,
+      "samples_per_task": 1,
+      "test_tasks": 412,
+      "macro_accuracy_percent": 43.16352201257862,
+      "per_dataset_accuracy_percent": {
+        "LawBench": 28.000000000000004,
+        "Symptom2Disease": 83.49056603773585,
+        "USPTO": 18.0
+      },
+      "usage_priced_inference_usd": 0.187415,
+      "unknown_inference_upper_usd": 0.0,
+      "new_provider_completions": 411,
+      "rejected_provider_attempts": 61,
+      "bounded_unknown_attempts": 0
+    },
+    {
+      "system": "fewshot_vote5",
+      "temperature": 1,
+      "samples_per_task": 5,
+      "test_tasks": 412,
+      "macro_accuracy_percent": 45.83018867924529,
+      "per_dataset_accuracy_percent": {
+        "LawBench": 34.0,
+        "Symptom2Disease": 83.49056603773585,
+        "USPTO": 20.0
+      },
+      "usage_priced_inference_usd": 0.952856,
+      "unknown_inference_upper_usd": 0.055468,
+      "new_provider_completions": 2060,
+      "rejected_provider_attempts": 4,
+      "bounded_unknown_attempts": 14
+    }
+  ],
+  "scope": "Observed controls only; no optimized-harness result. Task ordinals preserve pairing but contain no task text, answer labels, content hashes or private evidence links."
+}

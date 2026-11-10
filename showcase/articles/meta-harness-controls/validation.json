@@ -1,0 +1,24 @@
+{
+  "report_text_blocks_verified": 127,
+  "native_panel_groups_retained": 5,
+  "report_images": 16,
+  "download_reproduces_in_isolated_directory": true,
+  "download_privacy_scan": "passed",
+  "local_links": "passed",
+  "controls_verified_exports": {
+    "wandb": 5,
+    "agent_lens": 48
+  },
+  "visual_checks": {
+    "desktop_width": 1280,
+    "narrow_iframe_width": 390,
+    "desktop_images_loaded": true,
+    "desktop_horizontal_overflow": false,
+    "narrow_tables": "stacked labeled rows",
+    "figures": "dedicated readable narrow PNGs from same scored rows; desktop PNGs retain original figures",
+    "text": "read in full; six editing passes completed",
+    "publication": "not performed"
+  },
+  "analysis_zip_sha256": "9beb09f1dccc34791dcee6ec509107e8ebdc95a4b8567c7648c4889b20cd8b9c",
+  "text_normalization": "Generated SVG trailing spaces and CSV CRLF normalized; all values and PNG images unchanged."
+}
