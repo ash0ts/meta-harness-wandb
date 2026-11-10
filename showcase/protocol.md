@@ -1,6 +1,6 @@
 # Forge showcase research contract
 
-TEMPLATE-UNFILLED
+STAGE1-RECORDED-2026-11-10
 STAGE2-UNSIGNED
 
 ## Question and scope
@@ -35,10 +35,24 @@ No raw dataset text is public by default. Export only guarded plans and allowlis
 
 ## Stage 1 decisions to record before any live qualification
 
-Team and private preflight project; dedicated key provisioning; budget owner and service ceilings; proposer allowance/model/permission mode; package and image hashes; dataset notices; live-check scope and cleanup protocol. Replace TEMPLATE-UNFILLED only when those decisions are recorded in the campaign manifest and this contract.
+Team and private preflight project; dedicated key provisioning; budget owner and service ceilings; proposer allowance/model/permission mode; package and image hashes; dataset notices; live-check scope and cleanup protocol. Replace STAGE1-RECORDED-2026-11-10 only when those decisions are recorded in the campaign manifest and this contract.
 
 ## Stage 2 decisions after qualification
 
 Record the actual receipts, calibration verdict, price reconciliation, resolved model, observed forecast, remaining budget, measured campaign/project identity and any deviations before removing STAGE2-UNSIGNED. This document is intentionally unsigned at the offline continuation checkpoint.
 
 Reproduce the local integration with `python -m mhforge offline-smoke --executor local_relay --keep`. A measured result must also retain its exact manifest, engine snapshot, journal, attempts, export receipts and research revision.
+
+## Delegated stage 1 decisions, 2026-11-10
+
+The user authorized useful article experiments, delegated the Forge team/project and service cap choices, and designated an existing local credential file. Use team `wandb` and private project `mh-forge-preflight-20261110`, whose PRIVATE visibility and write permission were read back. Credential provenance is `user_supplied`, not a claim of dedicated provisioning. Pass it only over the host descriptor channel; workers receive no user API key, and the proposer must pass restricted-mode access probes before search. The source credential file is explicitly denied in proposer settings.
+
+Preserve ceilings of $60 solver inference and $40 sandbox compute. Proposer cost is a separate metered allowance of at most $25 per session and $300 for the full 20-iteration campaign; no proposal starts without a passing cost forecast, resolved-model check and permission proof. These are maximum reservations, not forecasts or reported costs. Stop on any service/account limit; do not change the account's billing limits. Qualification and calibration come first; no proposer spend is needed to diagnose those paths.
+
+Use the pinned amd64 Python image and the deterministic CPython 3.13 wheelhouse recorded in the manifest. All dataset inputs, model settings and released parsers stay pinned. Export identifier/hash-only data to private Forge Agent Lens, CES and W&B; no public project or article publication is authorized here.
+
+The planned article compares no_memory, released fewshot_all, validation-selected Meta-Harness candidates, and a K=5 temperature-1 fewshot_all majority-vote control. Resolve ties with the earliest sample among the tied labels. Keep sample identities independent, count all five calls, and judge votes with the released dataset evaluator. Baseline validation repeats 1–5 measure provider variation. Report task-paired gains/losses and stratified bootstrap uncertainty; five repeats of one task are not five independent tasks. Search never sees calibration/test outputs. Test only the validation-selected frontier after search is ended.
+
+PF6 requires pinned imports, egress denial, a 600-second synthetic relay soak (32 concurrent requests per batch, multibyte payloads, forced disconnect and stream rotation), automatic expiration, and two consecutive empty campaign sandbox lists. Synthetic relay traffic is not model evaluation. Every failed check remains an attempt. Each code revision gets a new engine digest and offline receipt before live use. Stage 2 remains unsigned until observed qualification, calibration, export readback and spend evidence support the measured campaign.
+
+Observed sandbox limitation: the platform mounts an identity-token file. The probe records its presence without reading its contents. All tested external, DNS, metadata, cluster and IPv6 network paths were blocked. Do not describe this as a credential-free filesystem or infer untested isolation properties. The public Python image also sets a release-verification GPG fingerprint; the runner clears that unused variable and retains the general credential-environment check.

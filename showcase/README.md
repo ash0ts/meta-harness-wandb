@@ -2,7 +2,7 @@
 
 This package instruments the pinned Stanford Meta-Harness text-classification example with a budgeted inference gateway, isolated job execution, a durable journal, and independently verified telemetry exports. The upstream source remains unchanged.
 
-The driver, CLI and real-worker offline smoke are implemented. **No live campaign has run.** The live preflight registry refuses missing probe implementations or evidence; sandbox lifetime/relay soak, the full telemetry rehearsal, proposer isolation probes and crash/recovery rehearsal still need their live probe runners. Public visibility, Report and saved-view operations remain an explicitly unverified publication skeleton. These gaps prevent qualification for a measured search.
+The driver, controls, CLI and real-worker offline smoke are implemented. Live preflight work started on 2026-11-10: account/private-project checks and two Forge inference calls passed. Sandbox setup failures remain separate attempts; these are not model-quality results. The live probes cover sandbox imports, relay soak and expiration, telemetry readback, restricted proposer access, and baseline resume. Every required check still needs its own passing receipt before measured search. Public visibility, Report and saved-view operations remain an explicitly unverified publication skeleton.
 
 ## Local verification
 
@@ -30,9 +30,9 @@ The smoke uses the real upstream loop, six workers, LiteLLM, capture sidecars, g
 
 ## First live check
 
-Use a separate private project such as `mh-forge-preflight-20261110` under the team that owns the dedicated Forge key. The draft preserves the previous service ceilings: $60 solver inference and $40 sandbox compute, plus separate telemetry limits. Those are campaign ceilings, not a forecast. The first inference probe makes two capped requests. The proposer allowance remains unset until explicit headroom and session limits are recorded.
+Use a separate private project such as `mh-forge-preflight-20261110` under the chosen Forge team. The draft preserves the previous service ceilings: $60 solver inference and $40 sandbox compute, plus separate telemetry limits. Those are campaign ceilings, not a forecast. The first inference probe makes two capped requests. Record proposer headroom and session limits separately before search.
 
-Create a **new** manifest beside `manifest.draft.json`. Set team/project, dedicated-key provisioning, approved limits and the preflight decisions before freezing. `account-check` can run before a freeze:
+Create a **new** manifest beside `manifest.draft.json`. Set team/project, key provenance, approved limits and the preflight decisions before freezing. Use `key_provisioning: user_supplied` only for a credential source explicitly designated by the operator; it requires restricted proposer mode for search. `account-check` can run before a freeze:
 
 ```sh
 .venv/bin/python -m mhforge account-check --manifest manifest.preflight.json
@@ -63,6 +63,6 @@ Interactive commands default to hidden prompts. Enter at subsequent prompts reus
 
 The first signal requests a stop at the iteration boundary; the second interrupts immediately. `halt` works while a runner holds the lock. Clearing a halt, reconciling usage and resetting an attempt require a note and an exclusive runner lock. Search blocks journal `paused` until the declared total is reached. Completed failed proposals consume their iteration on resume even when upstream omitted its summary row; the correction is recorded in `design/continuation.md`.
 
-Final test scoring uses `evaluate --test`; calibration uses `evaluate --calibration`. Finalization blocks future search in that campaign. Export plans apply dataset content policy; publication bundles exclude raw prompts, transcripts, sidecars, memory, account facts and credentials, and scan final bytes before exposing a bundle. Publication approval remains false by default.
+Final test scoring uses `evaluate --test`; calibration uses `evaluate --calibration`. `evaluate --noise` runs fresh validation repeats. `evaluate --controls` runs five independent temperature-1 fewshot_all samples on each test task, chooses the most frequent normalized label (earliest sample breaks ties), and regrades the selected raw prediction with the pinned evaluator. All 15 sample jobs use the normal gateway, ledger, sandbox, sidecar and export path. Private `controls/` records retain the plan, task identities and selected-sample evidence. This is a five-sample control; its measured costs must be compared before calling it cost matched. Finalization blocks future search in that campaign. Export plans apply dataset content policy; publication bundles exclude raw prompts, transcripts, sidecars, memory, account facts and credentials, and scan final bytes before exposing a bundle. Publication approval remains false by default.
 
-See `design/showcase-spec.md`, `design/lead-decisions.md` and `design/continuation.md` for the contracts and remaining work. `protocol.md` contains the unsigned research contract; it is not evidence that a live experiment ran.
+See `design/showcase-spec.md`, `design/lead-decisions.md` and `design/continuation.md` for the contracts and remaining work. `protocol.md` records the delegated stage 1 choices; stage 2 remains gated on live evidence.

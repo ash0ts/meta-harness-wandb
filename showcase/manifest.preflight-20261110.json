@@ -1,0 +1,458 @@
+{
+  "schema": "mhforge.manifest/1",
+  "notes": "Live preflight authorized 2026-11-10. User selected an existing local credential source. No claim that the key is dedicated. Account discovery first; other live gates remain closed until prerequisites are verified.",
+  "campaign": "mh-forge-preflight-20261110",
+  "campaign_kind": "preflight",
+  "state_dir": "state/mh-forge-preflight-20261110",
+  "decisions": {
+    "live_spend_approved": true,
+    "key_provisioning": "user_supplied",
+    "entity": "wandb",
+    "project": "mh-forge-preflight-20261110",
+    "proposer_permission_mode": "restricted",
+    "evaltables_backend": "ces",
+    "publish_approved": false,
+    "dataset_text_publication": "identifiers_only",
+    "uspto_text_cleared": false
+  },
+  "upstream": {
+    "repo": "https://github.com/stanford-iris-lab/meta-harness",
+    "commit": "f805ad3aa4ada290458c1e0deadbe132fbbdea4e",
+    "example_dir": "/Users/ashah/rsi/meta-harness-wandb/reference_examples/text_classification",
+    "tree_sha256": "8f2e6831b4e0db92bf083f3161d6329a1279ba18637bffb33c7cac64a872f057",
+    "worker_lock_sha256": "b4b08cf476c9963293879afbdc39b7b32f2919a577b563567632f8e03da19bd4",
+    "worker_python": "/Users/ashah/rsi/meta-harness-wandb/reference_examples/text_classification/.venv/bin/python",
+    "expect": {
+      "model": "openrouter/openai/gpt-oss-120b",
+      "model_short": "gpt-oss-120b",
+      "mode": "offline",
+      "num_epochs": 1,
+      "temperature": 0.0,
+      "seed": 42,
+      "max_tokens": 16384,
+      "system_prompt": "Reasoning: medium",
+      "datasets": [
+        "USPTO",
+        "Symptom2Disease",
+        "LawBench"
+      ],
+      "dataset_dirs": {
+        "USPTO": "uspto",
+        "Symptom2Disease": "symptom_diagnosis",
+        "LawBench": "crime_prediction"
+      },
+      "baselines": [
+        "no_memory",
+        "fewshot_all"
+      ],
+      "sizes": {
+        "USPTO": [
+          50,
+          30,
+          100
+        ],
+        "Symptom2Disease": [
+          200,
+          50,
+          212
+        ],
+        "LawBench": [
+          200,
+          50,
+          100
+        ]
+      }
+    }
+  },
+  "search": {
+    "iterations": 20,
+    "propose_timeout_s": 2400,
+    "max_candidates_per_iteration": 3,
+    "partial_candidate_policy": "upstream"
+  },
+  "routing": {
+    "route": 2,
+    "route1_model": "openai/openai/gpt-oss-120b",
+    "reply_reuse_scope": "search"
+  },
+  "provider": {
+    "kind": "forge",
+    "base_url": "https://api.inference.wandb.ai/v1",
+    "wire_model": "openai/gpt-oss-120b",
+    "api_key_env": "MHFORGE_FORGE_API_KEY",
+    "openai_project": null,
+    "user_agent": "mhforge-gateway/0.1 (meta-harness forge showcase)",
+    "connect_timeout_s": 20,
+    "first_byte_timeout_s": 420,
+    "idle_timeout_s": 120,
+    "attempt_deadline_s": 900,
+    "max_response_bytes": 2097152,
+    "expected_response_model": null,
+    "retry": {
+      "max_transport_retries": 2,
+      "backoff_429_s": [
+        20,
+        40
+      ],
+      "backoff_5xx_s": [
+        30,
+        60
+      ],
+      "backoff_other_s": [
+        2,
+        8
+      ]
+    },
+    "circuit": {
+      "failures": 3,
+      "cooldown_s": 60
+    },
+    "terminal_429_patterns": [
+      "quota"
+    ]
+  },
+  "prices": {
+    "model": "openai/gpt-oss-120b",
+    "input_per_million": "0.03",
+    "cached_per_million": "0.03",
+    "output_per_million": "0.17",
+    "source_url": "https://coreweave.com/forge-pricing/inference-agents",
+    "checked_utc": "2026-11-10T00:03:00.000000Z"
+  },
+  "gateway": {
+    "max_in_flight": 16,
+    "max_request_bytes": 4000000,
+    "max_content_bytes": 1048576,
+    "max_output_tokens": 16384,
+    "model_context_tokens": 131072,
+    "template_overhead_tokens": 8192,
+    "max_messages": 8,
+    "per_message_overhead_tokens": 16,
+    "max_requests_per_job": 1000,
+    "max_job_usd": "1.00",
+    "max_refused_records_per_job": 200,
+    "loopback_backlog": 128
+  },
+  "budgets": {
+    "solver_usd": {
+      "total": "60.00",
+      "phases": {
+        "qualification": "3.00",
+        "calibration": "8.00",
+        "baseline": "3.00",
+        "search": "28.00",
+        "test": "5.00",
+        "controls": "3.00",
+        "recovery": "10.00"
+      }
+    },
+    "sandbox_usd": "40.00",
+    "lens_ingest_mb": 175,
+    "lens_ingest_split_mb": {
+      "main": 150,
+      "preflight": 5,
+      "recovery": 20
+    },
+    "lens_proposer_session_mb": 4,
+    "wandb_upload_gb": 2,
+    "eval_tables_max": 250,
+    "proposer_list_usd": "300"
+  },
+  "accounting": {
+    "missing_usage": "charge_reservation",
+    "forecast_contingency": "1.25",
+    "reconcile_tolerance": "0.10"
+  },
+  "forecast": {
+    "candidates_per_iteration": 3,
+    "test_systems": 6,
+    "output_tokens_quantile": 0.95,
+    "calls_per_job": {
+      "val": {
+        "USPTO": 30,
+        "Symptom2Disease": 50,
+        "LawBench": 50
+      },
+      "test": {
+        "USPTO": 100,
+        "Symptom2Disease": 212,
+        "LawBench": 100
+      }
+    },
+    "input_tokens_per_job": {
+      "val": {
+        "USPTO": 140494,
+        "Symptom2Disease": 369420,
+        "LawBench": 1213069
+      },
+      "test": {
+        "USPTO": 468289,
+        "Symptom2Disease": 1566127,
+        "LawBench": 2469033
+      }
+    },
+    "job_seconds": {
+      "val": {
+        "USPTO": 600,
+        "Symptom2Disease": 600,
+        "LawBench": 600
+      },
+      "test": {
+        "USPTO": 600,
+        "Symptom2Disease": 600,
+        "LawBench": 600
+      }
+    }
+  },
+  "calibration": {
+    "systems": null,
+    "gates": {
+      "G1": {
+        "system": "no_memory",
+        "hard": true,
+        "macro_test_accuracy": [
+          23.4,
+          33.3
+        ],
+        "correct": {
+          "Symptom2Disease": [
+            118,
+            156
+          ],
+          "USPTO": [
+            0,
+            21
+          ],
+          "LawBench": [
+            0,
+            15
+          ]
+        },
+        "content_on_every_call": true
+      },
+      "G2": {
+        "system": "fewshot_all",
+        "hard": false,
+        "macro_test_accuracy": [
+          35.9,
+          47.3
+        ],
+        "correct": {
+          "Symptom2Disease": [
+            166,
+            194
+          ],
+          "USPTO": [
+            6,
+            24
+          ],
+          "LawBench": [
+            13,
+            37
+          ]
+        },
+        "content_on_every_call": false
+      }
+    },
+    "gate_search": true,
+    "noise_repeats": 5
+  },
+  "executor": {
+    "kind": "sandbox",
+    "allow_unisolated_live": false,
+    "max_attempts": 1,
+    "max_infra_attempts": 3,
+    "job_timeout_s": 7200,
+    "parallel_dataset_jobs": {
+      "validation": 1,
+      "test": 1
+    },
+    "import_check_timeout_s": 30
+  },
+  "sandbox": {
+    "env_mode": "wheelhouse",
+    "image": null,
+    "base_image": "public.ecr.aws/docker/library/python@sha256:f3dac913ab53b78c64f26d5518fcd7043d5a1a46522d6a493b598c3ed12f62a6",
+    "base_image_fallback": "docker.io/library/python@sha256:f3dac913ab53b78c64f26d5518fcd7043d5a1a46522d6a493b598c3ed12f62a6",
+    "wheelhouse": {
+      "tar_path": "worker-image/wheelhouse/wheelhouse.tar",
+      "tar_sha256": "fcd6ba4a2c9a53eed17c64360acb612a3d4d1239ee19ca8727cac8f57b3bfb21",
+      "tar_bytes": 127825920,
+      "sha256sums_sha256": "62f30615ff8c773aa97a3459faf3fac07f7ca0e00003bb897d152c7f3e8140c8",
+      "requirements_sha256": "40797a2df5fc9dd611f08b2570fd1051e5d78da6edbc75d1053cb31da2c14cce"
+    },
+    "expect": {
+      "machine": "x86_64",
+      "python": "3.13"
+    },
+    "cpu": "2",
+    "memory": "4Gi",
+    "auth_env": "MHFORGE_SANDBOX_API_KEY",
+    "auth_mode": "headers",
+    "price_cpu_hour": "0.128",
+    "price_gib_hour": "0.0212",
+    "lifetime_margin_s": 900,
+    "setup_allowance_s": 150,
+    "create_wait_s": 180,
+    "work_dir": "/mhf",
+    "python": "python3",
+    "tiktoken_cache_dir": null,
+    "object_store_endpoint": null,
+    "copy_back_cache": false,
+    "selfcheck": "every_job"
+  },
+  "relay": {
+    "mode": "daemon",
+    "rotate_after_mb": 64,
+    "max_stream_mb": 512,
+    "max_job_stream_mb": 1024,
+    "reply_timeout_s": 3600,
+    "ping_interval_s": 20,
+    "pong_timeout_s": 60,
+    "max_workers": 64,
+    "write_chunk_bytes": 32768,
+    "done_cache_max": 256,
+    "reattach_attempts": 8,
+    "reattach_backoff_s": [
+      1,
+      30
+    ]
+  },
+  "capture": {
+    "enabled": true,
+    "max_text_chars": 20000
+  },
+  "proposer": {
+    "cli_path": "/Users/ashah/Library/Application Support/Claude/claude-code/2.1.317/91184d3d9ba3/claude.app/Contents/MacOS/claude",
+    "cli_sha256": "577c8ac6411ef57dd741e3c491e89f57ff6f42bb835a5ac5d4f496c29f14c5d5",
+    "cli_version": "2.1.317",
+    "model": "opus",
+    "expected_resolved_model": "claude-opus-5-5",
+    "effort": "max",
+    "max_budget_usd_per_session": "25",
+    "grace_s": [
+      60,
+      20
+    ],
+    "env_allow": [
+      "HOME",
+      "USER",
+      "LOGNAME",
+      "SHELL",
+      "TMPDIR",
+      "LANG",
+      "LC_ALL",
+      "LC_CTYPE",
+      "TERM"
+    ],
+    "env_set": {
+      "VIRTUAL_ENV": "{example_venv}",
+      "UV_PROJECT_ENVIRONMENT": "{example_venv}",
+      "UV_NO_SYNC": "1",
+      "UV_FROZEN": "1"
+    },
+    "path_dirs": [
+      "{example_venv}/bin",
+      "{uv_dir}",
+      "/usr/bin",
+      "/bin",
+      "/usr/sbin",
+      "/sbin"
+    ],
+    "scratch_root": "/private/tmp/mhf-proposer",
+    "restricted": {
+      "settings": null
+    },
+    "usage_limit_patterns": [
+      "spend limit",
+      "usage limit",
+      "budget",
+      "limit reached",
+      "resets at"
+    ],
+    "auth_patterns": [
+      "not logged in",
+      "please run /login",
+      "login expired",
+      "authentication_failed"
+    ],
+    "transient_retries": 2,
+    "transient_backoff_s": [
+      60,
+      300
+    ],
+    "max_limit_wait_s": 21600,
+    "session_estimate_usd": "10",
+    "list_prices": {
+      "claude-opus-5-5": {
+        "input_per_million": "4",
+        "output_per_million": "20",
+        "cache_read_per_million": "0.20",
+        "cache_write_5m_per_million": "5",
+        "cache_write_1h_per_million": "8"
+      },
+      "claude-opus-4-6": {
+        "input_per_million": "5",
+        "output_per_million": "25",
+        "cache_read_per_million": "0.50",
+        "cache_write_5m_per_million": "6.25",
+        "cache_write_1h_per_million": "10"
+      }
+    },
+    "max_transcript_bytes": 268435456
+  },
+  "telemetry": {
+    "api_key_env": "MHFORGE_EXPORT_API_KEY",
+    "export_mode": "after_unit",
+    "export_timeout_s": 900,
+    "attribute_prefix": "metaharness",
+    "agent_lens": {
+      "enabled": true,
+      "service_name": "mhforge-showcase",
+      "max_spans_per_conversation": 180,
+      "loop_iterations_per_conversation": 15,
+      "readback_timeout_s": 60,
+      "readback_poll_s": 2,
+      "export_batch_size": 32,
+      "byte_estimate_factor": "1.00"
+    },
+    "content": {
+      "USPTO": {
+        "span_prompt": "hash",
+        "span_reply": "hash",
+        "span_reasoning": "hash",
+        "tool_result": "hash"
+      },
+      "Symptom2Disease": {
+        "span_prompt": "hash",
+        "span_reply": "hash",
+        "span_reasoning": "hash",
+        "tool_result": "hash"
+      },
+      "LawBench": {
+        "span_prompt": "hash",
+        "span_reply": "hash",
+        "span_reasoning": "hash",
+        "tool_result": "hash"
+      }
+    },
+    "verbatim_scan": {
+      "run_chars": 40,
+      "exact_datasets": [
+        "USPTO"
+      ]
+    },
+    "wandb_group": null
+  },
+  "qualification": {
+    "system": "no_memory",
+    "dataset": "USPTO",
+    "max_truncated_empty_rate": 0.05,
+    "import_from": null
+  },
+  "runner": {
+    "keep_awake": true,
+    "stall_alarm_s": 10800,
+    "sleep_gap_s": 60
+  }
+}

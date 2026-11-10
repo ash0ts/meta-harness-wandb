@@ -7,7 +7,7 @@ import contextlib
 import json
 import os
 import signal
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Mapping
 
@@ -428,6 +428,13 @@ class Driver:
             return {'status': 'complete' if record['status'] == 'succeeded' else 'incomplete', 'job': record}
         return self._execute('qualification', action)
 
+    def run_proposer_probe(self):
+        from . import proposer_probe
+        def action(up, runner):
+            result = proposer_probe.run(self, up)
+            return {'status': 'complete' if result['passed'] else 'incomplete', **result}
+        return self._execute('proposer_probe', action)
+
     def run_calibration(self):
         def action(up, runner):
             m, r = self.rt.manifest, self.rt
@@ -457,6 +464,53 @@ class Driver:
             r.journal.record('noise', m['campaign'], 'complete')
             return {'status': 'complete', 'noise': doc}
         return self._execute('noise', action)
+
+    def run_controls(self):
+        from . import controls
+        def action(up, runner):
+            r, m = self.rt, self.rt.manifest
+            root = r.paths.root / 'controls'
+            root.mkdir(parents=True, exist_ok=True)
+            plan = dict(controls.PLAN, engine_sha256=qualification.engine_snapshot(Path(__file__).parent)['engine_sha256'])
+            if (root / 'plan.json').exists() and util.read_json(root / 'plan.json') != plan:
+                raise CampaignStop(reason='upstream_contract', detail='control protocol changed; use a new campaign')
+            util.write_json(root / 'plan.json', plan, fsync=True)
+            r.journal.record('controls', m['campaign'], 'started', detail={'plan_sha256': util.sha256_file(root / 'plan.json')})
+            planned, error, skipped = jobs.plan_jobs(runner.facade, controls.PLAN['system'], test=True,
+                logs_dir=self.logs, results_dir=r.paths.scratch_root / 'control-results', manifest=m)
+            if error or skipped or len(planned) != len(m['upstream']['expect']['datasets']):
+                raise CampaignStop(reason='qualification_failed', detail='control baseline inputs missing')
+            grader = controls.load_grader(r.paths)
+            results = {}
+            for p in planned:
+                argv = list(p.inner_argv)
+                argv[argv.index('--temperature') + 1] = str(controls.PLAN['temperature'])
+                p = replace(p, inner_argv=tuple(argv))
+                samples, records = [], []
+                for sample in range(1, controls.PLAN['k'] + 1):
+                    record = runner.run_job(p, phase='controls', iteration=None, publish=False, sample=sample)
+                    a = _successful_attempt(record)
+                    if record['status'] != 'succeeded' or a is None:
+                        raise CampaignStop(reason='qualification_failed', detail='control sample incomplete')
+                    sidecar = r.paths.attempt_dir(record['job_key'], a['attempt']) / 'out/sidecar.jsonl'
+                    samples.append(controls.final_evals(util.read_jsonl(sidecar)))
+                    records.append({'job_key': record['job_key'], 'attempt': a['attempt'],
+                                    'sidecar_sha256': util.sha256_file(sidecar)})
+                result = controls.aggregate(p.dataset, samples, grader,
+                                            expected_count=m['upstream']['expect']['sizes'][p.dataset][2])
+                result['evidence'] = records
+                results[p.dataset] = result
+                util.write_json(root / (p.dataset + '.json'), result, fsync=True)
+            summary = {'schema': 'mhforge.controls-result/1', 'plan': plan, 'datasets': results,
+                       'macro_accuracy': sum(v['accuracy'] for v in results.values()) / len(results)}
+            util.write_json(root / 'result.json', summary, fsync=True)
+            r.journal.record('controls', m['campaign'], 'complete')
+            compact = {ds: {k: result[k] for k in ('correct', 'total', 'accuracy')}
+                       for ds, result in results.items()}
+            return {'status': 'complete', 'controls': {'plan': plan, 'datasets': compact,
+                    'macro_accuracy': summary['macro_accuracy'], 'result_file': 'controls/result.json',
+                    'result_sha256': util.sha256_file(root / 'result.json')}}
+        return self._execute('controls', action)
 
     def shutdown(self):
         if self._closed:

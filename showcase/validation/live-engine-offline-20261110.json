@@ -1,0 +1,81 @@
+{
+  "schema": "mhforge.validation/1",
+  "scope": "offline integration, unit tests and actual Linux dependency verification; not model quality",
+  "utc": "2026-11-10",
+  "engine_sha256": "dadd8993ea4933c87734fa25417c6b3446c9b84180ce5f35c1bc9411e760f41e",
+  "full_suite": {
+    "passed": true,
+    "tests": 1118,
+    "seconds": 351.2,
+    "engine_sha256": "536113b8608db854abec99c8d6593af3b5516ec83fdf510fdf5d5de9f17c3cae",
+    "log_sha256": "bf69d50d7a91b793fb0913296a0dd4a69037fb26d3c4ecab9972b99cb44eb382"
+  },
+  "post_suite_change": "Blank the pinned public Python image GPG_KEY environment variable without relaxing credential detection.",
+  "post_change_targeted_tests": {
+    "passed": true,
+    "tests": 32,
+    "seconds": 6.616
+  },
+  "smoke": {
+    "schema": "mhforge.smoke/1",
+    "passed": true,
+    "engine_sha256": "dadd8993ea4933c87734fa25417c6b3446c9b84180ce5f35c1bc9411e760f41e",
+    "executor": "local_relay",
+    "worker_network_guard": "sandbox-exec",
+    "provider_calls": 260,
+    "resume_provider_calls": 0,
+    "jobs": 6,
+    "dry_run_units": 9,
+    "audit": {
+      "ok": true,
+      "problems": [],
+      "calls": 260,
+      "observed_micro": 46499,
+      "bounded_unknown_micro": 0,
+      "listed": {
+        "reconciled": [],
+        "limit_exceeded": [],
+        "repeatable_provider_failure": [],
+        "admission_only": [],
+        "open_meters": []
+      }
+    },
+    "invariants_failed": [],
+    "utc": "2026-11-10T16:41:39.368894Z"
+  },
+  "five_sample_control": {
+    "passed": true,
+    "provider": "in_process_stub",
+    "baseline_calls": 260,
+    "control_calls": 2060,
+    "resume_calls": 0,
+    "resume_assertions_completed_before_export_fixture_error": true,
+    "export_fixture_correction": "provider.base_url changed to a valid loopback-only URL for dry export; no worker, judge, result or call changed",
+    "dry_export_units": 39,
+    "datasets": {
+      "USPTO": {
+        "correct": 0,
+        "total": 100,
+        "accuracy": 0.0
+      },
+      "Symptom2Disease": {
+        "correct": 0,
+        "total": 212,
+        "accuracy": 0.0
+      },
+      "LawBench": {
+        "correct": 0,
+        "total": 100,
+        "accuracy": 0.0
+      }
+    },
+    "engine_sha256": "536113b8608db854abec99c8d6593af3b5516ec83fdf510fdf5d5de9f17c3cae",
+    "resume_replayed_call_records": 2060,
+    "all_call_records": 4380
+  },
+  "linux_wheelhouse": {
+    "passed": true,
+    "sha256sums_sha256": "62f30615ff8c773aa97a3459faf3fac07f7ca0e00003bb897d152c7f3e8140c8",
+    "python": "3.13.18"
+  }
+}

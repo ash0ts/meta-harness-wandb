@@ -231,6 +231,7 @@ def _runner(args, m, paths, keys, base_env, home, hostname):
         current = None
         try:
             if args.command == 'preflight':
+                from . import live_probes
                 # Each phase gets a fresh gateway; a completed Driver has aborted its old gateway.
                 def run(method):
                     nonlocal current
@@ -239,12 +240,17 @@ def _runner(args, m, paths, keys, base_env, home, hostname):
                     current = make_driver()
                     return getattr(current, method)()
                 current = make_driver()
+                from .telemetry import probe as telemetry_probe
+                export_check = lambda ctx: telemetry_probe.run(ctx, keys, drain=spawner.drain if spawner else None)
                 ctx = preflight.Context(m, paths, {}, args.manifest.parent,
                     attempt=qualification.next_attempt(paths), gateway=current.rt.gateway, ledger=current.rt.ledger,
                     executor=current.rt.executor, sandbox_client=getattr(current.rt.executor, 'client', None),
                     run_qualification_job=lambda: run('run_qualification_job'), run_baselines=lambda: run('run_baselines'),
                     run_calibration=lambda: run('run_calibration'), hostname=hostname,
-                    user_figures={k: v for k, v in vars(args).items() if k.startswith(('platform_', 'waive_')) and v})
+                    user_figures={k: v for k, v in vars(args).items() if k.startswith(('platform_', 'waive_')) and v},
+                    probes={'sandbox': live_probes.sandbox, 'telemetry': export_check,
+                            'proposer_probes': lambda ctx: run('run_proposer_probe'),
+                            'rehearsal_review': lambda ctx: live_probes.rehearsal_review(ctx, export_check)})
                 if args.teardown:
                     current.rt.executor.cleanup_orphans(current.rt.journal.open_handles())
                     out = {'teardown': preflight.TEARDOWN, 'status': 'complete'}

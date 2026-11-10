@@ -403,11 +403,13 @@ class CwSandboxClient:
 
         def run(image: str):
             return cw.Sandbox.run(
+                "/bin/sh", "-c", 'set -e; mkdir -p "$1"; cd "$1"; trap "exit 0" TERM INT; sleep infinity & wait',
+                "mhforge", spec.working_dir,
                 container_image=image, auth=self._auth(spec.entity, spec.project),
                 max_lifetime_seconds=spec.max_lifetime_s, tags=list(spec.tags),
                 resources={"cpu": spec.cpu, "memory": spec.memory},
                 network=cw.NetworkOptions(deny_egress=True, dns_egress="deny"),
-                working_dir=spec.working_dir, environment_variables=dict(spec.env))
+                working_dir="/", environment_variables=dict(spec.env))
         try:
             sandbox = run(spec.image)
         except Exception as exc:                   # noqa: BLE001

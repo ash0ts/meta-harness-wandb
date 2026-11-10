@@ -7,13 +7,14 @@ from __future__ import annotations
 
 import json
 import shlex
+import traceback
 from dataclasses import asdict, dataclass, field
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
 from typing import Callable, Mapping
 
 from . import audit, manifest as manifests, qualification, util
-from .errors import CampaignStop, LiveGateError
+from .errors import CampaignStop, ExecutorError, LiveGateError
 from .paths import StatePaths
 from .wire import JobIdentity, make_envelope
 
@@ -57,7 +58,7 @@ class Context:
 class WandbAccountReader:
     def __init__(self, *, api_key, user_agent):
         if not api_key:
-            raise LiveGateError(blockers=[('provider', 'a dedicated key is required')])
+            raise LiveGateError(blockers=[('provider', 'an explicit key is required')])
         import wandb
         from .telemetry.adapter_wandb import DEFAULT_BASE_URL
         self.api = wandb.Api(api_key=api_key, overrides={'base_url': DEFAULT_BASE_URL})
@@ -156,7 +157,8 @@ def _inference(ctx):
                       phase='qualification', iteration=None)
     request = util.canonical_json({'model': ctx.manifest['provider']['wire_model'],
         'messages': [{'role': 'system', 'content': ctx.manifest['upstream']['expect']['system_prompt']},
-                     {'role': 'user', 'content': 'Reply with exactly OK.'}], 'temperature': 0.0, 'max_tokens': 64})
+                     {'role': 'user', 'content': 'Reply with exactly OK.'}], 'temperature': 0.0,
+        'max_tokens': min(2048, ctx.manifest['gateway']['max_output_tokens'])})
     replies = []
     ctx.gateway.register_job(job)
     try:
@@ -261,7 +263,11 @@ def _invoke(check, ctx):
     except CampaignStop:
         raise
     except Exception as exc:
-        result = {'passed': False, 'exception_type': type(exc).__name__}
+        result = {'passed': False, 'exception_type': type(exc).__name__,
+                  'failure_frames': [{'file': Path(f.filename).name, 'function': f.name, 'line': f.lineno}
+                                     for f in traceback.extract_tb(exc.__traceback__)[-6:]]}
+        if isinstance(exc, ExecutorError):
+            result.update(error_kind=exc.kind, retryable=exc.retryable)
     return {'schema': 'mhforge.check/1', 'name': check.name, 'step': check.step,
             'required': check.required, 'utc': util.utc_now(), **result}
 
@@ -292,6 +298,7 @@ def run_checks(ctx, only=None):
     if only and set(only) - names:
         raise ValueError('unknown preflight check')
     engine = qualification.engine_snapshot(Path(__file__).parent)
+    util.write_json(ctx.paths.qualification_dir(ctx.attempt) / 'engine.json', engine, fsync=True)
     imported = ctx.manifest['qualification']['import_from']
     if imported:
         problems = qualification.import_problems(ctx.manifest, ctx.paths, engine)
@@ -301,6 +308,7 @@ def run_checks(ctx, only=None):
     receipts = []
     for check in chosen:
         result = _invoke(check, ctx)
+        result.update(engine_sha256=engine['engine_sha256'], manifest_sha256=manifests.manifest_sha256(ctx.manifest))
         util.write_json(ctx.paths.qualification_dir(ctx.attempt) / (check.name + '.json'), result, fsync=True)
         receipts.append(result)
         if check.required and result.get('passed') is not True:

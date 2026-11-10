@@ -227,7 +227,7 @@ class SandboxExecutor:
             raise ExecutorError("decisions.entity and decisions.project must be set", kind="auth", retryable=False)
         image, fallback = self._image()
         return SandboxSpec(image=image, fallback_image=fallback, cpu=self.cpu, memory=self.memory,
-                           max_lifetime_s=int(lifetime_s), tags=tuple(tags), env={"WANDB_API_KEY": ""},
+                           max_lifetime_s=int(lifetime_s), tags=tuple(tags), env={"WANDB_API_KEY": "", "GPG_KEY": ""},
                            deny_egress=True, dns_egress="deny", working_dir=self.box, entity=self.entity,
                            project=self.project)
 
@@ -334,6 +334,7 @@ class SandboxExecutor:
             sbx.handle.stop(timeout_s=STOP_TIMEOUT_S)
         except Exception as exc:                   # noqa: BLE001 - never mask the attempt's own outcome
             sbx.stop_error = type(exc).__name__
+            self.ledger.set_halt("cleanup_unverified", "sandbox stop failed; worst-case reservation retained")
         stopped = self.clock.monotonic()
         with self._lock:
             self._live.pop(sbx.id, None)
@@ -760,7 +761,7 @@ class SandboxExecutor:
     # ------------------------------------------------------------------ cleanup
     def cleanup_orphans(self, handles: Sequence[dict]) -> int:
         """stop_id for every recorded sandbox, then list by the campaign's tags and stop what is left until two
-        consecutive empty lists (or 10 rounds); then close every open sandbox meter row with min(worst, elapsed)."""
+        consecutive empty lists. Exhausting 10 rounds halts without releasing reservations."""
         stopped = 0
         for h in handles or ():
             sid = h.get("sandbox_id") if isinstance(h, dict) else None
@@ -787,6 +788,9 @@ class SandboxExecutor:
                         pass
             if round_ + 1 < CLEANUP_ROUNDS:
                 self.clock.sleep(CLEANUP_PAUSE_S)
+        if empties < 2:
+            self.ledger.set_halt("cleanup_unverified", "campaign sandboxes still listed after cleanup")
+            raise CampaignStop(reason="cleanup_unverified", detail="two consecutive empty sandbox lists required")
         now = self.clock.now()
         with self._lock:
             live = set(self._live)

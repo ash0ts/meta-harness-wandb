@@ -402,7 +402,9 @@ class AdapterCase(unittest.TestCase):
         client = self.client()
         handle = client.create(spec())
         (_, args, kwargs), = self.calls("run")
-        self.assertEqual(args, ())                               # a positional argument would be the command
+        self.assertEqual(args[:2], ("/bin/sh", "-c"))
+        self.assertIn('mkdir -p "$1"', args[2])
+        self.assertEqual(args[-2:], ("mhforge", "/mhf"))
         self.assertEqual(set(kwargs), {"container_image", "auth", "max_lifetime_seconds", "tags", "resources", "network",
                                        "working_dir", "environment_variables"})
         self.assertEqual(kwargs["container_image"], "registry.example.com/w@" + DIGEST)
@@ -412,7 +414,7 @@ class AdapterCase(unittest.TestCase):
         self.assertIsInstance(kwargs["network"], self.fake.NetworkOptions)
         self.assertEqual((kwargs["network"].deny_egress, kwargs["network"].dns_egress, kwargs["network"].egress),
                          (True, "deny", None))
-        self.assertEqual((kwargs["working_dir"], kwargs["environment_variables"]), ("/mhf", {"WANDB_API_KEY": ""}))
+        self.assertEqual((kwargs["working_dir"], kwargs["environment_variables"]), ("/", {"WANDB_API_KEY": ""}))
         self.assertEqual(self.calls("Session"), [])
         # review regression: deny-egress is always set; a spec that asks for anything else is refused, no SDK call
         for over in ({"deny_egress": False}, {"dns_egress": "allow"}, {"deny_egress": 1}):
@@ -680,7 +682,8 @@ class AdapterCase(unittest.TestCase):
         for _, args, kwargs in runs:
             for name in kwargs:
                 self.assertNotRegex(name.lower(), r"mount|volume|snapshot|session|defaults")
-            self.assertEqual(args, ())
+            self.assertEqual(args[:2], ("/bin/sh", "-c"))
+            self.assertEqual(args[-2:], ("mhforge", "/mhf"))
         self.assertEqual(self.calls("Session"), [])
 
 

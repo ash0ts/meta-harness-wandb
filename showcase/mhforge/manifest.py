@@ -31,7 +31,7 @@ __all__ = [
 MANIFEST_CHANGED = "Manifest changed: start a new campaign instead of mixing attempts"
 COMMANDS = ("account-check", "preflight", "search", "evaluate", "export", "publish")
 RUNNER_COMMANDS = ("preflight", "search", "evaluate")
-EVALUATE_MODES = ("baselines", "calibration", "noise", "test")
+EVALUATE_MODES = ("baselines", "calibration", "noise", "controls", "test")
 FORGE_BASE_URL = "https://api.inference.wandb.ai/v1"
 RESERVED_KEY_NAMES = ("WANDB_API_KEY", "OPENROUTER_API_KEY", "ANTHROPIC_API_KEY")
 EXPORT_MUST_BE_UNSET = ("WANDB_BASE_URL", "CES_BASE_URL", "WANDB_APP_URL", "WANDB_MODE", "OTEL_RESOURCE_ATTRIBUTES",
@@ -147,7 +147,7 @@ SCHEMA: dict = {
     "schema": _enum("mhforge.manifest/1"), "notes": STR, "campaign": STR, "campaign_kind": _enum(*wire.CAMPAIGN_KINDS),
     "state_dir": STR,
     "decisions": {
-        "live_spend_approved": BOOL, "key_provisioning": _enum("unset", "dedicated"), "entity": STR_N, "project": STR_N,
+        "live_spend_approved": BOOL, "key_provisioning": _enum("unset", "dedicated", "user_supplied"), "entity": STR_N, "project": STR_N,
         "proposer_permission_mode": _enum("unset", "upstream", "restricted", "contained"),
         "evaltables_backend": _enum("unset", "ces", "wandb_table", "off"), "publish_approved": BOOL,
         "dataset_text_publication": _enum("unset", "identifiers_only", "per_dataset"), "uspto_text_cleared": BOOL},
@@ -984,8 +984,10 @@ def live_blockers(manifest: dict, command: str, environ: Mapping[str, str], path
         out.append(("frozen", MANIFEST_CHANGED))
     if dec["live_spend_approved"] is not True:
         out.append(("decisions.live_spend_approved", "false: no paid call, sandbox or remote write is approved"))
-    if dec["key_provisioning"] != "dedicated":
-        out.append(("decisions.key_provisioning", "unset: confirm dedicated, revocable keys"))
+    if dec["key_provisioning"] == "unset":
+        out.append(("decisions.key_provisioning", "unset: select dedicated or explicitly user-supplied keys"))
+    if command == "search" and dec["key_provisioning"] == "user_supplied" and dec["proposer_permission_mode"] != "restricted":
+        out.append(("decisions.proposer_permission_mode", "user-supplied credentials require a verified restricted proposer"))
     if manifest["provider"]["kind"] != "forge":
         out.append(("provider.kind", "stub is refused by every live command"))
     if util.lookup(manifest, "upstream.tree_sha256") is None:

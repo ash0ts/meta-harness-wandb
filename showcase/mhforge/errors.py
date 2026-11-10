@@ -10,7 +10,7 @@ from __future__ import annotations
 HALT_REASONS = frozenset({
     "budget:qualification", "budget:calibration", "budget:baseline", "budget:search", "budget:test", "budget:controls",
     "budget:recovery", "budget:total", "budget:sandbox", "budget:proposer", "usage_contradiction", "ledger_fault",
-    "model_identity", "provider_config", "provider_quota", "isolation", "operator"})
+    "model_identity", "provider_config", "provider_quota", "isolation", "cleanup_unverified", "operator"})
 STOP_REASONS = HALT_REASONS | frozenset({
     "proposer_spend_limit", "proposer_limit_wait", "proposer_auth", "proposer_transient", "proposer_model", "proposer_sandbox",
     "proposer_settings", "proposer_integrity", "proposer_cli", "proposer_environment", "infrastructure",

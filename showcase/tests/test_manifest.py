@@ -489,6 +489,13 @@ class LiveGateTest(unittest.TestCase):
                 if commands == ["search"]:
                     self.assertEqual(r.blockers("preflight"), [])
 
+    def test_user_supplied_key_requires_restricted_search(self):
+        with ready({'decisions.key_provisioning': 'user_supplied', 'decisions.proposer_permission_mode': 'restricted'}) as r:
+            self.assertEqual(r.blockers('preflight'), [])
+            self.assertEqual(r.blockers('search'), [])
+        with ready({'decisions.key_provisioning': 'user_supplied', 'decisions.proposer_permission_mode': 'upstream'}) as r:
+            self.assertEqual(fields(r.blockers('search')), {'decisions.proposer_permission_mode'})
+
     def test_require_live_checks_presence_and_never_echoes_a_value(self):
         with ready() as r:
             env = dict(ENV, MHFORGE_FORGE_API_KEY="")

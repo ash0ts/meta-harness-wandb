@@ -41,7 +41,7 @@ __all__ = ["COMMON_SETTINGS", "CREDENTIAL_PATHS", "RESTRICTED_ADDENDUM", "Settin
 COMMON_SETTINGS = {"autoMemoryEnabled": False, "switchModelsOnFlag": False, "disableAllHooks": True}
 CREDENTIAL_PATHS = ("~/.netrc", "~/.ssh", "~/.gnupg", "~/.aws", "~/.config/gh", "~/.config/gcloud", "~/.config/wandb",
                     "~/.docker", "~/.kube", "~/.npmrc", "~/.pypirc", "~/.git-credentials", "~/.cache/huggingface",
-                    "~/Library/Keychains", "~/.claude/.credentials.json")
+                    "~/Library/Keychains", "~/.claude/.credentials.json", "~/Documents/common_tools/.env")
 RESTRICTED_ADDENDUM = """## Run environment (added by the harness; not part of the skill)
 
 This session runs with restricted permissions. Where the skill mentions /tmp, these rules apply instead.

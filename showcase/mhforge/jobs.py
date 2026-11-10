@@ -43,7 +43,7 @@ OUTPUT_NAMES = ("val.json", "test.json", "memory.json", "log.jsonl")
 PROBE = "no_memory"
 _SEPARATOR = "=" * 60
 _LOOPBACK_URL = re.compile(rb"https?://(?:127\.0\.0\.1|localhost|\[::1\]):[0-9]{1,5}[^\s\"']*")
-_FACT_KEYS = ("sandbox_id", "seconds", "setup_seconds", "cost_micro", "environment", "relay", "selfcheck")
+_FACT_KEYS = ("sandbox_id", "seconds", "setup_seconds", "cost_micro", "environment", "relay", "selfcheck", "stop_error")
 _SECRET_KEY = re.compile(r"(?i)(?:^|_)(?:token|bearer|api_?key|secret|password|address|url|port|listener)(?:$|_)")
 
 

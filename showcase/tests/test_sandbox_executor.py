@@ -301,7 +301,7 @@ class CallSequence(Base):
         self.assertIsNone(s.fallback_image)
         self.assertIs(s.deny_egress, True)
         self.assertEqual(s.dns_egress, "deny")
-        self.assertEqual(s.env, {"WANDB_API_KEY": ""})
+        self.assertEqual(s.env, {"WANDB_API_KEY": "", "GPG_KEY": ""})
         self.assertEqual(s.max_lifetime_s, 120 + 900)
         self.assertEqual((s.cpu, s.memory, s.working_dir), ("2", "4Gi", "/mhf"))
         self.assertEqual((s.entity, s.project), ("example-entity", "mh-forge-test"))
@@ -870,7 +870,12 @@ class Cleanup(Base):
         # never two empty lists in a row: at most 10 rounds
         self.client.calls.clear()
         self.client.list_script = [["x"]] * 20
-        ex.cleanup_orphans([])
+        self.ledger.meter_open("sandbox_seconds", "x", 1000000, "ms", worst_micro=100000)
+        with self.assertRaises(CampaignStop) as raised:
+            ex.cleanup_orphans([])
+        self.assertEqual(raised.exception.reason, "cleanup_unverified")
+        self.assertEqual(len(self.ledger.open_meter_rows("sandbox_seconds")), 1)
+        self.assertEqual(self.ledger.halted().reason, "cleanup_unverified")
         self.assertEqual(len(self.calls("list_ids")), 10)
 
     def test_cleanup_stops_a_real_leftover_sandbox(self):
@@ -912,7 +917,7 @@ class ImportCheck(Base):
         self.assertFalse(any(n in ("exec:serve", "exec_stream:bridge") for n in names))
         spec = self.calls("create")[0].args["spec"]
         self.assertEqual(spec.max_lifetime_s, 300 + 900)
-        self.assertEqual((spec.deny_egress, spec.dns_egress, spec.env), (True, "deny", {"WANDB_API_KEY": ""}))
+        self.assertEqual((spec.deny_egress, spec.dns_egress, spec.env), (True, "deny", {"WANDB_API_KEY": "", "GPG_KEY": ""}))
         self.assertEqual(len(spec.tags), 5)
         (row,) = self.meter_rows()
         self.assertEqual(row["status"], "final")

@@ -108,8 +108,9 @@ def build_wheelhouse(dest: Path, *, corrupt: bool = False) -> dict:
     """A small wheelhouse tar (wheels/*.whl, SHA256SUMS, requirements.lock.txt). corrupt: SHA256SUMS lists a wrong
     hash, so `sha256sum -c` fails in the sandbox."""
     wheels = {"wheels/fakepkg_a-1.0-py3-none-any.whl": b"wheel a\n", "wheels/fakepkg_b-2.0-py3-none-any.whl": b"wheel b\n"}
-    sums = "".join("%s  %s\n" % ("0" * 64 if corrupt else hashlib.sha256(d).hexdigest(), n) for n, d in sorted(wheels.items()))
-    members = dict(wheels, **{"SHA256SUMS": sums.encode(), "requirements.lock.txt": b"fakepkg-a==1.0\nfakepkg-b==2.0\n"})
+    members = dict(wheels, **{"requirements.lock.txt": b"fakepkg-a==1.0\nfakepkg-b==2.0\n"})
+    sums = "".join("%s  %s\n" % ("0" * 64 if corrupt else hashlib.sha256(d).hexdigest(), n) for n, d in sorted(members.items()))
+    members['SHA256SUMS'] = sums.encode()
     buf = io.BytesIO()
     with tarfile.open(fileobj=buf, mode="w", format=tarfile.USTAR_FORMAT) as tf:
         for name in sorted(members):

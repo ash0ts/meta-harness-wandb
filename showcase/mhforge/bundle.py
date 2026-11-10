@@ -165,13 +165,15 @@ def _mhf_wheelhouse(box):
     for line in sums.decode("utf-8").splitlines():
         if not line.strip():
             continue
-        m = re.fullmatch(r"[0-9a-f]{64} [ *](wheels/[A-Za-z0-9_.+-]{1,200}\.whl)", line)
+        m = re.fullmatch(r"[0-9a-f]{64} [ *](requirements\.lock\.txt|wheels/[A-Za-z0-9_.+-]{1,200}\.whl)", line)
         if m is None:
             raise ValueError("bad SHA256SUMS line")
+        if m.group(1) in listed:
+            raise ValueError("duplicate SHA256SUMS entry")
         listed.add(m.group(1))
     wheels = set(n for n in names if n.startswith("wheels/"))
-    if listed != wheels or not wheels:
-        raise ValueError("SHA256SUMS does not list exactly the wheels in the archive")
+    if listed != wheels | {"requirements.lock.txt"} or not wheels:
+        raise ValueError("SHA256SUMS does not list exactly the requirements and wheels in the archive")
     rc = subprocess.call(["sha256sum", "-c", "SHA256SUMS"], cwd=dest, stdout=subprocess.DEVNULL)
     if rc != 0:
         raise ValueError("sha256sum -c failed")

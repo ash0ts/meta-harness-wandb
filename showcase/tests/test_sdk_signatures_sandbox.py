@@ -207,8 +207,9 @@ class SdkSignatures(unittest.TestCase):
                     self.assertIsNot(sig.parameters[pname].kind, inspect.Parameter.VAR_KEYWORD, name)
                 for pname, value in bound.arguments.items():
                     if sig.parameters[pname].kind is inspect.Parameter.VAR_POSITIONAL:
-                        self.assertEqual(value, (), f"{name}: no positional {pname} (a command would replace "
-                                                    "the default keep-alive)")
+                        self.assertEqual(name, "Sandbox.run")
+                        self.assertEqual(value[:2], ("/bin/sh", "-c"))
+                        self.assertEqual(value[-2:], ("mhforge", "/mhf"))
 
     # ------------------------------------------------------------ the pin
     def test_installed_sdk_is_the_pinned_version(self):
@@ -247,7 +248,8 @@ class SdkSignatures(unittest.TestCase):
     def test_run_keywords_and_values(self):
         self.client().create(spec())
         (_, args, kwargs), = [e for e in self.rec.log if e[0] == "Sandbox.run"]
-        self.assertEqual(args, ())
+        self.assertEqual(args[:2], ("/bin/sh", "-c"))
+        self.assertEqual(args[-2:], ("mhforge", "/mhf"))
         self.assertEqual(sorted(kwargs), ["auth", "container_image", "environment_variables", "max_lifetime_seconds",
                                           "network", "resources", "tags", "working_dir"])
         self.assertIsInstance(kwargs["auth"], cw.AuthHeaders)
