@@ -1,0 +1,98 @@
+{
+  "schema": "mhforge.split-audit/1",
+  "match": "exact question and optional instruction; target checked separately",
+  "datasets": {
+    "USPTO": {
+      "files": {
+        "train": {
+          "sha256": "5049890cd908a5bbed4f635a2a68c51a8756d50fc09e7648ad4ebc36a295f6d6",
+          "count": 50
+        },
+        "val": {
+          "sha256": "824579221c59d1e71895620f539a05f978d8832e067a7956562612eebcdef2ed",
+          "count": 30
+        },
+        "test": {
+          "sha256": "e2730f05f215363687ec0c6a1f75ce808ed697749b181becdae62cd7991c67e4",
+          "count": 100
+        }
+      },
+      "cross_split": {
+        "train__val": [],
+        "train__test": [],
+        "val__test": []
+      },
+      "within_split_duplicate_groups": {
+        "train": [],
+        "val": [],
+        "test": []
+      }
+    },
+    "Symptom2Disease": {
+      "files": {
+        "train": {
+          "sha256": "b41e494b40bf971a1eadd79ed4dda527640916abe0a2dc94e047e13ef293ee4c",
+          "count": 200
+        },
+        "val": {
+          "sha256": "f6ad74bea9fb59f4a3abf930668042c33fbb7519bc9e2568a9758c2a0b1277e8",
+          "count": 50
+        },
+        "test": {
+          "sha256": "6a6b224665715f40d42a46eed82498698d39fa7689241eaae2cc2276e444671d",
+          "count": 212
+        }
+      },
+      "cross_split": {
+        "train__val": [],
+        "train__test": [],
+        "val__test": [
+          {
+            "question_sha256": "98d7fab5be80843134d82360bb2562d7257c3851c23e4f29e68bfeffc0d73206",
+            "left_index": 27,
+            "right_index": 140,
+            "same_target": true
+          }
+        ]
+      },
+      "within_split_duplicate_groups": {
+        "train": [],
+        "val": [],
+        "test": []
+      }
+    },
+    "LawBench": {
+      "files": {
+        "train": {
+          "sha256": "36ead48b5e88e02f6bf5944d1c00c561f6592e5573f9ecf05c23affc111c386c",
+          "count": 200
+        },
+        "val": {
+          "sha256": "c5d900d64a7be5359579e4c2fc0b499f18ebbe9a96fee1ff43879d511bc992ea",
+          "count": 50
+        },
+        "test": {
+          "sha256": "a08a9aba4da6814fc0efdfc713814a2562f4ce1d174981d8d5823a126b99f6dc",
+          "count": 100
+        }
+      },
+      "cross_split": {
+        "train__val": [],
+        "train__test": [],
+        "val__test": []
+      },
+      "within_split_duplicate_groups": {
+        "train": [],
+        "val": [],
+        "test": []
+      }
+    }
+  },
+  "sensitivity_exclude_test_indices": {
+    "USPTO": [],
+    "Symptom2Disease": [
+      140
+    ],
+    "LawBench": []
+  }
+}

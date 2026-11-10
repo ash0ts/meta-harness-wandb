@@ -99,6 +99,7 @@ def main():
     p.add_argument('--left', required=True)
     p.add_argument('--right', required=True)
     p.add_argument('--output', type=Path, required=True)
+    p.add_argument('--split-audit', type=Path, help='Frozen audit for the separately labelled overlap sensitivity')
     args=p.parse_args()
     m=util.read_json(args.state/'manifest.json')
     expected={ds:sizes[2] for ds,sizes in m['upstream']['expect']['sizes'].items()}
@@ -108,6 +109,18 @@ def main():
                 source_manifest_sha256=util.sha256_file(args.state/'manifest.json'),
                 analysis_sha256=util.sha256_file(Path(__file__)),evidence=dict(left=le,right=re),
                 **paired(left,right))
+    if args.split_audit:
+        audit=util.read_json(args.split_audit)
+        for ds, data in audit['datasets'].items():
+            for split, f in data['files'].items():
+                path=args.state/'workspace/text_classification/data'/m['upstream']['expect']['dataset_dirs'][ds]/(split+'.jsonl')
+                if util.sha256_file(path) != f['sha256']:
+                    raise ValueError('split audit refers to different data')
+        exclude=audit['sensitivity_exclude_test_indices']
+        def filtered(arm):
+            return {ds:{i:r for i,r in rows.items() if i not in exclude[ds]} for ds,rows in arm.items()}
+        result['overlap_sensitivity']=dict(excluded_test_indices=exclude,
+            split_audit_sha256=util.sha256_file(args.split_audit),**paired(filtered(left),filtered(right)))
     util.write_json(args.output,result,fsync=True)
     print(json.dumps({k:v for k,v in result.items() if k not in ('tasks','evidence')},indent=2))
 
