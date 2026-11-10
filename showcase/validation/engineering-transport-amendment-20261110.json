@@ -1,0 +1,19 @@
+{
+  "schema": "mhforge.transport-amendment/1",
+  "utc": "2026-11-10T21:07:30.237208+00:00",
+  "from_campaign": "mh-engineering-d-20261110",
+  "new_campaign": "mh-engineering-e-20261110",
+  "manifest_sha256": "509419b166b4bb6f54e449909684d0bd19b938993839972a50e444e23889d742",
+  "changed_runtime_field": "provider.max_response_bytes",
+  "old_bytes": 2097152,
+  "new_bytes": 16777216,
+  "reason": "HTTP200 stream exceeded local transport ceiling during preparation; no test started",
+  "prior_complete_provider_calls": 289,
+  "prior_bounded_unknown_calls": 1,
+  "prior_observed_micro": 53627,
+  "prior_bounded_unknown_micro": 3342,
+  "prior_verified_lens_exports": 7,
+  "audit_ok": true,
+  "open_meters": 0,
+  "scientific_settings_unchanged": true
+}
