@@ -1,0 +1,90 @@
+{
+  "branch": "showcase/forge",
+  "date": "2026-11-10",
+  "engine_sha256": "fc5b44f4a4162ca18ffab265cc9918c927865d0cb98a4ca3ea111f2db9a68a3d",
+  "forge_service_spend_usd": "0",
+  "implementation_commit": "6b2a92b2e185c15abc33a473e9ca1a0765473944",
+  "limits": [
+    "No live Forge inference, paid sandbox, real proposer session, remote export or publication was run.",
+    "Sandbox lifetime/relay-soak, telemetry rehearsal, proposer isolation and crash-recovery live probe runners remain incomplete and block qualification.",
+    "Dedicated credentials, owning team, private project, worker environment proof and signed protocol are required for live qualification.",
+    "Stub scores demonstrate integration only and are not model-quality evidence."
+  ],
+  "original_checkpoint_commit": "eba168f98591223bc9160b157eab64b50460175c",
+  "python_version": "3.13.14",
+  "requirements_lock_sha256": "40797a2df5fc9dd611f08b2570fd1051e5d78da6edbc75d1053cb31da2c14cce",
+  "schema": "mhforge.continuation-validation/1",
+  "sdk_versions": {
+    "coreweave": "0.1.0b0",
+    "cwsandbox": "1.27.0",
+    "wandb": "0.31.0"
+  },
+  "smoke_runs": [
+    {
+      "audit": {
+        "bounded_unknown_micro": 0,
+        "calls": 260,
+        "listed": {
+          "admission_only": [],
+          "limit_exceeded": [],
+          "open_meters": [],
+          "reconciled": [],
+          "repeatable_provider_failure": []
+        },
+        "observed_micro": 46499,
+        "ok": true,
+        "problems": []
+      },
+      "dry_run_units": 9,
+      "engine_sha256": "fc5b44f4a4162ca18ffab265cc9918c927865d0cb98a4ca3ea111f2db9a68a3d",
+      "executor": "local_relay",
+      "invariants_failed": [],
+      "jobs": 6,
+      "passed": true,
+      "provider_calls": 260,
+      "resume_provider_calls": 0,
+      "schema": "mhforge.smoke/1",
+      "utc": "2026-11-10T16:02:08.985856Z",
+      "worker_network_guard": "sandbox-exec"
+    },
+    {
+      "audit": {
+        "bounded_unknown_micro": 0,
+        "calls": 260,
+        "listed": {
+          "admission_only": [],
+          "limit_exceeded": [],
+          "open_meters": [],
+          "reconciled": [],
+          "repeatable_provider_failure": []
+        },
+        "observed_micro": 46499,
+        "ok": true,
+        "problems": []
+      },
+      "dry_run_units": 9,
+      "engine_sha256": "fc5b44f4a4162ca18ffab265cc9918c927865d0cb98a4ca3ea111f2db9a68a3d",
+      "executor": "local",
+      "invariants_failed": [],
+      "jobs": 6,
+      "passed": true,
+      "provider_calls": 260,
+      "resume_provider_calls": 0,
+      "schema": "mhforge.smoke/1",
+      "utc": "2026-11-10T16:02:43.014696Z",
+      "worker_network_guard": "sandbox-exec"
+    }
+  ],
+  "tests": {
+    "command": "python -m unittest discover -s tests -t .",
+    "count": 1111,
+    "duration_s": 303.159,
+    "errors": 0,
+    "failures": 0,
+    "log_sha256": "68b2f36daad5d3b1d04194637602ddd9dc4afb9debdb3dd6cb3046c7f102ac47",
+    "skipped": 0
+  },
+  "upstream_commit": "f805ad3aa4ada290458c1e0deadbe132fbbdea4e",
+  "upstream_tree_sha256": "8f2e6831b4e0db92bf083f3161d6329a1279ba18637bffb33c7cac64a872f057",
+  "worker_lock_sha256": "b4b08cf476c9963293879afbdc39b7b32f2919a577b563567632f8e03da19bd4"
+}
