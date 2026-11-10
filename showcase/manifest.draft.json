@@ -279,7 +279,7 @@
       "tar_sha256": null,
       "tar_bytes": null,
       "sha256sums_sha256": null,
-      "requirements_sha256": "4698f162b4a77cb251f492b930029976b6f573478faa69663f56a73bd73a7ade"
+      "requirements_sha256": "40797a2df5fc9dd611f08b2570fd1051e5d78da6edbc75d1053cb31da2c14cce"
     },
     "expect": {
       "machine": "x86_64",

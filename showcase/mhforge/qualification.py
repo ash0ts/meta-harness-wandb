@@ -169,7 +169,10 @@ def offline_gate(manifest: dict, paths: StatePaths, sc_dir: Path, *, command: st
         _gate(out, "smoke_receipt", False, "no offline-smoke receipt: run offline-smoke")
     else:
         same = receipt.get("engine_sha256") == engine
-        _gate(out, "smoke_receipt", same, "for this engine" if same else "made for another engine: run offline-smoke")
+        passed = receipt.get("passed") is True
+        _gate(out, "smoke_receipt", same and passed,
+              ("passed for this engine" if passed else "no passing smoke result: run offline-smoke") if same
+              else "made for another engine: run offline-smoke")
     # 6 the proposer binary (search only)
     if command == "search":
         pp = manifest["proposer"]

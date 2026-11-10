@@ -68,7 +68,8 @@ class Gate:
         cli = write_text(self.sc.parent / "bin" / "claude", "SYNTHETIC cli\n")
         write_text(self.sc / "protocol.md", "# Protocol\n\nSigned.\n\n## Stage 2\n\nSigned.\n")
         util.write_json(self.sc / "state" / "_smoke" / "receipt.json",
-                        {"schema": "mhforge.smoke/1", "engine_sha256": q.engine_snapshot(PACKAGE)["engine_sha256"]})
+                        {"schema": "mhforge.smoke/1", "passed": True,
+                         "engine_sha256": q.engine_snapshot(PACKAGE)["engine_sha256"]})
         base = {"upstream.example_dir": str(self.ex), "upstream.tree_sha256": workspace.source_digest(self.ex)[0],
                 "upstream.worker_lock_sha256": util.sha256_file(lock), "executor.kind": "sandbox",
                 "sandbox.env_mode": "wheelhouse", "sandbox.wheelhouse.tar_sha256": util.sha256_file(tar),
@@ -198,6 +199,14 @@ class OfflineGate(unittest.TestCase):
         write_text(g.sc / "protocol.md", "# Protocol\n<!-- STAGE2-UNSIGNED -->\n")
         self.assertEqual(g.failed("preflight"), [])
         self.assertEqual(g.failed("search"), [])          # a preflight campaign needs stage 1 only
+
+    def test_gate_rejects_failed_or_missing_smoke_verdict(self):
+        g = Gate(self)
+        receipt = g.sc / 'state' / '_smoke' / 'receipt.json'
+        for value in (False, None):
+            util.write_json(receipt, {'schema': 'mhforge.smoke/1', 'passed': value,
+                                     'engine_sha256': q.engine_snapshot(PACKAGE)['engine_sha256']})
+            self.assertEqual(g.failed(), ['smoke_receipt'])
 
     def test_gate_two_stage_protocol(self):
         g = Gate(self)                                    # measured campaign (fixture)

@@ -10,13 +10,15 @@
 | Branch | `showcase/forge`, created from the commit above |
 | Example used | `reference_examples/text_classification` |
 
-No upstream file has been modified. Upstream ships no `uv.lock` and pins only
-`litellm==1.84.10`, so a lock file still has to be generated and committed here
-before any measured run.
+No upstream tracked file has been modified. Upstream ships no `uv.lock` and pins only
+`litellm==1.84.10`. The continuation preserves the local example lock in `worker-image/uv.lock`
+and its hashed requirements export. A measured run still requires the image or wheelhouse proof.
+See `design/continuation.md` for offline execution evidence and the remaining live work.
 
 ## What the pinned code does
 
-Read from the source at the pinned commit. Nothing below has been run yet.
+Read from the source at the pinned commit. The continuation exercised the baseline loop
+with real local workers and a loopback inference stub. Live service behavior remains unverified.
 
 **Outer loop** (`meta_harness.py`)
 
@@ -59,7 +61,8 @@ Read from the source at the pinned commit. Nothing below has been run yet.
   to LiteLLM as is, and LiteLLM strips that prefix. Serverless Inference's id is
   `openai/gpt-oss-120b`, so the config entry needs to be
   `openai/openai/gpt-oss-120b`, or the gateway has to restore the prefix.
-  Inferred from `_normalized_model`; not yet confirmed by a call.
+  The gateway restores the wire model; the real-worker stub smoke covers this local path.
+  The live service's resolved model identity still needs qualification.
 - **API key.** With `api_base` set, `llm.py` sends the key `local` unless one is
   passed, and `inner_loop.py` never passes one. A direct call to Serverless
   Inference would be unauthenticated. Pointing `api_base` at the gateway, which
@@ -72,4 +75,5 @@ Read from the source at the pinned commit. Nothing below has been run yet.
 - **Sandboxes.** The candidate's `predict()` makes the LLM calls, so once
   evaluation moves into a sandbox those calls start inside it. The gateway then
   has to be reachable from the sandbox, or the calls have to be relayed back to
-  the host. This is undecided.
+  the host. The implementation uses a framed relay, exercised locally with the real workers;
+  its live sandbox transport still needs qualification.
