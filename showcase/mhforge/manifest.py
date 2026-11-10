@@ -45,7 +45,8 @@ WANDB_AUTH_REFUSED = ("wandb_auth is refused live: cwsandbox's WandbAuth takes W
 CLAUDE_SESSION_NAMES = ("CLAUDECODE", "CLAUDE_CODE_ENTRYPOINT")
 UPSTREAM_DEFAULT_SEED = 42                                   # benchmark.py L35: run_dir adds _seed<N> otherwise
 
-AMENDABLE: tuple[str, ...] = ("telemetry.content.", "decisions.dataset_text_publication", "decisions.uspto_text_cleared")
+AMENDABLE: tuple[str, ...] = ("telemetry.content.", "decisions.dataset_text_publication", "decisions.uspto_text_cleared",
+                            "decisions.evaltables_backend")
 IMPORT_DIFF_ALLOWED: tuple[str, ...] = (
     "notes", "campaign", "campaign_kind", "state_dir", "qualification.import_from",
     "decisions.project", "decisions.publish_approved", "decisions.evaltables_backend",
@@ -773,6 +774,9 @@ def read_amendments(paths: StatePaths, frozen_sha256: str) -> list[dict]:
         bad = [p for p in changes if not path_allowed(p, AMENDABLE)]
         if bad:
             raise ManifestError(problems=[f"{where}: {bad[0]} is not amendable"])
+        if ("decisions.evaltables_backend" in changes
+                and changes["decisions.evaltables_backend"] not in ("ces", "wandb_table")):
+            raise ManifestError(problems=[f"{where}: table backend amendment must retain tables"])
         prev = row["row_sha256"]
     return rows
 
@@ -819,6 +823,9 @@ def append_amendment(manifest: dict, paths: StatePaths, changes: Mapping[str, ob
     bad = [p for p in changes if not isinstance(p, str) or not path_allowed(p, AMENDABLE)]
     if bad:
         raise ManifestError(problems=[f"{bad[0]}: not amendable after the freeze"])
+    if ("decisions.evaltables_backend" in changes
+            and changes["decisions.evaltables_backend"] not in ("ces", "wandb_table")):
+        raise ManifestError(problems=["table backend amendment must retain tables"])
     _repair_tail(paths.amendments)
     existing = read_amendments(paths, digest)
     row = {"schema": "mhforge.amendment/1", "seq": len(existing) + 1, "utc": util.utc_now(clock),

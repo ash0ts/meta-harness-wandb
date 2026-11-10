@@ -1,0 +1,30 @@
+{
+  "schema": "mhforge.ces-minimal-probe/1",
+  "utc": "2026-11-10T17:44:11.912468Z",
+  "campaign": "mh-forge-controls-20261110",
+  "purpose": "Distinguish service create failure from table name/row/schema failures",
+  "name": "mhforge_diagnostic",
+  "row_count": 0,
+  "attempts": 1,
+  "status": "failed",
+  "exception_type": "InternalServerError",
+  "http_status": 500,
+  "feature_advertised": true,
+  "export_attempts": [
+    {
+      "unit": "eval:val.no_memory",
+      "attempt": 1,
+      "status": "partial",
+      "http_status": 500
+    },
+    {
+      "unit": "eval:val.no_memory",
+      "attempt": 2,
+      "status": "partial",
+      "http_status": 500
+    }
+  ],
+  "endpoint": "https://evaluations.wandb.ai",
+  "stage": "create; before columns or rows",
+  "native_ces_verified": false
+}

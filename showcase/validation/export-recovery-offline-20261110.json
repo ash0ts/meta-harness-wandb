@@ -1,0 +1,37 @@
+{
+  "schema": "mhforge.engine-validation/1",
+  "engine_sha256": "df92ce96110ce16649a0d9ead844b42fea451a2d1d103b5a4c6158dc9c192f2f",
+  "targeted_tests": {
+    "count": 163,
+    "passed": true,
+    "seconds": 16.054
+  },
+  "offline_smoke": {
+    "schema": "mhforge.smoke/1",
+    "passed": true,
+    "engine_sha256": "df92ce96110ce16649a0d9ead844b42fea451a2d1d103b5a4c6158dc9c192f2f",
+    "executor": "local_relay",
+    "worker_network_guard": "sandbox-exec",
+    "provider_calls": 260,
+    "resume_provider_calls": 0,
+    "jobs": 6,
+    "dry_run_units": 9,
+    "audit": {
+      "ok": true,
+      "problems": [],
+      "calls": 260,
+      "observed_micro": 46499,
+      "bounded_unknown_micro": 0,
+      "listed": {
+        "reconciled": [],
+        "limit_exceeded": [],
+        "repeatable_provider_failure": [],
+        "admission_only": [],
+        "open_meters": []
+      }
+    },
+    "invariants_failed": [],
+    "utc": "2026-11-10T17:48:07.231260Z"
+  },
+  "scope": "Explicit export-only table backend amendment; does not disable tables or alter scoring. No live fallback claim yet."
+}

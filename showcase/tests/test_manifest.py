@@ -792,6 +792,24 @@ class LiveGateTest(unittest.TestCase):
 
 
 class AmendmentTest(unittest.TestCase):
+    def test_explicit_table_fallback_preserves_frozen_scoring_and_requires_tables(self):
+        with ready() as r:
+            original = r.paths.manifest.read_bytes()
+            row = M.append_amendment(r.manifest, r.paths,
+                {"decisions.evaltables_backend": "wandb_table"}, "CES creation returned HTTP 500")
+            effective = M.effective(r.manifest, M.read_amendments(r.paths, M.manifest_sha256(r.manifest)))
+            self.assertEqual(effective['decisions']['evaltables_backend'], 'wandb_table')
+            self.assertEqual(effective['upstream'], r.manifest['upstream'])
+            self.assertEqual(r.paths.manifest.read_bytes(), original)
+            for value in ('off', 'unset', None):
+                with self.assertRaises(ManifestError):
+                    M.append_amendment(r.manifest, r.paths, {'decisions.evaltables_backend': value}, 'no')
+            row['set']['decisions.evaltables_backend'] = 'off'
+            row['row_sha256'] = M._row_sha256(row)
+            r.paths.amendments.write_text(json.dumps(row)+'\n')
+            with self.assertRaises(ManifestError):
+                M.read_amendments(r.paths, M.manifest_sha256(r.manifest))
+
     def test_amendment_chain_and_effective_manifest(self):
         clock = helpers.FakeClock()
         with ready() as r:

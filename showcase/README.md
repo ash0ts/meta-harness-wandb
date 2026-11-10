@@ -76,3 +76,8 @@ python -m mhforge preflight --live --manifest manifest.preflight.json --only tel
 ```
 
 Run baselines before baseline noise. Selected diagnostics do not qualify a campaign, waive calibration, or authorize search. Live keys use the same credential channel as other commands. Proposer settings disable optional built-ins; the exact hash-pinned privacy component stays enabled and runtime permission probes remain mandatory.
+
+
+If CES advertises support but table creation fails, preserve the partial receipt. After the active runner has stopped, an explicit export-only amendment can select `decisions.evaltables_backend="wandb_table"` with a failure note, followed by `export --retry-partial`. Native CES remains unverified. The hash-chained amendment cannot turn tables off or change solver/scoring inputs.
+
+For a control measured in a separate campaign, `analyze_campaign.py --right-state STATE` checks frozen worker/data/solver compatibility and rebuilds the five-vote results from all sample sidecars before comparison.
