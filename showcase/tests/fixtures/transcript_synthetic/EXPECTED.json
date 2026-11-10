@@ -1,0 +1,145 @@
+{
+  "note": "Expected converter output for the synthetic fixtures. Dedupe assistant records by message.id.",
+  "session_id": "5e55104e-0000-4000-8000-00000000abcd",
+  "api_messages": {
+    "main": [
+      "msg_synthetic_A",
+      "msg_synthetic_B",
+      "msg_synthetic_C"
+    ],
+    "subagent": [
+      "msg_synthetic_S1",
+      "msg_synthetic_S2"
+    ]
+  },
+  "transcript_assistant_records": {
+    "main": 4,
+    "subagent": 2
+  },
+  "api_request_records": {
+    "main": 3,
+    "subagent": 2,
+    "total": 5
+  },
+  "request_join": {
+    "msg_synthetic_A": {
+      "request_ref": "apireq_synthetic_0001",
+      "request_start": "2026-11-10T01:00:00.040Z",
+      "model": "claude-opus-5-5",
+      "effort": "max",
+      "last_record_timestamp": "2026-11-10T01:00:14.350Z"
+    },
+    "msg_synthetic_B": {
+      "request_ref": "apireq_synthetic_0002",
+      "request_start": "2026-11-10T01:00:15.060Z",
+      "model": "claude-opus-5-5",
+      "effort": "max",
+      "last_record_timestamp": "2026-11-10T01:00:22.800Z"
+    },
+    "msg_synthetic_C": {
+      "request_ref": "apireq_synthetic_0003",
+      "request_start": "2026-11-10T01:00:41.040Z",
+      "model": "claude-opus-5-5",
+      "effort": "max",
+      "last_record_timestamp": "2026-11-10T01:00:52.640Z"
+    },
+    "msg_synthetic_S1": {
+      "request_ref": "apireq_synthetic_0004",
+      "request_start": "2026-11-10T01:00:23.330Z",
+      "model": "claude-haiku-5-5",
+      "effort": "high",
+      "last_record_timestamp": "2026-11-10T01:00:29.900Z"
+    },
+    "msg_synthetic_S2": {
+      "request_ref": "apireq_synthetic_0005",
+      "request_start": "2026-11-10T01:00:30.190Z",
+      "model": "claude-haiku-5-5",
+      "effort": "high",
+      "last_record_timestamp": "2026-11-10T01:00:40.700Z"
+    }
+  },
+  "transcript_records_by_type": {
+    "main": {
+      "api-request": 3,
+      "assistant": 4,
+      "attachment": 1,
+      "cost-state": 1,
+      "queue-operation": 2,
+      "synthetic-unknown-record": 1,
+      "user": 3
+    },
+    "subagent": {
+      "api-request": 2,
+      "assistant": 2,
+      "user": 2
+    }
+  },
+  "records_to_skip": {
+    "attachment": 1,
+    "queue-operation": 2,
+    "synthetic-unknown-record": 1
+  },
+  "pinned_version": "2.1.317",
+  "tool_calls": [
+    {
+      "name": "Bash",
+      "id": "toolu_synthetic_bash_01",
+      "scope": "main"
+    },
+    {
+      "name": "Agent",
+      "id": "toolu_synthetic_agent_01",
+      "scope": "main"
+    },
+    {
+      "name": "Read",
+      "id": "toolu_synthetic_read_01",
+      "scope": "subagent"
+    }
+  ],
+  "tokens_from_transcript_deduped": {
+    "claude-opus-5-5": {
+      "input": 26,
+      "output": 1420,
+      "cache_creation": 20100,
+      "cache_read": 37400
+    },
+    "claude-haiku-5-5": {
+      "input": 2100,
+      "output": 380,
+      "cache_creation": 5000,
+      "cache_read": 5000
+    }
+  },
+  "tokens_if_NOT_deduped_main_wrong": {
+    "input": 38,
+    "output": 2320,
+    "cache_creation": 38100,
+    "cache_read": 37400
+  },
+  "stream_assistant_output_tokens_are_placeholders": true,
+  "cost_usd_list_price": {
+    "claude-opus-5-5": 0.196784,
+    "claude-haiku-5-5": 0.001075,
+    "total": 0.197859
+  },
+  "prices_usd_per_mtok": {
+    "claude-opus-5-5": {
+      "input": 4,
+      "output": 20,
+      "cache_write_1h": 8,
+      "cache_read": 0.2
+    },
+    "claude-haiku-5-5": {
+      "input": 0.1,
+      "output": 0.5,
+      "cache_write_5m": 0.125,
+      "cache_read": 0.01
+    }
+  },
+  "usage_limit_stream": {
+    "is_inferred_not_observed": true,
+    "wait_until_epoch_s": 1794286800,
+    "retryable_after_reset": true
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "schema": "mhforge.call/1",
+  "call_id": "c-20261110T031531-000000000a04",
+  "job": {
+    "campaign": "mh-test",
+    "split": "val",
+    "candidate": "no_memory",
+    "dataset": "USPTO",
+    "attempt": 1,
+    "phase": "baseline",
+    "iteration": null,
+    "repeat": null,
+    "sample": null,
+    "job_key": "val.no_memory.USPTO",
+    "job_id": "val.no_memory.USPTO.a1"
+  },
+  "ingress": "relay",
+  "outcome": "completed",
+  "refusal": null,
+  "received_utc": "2026-11-10T03:15:31.000000Z",
+  "admitted_utc": "2026-11-10T03:15:31.000900Z",
+  "ended_utc": "2026-11-10T03:16:01.000000Z",
+  "queue_s": 0.4,
+  "request": {
+    "model": "openai/gpt-oss-120b",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Reasoning: medium"
+      },
+      {
+        "role": "user",
+        "content": "SYNTHETIC USPTO PROMPT 1"
+      }
+    ],
+    "temperature": 0.0,
+    "max_tokens": 16384
+  },
+  "dropped_keys": [
+    "usage"
+  ],
+  "request_sha256": "905e18d8c4a2bb830b4f8675fdb2d7cc6e36010191102e5e067463217fd5abda",
+  "user_sha256": "504c5b8b01e4fcd0651eaefbb5ed615c8230b422a797c4100a1021cbb599de02",
+  "content_bytes": 41,
+  "n_messages": 2,
+  "input_limit": 76397,
+  "output_limit": 16384,
+  "conformance": {
+    "temperature": true,
+    "max_tokens": true,
+    "system_prompt": true
+  },
+  "replay": null,
+  "reuse_salt": null,
+  "attempts": [
+    {
+      "n": 1,
+      "ledger_id": "l-20261110T031501-000000000a04",
+      "ledger_phase": "baseline",
+      "started_utc": "2026-11-10T03:15:31.000950Z",
+      "first_byte_utc": "2026-11-10T03:15:31.000800Z",
+      "ended_utc": "2026-11-10T03:16:01.000000Z",
+      "http_status": 200,
+      "disposition": "ok",
+      "done": true,
+      "error": null,
+      "response_headers": {
+        "content-type": "text/event-stream"
+      },
+      "sse_file": "c-20261110T031531-000000000a04.a1.sse",
+      "sse_bytes": 4821,
+      "reserved_micro": 5078,
+      "spent_micro": 972,
+      "ledger_status": "complete",
+      "backoff_s": 0.0
+    }
+  ],
+  "response": {
+    "id": "chatcmpl-synthetic-1",
+    "object": "chat.completion",
+    "created": 1794270000,
+    "model": "openai/gpt-oss-120b",
+    "choices": [
+      {
+        "index": 0,
+        "finish_reason": "length",
+        "message": {
+          "role": "assistant",
+          "content": "",
+          "reasoning": "SYNTHETIC REASONING"
+        }
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 402,
+      "completion_tokens": 16384,
+      "total_tokens": 16786
+    }
+  },
+  "usage": {
+    "prompt_tokens": 402,
+    "completion_tokens": 16384,
+    "total_tokens": 16786,
+    "cached_tokens": null,
+    "reasoning_tokens": null
+  },
+  "finish_reason": "length",
+  "response_model": "openai/gpt-oss-120b",
+  "response_id": "chatcmpl-synthetic-1",
+  "flags": {
+    "truncated_empty": true,
+    "empty_content": true,
+    "reasoning_present": true,
+    "model_mismatch": false
+  },
+  "cost_micro": 972,
+  "cost_basis": "usage",
+  "reply": {
+    "status": 200,
+    "code": null,
+    "source": "provider"
+  }
+}

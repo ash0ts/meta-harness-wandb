@@ -1,0 +1,6 @@
+data: {"id":"chatcmpl-nu1","object":"chat.completion.chunk","created":1794270000,"model":"openai/gpt-oss-120b","choices":[{"index":0,"delta":{"role":"assistant","content":"[罪名]盗窃<eoa>"},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-nu1","object":"chat.completion.chunk","created":1794270000,"model":"openai/gpt-oss-120b","choices":[{"index":0,"delta":{},"finish_reason":"stop"}]}
+
+data: [DONE]
+

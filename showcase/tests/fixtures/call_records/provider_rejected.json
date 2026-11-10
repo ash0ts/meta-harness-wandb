@@ -1,0 +1,105 @@
+{
+  "schema": "mhforge.call/1",
+  "call_id": "c-20261110T031500-000000000a01",
+  "job": {
+    "campaign": "mh-test",
+    "split": "val",
+    "candidate": "no_memory",
+    "dataset": "USPTO",
+    "attempt": 1,
+    "phase": "baseline",
+    "iteration": null,
+    "repeat": null,
+    "sample": null,
+    "job_key": "val.no_memory.USPTO",
+    "job_id": "val.no_memory.USPTO.a1"
+  },
+  "ingress": "relay",
+  "outcome": "provider_rejected",
+  "refusal": {
+    "code": "provider_rejected",
+    "status": 403,
+    "detail": "SYNTHETIC provider said: invalid request"
+  },
+  "received_utc": "2026-11-10T03:15:00.100000Z",
+  "admitted_utc": "2026-11-10T03:15:00.100900Z",
+  "ended_utc": "2026-11-10T03:15:01.200000Z",
+  "queue_s": 0.4,
+  "request": {
+    "model": "openai/gpt-oss-120b",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Reasoning: medium"
+      },
+      {
+        "role": "user",
+        "content": "SYNTHETIC USPTO PROMPT L1"
+      }
+    ],
+    "temperature": 0.0,
+    "max_tokens": 16384
+  },
+  "dropped_keys": [
+    "usage"
+  ],
+  "request_sha256": "57d99555aefb49fc61b1dc0aab716d0e60395b152b8f21eb023ef44e94c369cf",
+  "user_sha256": "a1de3e82c06c7d42b0f145f8896aa0b4d8df8ab1ad6a5a7e2accd83af6f97822",
+  "content_bytes": 42,
+  "n_messages": 2,
+  "input_limit": 76397,
+  "output_limit": 16384,
+  "conformance": {
+    "temperature": true,
+    "max_tokens": true,
+    "system_prompt": true
+  },
+  "replay": null,
+  "reuse_salt": null,
+  "attempts": [
+    {
+      "n": 1,
+      "ledger_id": "l-20261110T031501-000000000a01",
+      "ledger_phase": "baseline",
+      "started_utc": "2026-11-10T03:15:00.300000Z",
+      "first_byte_utc": null,
+      "ended_utc": "2026-11-10T03:15:01.100000Z",
+      "http_status": 400,
+      "disposition": "provider_rejected",
+      "done": false,
+      "error": {
+        "kind": "http",
+        "http_status": 400,
+        "code": "invalid_request",
+        "body_excerpt": "SYNTHETIC invalid request"
+      },
+      "response_headers": {
+        "content-type": "application/json"
+      },
+      "sse_file": null,
+      "sse_bytes": 0,
+      "reserved_micro": 5078,
+      "spent_micro": 0,
+      "ledger_status": "complete",
+      "backoff_s": 0.0
+    }
+  ],
+  "response": null,
+  "usage": null,
+  "finish_reason": null,
+  "response_model": null,
+  "response_id": null,
+  "flags": {
+    "truncated_empty": false,
+    "empty_content": false,
+    "reasoning_present": false,
+    "model_mismatch": false
+  },
+  "cost_micro": 0,
+  "cost_basis": "none",
+  "reply": {
+    "status": 403,
+    "code": "provider_rejected",
+    "source": "gateway"
+  }
+}

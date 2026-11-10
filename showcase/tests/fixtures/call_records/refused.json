@@ -1,0 +1,68 @@
+{
+  "schema": "mhforge.call/1",
+  "call_id": "c-20261110T031603-000000000a06",
+  "job": {
+    "campaign": "mh-test",
+    "split": "val",
+    "candidate": "no_memory",
+    "dataset": "USPTO",
+    "attempt": 1,
+    "phase": "baseline",
+    "iteration": null,
+    "repeat": null,
+    "sample": null,
+    "job_key": "val.no_memory.USPTO",
+    "job_id": "val.no_memory.USPTO.a1"
+  },
+  "ingress": "relay",
+  "outcome": "refused",
+  "refusal": {
+    "code": "job_request_ceiling",
+    "status": 403,
+    "detail": "job_request_ceiling"
+  },
+  "received_utc": "2026-11-10T03:16:03.000000Z",
+  "admitted_utc": "2026-11-10T03:16:03.000900Z",
+  "ended_utc": "2026-11-10T03:16:03.004000Z",
+  "queue_s": 0.4,
+  "dropped_keys": [
+    "usage"
+  ],
+  "request_sha256": "b47c17f48e451b626f299c28f46c302822a43aa090d417e2f69a8067d9133125",
+  "user_sha256": "245859828f6b762f67d9747148cf70752299e95fbb9d17b677721079c385e7ab",
+  "content_bytes": 41,
+  "n_messages": 2,
+  "input_limit": 76397,
+  "output_limit": 16384,
+  "conformance": {
+    "temperature": true,
+    "max_tokens": true,
+    "system_prompt": true
+  },
+  "replay": null,
+  "reuse_salt": null,
+  "attempts": [],
+  "response": null,
+  "usage": null,
+  "finish_reason": null,
+  "response_model": null,
+  "response_id": null,
+  "flags": {
+    "truncated_empty": false,
+    "empty_content": false,
+    "reasoning_present": false,
+    "model_mismatch": false
+  },
+  "cost_micro": 0,
+  "cost_basis": "none",
+  "reply": {
+    "status": 403,
+    "code": "job_request_ceiling",
+    "source": "gateway"
+  },
+  "request_excerpt": {
+    "bytes": 196,
+    "sha256": "b47c17f48e451b626f299c28f46c302822a43aa090d417e2f69a8067d9133125",
+    "head": "{\"model\": \"openai/gpt-oss-120b\", \"messages\": [{\"role\": \"system\", \"content\": \"Reasoning: medium\"}, {\"role\": \"user\", \"content\": \"SYNTHETIC USPTO PROMPT 3\"}], \"temperature\": 0.0, \"max_tokens\": 16384}"
+  }
+}

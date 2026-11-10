@@ -1,0 +1,2 @@
+# SSE fixtures require the terminating empty line on the wire.
+tests/fixtures/sse_*.txt whitespace=-blank-at-eof

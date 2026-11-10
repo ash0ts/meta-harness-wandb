@@ -1,0 +1,8 @@
+data: {"id":"chatcmpl-ro1","object":"chat.completion.chunk","created":1794270000,"model":"openai/gpt-oss-120b","choices":[{"index":0,"delta":{"role":"assistant","content":"","reasoning":"I keep thinking "},"finish_reason":null}]}
+
+data: {"id":"chatcmpl-ro1","object":"chat.completion.chunk","created":1794270000,"model":"openai/gpt-oss-120b","choices":[{"index":0,"delta":{"reasoning":"and never answer."},"finish_reason":"length"}]}
+
+data: {"id":"chatcmpl-ro1","object":"chat.completion.chunk","created":1794270000,"model":"openai/gpt-oss-120b","choices":[],"usage":{"prompt_tokens":200,"completion_tokens":4096,"total_tokens":4296}}
+
+data: [DONE]
+

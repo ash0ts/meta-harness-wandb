@@ -1,0 +1,12 @@
+{
+  "agentType": "general-purpose",
+  "description": "Summarise example_memory",
+  "model": "claude-haiku-5-5",
+  "toolUseId": "toolu_synthetic_agent_01",
+  "spawnDepth": 1,
+  "isBuiltIn": true,
+  "isFork": false,
+  "finished": true,
+  "launchedWithDefaults": false,
+  "requestNonInteractive": true
+}

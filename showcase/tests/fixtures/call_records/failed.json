@@ -1,0 +1,157 @@
+{
+  "schema": "mhforge.call/1",
+  "call_id": "c-20261110T031503-000000000a02",
+  "job": {
+    "campaign": "mh-test",
+    "split": "val",
+    "candidate": "no_memory",
+    "dataset": "USPTO",
+    "attempt": 1,
+    "phase": "baseline",
+    "iteration": null,
+    "repeat": null,
+    "sample": null,
+    "job_key": "val.no_memory.USPTO",
+    "job_id": "val.no_memory.USPTO.a1"
+  },
+  "ingress": "relay",
+  "outcome": "failed",
+  "refusal": {
+    "code": "provider_unavailable",
+    "status": 403,
+    "detail": "repeatable_provider_failure"
+  },
+  "received_utc": "2026-11-10T03:15:03.100000Z",
+  "admitted_utc": "2026-11-10T03:15:03.100900Z",
+  "ended_utc": "2026-11-10T03:15:09.200000Z",
+  "queue_s": 0.4,
+  "request": {
+    "model": "openai/gpt-oss-120b",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Reasoning: medium"
+      },
+      {
+        "role": "user",
+        "content": "SYNTHETIC USPTO PROMPT L2"
+      }
+    ],
+    "temperature": 0.0,
+    "max_tokens": 16384
+  },
+  "dropped_keys": [
+    "usage"
+  ],
+  "request_sha256": "05f547c7bf6a1d9056fb8d05855fd245ae40cfa465fd8794687c336df99594c1",
+  "user_sha256": "554b7e8fa682bcd29cebfc8c2655b72da267fd8bd7f821dd7efc5de6384a2cbd",
+  "content_bytes": 42,
+  "n_messages": 2,
+  "input_limit": 76397,
+  "output_limit": 16384,
+  "conformance": {
+    "temperature": true,
+    "max_tokens": true,
+    "system_prompt": true
+  },
+  "replay": null,
+  "reuse_salt": null,
+  "attempts": [
+    {
+      "n": 1,
+      "ledger_id": "l-20261110T031501-000000000a02",
+      "ledger_phase": "baseline",
+      "started_utc": "2026-11-10T03:15:03.300000Z",
+      "first_byte_utc": null,
+      "ended_utc": "2026-11-10T03:15:04.100000Z",
+      "http_status": 503,
+      "disposition": "retry_transport",
+      "done": false,
+      "error": {
+        "kind": "http",
+        "http_status": 503,
+        "code": null,
+        "body_excerpt": "SYNTHETIC unavailable"
+      },
+      "response_headers": {
+        "content-type": "application/json"
+      },
+      "sse_file": null,
+      "sse_bytes": 0,
+      "reserved_micro": 5078,
+      "spent_micro": 0,
+      "ledger_status": "complete",
+      "backoff_s": 0.0
+    },
+    {
+      "n": 2,
+      "ledger_id": "l-20261110T031502-000000000a02",
+      "ledger_phase": "baseline",
+      "started_utc": "2026-11-10T03:15:05.300000Z",
+      "first_byte_utc": null,
+      "ended_utc": "2026-11-10T03:15:06.100000Z",
+      "http_status": 503,
+      "disposition": "retry_transport",
+      "done": false,
+      "error": {
+        "kind": "http",
+        "http_status": 503,
+        "code": null,
+        "body_excerpt": "SYNTHETIC unavailable"
+      },
+      "response_headers": {
+        "content-type": "application/json"
+      },
+      "sse_file": null,
+      "sse_bytes": 0,
+      "reserved_micro": 5078,
+      "spent_micro": 0,
+      "ledger_status": "complete",
+      "backoff_s": 0.0
+    },
+    {
+      "n": 3,
+      "ledger_id": "l-20261110T031503-000000000a02",
+      "ledger_phase": "baseline",
+      "started_utc": "2026-11-10T03:15:07.300000Z",
+      "first_byte_utc": null,
+      "ended_utc": "2026-11-10T03:15:08.100000Z",
+      "http_status": 503,
+      "disposition": "retry_transport",
+      "done": false,
+      "error": {
+        "kind": "http",
+        "http_status": 503,
+        "code": null,
+        "body_excerpt": "SYNTHETIC unavailable"
+      },
+      "response_headers": {
+        "content-type": "application/json"
+      },
+      "sse_file": null,
+      "sse_bytes": 0,
+      "reserved_micro": 5078,
+      "spent_micro": 0,
+      "ledger_status": "complete",
+      "backoff_s": 0.0
+    }
+  ],
+  "response": null,
+  "usage": null,
+  "finish_reason": null,
+  "response_model": null,
+  "response_id": null,
+  "flags": {
+    "truncated_empty": false,
+    "empty_content": false,
+    "reasoning_present": false,
+    "model_mismatch": false
+  },
+  "cost_micro": 0,
+  "cost_basis": "none",
+  "reply": {
+    "status": 403,
+    "code": "provider_unavailable",
+    "source": "gateway"
+  }
+}

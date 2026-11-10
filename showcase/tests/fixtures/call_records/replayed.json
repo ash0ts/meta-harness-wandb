@@ -1,0 +1,84 @@
+{
+  "schema": "mhforge.call/1",
+  "call_id": "c-20261110T031602-000000000a05",
+  "job": {
+    "campaign": "mh-test",
+    "split": "val",
+    "candidate": "no_memory",
+    "dataset": "USPTO",
+    "attempt": 1,
+    "phase": "baseline",
+    "iteration": null,
+    "repeat": null,
+    "sample": null,
+    "job_key": "val.no_memory.USPTO",
+    "job_id": "val.no_memory.USPTO.a1"
+  },
+  "ingress": "relay",
+  "outcome": "replayed",
+  "refusal": null,
+  "received_utc": "2026-11-10T03:16:02.000000Z",
+  "admitted_utc": "2026-11-10T03:16:02.000900Z",
+  "ended_utc": "2026-11-10T03:16:02.050000Z",
+  "queue_s": 0.4,
+  "request": {
+    "model": "openai/gpt-oss-120b",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Reasoning: medium"
+      },
+      {
+        "role": "user",
+        "content": "SYNTHETIC USPTO PROMPT 2"
+      }
+    ],
+    "temperature": 0.0,
+    "max_tokens": 16384
+  },
+  "dropped_keys": [
+    "usage"
+  ],
+  "request_sha256": "fbf5656938e318b1382d38c24c72ac2ab6b456f86c8bfac2f1b22fdbf7279726",
+  "user_sha256": "0019045ce4a68b33629783a2480e568b44103d3bad2f39e9627b38876612fb28",
+  "content_bytes": 41,
+  "n_messages": 2,
+  "input_limit": 76397,
+  "output_limit": 16384,
+  "conformance": {
+    "temperature": true,
+    "max_tokens": true,
+    "system_prompt": true
+  },
+  "replay": {
+    "scope": "search",
+    "source_call_id": "c-20261109T221500-0000000001aa",
+    "kind": "stored"
+  },
+  "reuse_salt": null,
+  "attempts": [],
+  "response": null,
+  "usage": {
+    "prompt_tokens": 380,
+    "completion_tokens": 640,
+    "total_tokens": 1020,
+    "cached_tokens": null,
+    "reasoning_tokens": null
+  },
+  "finish_reason": "stop",
+  "response_model": "openai/gpt-oss-120b",
+  "response_id": null,
+  "flags": {
+    "truncated_empty": false,
+    "empty_content": false,
+    "reasoning_present": true,
+    "model_mismatch": false
+  },
+  "cost_micro": 0,
+  "cost_basis": "none",
+  "reply": {
+    "status": 200,
+    "code": null,
+    "source": "replay"
+  }
+}
