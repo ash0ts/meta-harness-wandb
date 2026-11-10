@@ -1,0 +1,213 @@
+{
+  "schema": "mhforge.live-qualification-job/1",
+  "scope": "One live job and Agent Lens readback; W&B runs, artifacts and CES still require baseline export verification. Full qualification pending.",
+  "campaign": "mh-forge-preflight-b-20261110",
+  "engine_sha256": "f6adec3adb99ec5ab6ac915b3ba35be99e6d5ee2bae63ed701d845dab3edd977",
+  "manifest_sha256": "a578d63baceedac3c7cb3130a052ed7e05750f9a4ece21f2e047d81f2a41761a",
+  "passed": true,
+  "checks": [
+    {
+      "name": "all_completed",
+      "ok": true,
+      "detail": "30 of 30 calls completed"
+    },
+    {
+      "name": "usage_every_call",
+      "ok": true,
+      "detail": "0 call(s) without usage"
+    },
+    {
+      "name": "within_input_limit",
+      "ok": true,
+      "detail": "0 limit_exceeded; largest prompt/limit 0.047465"
+    },
+    {
+      "name": "truncated_empty_rate",
+      "ok": true,
+      "detail": "0.0000 against at most 0.05"
+    },
+    {
+      "name": "one_model",
+      "ok": true,
+      "detail": "returned model ids: ['openai/gpt-oss-120b']"
+    },
+    {
+      "name": "job_outcome_ok",
+      "ok": true,
+      "detail": "last attempt outcome ok"
+    },
+    {
+      "name": "examples_matched",
+      "ok": true,
+      "detail": "30 of 30 example rows matched"
+    },
+    {
+      "name": "audit_clean",
+      "ok": true,
+      "detail": "clean"
+    },
+    {
+      "name": "environment_pinned",
+      "ok": true
+    }
+  ],
+  "observations": {
+    "calls": 30,
+    "outcomes": {
+      "completed": 30,
+      "replayed": 0,
+      "coalesced": 0,
+      "refused": 0,
+      "provider_rejected": 0,
+      "failed": 0,
+      "interrupted": 0
+    },
+    "completion_tokens": {
+      "n": 30,
+      "p50": 1628,
+      "p90": 2802,
+      "p95": 3242,
+      "max": 3484
+    },
+    "completion_tokens_sorted": [
+      733,
+      886,
+      891,
+      905,
+      932,
+      1028,
+      1059,
+      1069,
+      1085,
+      1095,
+      1240,
+      1397,
+      1571,
+      1587,
+      1628,
+      1696,
+      1735,
+      1762,
+      2087,
+      2096,
+      2108,
+      2477,
+      2510,
+      2654,
+      2729,
+      2747,
+      2802,
+      3018,
+      3242,
+      3484
+    ],
+    "latency_s": {
+      "n": 30,
+      "p50": 18.947849,
+      "p90": 33.777265,
+      "p95": 38.403882,
+      "max": 39.545639
+    },
+    "first_byte_s": {
+      "n": 30,
+      "p50": 1.0871,
+      "p90": 1.177433,
+      "p95": 1.204704,
+      "max": 1.209906
+    },
+    "queue_s": {
+      "n": 30,
+      "p50": 0.02308,
+      "p90": 15.906918,
+      "p95": 16.715052,
+      "max": 18.346827
+    },
+    "latency_p95_s": 38.403882,
+    "truncated_empty": 0,
+    "truncated_empty_rate": 0.0,
+    "models": [
+      "openai/gpt-oss-120b"
+    ],
+    "usage_keys": [
+      "completion_tokens",
+      "completion_tokens_details",
+      "completion_tokens_details.accepted_prediction_tokens",
+      "completion_tokens_details.audio_tokens",
+      "completion_tokens_details.reasoning_tokens",
+      "completion_tokens_details.rejected_prediction_tokens",
+      "prompt_tokens",
+      "prompt_tokens_details",
+      "prompt_tokens_details.audio_tokens",
+      "prompt_tokens_details.cached_tokens",
+      "total_tokens"
+    ],
+    "reasoning_fields": [
+      "reasoning"
+    ],
+    "calls_without_usage": 0,
+    "max_prompt_ratio": 0.047465,
+    "limit_exceeded": 0,
+    "job_seconds": 99.645
+  },
+  "forecast": {
+    "per_job": {
+      "val": {
+        "USPTO": 20750,
+        "Symptom2Disease": 38640,
+        "LawBench": 63950
+      },
+      "test": {
+        "USPTO": 69163,
+        "Symptom2Disease": 163826,
+        "LawBench": 129185
+      }
+    },
+    "output_tokens_q": 3242,
+    "validation_total_micro": 9558850,
+    "test_total_micro": 2716305,
+    "sandbox_total_micro": 23323992,
+    "proposer_total_micro": 375000000,
+    "calibration_total_micro": 2138835,
+    "controls_total_micro": 2263588,
+    "job_seconds": {
+      "val": {
+        "USPTO": 600.0,
+        "Symptom2Disease": 600.0,
+        "LawBench": 600.0
+      },
+      "test": {
+        "USPTO": 600.0,
+        "Symptom2Disease": 704.1579999999999,
+        "LawBench": 600.0
+      }
+    },
+    "proposer_sessions": 30,
+    "queue_wait_bound_s": 230.423292,
+    "parallel_validation_safe": true,
+    "fits_solver": true,
+    "fits_sandbox": true,
+    "fits_proposer": true,
+    "fits": true,
+    "problems": []
+  },
+  "audit": {
+    "ok": true,
+    "problems": [],
+    "calls": 30,
+    "observed_micro": 9640,
+    "bounded_unknown_micro": 0,
+    "listed": {
+      "reconciled": [],
+      "limit_exceeded": [],
+      "repeatable_provider_failure": [],
+      "admission_only": [],
+      "open_meters": []
+    }
+  },
+  "agent_lens_readback": {
+    "job:qual.val.no_memory.USPTO.a1": {
+      "agent_lens": "verified"
+    }
+  },
+  "qualified": false
+}
