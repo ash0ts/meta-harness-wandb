@@ -22,11 +22,12 @@ from .journal import Journal
 
 SOAK_SECONDS = 600
 SOAK_WORKER = r'''
-import concurrent.futures, hashlib, json, os, pathlib, sys, time, urllib.request
+import concurrent.futures, hashlib, json, os, pathlib, random, string, sys, time, urllib.request
 out = pathlib.Path(sys.argv[sys.argv.index('--out') + 1])
 seconds = float(sys.argv[sys.argv.index('--seconds') + 1])
 base = os.environ['OPENROUTER_API_BASE'].rstrip('/')
-payload = ('汉字é🙂' * 10000)  # 120,000 UTF-8 bytes, deliberately crosses stream chunks
+# Deterministic high-entropy text survives gzip; repetitive text never exercised rotation.
+payload = '汉字é🙂' + ''.join(random.Random(42).choices(string.ascii_letters + string.digits, k=120000))
 rows = []
 def one(i):
     data = json.dumps({'i': i, 'payload': payload}, ensure_ascii=False).encode()

@@ -383,9 +383,12 @@ def forecast(manifest: dict, obs: Mapping) -> dict:
     validation_total = _ceil(contingency * n_val * sums["val"])
     test_total = _ceil(contingency * n_test * sums["test"])
     calibration_total = _ceil(contingency * (n_cal_test * sums["test"] + n_noise_val * sums["val"]))
+    from .controls import PLAN as controls_plan
+    n_controls = controls_plan['k']
+    controls_total = _ceil(contingency * n_controls * sums['test'])
     caps = manifest_mod.phase_caps_micro(manifest)
     fits_solver = (validation_total <= caps["baseline"] + caps["search"] and test_total <= caps["test"]
-                   and calibration_total <= caps["calibration"])
+                   and calibration_total <= caps["calibration"] and controls_total <= caps['controls'])
     problems: list[str] = []
     # sandbox time
     sandbox_total, job_s = 0, {}
@@ -403,7 +406,7 @@ def forecast(manifest: dict, obs: Mapping) -> dict:
             return sandbox_cost_micro(math.ceil(seconds * 1000), sb["cpu"], sb["memory"], manifest)
 
         per_set = {split: sum(cost(job_s[split][ds] + setup) for ds in datasets) for split in job_s}
-        raw = ((n_val + n_noise_val) * per_set["val"] + (n_test + n_cal_test) * per_set["test"]
+        raw = ((n_val + n_noise_val) * per_set["val"] + (n_test + n_cal_test + n_controls) * per_set["test"]
                + iterations * cost(_IMPORT_CHECK_SECONDS + setup))
         sandbox_total = _ceil(contingency * raw)
     fits_sandbox = sandbox_total <= util.micros(util.lookup(manifest, "budgets.sandbox_usd"))
@@ -424,6 +427,7 @@ def forecast(manifest: dict, obs: Mapping) -> dict:
     return {"per_job": per_job, "output_tokens_q": q, "validation_total_micro": validation_total,
             "test_total_micro": test_total, "sandbox_total_micro": sandbox_total,
             "proposer_total_micro": proposer_total, "calibration_total_micro": calibration_total,
+            "controls_total_micro": controls_total,
             "job_seconds": job_s, "proposer_sessions": sessions,
             "queue_wait_bound_s": queue_bound,
             "parallel_validation_safe": None if queue_bound is None else queue_bound < 600,

@@ -37,6 +37,7 @@ def run(driver, up):
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     payload = {'denied': str(denied), 'credential': str(credential), 'existing': str(existing),
+               'new_report': str(reports / f'probe-new-{ordinal}.txt'),
                'scratch': str(scratch / 'writable.txt'), 'result': str(scratch / 'checks.json'),
                'url': 'http://127.0.0.1:' + str(server.server_port) + '/'}
     # Open-and-close only: never read a credential byte, even if the sandbox is broken.
@@ -52,7 +53,7 @@ for name in ('denied', 'credential'):
         checks[name] = 'permission_denied'
     except OSError:
         checks[name] = 'other_error'
-for name in ('existing', 'scratch'):
+for name in ('existing', 'scratch', 'new_report'):
     try:
         with open(p[name], 'a') as f:
             f.write('probe\\n')
@@ -90,7 +91,7 @@ print(json.dumps(checks))
     p = scratch / 'checks.json'
     checks = util.read_json(p) if p.is_file() else {}
     expected = {'denied': 'permission_denied', 'credential': 'permission_denied',
-                'existing': 'permission_denied', 'scratch': 'writable', 'loopback': 'blocked'}
+                'existing': 'permission_denied', 'scratch': 'writable', 'new_report': 'writable', 'loopback': 'blocked'}
     verified = (checks == expected and not hits and existing.read_text() == 'unchanged\n'
                 and session.outcome == 'no_candidates' and not session.stops
                 and session.record.get('sandbox_check', {}).get('passed') is True

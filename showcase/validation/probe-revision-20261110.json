@@ -1,0 +1,51 @@
+{
+  "scope": "post-live-soak probe and forecast correction",
+  "tests": {
+    "count": 120,
+    "passed": true,
+    "seconds": 25.057
+  },
+  "smoke": {
+    "schema": "mhforge.smoke/1",
+    "passed": true,
+    "engine_sha256": "7b359a0e0b53ff876cfc8e4e3f08aef8ca4d60c1052883fd549ab9e29b396635",
+    "executor": "local_relay",
+    "worker_network_guard": "sandbox-exec",
+    "provider_calls": 260,
+    "resume_provider_calls": 0,
+    "jobs": 6,
+    "dry_run_units": 9,
+    "audit": {
+      "ok": true,
+      "problems": [],
+      "calls": 260,
+      "observed_micro": 46499,
+      "bounded_unknown_micro": 0,
+      "listed": {
+        "reconciled": [],
+        "limit_exceeded": [],
+        "repeatable_provider_failure": [],
+        "admission_only": [],
+        "open_meters": []
+      }
+    },
+    "invariants_failed": [],
+    "utc": "2026-11-10T16:59:02.824630Z"
+  },
+  "engine_sha256": "7b359a0e0b53ff876cfc8e4e3f08aef8ca4d60c1052883fd549ab9e29b396635",
+  "changes": [
+    "Synthetic payload now survives gzip and can exercise stream rotation.",
+    "Proposer permission check now includes a new report write.",
+    "Forecast includes all 15 five-sample control jobs."
+  ],
+  "prior_live_soak": {
+    "attempt": 5,
+    "duration_s": 600.003335372,
+    "exactly_once_requests": 960,
+    "forced_disconnect_recovered": true,
+    "rotations": 0,
+    "passed": false,
+    "reason": "Probe payload compressed too well to exercise rotation",
+    "cleanup_verified": true
+  }
+}

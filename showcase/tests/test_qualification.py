@@ -394,6 +394,10 @@ class Forecast(unittest.TestCase):
         test = sum(fc["per_job"]["test"].values())
         self.assertEqual(fc["validation_total_micro"], ceil(Decimal("1.25") * (2 + 20 * 3) * val))
         self.assertEqual(fc["test_total_micro"], ceil(Decimal("1.25") * 6 * test))
+        self.assertEqual(fc['controls_total_micro'], ceil(Decimal('1.25') * 5 * test))
+        no_control_budget = json.loads(json.dumps(m))
+        no_control_budget['budgets']['solver_usd']['phases']['controls'] = '0'
+        self.assertFalse(q.forecast(no_control_budget, obs)['fits_solver'])
         self.assertEqual(fc["sandbox_total_micro"], 0)     # local_relay executor: no sandbox meter
         self.assertTrue(fc["fits_solver"] and fc["fits_sandbox"] and fc["fits_proposer"] and fc["fits"], fc)
         self.assertEqual(set(fc) >= {"per_job", "validation_total_micro", "test_total_micro", "sandbox_total_micro",
@@ -431,7 +435,7 @@ class Forecast(unittest.TestCase):
         fc = q.forecast(m, obs)
         one = sandbox_cost_micro(600_000, "2", "4Gi", m)    # a 600 s job: job_seconds of the manifest wins
         check = sandbox_cost_micro(300_000, "2", "4Gi", m)
-        jobs = (62 + 4 * 2) * 3 + (6 + 2) * 3              # validation and noise repeats; test and calibration
+        jobs = (62 + 4 * 2) * 3 + (6 + 2 + 5) * 3          # validation/noise; test/calibration/five-sample control
         self.assertEqual(fc["sandbox_total_micro"], ceil(Decimal("1.25") * (jobs * one + 20 * check)))
         self.assertTrue(fc["fits_sandbox"])
         tight = q.forecast(helpers.make_manifest({"executor.kind": "sandbox", "sandbox.env_mode": "image",
@@ -478,7 +482,7 @@ class Forecast(unittest.TestCase):
         wheel = q.forecast(helpers.make_manifest(sb, **{"sandbox.env_mode": "wheelhouse"}), obs)
         m = helpers.make_manifest(sb, **{"sandbox.env_mode": "wheelhouse"})
         cost = lambda s: sandbox_cost_micro(math.ceil(s * 1000), "2", "4Gi", m)   # noqa: E731
-        jobs = (62 + 8) * 3 + (6 + 2) * 3
+        jobs = (62 + 8) * 3 + (6 + 2 + 5) * 3
         self.assertEqual(wheel["sandbox_total_micro"], ceil(Decimal("1.25") * (jobs * cost(750) + 20 * cost(450))))
         self.assertGreater(wheel["sandbox_total_micro"], image["sandbox_total_micro"])
         slow = dict(obs, job_seconds=3000.0, calls=30)       # 100 s per call: a 30-call USPTO job takes 3,000 s
