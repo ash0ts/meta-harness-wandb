@@ -1,0 +1,24 @@
+{
+  "schema": "mhforge.controls-validation/1",
+  "targeted_tests": {
+    "initial_run": {
+      "tests": 131,
+      "passed": 130,
+      "errors": 1,
+      "cause": "Sandbox blocked loopback bind in redirect test"
+    },
+    "permitted_rerun": {
+      "tests": 1,
+      "passed": 1,
+      "test": "tests.test_adapters.AgentLens.test_readback_never_follows_a_redirect"
+    },
+    "all_affected_checks_passed": true
+  },
+  "voting_figure_full_and_600px_reviewed": true,
+  "reconstructed_voting_samples": 2060,
+  "reconstructed_vote_task_groups": 412,
+  "cost_report_matches_all_2060_complete_and_14_unknown_and_4_rejected_attempts": true,
+  "all_tables_and_traces_verified": true,
+  "native_metric_history_summary_and_lineage_verified": true,
+  "stage2_search_qualification": false
+}

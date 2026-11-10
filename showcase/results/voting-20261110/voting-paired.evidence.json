@@ -1,0 +1,23 @@
+{
+  "question": "How did Vote of 5 (temp 1) compare with Full few-shot (temp 0), and what failures remain?",
+  "title": "What five-sample voting changed",
+  "additional_caveat": "The comparison changes both temperature (0 \u2192 1) and sample count (1 \u2192 5).",
+  "stage": "Predeclared sampling control",
+  "takeaway": "19 gains, 11 losses, 170 tasks wrong in both runs.",
+  "source_sha256": "05707fe17a6b3a6d909747b05e287cbb4892ece2c3b48bf4f1829f2c837bcbfc",
+  "renderer": {
+    "name": "matplotlib",
+    "version": "3.10.8",
+    "font": "DejaVu Sans"
+  },
+  "metric": "Correct tasks divided by all released test tasks per dataset; macro gives each dataset equal weight.",
+  "missingness": "Every task has both boolean outcomes; missing outcomes would stop analysis.",
+  "privacy": "Only aggregate counts, no question, answer or prediction text.",
+  "forbidden_claims": [
+    "population-wide causal benefit",
+    "optimized harness result",
+    "independent replication",
+    "model-sampling confidence"
+  ],
+  "text_alternative": "Full few-shot (temp 0) macro 43.16%; Vote of 5 (temp 1) macro 45.83%. +2.67 percentage points, paired 95% interval [-0.20, 5.65]. See the companion CSV for all counts."
+}

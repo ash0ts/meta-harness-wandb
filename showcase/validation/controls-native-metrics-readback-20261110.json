@@ -1,0 +1,39 @@
+{
+  "schema": "mhforge.native-metrics-readback/1",
+  "checks": [
+    {
+      "unit": "eval:val.fewshot_all",
+      "run_path": "wandb/mh-forge-preflight-20261110/mh-forge-controls-20261110-eval-val-fewshot_all",
+      "numeric_history_verified": true,
+      "summary_values_verified": true,
+      "manifest_lineage_verified": true,
+      "history_rows": 1
+    },
+    {
+      "unit": "eval:val.no_memory",
+      "run_path": "wandb/mh-forge-preflight-20261110/mh-forge-controls-20261110-eval-val-no_memory-e3",
+      "numeric_history_verified": true,
+      "summary_values_verified": true,
+      "manifest_lineage_verified": true,
+      "history_rows": 1
+    },
+    {
+      "unit": "study:noise",
+      "run_path": "wandb/mh-forge-preflight-20261110/3ae1c86fa330f010bcc433c1",
+      "numeric_history_verified": true,
+      "summary_values_verified": true,
+      "manifest_lineage_verified": true,
+      "history_rows": 1
+    },
+    {
+      "unit": "study:vote5",
+      "run_path": "wandb/mh-forge-preflight-20261110/fa88057964aa18ea6210d30e",
+      "numeric_history_verified": true,
+      "summary_values_verified": true,
+      "manifest_lineage_verified": true,
+      "history_rows": 1
+    }
+  ],
+  "passed": true,
+  "browser_preview": "Current browser SSO rejected app assignment; verification uses the existing authorized SDK credential."
+}

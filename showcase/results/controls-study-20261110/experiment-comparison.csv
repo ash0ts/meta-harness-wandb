@@ -1,0 +1,4 @@
+system,campaign,temperature,samples_per_task,test_tasks,macro_accuracy_percent,usage_priced_inference_usd,unknown_inference_upper_usd,new_provider_completions,rejected_provider_attempts,bounded_unknown_attempts
+no_memory,mh-forge-preflight-b-20261110,0,1,412,28.9748427672956,0.055287,0.0,411,50,0
+fewshot_all,mh-forge-preflight-b-20261110,0,1,412,43.16352201257862,0.187415,0.0,411,61,0
+fewshot_vote5,mh-forge-controls-20261110,1,5,412,45.83018867924529,0.952856,0.055468,2060,4,14

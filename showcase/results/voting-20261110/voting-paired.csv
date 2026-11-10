@@ -1,0 +1,4 @@
+dataset,total,left_correct,right_correct,both_correct,gain,loss,both_wrong,delta
+LawBench,100,28,34,26,8,2,64,0.06
+Symptom2Disease,212,177,177,171,6,6,29,0.0
+USPTO,100,18,20,15,5,3,77,0.02

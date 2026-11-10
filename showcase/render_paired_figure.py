@@ -21,6 +21,8 @@ def main():
     p.add_argument('--left-label', required=True)
     p.add_argument('--right-label', required=True)
     p.add_argument('--stage', default='Calibration')
+    p.add_argument('--title', default='Few-shot gains were uneven across datasets')
+    p.add_argument('--caveat', help='One additional comparison-specific limitation printed beside the figure')
     a = p.parse_args()
     doc = json.loads(a.analysis.read_text())
     names = list(doc['datasets'])
@@ -40,7 +42,7 @@ def main():
                          'svg.fonttype': 'none', 'pdf.fonttype': 42})
     fig, (ax, bx) = plt.subplots(2, 1, figsize=(8.4, 8.3), gridspec_kw={'height_ratios': [1, 1]})
     fig.subplots_adjust(left=.24, right=.95, top=.81, bottom=.20, hspace=.73)
-    fig.text(.055, .955, 'Few-shot gains were uneven across datasets', fontsize=18, weight='bold')
+    fig.text(.055, .955, a.title, fontsize=18, weight='bold')
     fig.text(.055, .919, f'{a.stage} · gpt-oss-120b · {totals["total"]} paired test tasks', fontsize=12, color='#50565d')
     y = list(range(len(names)))
     for i, d in enumerate(data):
@@ -79,8 +81,11 @@ def main():
     delta=doc['macro_delta']*100
     fig.text(.055,.135,f'Equal-weight macro accuracy: {macro_left:.2f}% → {macro_right:.2f}%',fontsize=12,weight='bold')
     fig.text(.055,.105,f'Difference: {delta:+.2f} points · paired 95% interval [{ci[0]:.2f}, {ci[1]:.2f}]',fontsize=11.5)
-    fig.text(.055,.055,'Each dataset has equal macro weight. Bars show task outcomes; labels are counts.\n'
-             'Interval conditions on these fixed datasets and runs; it excludes model-sampling uncertainty.',
+    footer = ('Each dataset has equal macro weight. Bars show task outcomes; labels are counts.\n'
+              'Interval conditions on these fixed datasets and runs; it excludes model-sampling uncertainty.')
+    if a.caveat:
+        footer += '\n'+a.caveat
+    fig.text(.055,.035 if a.caveat else .055,footer,
              fontsize=9.3,color='#50565d',linespacing=1.5)
     a.output_prefix.parent.mkdir(parents=True,exist_ok=True)
     for ext in ('png','svg','pdf'):
@@ -90,7 +95,8 @@ def main():
         fields=['dataset','total','left_correct','right_correct','both_correct','gain','loss','both_wrong','delta']
         writer=csv.DictWriter(f,fieldnames=fields);writer.writeheader()
         for name,d in zip(names,data):writer.writerow({'dataset':name,**{k:d[k] for k in fields[1:]}})
-    contract={'question':'How much did full few-shot help, and what failures remain?',
+    contract={'question':f'How did {a.right_label} compare with {a.left_label}, and what failures remain?',
+              'title':a.title,'additional_caveat':a.caveat,
               'stage':a.stage,'takeaway':f'{totals["gain"]} gains, {totals["loss"]} losses, {totals["both_wrong"]} tasks wrong in both runs.',
               'source_sha256':hashlib.sha256(a.analysis.read_bytes()).hexdigest(),
               'renderer':{'name':'matplotlib','version':matplotlib.__version__,'font':'DejaVu Sans'},

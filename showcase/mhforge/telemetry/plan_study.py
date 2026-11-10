@@ -61,6 +61,9 @@ def noise(paths, manifest, lens_url):
     if rebuilt['problems'] or rebuilt != stored:
         raise ValueError('noise aggregate does not reproduce from its source evidence')
     summary = {f'noise/{system}/macro_std_pp': value for system, value in rebuilt['macro_std'].items()}
+    for system, values in rebuilt['macro_validation_accuracy'].items():
+        summary[f'noise/{system}/macro_min_percent'] = min(values)
+        summary[f'noise/{system}/macro_max_percent'] = max(values)
     for ds, by_system in rebuilt['per_dataset'].items():
         for system, result in by_system.items():
             summary[f'noise/{system}/{ds}/flip_rate'] = result['flip_rate']
@@ -76,7 +79,7 @@ def voting(paths, manifest, lens_url):
     if set(stored['datasets']) != set(datasets):
         raise ValueError('control dataset membership differs')
     grader = controls.load_grader(paths)
-    rows, evidence, scores = [], [], []
+    rows, evidence, scores, summary = [], [], [], {}
     for ds in datasets:
         result = stored['datasets'][ds]
         samples, sources, urls = [], [], []
@@ -98,6 +101,9 @@ def voting(paths, manifest, lens_url):
             raise ValueError('control aggregate does not reproduce from its source evidence')
         evidence += sources
         scores.append(rebuilt['accuracy'])
+        prefix = f'controls/fewshot_vote5/{ds}/'
+        summary.update({prefix+'accuracy':rebuilt['accuracy'], prefix+'correct':rebuilt['correct'],
+                        prefix+'total':n, prefix+'tied_tasks':sum(r['tied'] for r in rebuilt['rows'])})
         for row in rebuilt['rows']:
             rows.append([ds, row['index'], row['example_sha256'], row['selected_sample'], row['votes'],
                          row['tied'], row['was_correct'], json.dumps(row['sample_correct']),
@@ -105,9 +111,10 @@ def voting(paths, manifest, lens_url):
     macro = sum(scores)/len(scores)
     if macro != stored['macro_accuracy']:
         raise ValueError('control macro accuracy differs')
+    summary['controls/fewshot_vote5/macro_accuracy'] = macro
     return (['dataset', 'index', 'example_sha256', 'selected_sample', 'votes', 'tied', 'was_correct',
              'sample_correct', 'sample_prediction_sha256', 'sample_trace_urls'],
-            rows, evidence, {'controls/fewshot_vote5/macro_accuracy': macro})
+            rows, evidence, summary)
 
 
 def plan(name, paths, manifest, lens_url, *, export_attempt):

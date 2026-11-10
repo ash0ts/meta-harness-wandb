@@ -1,0 +1,14 @@
+{
+  "bounded_unknown_micro": 0,
+  "calls": 1116,
+  "listed": {
+    "admission_only": [],
+    "limit_exceeded": [],
+    "open_meters": [],
+    "reconciled": [],
+    "repeatable_provider_failure": []
+  },
+  "observed_micro": 339424,
+  "ok": true,
+  "problems": []
+}

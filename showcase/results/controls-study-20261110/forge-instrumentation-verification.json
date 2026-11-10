@@ -1,0 +1,1881 @@
+{
+  "schema": "mhforge.controls-evidence/1",
+  "campaign": "mh-forge-controls-20261110",
+  "canonical_manifest_sha256": "52b4eb6565d5815de5be7905c90d435e952c8a447b2ad60518e446718ed3f434",
+  "scoring_engine_sha256": "a8f3d34d0be34f1963c56c7c05134958648e89a33c7c3584f52f870c925438bb",
+  "full_qualification": false,
+  "jobs": 45,
+  "sample_outcomes_regraded": 2060,
+  "noise_outcomes_regraded": 1300,
+  "audit": {
+    "bounded_unknown_micro": 58642,
+    "calls": 3410,
+    "listed": {
+      "admission_only": [],
+      "limit_exceeded": [],
+      "open_meters": [],
+      "reconciled": [],
+      "repeatable_provider_failure": []
+    },
+    "observed_micro": 1386809,
+    "ok": true,
+    "problems": []
+  },
+  "cleanup": {
+    "utc": "2026-11-10T19:02:36.298596Z",
+    "campaign": "mh-forge-controls-20261110",
+    "consecutive_active_lists": [
+      [],
+      []
+    ],
+    "cleanup_verified": true
+  },
+  "native_metrics": {
+    "schema": "mhforge.native-metrics-readback/1",
+    "checks": [
+      {
+        "unit": "eval:val.fewshot_all",
+        "run_path": "wandb/mh-forge-preflight-20261110/mh-forge-controls-20261110-eval-val-fewshot_all",
+        "numeric_history_verified": true,
+        "summary_values_verified": true,
+        "manifest_lineage_verified": true,
+        "history_rows": 1
+      },
+      {
+        "unit": "eval:val.no_memory",
+        "run_path": "wandb/mh-forge-preflight-20261110/mh-forge-controls-20261110-eval-val-no_memory-e3",
+        "numeric_history_verified": true,
+        "summary_values_verified": true,
+        "manifest_lineage_verified": true,
+        "history_rows": 1
+      },
+      {
+        "unit": "study:noise",
+        "run_path": "wandb/mh-forge-preflight-20261110/3ae1c86fa330f010bcc433c1",
+        "numeric_history_verified": true,
+        "summary_values_verified": true,
+        "manifest_lineage_verified": true,
+        "history_rows": 1
+      },
+      {
+        "unit": "study:vote5",
+        "run_path": "wandb/mh-forge-preflight-20261110/fa88057964aa18ea6210d30e",
+        "numeric_history_verified": true,
+        "summary_values_verified": true,
+        "manifest_lineage_verified": true,
+        "history_rows": 1
+      }
+    ],
+    "passed": true,
+    "browser_preview": "Current browser SSO rejected app assignment; verification uses the existing authorized SDK credential."
+  },
+  "verified_table_count": 8,
+  "verified_table_rows": 702,
+  "receipts": [
+    {
+      "unit": "eval:val.fewshot_all",
+      "surface": "wandb",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "1a7d59275993b21acb6bad98e7460d683d468259035627bf4449f31de7389ced",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 75826,
+        "files": 3,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 1,
+        "row_sha256": "747887295d078746855e77d19f528a6bdead9522f2710dea614b3e98faad1a19"
+      },
+      "urls": [
+        "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-controls-20261110-eval-val-fewshot_all"
+      ],
+      "readback": {
+        "checked_utc": "2026-11-10T19:03:32.650944Z",
+        "table_contents_checked": true,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T19:02:13.068924Z",
+      "updated_utc": "2026-11-10T19:03:32.650990Z"
+    },
+    {
+      "unit": "eval:val.no_memory",
+      "surface": "wandb",
+      "status": "verified",
+      "export_attempt": 3,
+      "plan_sha256": "09077176c40b95815fe17839646d5886f8adf1e53dc660149d47c10dc8539a08",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 75859,
+        "files": 3,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 1,
+        "row_sha256": "747887295d078746855e77d19f528a6bdead9522f2710dea614b3e98faad1a19"
+      },
+      "urls": [
+        "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-controls-20261110-eval-val-no_memory-e3"
+      ],
+      "readback": {
+        "checked_utc": "2026-11-10T19:03:35.615225Z",
+        "table_contents_checked": true,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T19:02:22.087666Z",
+      "updated_utc": "2026-11-10T19:03:35.615252Z"
+    },
+    {
+      "unit": "job:test.fewshot_all.LawBench.s1.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "6a6664eded0ac7d2a56389f7d9f2005623a6e460cf1d9283fdf014add43d8db2",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 141031,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.test.fewshot_all.LawBench.s1.a1"
+      ],
+      "readback": {
+        "spans": 101,
+        "checked_utc": "2026-11-10T18:54:58.013722Z",
+        "waited_s": 0.525,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T18:54:53.842343Z",
+      "updated_utc": "2026-11-10T18:54:58.013756Z"
+    },
+    {
+      "unit": "job:test.fewshot_all.LawBench.s2.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "b7c4bf939b35d11ae34af15abe732b141fef6a9bf4aafe9a98d6e5fa669890bf",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 141262,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.test.fewshot_all.LawBench.s2.a1"
+      ],
+      "readback": {
+        "spans": 101,
+        "checked_utc": "2026-11-10T18:56:53.485475Z",
+        "waited_s": 0.447,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T18:56:48.803835Z",
+      "updated_utc": "2026-11-10T18:56:53.485511Z"
+    },
+    {
+      "unit": "job:test.fewshot_all.LawBench.s3.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "2826e8f8c9dc98a7e0a27bbb904dc86fa06a86b0b7c2a8c92bfe860eecb79185",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 141304,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.test.fewshot_all.LawBench.s3.a1"
+      ],
+      "readback": {
+        "spans": 101,
+        "checked_utc": "2026-11-10T18:58:26.286073Z",
+        "waited_s": 0.456,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T18:58:22.553052Z",
+      "updated_utc": "2026-11-10T18:58:26.286120Z"
+    },
+    {
+      "unit": "job:test.fewshot_all.LawBench.s4.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "b87f4f77a8923904514b5ef8e8650a94aaf5faf4a7111cfcf07e6e2f9ec6648a",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 141312,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.test.fewshot_all.LawBench.s4.a1"
+      ],
+      "readback": {
+        "spans": 101,
+        "checked_utc": "2026-11-10T19:00:01.096094Z",
+        "waited_s": 0.448,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T18:59:57.170612Z",
+      "updated_utc": "2026-11-10T19:00:01.096124Z"
+    },
+    {
+      "unit": "job:test.fewshot_all.LawBench.s5.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "90a9ac27434a6f4104d68061c4048659cd8334c49d93307e5500b5b7a6800f21",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 141291,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.test.fewshot_all.LawBench.s5.a1"
+      ],
+      "readback": {
+        "spans": 101,
+        "checked_utc": "2026-11-10T19:01:34.668265Z",
+        "waited_s": 0.525,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T19:01:30.220169Z",
+      "updated_utc": "2026-11-10T19:01:34.668306Z"
+    },
+    {
+      "unit": "job:test.fewshot_all.Symptom2Disease.s1.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "90d1f57c61672cdab92dc5a107d44c36544467f03b8449fd1beee3e5b7fd4fb4",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 1612,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.test.fewshot_all.Symptom2Disease.s1.a1"
+      ],
+      "readback": {
+        "spans": 1,
+        "checked_utc": "2026-11-10T18:39:20.296532Z",
+        "waited_s": 0.327,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T18:39:18.325049Z",
+      "updated_utc": "2026-11-10T19:02:11.863605Z"
+    },
+    {
+      "unit": "job:test.fewshot_all.Symptom2Disease.s1.a2",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "df0fe7b6b4cb97be932c9e7f897efe6dbfff957fddcbfe250653e9cfd24b6bf3",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 297940,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.test.fewshot_all.Symptom2Disease.s1.a2",
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.test.fewshot_all.Symptom2Disease.s1.a2.p2"
+      ],
+      "readback": {
+        "spans": 214,
+        "checked_utc": "2026-11-10T18:42:27.703697Z",
+        "waited_s": 0.732,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T18:42:19.460066Z",
+      "updated_utc": "2026-11-10T18:42:27.703728Z"
+    },
+    {
+      "unit": "job:test.fewshot_all.Symptom2Disease.s2.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "d4b1cb8e43e64f2448b1325d8ebd1bd2322aa570a7235f71a62677c136a3cb55",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 298255,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.test.fewshot_all.Symptom2Disease.s2.a1",
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.test.fewshot_all.Symptom2Disease.s2.a1.p2"
+      ],
+      "readback": {
+        "spans": 214,
+        "checked_utc": "2026-11-10T18:47:07.899782Z",
+        "waited_s": 0.82,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T18:46:59.892964Z",
+      "updated_utc": "2026-11-10T18:47:07.899820Z"
+    },
+    {
+      "unit": "job:test.fewshot_all.Symptom2Disease.s3.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "58b0bc00dfee630d9495cca04e4294a7891be5f4c9632e43d1a3dd7194f7ad6c",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 298329,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.test.fewshot_all.Symptom2Disease.s3.a1",
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.test.fewshot_all.Symptom2Disease.s3.a1.p2"
+      ],
+      "readback": {
+        "spans": 214,
+        "checked_utc": "2026-11-10T18:49:29.257505Z",
+        "waited_s": 0.704,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T18:49:21.081259Z",
+      "updated_utc": "2026-11-10T18:49:29.257544Z"
+    },
+    {
+      "unit": "job:test.fewshot_all.Symptom2Disease.s4.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "52d69ec18d5de6c7d277fdf93e65052d2ab8355393de3b3d0eb65d5fa20ada4e",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 298343,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.test.fewshot_all.Symptom2Disease.s4.a1",
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.test.fewshot_all.Symptom2Disease.s4.a1.p2"
+      ],
+      "readback": {
+        "spans": 214,
+        "checked_utc": "2026-11-10T18:51:13.361990Z",
+        "waited_s": 0.73,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T18:51:05.639038Z",
+      "updated_utc": "2026-11-10T18:51:13.362042Z"
+    },
+    {
+      "unit": "job:test.fewshot_all.Symptom2Disease.s5.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "788b30bf3878e3f0678267499d47372b220d95d3c5cada6c27f02b142f4bfde7",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 298324,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.test.fewshot_all.Symptom2Disease.s5.a1",
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.test.fewshot_all.Symptom2Disease.s5.a1.p2"
+      ],
+      "readback": {
+        "spans": 214,
+        "checked_utc": "2026-11-10T18:53:00.992348Z",
+        "waited_s": 0.854,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T18:52:54.503759Z",
+      "updated_utc": "2026-11-10T18:53:00.992382Z"
+    },
+    {
+      "unit": "job:test.fewshot_all.USPTO.s1.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "940a9fb967ff6d47edd8656cea86e9d8d0f049155e978996ac02ff0b5bf55358",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 141052,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.test.fewshot_all.USPTO.s1.a1"
+      ],
+      "readback": {
+        "spans": 101,
+        "checked_utc": "2026-11-10T18:27:37.656558Z",
+        "waited_s": 0.331,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T18:27:32.777666Z",
+      "updated_utc": "2026-11-10T18:27:37.656587Z"
+    },
+    {
+      "unit": "job:test.fewshot_all.USPTO.s2.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "5478294d96b86d248036b3b057819f8f5a96f6bbad66222084959a79fff19264",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 141186,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.test.fewshot_all.USPTO.s2.a1"
+      ],
+      "readback": {
+        "spans": 101,
+        "checked_utc": "2026-11-10T18:30:24.240490Z",
+        "waited_s": 0.418,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T18:30:19.625384Z",
+      "updated_utc": "2026-11-10T18:30:24.240515Z"
+    },
+    {
+      "unit": "job:test.fewshot_all.USPTO.s3.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "451338b19695de301fc7e746856e9ab6dcc8399cd2c0494e3a384e8c220afbce",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 141200,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.test.fewshot_all.USPTO.s3.a1"
+      ],
+      "readback": {
+        "spans": 101,
+        "checked_utc": "2026-11-10T18:33:07.639966Z",
+        "waited_s": 0.325,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T18:33:02.944499Z",
+      "updated_utc": "2026-11-10T18:33:07.639990Z"
+    },
+    {
+      "unit": "job:test.fewshot_all.USPTO.s4.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "35a08097eee3ddb8150efbe72233db85309ff80f46e07f11b7103892ae5b2c6f",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 141219,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.test.fewshot_all.USPTO.s4.a1"
+      ],
+      "readback": {
+        "spans": 101,
+        "checked_utc": "2026-11-10T18:36:13.531470Z",
+        "waited_s": 0.407,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T18:36:08.832584Z",
+      "updated_utc": "2026-11-10T18:36:13.531501Z"
+    },
+    {
+      "unit": "job:test.fewshot_all.USPTO.s5.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "a84c28c69076abc2f9a489ef4c51ac2ef0ec2113c961f41bd198347e838f6dcc",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 141211,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.test.fewshot_all.USPTO.s5.a1"
+      ],
+      "readback": {
+        "spans": 101,
+        "checked_utc": "2026-11-10T18:39:18.137522Z",
+        "waited_s": 0.319,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T18:39:13.178245Z",
+      "updated_utc": "2026-11-10T18:39:18.137546Z"
+    },
+    {
+      "unit": "job:val.fewshot_all.LawBench.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "6503e53e37859f64c078d42aa245b9b62cae2931e9f832eb0a27698c3abf2a62",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 71290,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.val.fewshot_all.LawBench.a1"
+      ],
+      "readback": {
+        "spans": 51,
+        "checked_utc": "2026-11-10T17:41:22.695039Z",
+        "waited_s": 0.545,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T17:41:19.950314Z",
+      "updated_utc": "2026-11-10T17:41:22.695063Z"
+    },
+    {
+      "unit": "job:val.fewshot_all.LawBench.r2.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "12f2797d99f7313191bedee75ed63db1ac40326ee6e00e1462e4fe9e3ee039d4",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 71302,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.val.fewshot_all.LawBench.r2.a1"
+      ],
+      "readback": {
+        "spans": 51,
+        "checked_utc": "2026-11-10T18:11:09.051504Z",
+        "waited_s": 0.486,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T18:11:05.346427Z",
+      "updated_utc": "2026-11-10T18:11:09.051528Z"
+    },
+    {
+      "unit": "job:val.fewshot_all.LawBench.r3.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "9a23bc52b74a2580dbf4f78615c110b27c7ae9581c52872dfae364a56f01aab9",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 71431,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.val.fewshot_all.LawBench.r3.a1"
+      ],
+      "readback": {
+        "spans": 51,
+        "checked_utc": "2026-11-10T18:15:42.349738Z",
+        "waited_s": 0.344,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T18:15:39.851031Z",
+      "updated_utc": "2026-11-10T18:15:42.349764Z"
+    },
+    {
+      "unit": "job:val.fewshot_all.LawBench.r4.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "509bb10e26396bf024c05e1dca7b6eac2630b6c737ad8223a2ef6d747e0a12c2",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 71427,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.val.fewshot_all.LawBench.r4.a1"
+      ],
+      "readback": {
+        "spans": 51,
+        "checked_utc": "2026-11-10T18:20:03.193082Z",
+        "waited_s": 0.248,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T18:20:00.440010Z",
+      "updated_utc": "2026-11-10T18:20:03.193108Z"
+    },
+    {
+      "unit": "job:val.fewshot_all.LawBench.r5.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "fa7aa19485cd43ab053ca8a2b71c5a3cb1d24cffca6cb2f797ae5798e205bd50",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 71450,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.val.fewshot_all.LawBench.r5.a1"
+      ],
+      "readback": {
+        "spans": 51,
+        "checked_utc": "2026-11-10T18:24:46.669423Z",
+        "waited_s": 0.35,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T18:24:43.420486Z",
+      "updated_utc": "2026-11-10T18:24:46.669452Z"
+    },
+    {
+      "unit": "job:val.fewshot_all.Symptom2Disease.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "ac5a127c7f209ff0a193106137d330aaed134bc1b00ddc48d30bbbe9fae88305",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 71230,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.val.fewshot_all.Symptom2Disease.a1"
+      ],
+      "readback": {
+        "spans": 51,
+        "checked_utc": "2026-11-10T17:39:45.673399Z",
+        "waited_s": 0.277,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T17:39:39.857153Z",
+      "updated_utc": "2026-11-10T17:39:45.673429Z"
+    },
+    {
+      "unit": "job:val.fewshot_all.Symptom2Disease.r2.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "5d37fdc44cb1cb720e3a285c4c3d631b3a244152fbff760ac2e9c6d26475efbc",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 71237,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.val.fewshot_all.Symptom2Disease.r2.a1"
+      ],
+      "readback": {
+        "spans": 51,
+        "checked_utc": "2026-11-10T18:09:26.733549Z",
+        "waited_s": 0.352,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T18:09:24.017163Z",
+      "updated_utc": "2026-11-10T18:09:26.733574Z"
+    },
+    {
+      "unit": "job:val.fewshot_all.Symptom2Disease.r3.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "4d029a8457d29bcfb3ebec54e239c1813c75b9f08701346d73e1df4cfc26f48f",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 71320,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.val.fewshot_all.Symptom2Disease.r3.a1"
+      ],
+      "readback": {
+        "spans": 51,
+        "checked_utc": "2026-11-10T18:14:18.903712Z",
+        "waited_s": 0.35,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T18:14:15.337759Z",
+      "updated_utc": "2026-11-10T18:14:18.903778Z"
+    },
+    {
+      "unit": "job:val.fewshot_all.Symptom2Disease.r4.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "e07afbe341eb8ac0dbe0c80575f7342e44e7cb7b235db663e86587dd8c1e6659",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 71316,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.val.fewshot_all.Symptom2Disease.r4.a1"
+      ],
+      "readback": {
+        "spans": 51,
+        "checked_utc": "2026-11-10T18:18:41.387311Z",
+        "waited_s": 0.248,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T18:18:36.342851Z",
+      "updated_utc": "2026-11-10T18:18:41.387347Z"
+    },
+    {
+      "unit": "job:val.fewshot_all.Symptom2Disease.r5.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "902cbb17241ffc0ed0bc8a6e5e6643f86c850bd777b1b6f6f511c30476566412",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 71326,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.val.fewshot_all.Symptom2Disease.r5.a1"
+      ],
+      "readback": {
+        "spans": 51,
+        "checked_utc": "2026-11-10T18:23:16.530607Z",
+        "waited_s": 0.565,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T18:23:13.688635Z",
+      "updated_utc": "2026-11-10T18:23:16.530633Z"
+    },
+    {
+      "unit": "job:val.fewshot_all.USPTO.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "ac7a28cc5121a1698413e35ce4c12518517dcc1a70f443baab03349404b43897",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 43393,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.val.fewshot_all.USPTO.a1"
+      ],
+      "readback": {
+        "spans": 31,
+        "checked_utc": "2026-11-10T17:38:23.130609Z",
+        "waited_s": 0.362,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T17:38:20.849946Z",
+      "updated_utc": "2026-11-10T17:38:23.130638Z"
+    },
+    {
+      "unit": "job:val.fewshot_all.USPTO.r2.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "fe81f6006e333df7a213473c0e6e440852c0ea16623e478776d7fc9854c46f43",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 43398,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.val.fewshot_all.USPTO.r2.a1"
+      ],
+      "readback": {
+        "spans": 31,
+        "checked_utc": "2026-11-10T18:08:08.566013Z",
+        "waited_s": 0.361,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T18:08:06.323655Z",
+      "updated_utc": "2026-11-10T18:08:08.566034Z"
+    },
+    {
+      "unit": "job:val.fewshot_all.USPTO.r3.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "a25b381fb8147f1688d5b4f7b5a7ce7958ae22df5a892ba3336a9bb6c81dd156",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 43435,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.val.fewshot_all.USPTO.r3.a1"
+      ],
+      "readback": {
+        "spans": 31,
+        "checked_utc": "2026-11-10T18:13:03.787564Z",
+        "waited_s": 0.382,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T18:13:01.007959Z",
+      "updated_utc": "2026-11-10T18:13:03.787591Z"
+    },
+    {
+      "unit": "job:val.fewshot_all.USPTO.r4.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "4b844d6ea348a9defca0a3d7992e6c8d441fc3572b32498ac308ac56221a36c7",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 43447,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.val.fewshot_all.USPTO.r4.a1"
+      ],
+      "readback": {
+        "spans": 31,
+        "checked_utc": "2026-11-10T18:17:21.699453Z",
+        "waited_s": 0.355,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T18:17:19.392088Z",
+      "updated_utc": "2026-11-10T18:17:21.699479Z"
+    },
+    {
+      "unit": "job:val.fewshot_all.USPTO.r5.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "8ad02b88b6aca0d995735ef209de49641ec477e9f6f02839f985eafec7c34403",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 43439,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.val.fewshot_all.USPTO.r5.a1"
+      ],
+      "readback": {
+        "spans": 31,
+        "checked_utc": "2026-11-10T18:21:47.337794Z",
+        "waited_s": 0.344,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T18:21:44.833212Z",
+      "updated_utc": "2026-11-10T18:21:47.337826Z"
+    },
+    {
+      "unit": "job:val.no_memory.LawBench.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "0b68a5405f7efda5fc680b4022ebad87ac2079844e994b5541acfd7fb3cbf80b",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 71053,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.val.no_memory.LawBench.a1"
+      ],
+      "readback": {
+        "spans": 51,
+        "checked_utc": "2026-11-10T17:36:19.129936Z",
+        "waited_s": 0.389,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T17:36:16.078603Z",
+      "updated_utc": "2026-11-10T17:36:19.129973Z"
+    },
+    {
+      "unit": "job:val.no_memory.LawBench.r2.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "35ded4491bfa2d20147fdb8c4c5793764e35450b02b01913df204e92ad3f6ef4",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 71074,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.val.no_memory.LawBench.r2.a1"
+      ],
+      "readback": {
+        "spans": 51,
+        "checked_utc": "2026-11-10T17:47:08.199486Z",
+        "waited_s": 0.417,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T17:47:05.676316Z",
+      "updated_utc": "2026-11-10T17:47:08.199518Z"
+    },
+    {
+      "unit": "job:val.no_memory.LawBench.r3.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "ee88e92a798d8cdaa2078ea8d8df70eb2865d07232097dd7b493814bd0f9470a",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 71092,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.val.no_memory.LawBench.r3.a1"
+      ],
+      "readback": {
+        "spans": 51,
+        "checked_utc": "2026-11-10T17:54:17.686682Z",
+        "waited_s": 0.381,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T17:54:15.138712Z",
+      "updated_utc": "2026-11-10T17:54:17.686725Z"
+    },
+    {
+      "unit": "job:val.no_memory.LawBench.r4.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "cef604cef4378751caa0cab5e630a3eb58e489656a908d0a20d516137bf1410e",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 71042,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.val.no_memory.LawBench.r4.a1"
+      ],
+      "readback": {
+        "spans": 52,
+        "checked_utc": "2026-11-10T18:26:10.862016Z",
+        "waited_s": 0.596,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T17:59:35.433342Z",
+      "updated_utc": "2026-11-10T18:26:10.862043Z"
+    },
+    {
+      "unit": "job:val.no_memory.LawBench.r4.a2",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "6c03dab7864b63d94962cefb95cf39a3f43384fe350f3848729de565b1045569",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 50306,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.val.no_memory.LawBench.r4.a2"
+      ],
+      "readback": {
+        "spans": 51,
+        "checked_utc": "2026-11-10T18:22:51.672014Z",
+        "waited_s": 0.346,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T18:01:45.394007Z",
+      "updated_utc": "2026-11-10T18:22:51.672042Z"
+    },
+    {
+      "unit": "job:val.no_memory.LawBench.r5.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "9caea45b05192ea93eba0e5c7efd735b3f72341dff385ecc482acd84dc920b46",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 71090,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.val.no_memory.LawBench.r5.a1"
+      ],
+      "readback": {
+        "spans": 51,
+        "checked_utc": "2026-11-10T18:06:22.055320Z",
+        "waited_s": 0.559,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T18:06:19.247222Z",
+      "updated_utc": "2026-11-10T18:06:22.055361Z"
+    },
+    {
+      "unit": "job:val.no_memory.Symptom2Disease.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "5f0c0dd4716a6da6fb22a2aa1127a72085ae6035de98af675aaa6c5b88e75fbd",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 71097,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.val.no_memory.Symptom2Disease.a1"
+      ],
+      "readback": {
+        "spans": 51,
+        "checked_utc": "2026-11-10T17:35:02.100389Z",
+        "waited_s": 0.507,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T17:34:58.647433Z",
+      "updated_utc": "2026-11-10T17:35:02.100412Z"
+    },
+    {
+      "unit": "job:val.no_memory.Symptom2Disease.r2.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "cddfc1790cd43e97ccd7aadf23dfac80c5f8f922dad07b30c82ba6c201896aec",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 71133,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.val.no_memory.Symptom2Disease.r2.a1"
+      ],
+      "readback": {
+        "spans": 51,
+        "checked_utc": "2026-11-10T17:45:06.266528Z",
+        "waited_s": 0.343,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T17:45:03.283213Z",
+      "updated_utc": "2026-11-10T17:45:06.266553Z"
+    },
+    {
+      "unit": "job:val.no_memory.Symptom2Disease.r3.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "e5ebdd49a3d6add185e346d5f11f51e8f0fcc21c7fa3550310abf261e2cc23d3",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 71135,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.val.no_memory.Symptom2Disease.r3.a1"
+      ],
+      "readback": {
+        "spans": 51,
+        "checked_utc": "2026-11-10T17:51:54.520005Z",
+        "waited_s": 0.364,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T17:51:51.234432Z",
+      "updated_utc": "2026-11-10T17:51:54.520049Z"
+    },
+    {
+      "unit": "job:val.no_memory.Symptom2Disease.r4.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "095dc20729cee2f84c0701af9ef7d5315655e867edae09781b01483fff0f018c",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 71125,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.val.no_memory.Symptom2Disease.r4.a1"
+      ],
+      "readback": {
+        "spans": 51,
+        "checked_utc": "2026-11-10T17:57:43.999612Z",
+        "waited_s": 0.239,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T17:57:40.112942Z",
+      "updated_utc": "2026-11-10T17:57:43.999631Z"
+    },
+    {
+      "unit": "job:val.no_memory.Symptom2Disease.r5.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "750de2a7ae888d01c9b62e7a266e7d6d2b15ad4d0066610c4874c47f4b94e134",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 71126,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.val.no_memory.Symptom2Disease.r5.a1"
+      ],
+      "readback": {
+        "spans": 51,
+        "checked_utc": "2026-11-10T18:05:01.231311Z",
+        "waited_s": 0.436,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T18:04:58.067970Z",
+      "updated_utc": "2026-11-10T18:05:01.231362Z"
+    },
+    {
+      "unit": "job:val.no_memory.USPTO.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "3a8b490759270c5d6c612cb6fd800ae591a06b0fc68821af00a7c5209ab4a078",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 43325,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.val.no_memory.USPTO.a1"
+      ],
+      "readback": {
+        "spans": 31,
+        "checked_utc": "2026-11-10T17:33:46.138597Z",
+        "waited_s": 0.368,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T17:33:43.552547Z",
+      "updated_utc": "2026-11-10T17:33:46.138628Z"
+    },
+    {
+      "unit": "job:val.no_memory.USPTO.r2.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "daa126293eaa3ebb49d250c4ccb4ad727aaa6bf2d651ac4ed85d9eba0a0c7bd0",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 43349,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.val.no_memory.USPTO.r2.a1"
+      ],
+      "readback": {
+        "spans": 31,
+        "checked_utc": "2026-11-10T17:43:49.399730Z",
+        "waited_s": 0.406,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T17:43:46.919634Z",
+      "updated_utc": "2026-11-10T17:43:49.399769Z"
+    },
+    {
+      "unit": "job:val.no_memory.USPTO.r3.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "6c00dd7c77b652beb5d39b97306d9fb242dd2e1e72cc97c147d6924ce1ccf76e",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 43350,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.val.no_memory.USPTO.r3.a1"
+      ],
+      "readback": {
+        "spans": 31,
+        "checked_utc": "2026-11-10T17:49:25.226248Z",
+        "waited_s": 0.3,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T17:49:23.261417Z",
+      "updated_utc": "2026-11-10T17:49:25.226298Z"
+    },
+    {
+      "unit": "job:val.no_memory.USPTO.r4.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "8f936dea48c5101deb243709dd72a10b9b471d0871ef775dd456c8e353121f2b",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 43342,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.val.no_memory.USPTO.r4.a1"
+      ],
+      "readback": {
+        "spans": 31,
+        "checked_utc": "2026-11-10T17:56:24.940700Z",
+        "waited_s": 0.229,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T17:56:22.746184Z",
+      "updated_utc": "2026-11-10T17:56:24.940723Z"
+    },
+    {
+      "unit": "job:val.no_memory.USPTO.r5.a1",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "eb2d84cde71b71417f5ee9fb2ad7812ec6c6c6d6fb4bb2340d30d6035f8b940b",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 43350,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.val.no_memory.USPTO.r5.a1"
+      ],
+      "readback": {
+        "spans": 31,
+        "checked_utc": "2026-11-10T18:03:28.800848Z",
+        "waited_s": 0.335,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T18:03:26.618482Z",
+      "updated_utc": "2026-11-10T18:03:28.800884Z"
+    },
+    {
+      "unit": "loop:iter000",
+      "surface": "agent_lens",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "de1a901430ab4581fa670f5e74d450aab86947c3d8f6db3b0deac9c93fc5d224",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 3181,
+        "files": 1,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-controls-20261110.search.p1"
+      ],
+      "readback": {
+        "spans": 4,
+        "checked_utc": "2026-11-10T17:41:24.948627Z",
+        "waited_s": 0.271,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T17:41:22.924106Z",
+      "updated_utc": "2026-11-10T19:02:13.066361Z"
+    },
+    {
+      "unit": "loop:iter000",
+      "surface": "wandb",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "73674a1f88643af2dbe0f3fc727c5d86db4aff9033bdc6683b45884492c72b5e",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 4964,
+        "files": 2,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 0,
+        "row_sha256": null
+      },
+      "urls": [
+        "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-controls-20261110-search"
+      ],
+      "readback": {
+        "checked_utc": "2026-11-10T17:41:27.402249Z",
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T17:41:24.949734Z",
+      "updated_utc": "2026-11-10T19:02:13.067938Z"
+    },
+    {
+      "unit": "study:noise",
+      "surface": "wandb",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "b279b6e18f3a105b3ca663791d63b0a0ef125f813d03e8c22663011a1fcd9960",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 19013,
+        "files": 2,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 1,
+        "row_sha256": "747887295d078746855e77d19f528a6bdead9522f2710dea614b3e98faad1a19"
+      },
+      "urls": [
+        "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/3ae1c86fa330f010bcc433c1"
+      ],
+      "readback": {
+        "checked_utc": "2026-11-10T19:03:39.170489Z",
+        "table_contents_checked": true,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T19:02:27.518412Z",
+      "updated_utc": "2026-11-10T19:03:39.170518Z"
+    },
+    {
+      "unit": "study:vote5",
+      "surface": "wandb",
+      "status": "verified",
+      "export_attempt": 1,
+      "plan_sha256": "49a391b87af6c24b662ad7ab6dcb4b367de4b26df22b26eba8fb29bac334ae3d",
+      "scan": {
+        "clean": true,
+        "findings": 0,
+        "scanned_bytes": 533344,
+        "files": 2,
+        "rules": 16,
+        "classes": [
+          "secret",
+          "privacy"
+        ]
+      },
+      "amendment": {
+        "seq": 1,
+        "row_sha256": "747887295d078746855e77d19f528a6bdead9522f2710dea614b3e98faad1a19"
+      },
+      "urls": [
+        "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/fa88057964aa18ea6210d30e"
+      ],
+      "readback": {
+        "checked_utc": "2026-11-10T19:03:46.243604Z",
+        "table_contents_checked": true,
+        "mismatches": []
+      },
+      "created_utc": "2026-11-10T19:02:34.718297Z",
+      "updated_utc": "2026-11-10T19:03:46.243631Z"
+    }
+  ],
+  "meters": [
+    {
+      "meter": "eval_tables",
+      "unit": "tables",
+      "status": "final",
+      "quantity": 15,
+      "micro_usd": null
+    },
+    {
+      "meter": "lens_bytes",
+      "unit": "bytes",
+      "status": "final",
+      "quantity": 4750562,
+      "micro_usd": null
+    },
+    {
+      "meter": "lens_spans",
+      "unit": "spans",
+      "status": "final",
+      "quantity": 3467,
+      "micro_usd": null
+    },
+    {
+      "meter": "sandbox_seconds",
+      "unit": "ms",
+      "status": "final",
+      "quantity": 4956357,
+      "micro_usd": 469224
+    },
+    {
+      "meter": "wandb_upload_bytes",
+      "unit": "bytes",
+      "status": "final",
+      "quantity": 782446,
+      "micro_usd": null
+    }
+  ],
+  "cost_caveat": "Inference uses observed usage and frozen prices; compute uses estimated time. Platform invoice reconciliation unavailable. Unknown usage remains bounded.",
+  "recovered_failures": [
+    {
+      "job_key": "val.no_memory.LawBench.r4",
+      "attempts": 2,
+      "observation": "Attempt 1 hit a 2 MiB response-size guard after 49 complete calls. Attempt 2 replayed those 49 results and completed the remaining task.",
+      "unknown_upper_micro_usd": 3174
+    },
+    {
+      "job_key": "test.fewshot_all.Symptom2Disease.s1",
+      "attempts": 2,
+      "observation": "First executor attempt failed before any inference call; second attempt completed all 212 tasks."
+    },
+    {
+      "job_key": "test.fewshot_all.Symptom2Disease.s2",
+      "observation": "Fourteen HTTP 200 streams ended incomplete; their usage is bounded and retained separately from successful retry usage. No upstream root cause is established.",
+      "unknown_upper_micro_usd": 55468
+    }
+  ],
+  "browser_preview": "Forge SSO refused app assignment; API table-cell, numeric-history and trace read-back passed."
+}
