@@ -1,0 +1,78 @@
+{
+  "schema": "mhforge.live-transport/1",
+  "campaign": "mh-forge-transport-20261110",
+  "passed": true,
+  "engine_sha256": "7b359a0e0b53ff876cfc8e4e3f08aef8ca4d60c1052883fd549ab9e29b396635",
+  "manifest_sha256": "61b98599fc8e8ea095c31807e9b70c2c8d842b1819ea125085a308885dba285b",
+  "utc": "2026-11-10T17:13:57.508234Z",
+  "synthetic_only": true,
+  "provider_calls": 0,
+  "soak": {
+    "passed": true,
+    "synthetic_requests": 928,
+    "exactly_once_echo": true,
+    "duration_s": 600.0122925339999,
+    "classification": [
+      "ok",
+      false,
+      null
+    ]
+  },
+  "relay": {
+    "attaches": 12,
+    "rotations": 10,
+    "frames_in": 972,
+    "frames_out": 960,
+    "bytes_out": 112142101,
+    "duplicate_requests": 2,
+    "resent_replies": 2,
+    "cancelled": 0,
+    "flood_refusals": 0,
+    "pings": 29,
+    "pongs": 29,
+    "logs": 0,
+    "gateway_errors": 0,
+    "mode": "daemon",
+    "chars_in": 112307676,
+    "noise_chars": 178438,
+    "frame_errors": 0,
+    "in_flight": 0,
+    "live": 0,
+    "done_cached": 32,
+    "bridge_ends": [
+      "detached",
+      "detached",
+      "detached",
+      "detached",
+      "detached",
+      "detached",
+      "detached",
+      "detached",
+      "detached",
+      "detached",
+      "detached",
+      "closed"
+    ],
+    "attach_errors": 0
+  },
+  "lifetime": {
+    "passed": true,
+    "max_lifetime_s": 60,
+    "observed_wait_s": 42.19316366699786
+  },
+  "environment": {
+    "env_mode": "wheelhouse",
+    "image_digest": "sha256:f3dac913ab53b78c64f26d5518fcd7043d5a1a46522d6a493b598c3ed12f62a6",
+    "requirements_sha256": "40797a2df5fc9dd611f08b2570fd1051e5d78da6edbc75d1053cb31da2c14cce",
+    "sha256sums_sha256": "62f30615ff8c773aa97a3459faf3fac07f7ca0e00003bb897d152c7f3e8140c8",
+    "freeze_sha256": "1b6faa4ddf8a6e1de1f8993fc14aa5ffa6ceb0aa120609a56b518e204f6e15c1",
+    "machine": "x86_64",
+    "python": "3.13.18"
+  },
+  "credential_environment_empty": true,
+  "network_probes_blocked": true,
+  "identity_token_file_present": true,
+  "identity_token_contents_read": false,
+  "cleanup_verified": true,
+  "scope": "The transport check passed; selected checks do not qualify a full campaign."
+}
