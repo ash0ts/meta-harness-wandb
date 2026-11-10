@@ -1,0 +1,17 @@
+{
+  "schema": "mhforge.export-budget-recovery/1",
+  "utc": "2026-11-10T21:43:27.924144+00:00",
+  "campaign": "mh-engineering-e-20261110",
+  "frozen_runtime_engine_sha256": "1364a77188d2b7fda1c2e45e190d44aadf80cfc09f7b4d0b1a682d714b5f9e10",
+  "export_engine_sha256": "b1cbcde2cac1d8f7d7bfb6bca9b84919b019c79d235da5ad784c0985d4a7fadd",
+  "runtime_code_unchanged": true,
+  "solver_and_scoring_settings_unchanged": true,
+  "budgets_unchanged": true,
+  "preflight_budget_mib": 5,
+  "recovery_budget_mib": 20,
+  "total_budget_mib": 175,
+  "new_option": "--retry-budget",
+  "tests_passed": 135,
+  "test_log_sha256": "4cc8315db0b8c6666d0ec0b928319ef6ea0379692dab72238749070cbeeb8ea4",
+  "scope": "Post-execution upload of saved evidence; retain deferred receipts, use the original recovery reserve, check every cap before sending."
+}

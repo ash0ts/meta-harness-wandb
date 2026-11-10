@@ -152,6 +152,8 @@ def parser():
     c.add_argument('--dry-run', action='store_true')
     c.add_argument('--unit', nargs='+')
     c.add_argument('--retry-partial', action='store_true')
+    c.add_argument('--retry-budget', action='store_true',
+                   help='Retry budget-deferred exports against existing recovery and total caps')
     c.add_argument('--supersede', nargs='+', default=[])
     commands['amend'].add_argument('--set', nargs='+', required=True)
     commands['amend'].add_argument('--note', required=True)
@@ -207,7 +209,8 @@ def _export(args, m, paths, keys, hostname):
         wandb=wandb, known_secrets=[v.encode() for v in keys.values()], hostname=hostname,
         example_dir=(args.manifest.parent / m['upstream']['example_dir']).absolute() if paths.pristine.exists() else None,
         amendment=amendments[-1] if amendments else None, dry_run=dry)
-    out = exporter.export_all(only=args.unit, retry_partial=args.retry_partial, supersede=args.supersede)
+    out = exporter.export_all(only=args.unit, retry_partial=args.retry_partial, retry_budget=args.retry_budget,
+                              supersede=args.supersede)
     _emit(out)
     failed = out['not_ready'] or out['deferred'] or any(
         value not in ('dry_run', 'verified', 'skipped_policy') for surfaces in out['statuses'].values() for value in surfaces.values())

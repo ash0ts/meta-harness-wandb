@@ -241,7 +241,7 @@ class ExporterCase(unittest.TestCase):
         ex = self.c.exporter(lens=lens, wandb=wandb if wandb is not None else FakeWandbSink(), manifest=manifest,
                              **{k: v for k, v in kw.items() if k in ("dry_run", "known_secrets", "hostname",
                                                                     "example_dir", "amendment", "ledger")})
-        opts = {k: v for k, v in kw.items() if k in ("retry_partial", "supersede")}
+        opts = {k: v for k, v in kw.items() if k in ("retry_partial", "retry_budget", "supersede")}
         return ex.export_unit(self.c.unit(ex, unit), **opts)
 
 
@@ -373,6 +373,47 @@ class Scan(ExporterCase):
 # ---------------------------------------------------------------- meters
 
 class Meters(ExporterCase):
+    def test_explicit_budget_retry_uses_reserved_recovery_and_retains_skip(self):
+        self.c.job()
+        self.c.ledger().meter("lens_bytes", "earlier#e1", 150 * MIB - 10, "bytes", bucket="main")
+        lens = FakeLensSink()
+        first = self.export(JOB, lens=lens)["agent_lens"]
+        self.assertEqual(first["status"], "skipped_budget")
+        unchanged = self.export(JOB, lens=lens, retry_partial=True)["agent_lens"]
+        self.assertEqual(unchanged["export_attempt"], 1)
+        self.assertEqual(lens.events, [])
+        exporter = self.c.exporter(lens=lens, wandb=FakeWandbSink())
+        second = exporter.export_all(only=[JOB], retry_budget=True)["receipts"][JOB]["agent_lens"]
+        self.assertEqual((second["status"], second["bucket"], second["export_attempt"]),
+                         ("verified", "recovery", 2))
+        archived = list((self.st.paths.export_root / "attempts").glob("*.json"))
+        self.assertEqual(len(archived), 1)
+        self.assertEqual(util.read_json(archived[0])["status"], "skipped_budget")
+        self.assertEqual(self.c.meter_rows("lens_bytes"),
+                         [("earlier#e1", 150 * MIB - 10, "main"), (f"{JOB}#e2", second["planned_bytes"], "recovery")])
+        sent = len(lens.emitted)
+        again = self.export(JOB, lens=lens, retry_budget=True)["agent_lens"]
+        self.assertEqual((again["status"], again["export_attempt"]), ("verified", 2))
+        self.assertEqual(len(lens.emitted), sent)
+
+    def test_budget_retry_still_refuses_exhausted_recovery_cap(self):
+        self.c.job()
+        ledger = self.c.ledger()
+        ledger.meter("lens_bytes", "earlier#e1", 150 * MIB - 10, "bytes", bucket="main")
+        ledger.meter("lens_bytes", "earlier#e2", 20 * MIB - 10, "bytes", bucket="recovery")
+        lens = FakeLensSink()
+        self.export(JOB, lens=lens)
+        second = self.export(JOB, lens=lens, retry_budget=True)["agent_lens"]
+        self.assertEqual((second["status"], second["bucket"], second["export_attempt"]),
+                         ("skipped_budget", "recovery", 2))
+        self.assertEqual(lens.events, [])
+        self.assertEqual(len(self.c.meter_rows("lens_bytes")), 2)
+
+    def test_budget_retry_cli_is_explicit(self):
+        from mhforge.cli import parser
+        self.assertFalse(parser().parse_args(["export", "--manifest", "manifest.json"]).retry_budget)
+        self.assertTrue(parser().parse_args(["export", "--manifest", "manifest.json", "--retry-budget"]).retry_budget)
+
     def test_ingest_cap_skips_unit(self):
         self.c.job()
         led = self.c.ledger()

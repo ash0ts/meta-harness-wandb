@@ -571,11 +571,12 @@ class Exporter:
             finally:
                 self._lock_depth = 0
 
-    def export_unit(self, unit: ExportUnit, *, retry_partial: bool = False, supersede: bool = False) -> dict[str, dict]:
+    def export_unit(self, unit: ExportUnit, *, retry_partial: bool = False, retry_budget: bool = False,
+                    supersede: bool = False) -> dict[str, dict]:
         with self._locked():
-            return {s: self._surface(unit, s, retry_partial, supersede) for s in unit.surfaces}
+            return {s: self._surface(unit, s, retry_partial, retry_budget, supersede) for s in unit.surfaces}
 
-    def _surface(self, u: ExportUnit, surface: str, retry_partial: bool, supersede: bool) -> dict:
+    def _surface(self, u: ExportUnit, surface: str, retry_partial: bool, retry_budget: bool, supersede: bool) -> dict:
         old = self._doc(self.paths.receipt_file(u.unit, surface))
         if old is not None and old.get("status") in _IN_FLIGHT:
             return old if self.dry_run else self._read_back(old, None)   # never emitted twice: read back
@@ -596,7 +597,10 @@ class Exporter:
                 old = self._read_back(old, None)
                 if old["status"] == "verified" and not (supersede and stale):
                     return old
-            restart = (retry_partial and old["status"] in ("partial", "failed")) or (supersede and stale)
+            # Explicitly retry a deferred upload using the existing recovery bucket.
+            # Every cap is checked again before emission; the skipped receipt is retained.
+            restart = ((retry_partial and old["status"] in ("partial", "failed"))
+                       or (retry_budget and old["status"] == "skipped_budget") or (supersede and stale))
             if not restart or self.dry_run or k >= MAX_EXPORT_ATTEMPTS:
                 want = built.sha if stale else None
                 if old.get("stale_plan_sha256") != want:
@@ -885,7 +889,7 @@ class Exporter:
                 return False
         return True
 
-    def export_all(self, *, only: Sequence[str] | None = None, retry_partial: bool = False,
+    def export_all(self, *, only: Sequence[str] | None = None, retry_partial: bool = False, retry_budget: bool = False,
                    supersede: Sequence[str] = ()) -> dict:
         """{"receipts": {unit: {surface: receipt}}, "statuses": {unit: {surface: status}}, "deferred": [unit],
         "not_ready": [unit]}. A unit whose dependencies have no final receipts yet is deferred, not exported."""
@@ -901,7 +905,8 @@ class Exporter:
                 if not all(d in by_name and self._final(d, by_name[d].surfaces) for d in u.depends_on):
                     out["deferred"].append(u.unit)
                     continue
-                receipts = self.export_unit(u, retry_partial=retry_partial, supersede=u.unit in set(supersede))
+                receipts = self.export_unit(u, retry_partial=retry_partial, retry_budget=retry_budget,
+                                            supersede=u.unit in set(supersede))
                 out["receipts"][u.unit] = receipts
                 out["statuses"][u.unit] = {s: rec.get("status") for s, rec in receipts.items()}
             return out

@@ -4480,3 +4480,6 @@ The repository the example took the data from (`metaevo-ai/mce-artifact`) has no
 **Attribution.** The dataset paragraph of G.1.
 
 Open questions for a lawyer (the user's to ask; this package sends nothing): the CC BY-NC label on the 180 USPTO rows; LawBench case text; whether a licence link meets Apache-2.0 section 4(a) on a web page.
+
+
+Export recovery revision (2026-11-10): `export --retry-budget` explicitly retries a `skipped_budget` unit as a new export attempt. The old skipped receipt is archived. Agent Lens attempt2+ uses the existing recovery bucket, and total/bucket caps are checked before any upload. It does not raise limits, change content policy, retry refused-secret/policy receipts, or resend verified units. The flag is separate from `--retry-partial`; budget deferrals remain terminal without this explicit request. No solver calls or rescoring are involved.
