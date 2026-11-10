@@ -1,0 +1,167 @@
+{
+  "schema": "mhforge.export-validation/1",
+  "engine_sha256": "df92ce96110ce16649a0d9ead844b42fea451a2d1d103b5a4c6158dc9c192f2f",
+  "tests": {
+    "count": 96,
+    "passed": true,
+    "seconds": 12.945
+  },
+  "native_ces": "unavailable: repeated HTTP 500 at creation",
+  "receipts": [
+    {
+      "unit": "eval:val.no_memory",
+      "surface": "wandb",
+      "export_attempt": 2,
+      "status": "verified",
+      "remote": {
+        "run_path": "wandb/mh-forge-preflight-20261110/mh-forge-preflight-b-20261110-eval-val-no_memory-e2",
+        "table_keys": [
+          "val/USPTO",
+          "val/Symptom2Disease",
+          "val/LawBench"
+        ],
+        "artifact_names": [
+          "candidate-no_memory"
+        ],
+        "backend": "wandb_table",
+        "base_url": "https://api.forge.coreweave.com"
+      },
+      "readback": {
+        "checked_utc": "2026-11-10T18:02:45.548965Z",
+        "table_contents_checked": true,
+        "mismatches": []
+      },
+      "readback_history": [
+        {
+          "checked_utc": "2026-11-10T17:58:46.647466Z",
+          "table_contents_checked": true,
+          "mismatches": [
+            "table_marker_missing:val/USPTO",
+            "table_marker_missing:val/Symptom2Disease",
+            "table_marker_missing:val/LawBench",
+            "table_content_unavailable:val/USPTO",
+            "table_content_unavailable:val/Symptom2Disease",
+            "table_content_unavailable:val/LawBench"
+          ]
+        }
+      ],
+      "urls": [
+        "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-val-no_memory-e2"
+      ]
+    },
+    {
+      "unit": "eval:val.fewshot_all",
+      "surface": "wandb",
+      "export_attempt": 2,
+      "status": "verified",
+      "remote": {
+        "run_path": "wandb/mh-forge-preflight-20261110/mh-forge-preflight-b-20261110-eval-val-fewshot_all-e2",
+        "table_keys": [
+          "val/USPTO",
+          "val/Symptom2Disease",
+          "val/LawBench"
+        ],
+        "artifact_names": [
+          "candidate-fewshot_all"
+        ],
+        "backend": "wandb_table",
+        "base_url": "https://api.forge.coreweave.com"
+      },
+      "readback": {
+        "checked_utc": "2026-11-10T18:02:40.548520Z",
+        "table_contents_checked": true,
+        "mismatches": []
+      },
+      "readback_history": [
+        {
+          "checked_utc": "2026-11-10T17:58:36.991949Z",
+          "table_contents_checked": true,
+          "mismatches": [
+            "table_marker_missing:val/USPTO",
+            "table_marker_missing:val/Symptom2Disease",
+            "table_marker_missing:val/LawBench",
+            "table_content_unavailable:val/USPTO",
+            "table_content_unavailable:val/Symptom2Disease",
+            "table_content_unavailable:val/LawBench"
+          ]
+        }
+      ],
+      "urls": [
+        "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-val-fewshot_all-e2"
+      ]
+    },
+    {
+      "unit": "job:test.no_memory.Symptom2Disease.a1",
+      "surface": "agent_lens",
+      "export_attempt": 2,
+      "status": "verified",
+      "remote": {
+        "run_path": null,
+        "table_keys": [],
+        "artifact_names": [],
+        "backend": null,
+        "base_url": null
+      },
+      "readback": {
+        "spans": 214,
+        "checked_utc": "2026-11-10T18:02:33.363900Z",
+        "waited_s": 0.574,
+        "mismatches": []
+      },
+      "readback_history": [
+        {
+          "spans": 214,
+          "checked_utc": "2026-11-10T17:58:30.173819Z",
+          "waited_s": 0.782,
+          "mismatches": [
+            "llm:c-20261110T174544-a9b43c36ce8e:input_tokens",
+            "llm:c-20261110T174544-a9b43c36ce8e:output_tokens"
+          ]
+        }
+      ],
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.no_memory.Symptom2Disease.a1.e2",
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.no_memory.Symptom2Disease.a1.p2.e2"
+      ]
+    },
+    {
+      "unit": "job:test.fewshot_all.Symptom2Disease.a1",
+      "surface": "agent_lens",
+      "export_attempt": 2,
+      "status": "verified",
+      "remote": {
+        "run_path": null,
+        "table_keys": [],
+        "artifact_names": [],
+        "backend": null,
+        "base_url": null
+      },
+      "readback": {
+        "spans": 214,
+        "checked_utc": "2026-11-10T18:01:23.844197Z",
+        "waited_s": 1.516,
+        "mismatches": []
+      },
+      "readback_history": [
+        {
+          "spans": 214,
+          "checked_utc": "2026-11-10T17:58:23.832717Z",
+          "waited_s": 0.619,
+          "mismatches": [
+            "llm:c-20261110T175257-06b96287c741:input_tokens",
+            "llm:c-20261110T175257-06b96287c741:output_tokens"
+          ]
+        }
+      ],
+      "urls": [
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.fewshot_all.Symptom2Disease.a1.e2",
+        "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.fewshot_all.Symptom2Disease.a1.p2.e2"
+      ]
+    }
+  ],
+  "offline_study_fixture": {
+    "vote_rows_recomputed": 412,
+    "sample_sidecars": 15,
+    "provider": "stub; not model-quality evidence"
+  }
+}

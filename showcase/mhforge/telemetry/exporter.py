@@ -25,7 +25,7 @@ from .. import scan, util, wire
 from ..errors import ExportError, ManifestError, MeterCapExceeded, PlanError, StateError, TranscriptError
 from ..paths import StatePaths, unit_slug
 from ..state import StateLock
-from . import join, plan_runs, plan_spans, plan_tables, policy, readback, transcript
+from . import join, plan_runs, plan_spans, plan_tables, plan_study, policy, readback, transcript
 
 __all__ = ["ExportUnit", "LensSink", "WandbSink", "Exporter", "final_statuses", "RECEIPT_SCHEMA", "SURFACES",
            "MAX_EXPORT_ATTEMPTS"]
@@ -36,7 +36,7 @@ SURFACES = ("agent_lens", "wandb")
 MAX_EXPORT_ATTEMPTS = 3
 _FINAL = frozenset({"verified", "refused_secret", "skipped_budget", "skipped_policy", "partial", "failed", "dry_run"})
 _IN_FLIGHT = ("emitting", "emitted")
-_KIND_ORDER = {"job": 0, "proposer": 1, "propose": 2, "loop": 3, "eval": 4}
+_KIND_ORDER = {"job": 0, "proposer": 1, "propose": 2, "loop": 3, "eval": 4, "study": 5}
 _JOB_ID_RE = re.compile(r"(.+)\.a([1-9][0-9]{0,5})")
 _JOB_KEY_RE = re.compile(r"(?:qual\.)?(val|test)\.([a-z][a-z0-9_]{0,47})\.([A-Za-z][A-Za-z0-9_-]{0,47})"
                          r"(?:\.r[0-9]{1,4})?(?:\.s[0-9]{1,4})?")
@@ -265,9 +265,17 @@ class Exporter:
                     and _ITER_RE.fullmatch(e["key"]):
                 add(ExportUnit(f"loop:{e['key']}", "loop", ("agent_lens", "wandb"), ()))
         baselines = set(util.lookup(self.manifest, "upstream.expect.baselines", []) or [])
-        for e in entries:
-            m = _EVAL_RE.fullmatch(str(e.get("key"))) if e.get("op") == "benchmark" else None
-            if not m or e.get("status") != "complete":
+        eval_keys = {str(e.get("key")) for e in entries
+                     if e.get("op") == "benchmark" and e.get("status") == "complete"}
+        # Calibration is deliberately unpublished to the upstream proposer
+        # workspace, but its private Forge evidence still needs evaluation runs.
+        if any(e.get("op") == "calibration" and e.get("status") == "complete" for e in entries):
+            calibration = self._doc(self.paths.calibration) or {}
+            eval_keys.update(f"test.{name}" for name, result in calibration.get("systems", {}).items()
+                             if name in baselines and result.get("complete") is True)
+        for eval_key in sorted(eval_keys):
+            m = _EVAL_RE.fullmatch(eval_key)
+            if not m:
                 continue
             split, candidate = m.groups()
             deps = []
@@ -279,6 +287,11 @@ class Exporter:
             if candidate not in baselines and f"propose:{candidate}" in units:
                 deps.append(f"propose:{candidate}")
             add(ExportUnit(f"eval:{split}.{candidate}", "eval", ("wandb",), tuple(deps)))
+        for op, name, path in (("noise", "noise", self.paths.noise),
+                              ("controls", "vote5", self.paths.root / "controls/result.json")):
+            if path.exists() and any(e.get("op") == op and e.get("status") == "complete" for e in entries):
+                deps = tuple(u.unit for u in units.values() if u.kind == "job")
+                add(ExportUnit(f"study:{name}", "study", ("wandb",), deps))
         return sorted(units.values(), key=lambda u: (_KIND_ORDER[u.kind], u.unit))
 
     # ------------------------------------------------------------ planning
@@ -369,7 +382,10 @@ class Exporter:
         m = self.manifest
         tables_doc, sent, skipped = None, [], []
         withheld: dict[str, dict] = {}
-        if u.kind == "propose":
+        if u.kind == "study":
+            runs, tables_doc = plan_study.plan(u.unit[6:], self.paths, m, self._lens_url, export_attempt=k)
+            sent = tables_doc["tables"]
+        elif u.kind == "propose":
             cand = u.unit[8:]
             found = self._proposal_for(cand)
             if found is None:
@@ -561,6 +577,12 @@ class Exporter:
             except (PlanError, StateError, TranscriptError, ValueError, OSError):
                 built = _Built(sha=None)
             stale = built.sha is not None and built.sha != old.get("plan_sha256")
+            # Eventual consistency can repair a partial readback without another
+            # upload. Re-read the same immutable plan before spending a retry.
+            if old["status"] == "partial" and built.sha == old.get("plan_sha256") and not self.dry_run:
+                old = self._read_back(old, None)
+                if old["status"] == "verified":
+                    return old
             restart = (retry_partial and old["status"] in ("partial", "failed")) or (supersede and stale)
             if not restart or self.dry_run or k >= MAX_EXPORT_ATTEMPTS:
                 want = built.sha if stale else None
@@ -778,14 +800,27 @@ class Exporter:
         return self._ces
 
     def _read_back(self, r: dict, plan: Mapping | None) -> dict:
+        if r.get("readback") is not None:
+            r.setdefault("readback_history", []).append(dict(r["readback"]))
         if r["surface"] == "wandb":
             rem = r["remote"]
             try:
                 problems = list(self.wandb.confirm(rem["run_path"], rem["table_keys"], rem["artifact_names"]))  # type: ignore[union-attr]
+                content_checked = False
+                check_contents = getattr(self.wandb, "confirm_table_contents", None)
+                if rem.get("backend") == "wandb_table" and rem["table_keys"] and callable(check_contents):
+                    doc = self._doc(self.paths.plan_dir(r["unit"]) / "tables.json") or {}
+                    tables = [t for t in doc.get("tables", []) if t.get("key") in rem["table_keys"]]
+                    if {t["key"] for t in tables} != set(rem["table_keys"]):
+                        problems.append("table_content_plan_missing")
+                    else:
+                        problems += list(check_contents(rem["run_path"], tables))
+                        content_checked = True
             except Exception as exc:                                 # noqa: BLE001 - stays in flight; read back later
                 r["error"] = self._error(exc)
                 return self._save(r)
-            r["readback"] = {"checked_utc": self._now(), "mismatches": [str(p)[:200] for p in problems][:200]}
+            r["readback"] = {"checked_utc": self._now(), "table_contents_checked": content_checked,
+                             "mismatches": [str(p)[:200] for p in problems][:200]}
             return self._save(r, "partial" if problems else "verified")
         if plan is None:
             plan = self._doc(self.paths.plan_dir(r["unit"]) / "spans.json")

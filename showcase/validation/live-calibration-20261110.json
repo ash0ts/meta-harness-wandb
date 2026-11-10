@@ -1,0 +1,181 @@
+{
+  "schema": "mhforge.live-calibration-evidence/1",
+  "campaign": "mh-forge-preflight-b-20261110",
+  "canonical_manifest_sha256": "a578d63baceedac3c7cb3130a052ed7e05750f9a4ece21f2e047d81f2a41761a",
+  "scoring_engine_sha256": "f6adec3adb99ec5ab6ac915b3ba35be99e6d5ee2bae63ed701d845dab3edd977",
+  "calibration": {
+    "schema": "mhforge.calibration/1",
+    "systems": {
+      "no_memory": {
+        "datasets": {
+          "USPTO": {
+            "accuracy": 0.13,
+            "correct": 13,
+            "total": 100,
+            "memory_context_chars": 191
+          },
+          "Symptom2Disease": {
+            "accuracy": 0.6792452830188679,
+            "correct": 144,
+            "total": 212,
+            "memory_context_chars": 191
+          },
+          "LawBench": {
+            "accuracy": 0.06,
+            "correct": 6,
+            "total": 100,
+            "memory_context_chars": 191
+          }
+        },
+        "complete": true,
+        "macro_test_accuracy": 28.9748427672956
+      },
+      "fewshot_all": {
+        "datasets": {
+          "USPTO": {
+            "accuracy": 0.18,
+            "correct": 18,
+            "total": 100,
+            "memory_context_chars": 8897
+          },
+          "Symptom2Disease": {
+            "accuracy": 0.8349056603773585,
+            "correct": 177,
+            "total": 212,
+            "memory_context_chars": 30142
+          },
+          "LawBench": {
+            "accuracy": 0.28,
+            "correct": 28,
+            "total": 100,
+            "memory_context_chars": 29645
+          }
+        },
+        "complete": true,
+        "macro_test_accuracy": 43.16352201257862
+      }
+    },
+    "gates": {
+      "G1": {
+        "passed": true,
+        "hard": true
+      },
+      "G2": {
+        "passed": true,
+        "hard": false
+      }
+    },
+    "verdict": "pass",
+    "flags": []
+  },
+  "paired": {
+    "schema": "mhforge.paired-analysis/1",
+    "campaign": "mh-forge-preflight-b-20261110",
+    "left": "no_memory",
+    "right": "fewshot_all",
+    "source_manifest_sha256": "26b5bf3202209f47474957c77459b42f651a1f61975fbf3afe54627ba5e8aca2",
+    "right_campaign": "mh-forge-preflight-b-20261110",
+    "right_manifest_sha256": "26b5bf3202209f47474957c77459b42f651a1f61975fbf3afe54627ba5e8aca2",
+    "analysis_sha256": "ad8aa489bdf49ae047779deb5aa35092b59bbd1a28704392f1a20ee03c782794",
+    "datasets": {
+      "LawBench": {
+        "total": 100,
+        "left_correct": 6,
+        "right_correct": 28,
+        "both_correct": 5,
+        "gain": 23,
+        "loss": 1,
+        "both_wrong": 71,
+        "delta": 0.22
+      },
+      "Symptom2Disease": {
+        "total": 212,
+        "left_correct": 144,
+        "right_correct": 177,
+        "both_correct": 136,
+        "gain": 41,
+        "loss": 8,
+        "both_wrong": 27,
+        "delta": 0.15566037735849056
+      },
+      "USPTO": {
+        "total": 100,
+        "left_correct": 13,
+        "right_correct": 18,
+        "both_correct": 11,
+        "gain": 7,
+        "loss": 2,
+        "both_wrong": 80,
+        "delta": 0.05
+      }
+    },
+    "macro_delta": 0.14188679245283017,
+    "macro_delta_ci95": [
+      0.10244811320754717,
+      0.18232704402515723
+    ],
+    "bootstrap": {
+      "method": "paired task bootstrap stratified by dataset; equal dataset weighting",
+      "repeats": 10000,
+      "seed": 20261110,
+      "interval": "percentile",
+      "limitation": "conditional on selected harness and fixed datasets; excludes search and model-sampling uncertainty"
+    }
+  },
+  "overlap_sensitivity": {
+    "excluded_test_indices": {
+      "USPTO": [],
+      "Symptom2Disease": [
+        140
+      ],
+      "LawBench": []
+    },
+    "split_audit_sha256": "594a5617417818a62090dc61c048c8d1040765e86d915844a48dbfb1f901031e",
+    "datasets": {
+      "LawBench": {
+        "total": 100,
+        "left_correct": 6,
+        "right_correct": 28,
+        "both_correct": 5,
+        "gain": 23,
+        "loss": 1,
+        "both_wrong": 71,
+        "delta": 0.22
+      },
+      "Symptom2Disease": {
+        "total": 211,
+        "left_correct": 143,
+        "right_correct": 176,
+        "both_correct": 135,
+        "gain": 41,
+        "loss": 8,
+        "both_wrong": 27,
+        "delta": 0.15639810426540285
+      },
+      "USPTO": {
+        "total": 100,
+        "left_correct": 13,
+        "right_correct": 18,
+        "both_correct": 11,
+        "gain": 7,
+        "loss": 2,
+        "both_wrong": 80,
+        "delta": 0.05
+      }
+    },
+    "macro_delta": 0.14213270142180096,
+    "macro_delta_ci95": [
+      0.10265402843601895,
+      0.18319115323854662
+    ],
+    "bootstrap": {
+      "method": "paired task bootstrap stratified by dataset; equal dataset weighting",
+      "repeats": 10000,
+      "seed": 20261110,
+      "interval": "percentile",
+      "limitation": "conditional on selected harness and fixed datasets; excludes search and model-sampling uncertainty"
+    }
+  },
+  "qualification_complete": false,
+  "limitation": "Calibration evidence only; no optimized harness or proposer inference has been measured."
+}

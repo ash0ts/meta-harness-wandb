@@ -192,9 +192,19 @@ def _compare(kind: str, ident: str, planned: Mapping, row: Mapping) -> list[str]
         if (row.get("response_model") or "") != (planned.get("response_model") or ""):   # missing becomes ""
             out.append(f"{tag}:response_model")
         usage = planned.get("usage")
+        # Agent Lens projects absent token fields as zero for replay spans. Accept
+        # that representation only when both the planned and stored attributes
+        # explicitly say replayed, no provider attempt, and no usage available.
+        pa, ra = planned.get("attributes") or {}, _row_attrs(row)
+        replay_zero = usage is None and any(
+            k.endswith(".outcome") and v == "replayed"
+            and all(pa.get(prefix + suffix) == value and ra.get(prefix + suffix) == value
+                    for suffix, value in ((".outcome", "replayed"), (".provider_attempts", 0),
+                                          (".usage_available", False)))
+            for k, v in pa.items() for prefix in [k.rsplit(".", 1)[0]])
         for stored, key in (("input_tokens", "input_tokens"), ("output_tokens", "output_tokens")):
             want = usage.get(key) if isinstance(usage, Mapping) else None
-            if row.get(stored) != want:       # no usage planned: the row must not invent a count either
+            if row.get(stored) != want and not (replay_zero and type(row.get(stored)) is int and row[stored] == 0):
                 out.append(f"{tag}:{stored}")
         if isinstance(usage, Mapping):
             for key in ("cache_read_input_tokens", "reasoning_tokens"):

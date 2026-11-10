@@ -167,8 +167,14 @@ class VerifyTest(unittest.TestCase):
         self.assertIn(f"llm:{cid}:input_messages", found)
         self.assertIn(f"llm:{cid}:output_messages", found)
         rows, llm = self._rows()                         # a count stored for a call that has no usage
-        llm["replayed"]["input_tokens"] = 0
+        llm["replayed"]["input_tokens"] = 1
         rep = next(r["call_id"] for r in fixture_records() if r["outcome"] == "replayed")
+        self.assertIn(f"llm:{rep}:input_tokens", rb.verify_spans(self.solver, rows))
+        llm["replayed"]["input_tokens"] = 0
+        self.assertNotIn(f"llm:{rep}:input_tokens", rb.verify_spans(self.solver, rows))
+        raw = json.loads(llm["replayed"]["raw_span_dump"])
+        raw['attributes']['metaharness']['usage_available'] = True
+        llm["replayed"]["raw_span_dump"] = json.dumps(raw)
         self.assertIn(f"llm:{rep}:input_tokens", rb.verify_spans(self.solver, rows))
         rows, _ = self._rows()                           # a missing row and a duplicate row
         dropped = rows.pop(next(i for i, r in enumerate(rows) if r["operation_name"] == "chat"))

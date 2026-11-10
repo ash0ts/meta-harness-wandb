@@ -10,8 +10,10 @@ are off (LD9)."""
 from __future__ import annotations
 
 import importlib.util
+import json
 import os
 import sys
+import tempfile
 from pathlib import Path
 from typing import Mapping, MutableMapping, Sequence
 
@@ -139,6 +141,18 @@ def _sdk_artifact_exists(api, ref: str) -> bool:
         return api.artifact(ref) is not None
     except Exception:                             # noqa: BLE001 - the SDK raises its own CommError for "not found"
         return False
+
+
+def _sdk_table_data(api, run_path: str, marker: Mapping, root: Path) -> Mapping:
+    """Read the actual table file, in a fresh private directory; never accept a cached download."""
+    path = marker.get("path")
+    if (not isinstance(path, str) or not path.startswith("media/table/")
+            or not path.endswith(".table.json") or ".." in Path(path).parts):
+        raise ExportError("table file path is missing or unsafe")
+    root.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix="table-", dir=root) as tmp:
+        with api.run(run_path).file(path).download(root=tmp, replace=True, api=api) as handle:
+            return json.load(handle)
 
 
 class WandbSdkSink:                               # ------------------------------------------------ the sink
@@ -282,3 +296,25 @@ class WandbSdkSink:                               # ----------------------------
         entity_project = "/".join(str(run_path).split("/")[:2])
         return problems + [f"artifact_missing:{n}" for n in artifact_names
                            if not _sdk_artifact_exists(api, f"{entity_project}/{n}:{self.campaign}")]
+
+    def confirm_table_contents(self, run_path: str, tables: Sequence[Mapping]) -> list[str]:
+        """Compare every W&B Table cell to the scanned local plan. CES is explicitly unsupported here."""
+        api = self._api()
+        summary = _sdk_run_summary(api, run_path)
+        problems = []
+        for table in tables:
+            key = table["key"]
+            marker = summary.get(key)
+            if not isinstance(marker, Mapping) or marker.get("_type") != TABLE_MARKER:
+                problems.append(f"table_content_unavailable:{key}")
+                continue
+            try:
+                stored = _sdk_table_data(api, run_path, marker, self.paths.export_root / "readback-tables")
+                # JSON round-trip permits list/tuple representation differences, but not changed cells or order.
+                expected = json.loads(json.dumps({"columns": table["columns"], "data": table["rows"]}))
+                actual = {"columns": stored.get("columns"), "data": stored.get("data")}
+                if json.dumps(actual, sort_keys=True) != json.dumps(expected, sort_keys=True):
+                    problems.append(f"table_content_mismatch:{key}")
+            except Exception as exc:
+                problems.append(f"table_content_read_failed:{key}:{type(exc).__name__}")
+        return problems

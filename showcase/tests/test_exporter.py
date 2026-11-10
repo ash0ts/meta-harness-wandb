@@ -557,6 +557,31 @@ class EmitAndReadBack(ExporterCase):
                                      ("example-entity/mh-forge-test/mh-test-eval-val-no_memory-e2", "val/USPTO")])
         self.assertEqual(len(self.c.meter_rows("eval_tables")), 2)
 
+    def test_delayed_summary_is_rechecked_without_another_upload_or_meter_charge(self):
+        self.c.job()
+        self.c.baseline_file()
+        self.c.benchmark()
+        self.export(JOB, lens=FakeLensSink())
+        wb = FakeWandbSink(drop_markers=True)
+        first = self.export("eval:val.no_memory", wandb=wb)["wandb"]
+        path = first['remote']['run_path']
+        wb.runs[path]['summary']['val/USPTO'] = {'_type': 'eval-table-ces'}
+        second = self.export("eval:val.no_memory", wandb=wb, retry_partial=True)["wandb"]
+        self.assertEqual(second['status'], 'verified')
+        self.assertEqual(second['export_attempt'], 1)
+        self.assertEqual(len(wb.table_logs), 1)
+        self.assertEqual(len(self.c.meter_rows('eval_tables')), 1)
+        self.assertTrue(second['readback_history'][0]['mismatches'])
+
+    def test_finished_private_calibration_discovers_test_eval_runs(self):
+        util.write_json(self.st.paths.calibration, {'systems': {
+            'no_memory': {'complete': True}, 'fewshot_all': {'complete': False},
+            'unrecognized': {'complete': True}}})
+        ex = self.c.exporter(dry_run=True, ledger=False)
+        self.assertNotIn('eval:test.no_memory', [u.unit for u in ex.discover()])
+        self.c.journal.record('calibration', self.st.campaign, 'complete')
+        self.assertEqual([u.unit for u in ex.discover()], ['eval:test.no_memory'])
+
     def test_ces_fallback_recorded(self):
         self.c.job()
         self.c.baseline_file()

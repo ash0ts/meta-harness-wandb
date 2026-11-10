@@ -21,6 +21,7 @@ import copy
 import hashlib
 import importlib.abc
 import importlib.util
+import io
 import json
 import os
 import sys
@@ -428,6 +429,10 @@ class FakeSdk:
                 for k, v in data.items():
                     if isinstance(v, (EvalTable, Table)):
                         self.summary[k] = {"_type": v.marker}
+                        if isinstance(v, Table):
+                            path = f"media/table/{len(self.doc.setdefault('files', {}))}.table.json"
+                            self.summary[k]['path'] = path
+                            self.doc['files'][path] = copy.deepcopy(v.kwargs)
                     else:
                         plain[k] = v
                 if plain:
@@ -492,9 +497,18 @@ class FakeSdk:
                 return self._items[k]
 
         class PublicRun:
-            def __init__(self, summary):
+            def __init__(self, doc):
+                self.doc = doc
+                summary = doc['summary']
                 self.summary_metrics = copy.deepcopy(dict(summary))
                 self.summary = {k: SubDict(v) if isinstance(v, dict) else v for k, v in summary.items()}
+
+            def file(self, name):
+                data = self.doc['files'][name]
+                class File:
+                    def download(self, *, root, replace=False, api=None):
+                        return io.StringIO(json.dumps(data))
+                return File()
 
         class Api:
             def __init__(self, *, overrides=None, timeout=None, api_key=None):
@@ -505,7 +519,7 @@ class FakeSdk:
                 sdk.log.append(("api.run", path))
                 if path not in sdk.runs:
                     raise RuntimeError("run not found")
-                return PublicRun(sdk.runs[path]["summary"])
+                return PublicRun(sdk.runs[path])
 
             def artifact(self, name, type=None):
                 ref = name
