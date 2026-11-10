@@ -1,0 +1,25 @@
+{
+  "schema": "mhforge.analysis-correction/1",
+  "cause": "Frozen audit indices refer to source-file order; the evaluator assigns indices after a seed-42 shuffle.",
+  "primary_412_task_scores_changed": false,
+  "frozen_split_audit_changed": false,
+  "source_file_index": 140,
+  "evaluation_index": 11,
+  "previous_analysis_sha256": "ad8aa489bdf49ae047779deb5aa35092b59bbd1a28704392f1a20ee03c782794",
+  "corrected_analysis_sha256": "092d7e536960cd4cbc31e46b067294de96beadde914275e643bf8e1b8d2e4777",
+  "previous_sensitivity_ci95": [
+    0.10265402843601895,
+    0.18319115323854662
+  ],
+  "corrected_sensitivity_ci95": [
+    0.1015955766192733,
+    0.18213704581358606
+  ],
+  "corrected_sensitivity_delta": 0.14213270142180096,
+  "validation": {
+    "unit_tests_passed": 8,
+    "all_824_task_identities_verified": true,
+    "all_824_predictions_regraded": true
+  },
+  "prior_outputs_preserved": "Prior validation receipt remains in Git commit d71ec9d; derived local outputs archived separately."
+}

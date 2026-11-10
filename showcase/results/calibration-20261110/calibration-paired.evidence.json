@@ -1,0 +1,21 @@
+{
+  "question": "How much did full few-shot help, and what failures remain?",
+  "stage": "Calibration",
+  "takeaway": "71 gains, 11 losses, 178 tasks wrong in both runs.",
+  "source_sha256": "46294879e50014b6bb53e1d0919261261f6afe226bc71a7c5c155ede66b54cf8",
+  "renderer": {
+    "name": "matplotlib",
+    "version": "3.10.8",
+    "font": "DejaVu Sans"
+  },
+  "metric": "Correct tasks divided by all released test tasks per dataset; macro gives each dataset equal weight.",
+  "missingness": "Every task has both boolean outcomes; missing outcomes would stop analysis.",
+  "privacy": "Only aggregate counts, no question, answer or prediction text.",
+  "forbidden_claims": [
+    "population-wide causal benefit",
+    "optimized harness result",
+    "independent replication",
+    "model-sampling confidence"
+  ],
+  "text_alternative": "No memory macro 28.97%; Full few-shot macro 43.16%. +14.19 percentage points, paired 95% interval [10.24, 18.23]. See the companion CSV for all counts."
+}

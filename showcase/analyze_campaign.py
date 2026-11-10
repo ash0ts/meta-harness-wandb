@@ -15,6 +15,50 @@ from mhforge import controls, util
 from mhforge.paths import StatePaths
 
 
+def evaluation_indices(source_indices, count, seed):
+    """The released MCE loader shuffles each split before assigning sidecar indices."""
+    if len(set(source_indices)) != len(source_indices) or any(type(i) is not int or not 0 <= i < count for i in source_indices):
+        raise ValueError('invalid source-file index')
+    order = list(range(count))
+    random.Random(seed).shuffle(order)
+    inverse = {source: evaluated for evaluated, source in enumerate(order)}
+    return sorted(inverse[i] for i in source_indices)
+
+
+def source_identity(dataset, row):
+    """Mirror only the three pinned released loaders; validate against every sidecar identity."""
+    if dataset == 'USPTO':
+        target = row['target']
+    elif dataset == 'Symptom2Disease':
+        target = row['answer']
+    elif dataset == 'LawBench':
+        target = row['answer']
+        if '罪名:' in target:
+            target = target.split('罪名:')[-1].strip()
+    else:
+        raise ValueError('source identity check has no pinned loader for '+dataset)
+    return util.sha256_bytes((str(row['question'])+'\0'+str(target)).encode())
+
+
+def verify_source_identities(root, manifest, arm):
+    paths = StatePaths(root)
+    pins = util.read_json(paths.pristine)['files']
+    for name in ('data/api.py', 'data/loaders.py'):
+        if util.sha256_file(paths.ws/name) != pins[name]:
+            raise ValueError('upstream loader changed')
+    for ds, outcomes in arm.items():
+        rel = 'data/'+manifest['upstream']['expect']['dataset_dirs'][ds]+'/test.jsonl'
+        if util.sha256_file(paths.ws/rel) != pins[rel]:
+            raise ValueError('released test data changed')
+        source = util.read_jsonl(paths.ws/rel)
+        if len(source) != len(outcomes):
+            raise ValueError('analysis requires every released test occurrence')
+        random.Random(manifest['upstream']['expect']['seed']).shuffle(source)
+        for index, row in enumerate(source):
+            if outcomes[index]['example_sha256'] != source_identity(ds, row):
+                raise ValueError('sidecar index does not match the shuffled released task identity')
+
+
 def paired(left, right, *, repeats=10000, seed=20261110):
     if set(left) != set(right) or not left:
         raise ValueError('both arms must cover the same nonempty dataset set')
@@ -59,12 +103,12 @@ def paired(left, right, *, repeats=10000, seed=20261110):
 
 def read_arm(root, name, expected):
     evidence, arm = [], {}
+    grader = controls.load_grader(StatePaths(root))
     if name == 'fewshot_vote5':
         p = root/'controls/result.json'
         doc = util.read_json(p)
         if any(doc['plan'].get(k) != v for k, v in controls.PLAN.items()):
             raise ValueError('control plan differs from predeclared protocol')
-        grader = controls.load_grader(StatePaths(root))
         for ds, result in doc['datasets'].items():
             samples, seen = [], set()
             for number, record in enumerate(result['evidence'], 1):
@@ -111,6 +155,12 @@ def read_arm(root, name, expected):
                 raise ValueError('sidecar digest changed')
             rows = controls.final_evals(util.read_jsonl(sidecar))
             ds = job['dataset']
+            judge = grader.get_evaluator(ds)
+            for row in rows.values():
+                scored = judge(row['prediction'], row['target'])
+                correct = scored['was_correct'] if isinstance(scored, dict) else scored
+                if bool(correct) != row['was_correct']:
+                    raise ValueError('host grader disagrees with the stored task score')
             # Calibration reuse can produce two records. Accept only identical task outcomes.
             compact = {i:{k:r[k] for k in ('example_sha256','prediction_sha256','was_correct')} for i,r in rows.items()}
             if ds in arm and arm[ds] != compact:
@@ -153,10 +203,12 @@ def main():
     m=util.read_json(args.state/'manifest.json')
     expected={ds:sizes[2] for ds,sizes in m['upstream']['expect']['sizes'].items()}
     left, le=read_arm(args.state,args.left,expected)
+    verify_source_identities(args.state,m,left)
     right_state=args.right_state or args.state
     right_manifest=util.read_json(right_state/'manifest.json')
     compatible_campaigns(m,right_manifest)
     right, re=read_arm(right_state,args.right,expected)
+    verify_source_identities(right_state,right_manifest,right)
     result=dict(schema='mhforge.paired-analysis/1',campaign=m['campaign'],left=args.left,right=args.right,
                 source_manifest_sha256=util.sha256_file(args.state/'manifest.json'),
                 right_campaign=right_manifest['campaign'],
@@ -170,10 +222,14 @@ def main():
                 path=args.state/'workspace/text_classification/data'/m['upstream']['expect']['dataset_dirs'][ds]/(split+'.jsonl')
                 if util.sha256_file(path) != f['sha256']:
                     raise ValueError('split audit refers to different data')
-        exclude=audit['sensitivity_exclude_test_indices']
+        source_exclude=audit['sensitivity_exclude_test_indices']
+        exclude={ds:evaluation_indices(indices,expected[ds],m['upstream']['expect']['seed'])
+                 for ds,indices in source_exclude.items()}
         def filtered(arm):
             return {ds:{i:r for i,r in rows.items() if i not in exclude[ds]} for ds,rows in arm.items()}
         result['overlap_sensitivity']=dict(excluded_test_indices=exclude,
+            excluded_source_file_indices=source_exclude,
+            index_mapping='Source file order mapped through the pinned loader shuffle; every task identity verified.',
             split_audit_sha256=util.sha256_file(args.split_audit),**paired(filtered(left),filtered(right)))
     util.write_json(args.output,result,fsync=True)
     print(json.dumps({k:v for k,v in result.items() if k not in ('tasks','evidence')},indent=2))

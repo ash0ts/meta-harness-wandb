@@ -1,0 +1,1147 @@
+{
+  "schema": "mhforge.case-audit/1",
+  "campaign": "mh-forge-preflight-b-20261110",
+  "left": "no_memory",
+  "right": "fewshot_all",
+  "selection": "First evaluation index in each dataset/outcome stratum; illustrative, not a random sample.",
+  "grader_sha256": "e4f20042e4cc526da5f7d12ee8f74d0c09bdbaa99243aef2b904cfca0a7215aa",
+  "raw_content": "Withheld; private sidecar locators and hashes retained.",
+  "cases": [
+    {
+      "dataset": "LawBench",
+      "index": 2,
+      "example_sha256": "613ecf2a71fe45064d4f512cba3f0a854d15793a5bc9524dd9f240fca71db459",
+      "left_correct": true,
+      "right_correct": true,
+      "change": "both_correct",
+      "criterion": "Exact equality of extracted charge-label sets; no independent legal judgment.",
+      "arms": {
+        "no_memory": {
+          "was_correct": true,
+          "metrics": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "tp": 1,
+            "fp": 0,
+            "fn": 0
+          },
+          "prediction_sha256": "fb5241a1e0a5492e6b21659cf67d3a71c52d1b96a8bf7fa571790bf4a9b998c5",
+          "target_sha256": "d87e50228c9d336d39c1904c0e5df8a0e1f89d1ec3b7beac310aa7f6d3ae96c2",
+          "prediction_chars": 15,
+          "source": {
+            "path": "jobs/test.no_memory.LawBench/a1/out/sidecar.jsonl",
+            "sha256": "8eb1403aae564b69923f7dac0c4c02c484f7ec5a53df6443d5287f1761e214d7",
+            "job_key": "test.no_memory.LawBench",
+            "attempt": 1
+          },
+          "sidecar_seq": 20,
+          "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.no_memory.LawBench.a1",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory",
+          "operations": [
+            {
+              "call_id": "c-20261110T174804-3d146fff1683",
+              "outcome": "completed",
+              "finish_reason": "stop",
+              "usage": {
+                "prompt_tokens": 540,
+                "completion_tokens": 447,
+                "total_tokens": 987,
+                "cached_tokens": 160,
+                "reasoning_tokens": 240
+              },
+              "flags": {
+                "truncated_empty": false,
+                "empty_content": false,
+                "reasoning_present": true,
+                "model_mismatch": false
+              },
+              "cost_micro": 93,
+              "cost_basis": "usage"
+            }
+          ]
+        },
+        "fewshot_all": {
+          "was_correct": true,
+          "metrics": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "tp": 1,
+            "fp": 0,
+            "fn": 0
+          },
+          "prediction_sha256": "fb5241a1e0a5492e6b21659cf67d3a71c52d1b96a8bf7fa571790bf4a9b998c5",
+          "target_sha256": "d87e50228c9d336d39c1904c0e5df8a0e1f89d1ec3b7beac310aa7f6d3ae96c2",
+          "prediction_chars": 15,
+          "source": {
+            "path": "jobs/test.fewshot_all.LawBench/a1/out/sidecar.jsonl",
+            "sha256": "d2d14b54b36a40fde5878870519ef471dfbec0da8e8bef8dad4f3325d28b44b7",
+            "job_key": "test.fewshot_all.LawBench",
+            "attempt": 1
+          },
+          "sidecar_seq": 40,
+          "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.fewshot_all.LawBench.a1",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all",
+          "operations": [
+            {
+              "call_id": "c-20261110T175514-cb37296c54e0",
+              "outcome": "completed",
+              "finish_reason": "stop",
+              "usage": {
+                "prompt_tokens": 25118,
+                "completion_tokens": 445,
+                "total_tokens": 25563,
+                "cached_tokens": 64,
+                "reasoning_tokens": 303
+              },
+              "flags": {
+                "truncated_empty": false,
+                "empty_content": false,
+                "reasoning_present": true,
+                "model_mismatch": false
+              },
+              "cost_micro": 830,
+              "cost_basis": "usage"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataset": "LawBench",
+      "index": 3,
+      "example_sha256": "7e4d49e60514c84c2e32fa0365be78119d55857abfadd0a579ffbdafbf6274bc",
+      "left_correct": false,
+      "right_correct": true,
+      "change": "gain",
+      "criterion": "Exact equality of extracted charge-label sets; no independent legal judgment.",
+      "arms": {
+        "no_memory": {
+          "was_correct": false,
+          "metrics": {
+            "f1": 0.5,
+            "precision": 0.5,
+            "recall": 0.5,
+            "tp": 1,
+            "fp": 1,
+            "fn": 1
+          },
+          "prediction_sha256": "8c1266ec3fe312591105b5f0d534957b2267215a4d543e616e756aa1e023c600",
+          "target_sha256": "2b53a29b06ca4bc21bbf98ebbd2bd13610f90dc6690b62580a74dabffcba796f",
+          "prediction_chars": 19,
+          "source": {
+            "path": "jobs/test.no_memory.LawBench/a1/out/sidecar.jsonl",
+            "sha256": "8eb1403aae564b69923f7dac0c4c02c484f7ec5a53df6443d5287f1761e214d7",
+            "job_key": "test.no_memory.LawBench",
+            "attempt": 1
+          },
+          "sidecar_seq": 36,
+          "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.no_memory.LawBench.a1",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory",
+          "operations": [
+            {
+              "call_id": "c-20261110T174804-6528401dd519",
+              "outcome": "completed",
+              "finish_reason": "stop",
+              "usage": {
+                "prompt_tokens": 405,
+                "completion_tokens": 447,
+                "total_tokens": 852,
+                "cached_tokens": 160,
+                "reasoning_tokens": 261
+              },
+              "flags": {
+                "truncated_empty": false,
+                "empty_content": false,
+                "reasoning_present": true,
+                "model_mismatch": false
+              },
+              "cost_micro": 89,
+              "cost_basis": "usage"
+            }
+          ]
+        },
+        "fewshot_all": {
+          "was_correct": true,
+          "metrics": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "tp": 2,
+            "fp": 0,
+            "fn": 0
+          },
+          "prediction_sha256": "9c990faefc7d0ec6daae35ad2c74dee1529583f8dd7ff6181da641f80018ef84",
+          "target_sha256": "2b53a29b06ca4bc21bbf98ebbd2bd13610f90dc6690b62580a74dabffcba796f",
+          "prediction_chars": 18,
+          "source": {
+            "path": "jobs/test.fewshot_all.LawBench/a1/out/sidecar.jsonl",
+            "sha256": "d2d14b54b36a40fde5878870519ef471dfbec0da8e8bef8dad4f3325d28b44b7",
+            "job_key": "test.fewshot_all.LawBench",
+            "attempt": 1
+          },
+          "sidecar_seq": 6,
+          "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.fewshot_all.LawBench.a1",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all",
+          "operations": [
+            {
+              "call_id": "c-20261110T175514-0cdce4c60118",
+              "outcome": "completed",
+              "finish_reason": "stop",
+              "usage": {
+                "prompt_tokens": 24956,
+                "completion_tokens": 330,
+                "total_tokens": 25286,
+                "cached_tokens": 64,
+                "reasoning_tokens": 196
+              },
+              "flags": {
+                "truncated_empty": false,
+                "empty_content": false,
+                "reasoning_present": true,
+                "model_mismatch": false
+              },
+              "cost_micro": 805,
+              "cost_basis": "usage"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataset": "LawBench",
+      "index": 33,
+      "example_sha256": "51df0f70f01c3df816d8d01d04caa231ab7bdc266d8111c2a7c730f8e1edc6b0",
+      "left_correct": true,
+      "right_correct": false,
+      "change": "loss",
+      "criterion": "Exact equality of extracted charge-label sets; no independent legal judgment.",
+      "arms": {
+        "no_memory": {
+          "was_correct": true,
+          "metrics": {
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "tp": 1,
+            "fp": 0,
+            "fn": 0
+          },
+          "prediction_sha256": "4c9099b88df88a13d617deee5a37782f12802c4d0be8a0e678edd4999e43d310",
+          "target_sha256": "db9856e664da20ac1b2ce6c6834fbf40ebbbb71a3305b8540d559d37ae7793e2",
+          "prediction_chars": 13,
+          "source": {
+            "path": "jobs/test.no_memory.LawBench/a1/out/sidecar.jsonl",
+            "sha256": "8eb1403aae564b69923f7dac0c4c02c484f7ec5a53df6443d5287f1761e214d7",
+            "job_key": "test.no_memory.LawBench",
+            "attempt": 1
+          },
+          "sidecar_seq": 46,
+          "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.no_memory.LawBench.a1",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory",
+          "operations": [
+            {
+              "call_id": "c-20261110T174807-fb998b58a1fd",
+              "outcome": "completed",
+              "finish_reason": "stop",
+              "usage": {
+                "prompt_tokens": 467,
+                "completion_tokens": 359,
+                "total_tokens": 826,
+                "cached_tokens": 160,
+                "reasoning_tokens": 190
+              },
+              "flags": {
+                "truncated_empty": false,
+                "empty_content": false,
+                "reasoning_present": true,
+                "model_mismatch": false
+              },
+              "cost_micro": 76,
+              "cost_basis": "usage"
+            }
+          ]
+        },
+        "fewshot_all": {
+          "was_correct": false,
+          "metrics": {
+            "f1": 0.0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "tp": 0,
+            "fp": 0,
+            "fn": 1
+          },
+          "prediction_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "target_sha256": "db9856e664da20ac1b2ce6c6834fbf40ebbbb71a3305b8540d559d37ae7793e2",
+          "prediction_chars": 0,
+          "source": {
+            "path": "jobs/test.fewshot_all.LawBench/a1/out/sidecar.jsonl",
+            "sha256": "d2d14b54b36a40fde5878870519ef471dfbec0da8e8bef8dad4f3325d28b44b7",
+            "job_key": "test.fewshot_all.LawBench",
+            "attempt": 1
+          },
+          "sidecar_seq": 72,
+          "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.fewshot_all.LawBench.a1",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all",
+          "operations": [
+            {
+              "call_id": "c-20261110T175519-a70b35dffbba",
+              "outcome": "completed",
+              "finish_reason": "stop",
+              "usage": {
+                "prompt_tokens": 22944,
+                "completion_tokens": 288,
+                "total_tokens": 23232,
+                "cached_tokens": 64,
+                "reasoning_tokens": 285
+              },
+              "flags": {
+                "truncated_empty": false,
+                "empty_content": true,
+                "reasoning_present": true,
+                "model_mismatch": false
+              },
+              "cost_micro": 738,
+              "cost_basis": "usage"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataset": "LawBench",
+      "index": 0,
+      "example_sha256": "ccf0b372bc4dd19df41929636604a91abd01a19b2b419afb439c5d9f364cf6c4",
+      "left_correct": false,
+      "right_correct": false,
+      "change": "both_wrong",
+      "criterion": "Exact equality of extracted charge-label sets; no independent legal judgment.",
+      "arms": {
+        "no_memory": {
+          "was_correct": false,
+          "metrics": {
+            "f1": 0.0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "tp": 0,
+            "fp": 2,
+            "fn": 7
+          },
+          "prediction_sha256": "b398f082ccc675c993b115e5e0cf3025215c7d7985d091d066358f40e80101fd",
+          "target_sha256": "bf4b0c585133d448213bf53e05899cd880f94b9032f54b6fe02b3ebf1c32e69b",
+          "prediction_chars": 19,
+          "source": {
+            "path": "jobs/test.no_memory.LawBench/a1/out/sidecar.jsonl",
+            "sha256": "8eb1403aae564b69923f7dac0c4c02c484f7ec5a53df6443d5287f1761e214d7",
+            "job_key": "test.no_memory.LawBench",
+            "attempt": 1
+          },
+          "sidecar_seq": 22,
+          "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.no_memory.LawBench.a1",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory",
+          "operations": [
+            {
+              "call_id": "c-20261110T174804-0b6e353391aa",
+              "outcome": "completed",
+              "finish_reason": "stop",
+              "usage": {
+                "prompt_tokens": 646,
+                "completion_tokens": 495,
+                "total_tokens": 1141,
+                "cached_tokens": 160,
+                "reasoning_tokens": 311
+              },
+              "flags": {
+                "truncated_empty": false,
+                "empty_content": false,
+                "reasoning_present": true,
+                "model_mismatch": false
+              },
+              "cost_micro": 104,
+              "cost_basis": "usage"
+            }
+          ]
+        },
+        "fewshot_all": {
+          "was_correct": false,
+          "metrics": {
+            "f1": 0.0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "tp": 0,
+            "fp": 3,
+            "fn": 7
+          },
+          "prediction_sha256": "f2a7564ab608c6e64137ab01348dd8cca45683fe48185455757148a2ae6c0301",
+          "target_sha256": "bf4b0c585133d448213bf53e05899cd880f94b9032f54b6fe02b3ebf1c32e69b",
+          "prediction_chars": 29,
+          "source": {
+            "path": "jobs/test.fewshot_all.LawBench/a1/out/sidecar.jsonl",
+            "sha256": "d2d14b54b36a40fde5878870519ef471dfbec0da8e8bef8dad4f3325d28b44b7",
+            "job_key": "test.fewshot_all.LawBench",
+            "attempt": 1
+          },
+          "sidecar_seq": 52,
+          "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.fewshot_all.LawBench.a1",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all",
+          "operations": [
+            {
+              "call_id": "c-20261110T175514-72a1fdf7f09c",
+              "outcome": "completed",
+              "finish_reason": "stop",
+              "usage": {
+                "prompt_tokens": 21180,
+                "completion_tokens": 568,
+                "total_tokens": 21748,
+                "cached_tokens": 64,
+                "reasoning_tokens": 441
+              },
+              "flags": {
+                "truncated_empty": false,
+                "empty_content": false,
+                "reasoning_present": true,
+                "model_mismatch": false
+              },
+              "cost_micro": 732,
+              "cost_basis": "usage"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataset": "Symptom2Disease",
+      "index": 1,
+      "example_sha256": "f35bbc777ad64a535167bbc9023e6940646221fb7adbc9ae92a8c556369b8d6b",
+      "left_correct": true,
+      "right_correct": true,
+      "change": "both_correct",
+      "criterion": "Exact normalized diagnosis-label equality after the released answer extraction.",
+      "arms": {
+        "no_memory": {
+          "was_correct": true,
+          "metrics": {},
+          "prediction_sha256": "7b1a59bebcd12bab006eb7f648193235dbb295f53c219ea03cb0617e0584caee",
+          "target_sha256": "eb4e683fed0e576619df86b7ed128f4d5c2b9b985c88b391451901b74b58fa90",
+          "prediction_chars": 30,
+          "source": {
+            "path": "jobs/test.no_memory.Symptom2Disease/a1/out/sidecar.jsonl",
+            "sha256": "0ee9aa0e9022aba9a39d8c0ec7aa32472abc0efd1c9f4a617e5b6243b29f6349",
+            "job_key": "test.no_memory.Symptom2Disease",
+            "attempt": 1
+          },
+          "sidecar_seq": 24,
+          "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.no_memory.Symptom2Disease.a1.e2",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory",
+          "operations": [
+            {
+              "call_id": "c-20261110T174544-71397b10a213",
+              "outcome": "completed",
+              "finish_reason": "stop",
+              "usage": {
+                "prompt_tokens": 317,
+                "completion_tokens": 614,
+                "total_tokens": 931,
+                "cached_tokens": 224,
+                "reasoning_tokens": 448
+              },
+              "flags": {
+                "truncated_empty": false,
+                "empty_content": false,
+                "reasoning_present": true,
+                "model_mismatch": false
+              },
+              "cost_micro": 114,
+              "cost_basis": "usage"
+            }
+          ]
+        },
+        "fewshot_all": {
+          "was_correct": true,
+          "metrics": {},
+          "prediction_sha256": "7b1a59bebcd12bab006eb7f648193235dbb295f53c219ea03cb0617e0584caee",
+          "target_sha256": "eb4e683fed0e576619df86b7ed128f4d5c2b9b985c88b391451901b74b58fa90",
+          "prediction_chars": 30,
+          "source": {
+            "path": "jobs/test.fewshot_all.Symptom2Disease/a1/out/sidecar.jsonl",
+            "sha256": "0fc1e29d77c5496131abfc9ae5262fc224dfb488e3bda88ba290c8ad278e3444",
+            "job_key": "test.fewshot_all.Symptom2Disease",
+            "attempt": 1
+          },
+          "sidecar_seq": 58,
+          "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.fewshot_all.Symptom2Disease.a1.e2",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all",
+          "operations": [
+            {
+              "call_id": "c-20261110T175257-0613385d62e9",
+              "outcome": "completed",
+              "finish_reason": "stop",
+              "usage": {
+                "prompt_tokens": 7483,
+                "completion_tokens": 433,
+                "total_tokens": 7916,
+                "cached_tokens": 64,
+                "reasoning_tokens": 291
+              },
+              "flags": {
+                "truncated_empty": false,
+                "empty_content": false,
+                "reasoning_present": true,
+                "model_mismatch": false
+              },
+              "cost_micro": 299,
+              "cost_basis": "usage"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataset": "Symptom2Disease",
+      "index": 7,
+      "example_sha256": "961a5e84e742e15647d3a121107ab919b16c9f9a1f58c1bff4822f305ab63c82",
+      "left_correct": false,
+      "right_correct": true,
+      "change": "gain",
+      "criterion": "Exact normalized diagnosis-label equality after the released answer extraction.",
+      "arms": {
+        "no_memory": {
+          "was_correct": false,
+          "metrics": {},
+          "prediction_sha256": "f086547361323e556203191f3ba66dbb8a1a888f33b0721e748104cf4816714d",
+          "target_sha256": "157f9d7c05ff7b695d38d7c9623001cb94b514f876e3322c332bc47e99124960",
+          "prediction_chars": 54,
+          "source": {
+            "path": "jobs/test.no_memory.Symptom2Disease/a1/out/sidecar.jsonl",
+            "sha256": "0ee9aa0e9022aba9a39d8c0ec7aa32472abc0efd1c9f4a617e5b6243b29f6349",
+            "job_key": "test.no_memory.Symptom2Disease",
+            "attempt": 1
+          },
+          "sidecar_seq": 22,
+          "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.no_memory.Symptom2Disease.a1.e2",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory",
+          "operations": [
+            {
+              "call_id": "c-20261110T174544-f51c8c12d2d7",
+              "outcome": "completed",
+              "finish_reason": "stop",
+              "usage": {
+                "prompt_tokens": 301,
+                "completion_tokens": 372,
+                "total_tokens": 673,
+                "cached_tokens": 64,
+                "reasoning_tokens": 204
+              },
+              "flags": {
+                "truncated_empty": false,
+                "empty_content": false,
+                "reasoning_present": true,
+                "model_mismatch": false
+              },
+              "cost_micro": 73,
+              "cost_basis": "usage"
+            }
+          ]
+        },
+        "fewshot_all": {
+          "was_correct": true,
+          "metrics": {},
+          "prediction_sha256": "a6e09f9172404404afe8aa736e22b9af7263c70360538d528ed33823201e3e81",
+          "target_sha256": "157f9d7c05ff7b695d38d7c9623001cb94b514f876e3322c332bc47e99124960",
+          "prediction_chars": 43,
+          "source": {
+            "path": "jobs/test.fewshot_all.Symptom2Disease/a1/out/sidecar.jsonl",
+            "sha256": "0fc1e29d77c5496131abfc9ae5262fc224dfb488e3bda88ba290c8ad278e3444",
+            "job_key": "test.fewshot_all.Symptom2Disease",
+            "attempt": 1
+          },
+          "sidecar_seq": 24,
+          "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.fewshot_all.Symptom2Disease.a1.e2",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all",
+          "operations": [
+            {
+              "call_id": "c-20261110T175257-cc559effa944",
+              "outcome": "completed",
+              "finish_reason": "stop",
+              "usage": {
+                "prompt_tokens": 7458,
+                "completion_tokens": 337,
+                "total_tokens": 7795,
+                "cached_tokens": 64,
+                "reasoning_tokens": 220
+              },
+              "flags": {
+                "truncated_empty": false,
+                "empty_content": false,
+                "reasoning_present": true,
+                "model_mismatch": false
+              },
+              "cost_micro": 282,
+              "cost_basis": "usage"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataset": "Symptom2Disease",
+      "index": 50,
+      "example_sha256": "e4815830c6b455576174bee262d068e57dfed751d9314621d87eeb989f90c7b0",
+      "left_correct": true,
+      "right_correct": false,
+      "change": "loss",
+      "criterion": "Exact normalized diagnosis-label equality after the released answer extraction.",
+      "arms": {
+        "no_memory": {
+          "was_correct": true,
+          "metrics": {},
+          "prediction_sha256": "7de5e2ff1412824ae90deabad731b6305c414ef14f7aad34ab6538b1efcb16ab",
+          "target_sha256": "9be41eeda9615665b3de5b8f6b3f04fffe17c86c0300c316af1a99f4ba4c550b",
+          "prediction_chars": 31,
+          "source": {
+            "path": "jobs/test.no_memory.Symptom2Disease/a1/out/sidecar.jsonl",
+            "sha256": "0ee9aa0e9022aba9a39d8c0ec7aa32472abc0efd1c9f4a617e5b6243b29f6349",
+            "job_key": "test.no_memory.Symptom2Disease",
+            "attempt": 1
+          },
+          "sidecar_seq": 96,
+          "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.no_memory.Symptom2Disease.a1.e2",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory",
+          "operations": [
+            {
+              "call_id": "c-20261110T174550-2ada206a97c4",
+              "outcome": "completed",
+              "finish_reason": "stop",
+              "usage": {
+                "prompt_tokens": 304,
+                "completion_tokens": 588,
+                "total_tokens": 892,
+                "cached_tokens": 224,
+                "reasoning_tokens": 453
+              },
+              "flags": {
+                "truncated_empty": false,
+                "empty_content": false,
+                "reasoning_present": true,
+                "model_mismatch": false
+              },
+              "cost_micro": 110,
+              "cost_basis": "usage"
+            }
+          ]
+        },
+        "fewshot_all": {
+          "was_correct": false,
+          "metrics": {},
+          "prediction_sha256": "f086547361323e556203191f3ba66dbb8a1a888f33b0721e748104cf4816714d",
+          "target_sha256": "9be41eeda9615665b3de5b8f6b3f04fffe17c86c0300c316af1a99f4ba4c550b",
+          "prediction_chars": 54,
+          "source": {
+            "path": "jobs/test.fewshot_all.Symptom2Disease/a1/out/sidecar.jsonl",
+            "sha256": "0fc1e29d77c5496131abfc9ae5262fc224dfb488e3bda88ba290c8ad278e3444",
+            "job_key": "test.fewshot_all.Symptom2Disease",
+            "attempt": 1
+          },
+          "sidecar_seq": 304,
+          "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.fewshot_all.Symptom2Disease.a1.e2",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all",
+          "operations": [
+            {
+              "call_id": "c-20261110T175303-daedd554dddc",
+              "outcome": "completed",
+              "finish_reason": "stop",
+              "usage": {
+                "prompt_tokens": 7439,
+                "completion_tokens": 407,
+                "total_tokens": 7846,
+                "cached_tokens": 96,
+                "reasoning_tokens": 270
+              },
+              "flags": {
+                "truncated_empty": false,
+                "empty_content": false,
+                "reasoning_present": true,
+                "model_mismatch": false
+              },
+              "cost_micro": 293,
+              "cost_basis": "usage"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataset": "Symptom2Disease",
+      "index": 0,
+      "example_sha256": "18d476a9deff35cfc02484b6240114ed236021cb736b5110d961c42d10032371",
+      "left_correct": false,
+      "right_correct": false,
+      "change": "both_wrong",
+      "criterion": "Exact normalized diagnosis-label equality after the released answer extraction.",
+      "arms": {
+        "no_memory": {
+          "was_correct": false,
+          "metrics": {},
+          "prediction_sha256": "0ffed1efb9a728dddb52186920834e4202643011188ffaf38a4a172c173782a5",
+          "target_sha256": "be7e8b6f31ca48345959e239387ae8d6f170b9723cea10b0f495ea724e9bec12",
+          "prediction_chars": 31,
+          "source": {
+            "path": "jobs/test.no_memory.Symptom2Disease/a1/out/sidecar.jsonl",
+            "sha256": "0ee9aa0e9022aba9a39d8c0ec7aa32472abc0efd1c9f4a617e5b6243b29f6349",
+            "job_key": "test.no_memory.Symptom2Disease",
+            "attempt": 1
+          },
+          "sidecar_seq": 28,
+          "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.no_memory.Symptom2Disease.a1.e2",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory",
+          "operations": [
+            {
+              "call_id": "c-20261110T174544-1983ff49405b",
+              "outcome": "completed",
+              "finish_reason": "stop",
+              "usage": {
+                "prompt_tokens": 300,
+                "completion_tokens": 227,
+                "total_tokens": 527,
+                "cached_tokens": 224,
+                "reasoning_tokens": 107
+              },
+              "flags": {
+                "truncated_empty": false,
+                "empty_content": false,
+                "reasoning_present": true,
+                "model_mismatch": false
+              },
+              "cost_micro": 48,
+              "cost_basis": "usage"
+            }
+          ]
+        },
+        "fewshot_all": {
+          "was_correct": false,
+          "metrics": {},
+          "prediction_sha256": "0ffed1efb9a728dddb52186920834e4202643011188ffaf38a4a172c173782a5",
+          "target_sha256": "be7e8b6f31ca48345959e239387ae8d6f170b9723cea10b0f495ea724e9bec12",
+          "prediction_chars": 31,
+          "source": {
+            "path": "jobs/test.fewshot_all.Symptom2Disease/a1/out/sidecar.jsonl",
+            "sha256": "0fc1e29d77c5496131abfc9ae5262fc224dfb488e3bda88ba290c8ad278e3444",
+            "job_key": "test.fewshot_all.Symptom2Disease",
+            "attempt": 1
+          },
+          "sidecar_seq": 66,
+          "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.fewshot_all.Symptom2Disease.a1.e2",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all",
+          "operations": [
+            {
+              "call_id": "c-20261110T175257-ed04440a0b9f",
+              "outcome": "completed",
+              "finish_reason": "stop",
+              "usage": {
+                "prompt_tokens": 7445,
+                "completion_tokens": 534,
+                "total_tokens": 7979,
+                "cached_tokens": 64,
+                "reasoning_tokens": 422
+              },
+              "flags": {
+                "truncated_empty": false,
+                "empty_content": false,
+                "reasoning_present": true,
+                "model_mismatch": false
+              },
+              "cost_micro": 315,
+              "cost_basis": "usage"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataset": "USPTO",
+      "index": 12,
+      "example_sha256": "0f156b5353e95651293b9c4c71aa7ffd031a0a255f9cd69c2c37ca4354329d7a",
+      "left_correct": true,
+      "right_correct": true,
+      "change": "both_correct",
+      "criterion": "Exact equality of lowercase, dot-separated reactant string sets; no chemical equivalence check.",
+      "arms": {
+        "no_memory": {
+          "was_correct": true,
+          "metrics": {
+            "jaccard_similarity": 1.0
+          },
+          "prediction_sha256": "672d6112459491042b9cee51adcc06822f603e82bab82f75e6c64b81b9db9845",
+          "target_sha256": "b87ede72003b7a5feaa018266223be32696e5941ec490fc480d13f663c743f85",
+          "prediction_chars": 60,
+          "source": {
+            "path": "jobs/test.no_memory.USPTO/a1/out/sidecar.jsonl",
+            "sha256": "aa34be498fcaa71f0f3cf9bf17b790a4eb7c4b5136ec6f7fb5eac101e125e46e",
+            "job_key": "test.no_memory.USPTO",
+            "attempt": 1
+          },
+          "sidecar_seq": 144,
+          "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.no_memory.USPTO.a1",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory",
+          "operations": [
+            {
+              "call_id": "c-20261110T174252-46ed841eea37",
+              "outcome": "completed",
+              "finish_reason": "stop",
+              "usage": {
+                "prompt_tokens": 447,
+                "completion_tokens": 1382,
+                "total_tokens": 1829,
+                "cached_tokens": 96,
+                "reasoning_tokens": 1081
+              },
+              "flags": {
+                "truncated_empty": false,
+                "empty_content": false,
+                "reasoning_present": true,
+                "model_mismatch": false
+              },
+              "cost_micro": 249,
+              "cost_basis": "usage"
+            }
+          ]
+        },
+        "fewshot_all": {
+          "was_correct": true,
+          "metrics": {
+            "jaccard_similarity": 1.0
+          },
+          "prediction_sha256": "b87ede72003b7a5feaa018266223be32696e5941ec490fc480d13f663c743f85",
+          "target_sha256": "b87ede72003b7a5feaa018266223be32696e5941ec490fc480d13f663c743f85",
+          "prediction_chars": 60,
+          "source": {
+            "path": "jobs/test.fewshot_all.USPTO/a1/out/sidecar.jsonl",
+            "sha256": "3d9f316e6da5ecd1067310d90c4d3a8cc9d5d2a0e2af1557065da91dbd8b97ec",
+            "job_key": "test.fewshot_all.USPTO",
+            "attempt": 1
+          },
+          "sidecar_seq": 16,
+          "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.fewshot_all.USPTO.a1",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all",
+          "operations": [
+            {
+              "call_id": "c-20261110T175016-f2fc0dbe0023",
+              "outcome": "completed",
+              "finish_reason": "stop",
+              "usage": {
+                "prompt_tokens": 4763,
+                "completion_tokens": 1138,
+                "total_tokens": 5901,
+                "cached_tokens": 64,
+                "reasoning_tokens": 844
+              },
+              "flags": {
+                "truncated_empty": false,
+                "empty_content": false,
+                "reasoning_present": true,
+                "model_mismatch": false
+              },
+              "cost_micro": 337,
+              "cost_basis": "usage"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataset": "USPTO",
+      "index": 1,
+      "example_sha256": "f19feb667ef028dcbe038286a380d5d7d811e0e7ad6615bed6dc642c7c638bfa",
+      "left_correct": false,
+      "right_correct": true,
+      "change": "gain",
+      "criterion": "Exact equality of lowercase, dot-separated reactant string sets; no chemical equivalence check.",
+      "arms": {
+        "no_memory": {
+          "was_correct": false,
+          "metrics": {
+            "jaccard_similarity": 0.25
+          },
+          "prediction_sha256": "9da67ab12343a7c392bafc5799c6dcd183f2899cdf995ffe4ab34ab7a2a21a13",
+          "target_sha256": "cc4daedca3e982cafb8af171dbdaa908f985833bae8259b5c4b8e0a0259dc27b",
+          "prediction_chars": 44,
+          "source": {
+            "path": "jobs/test.no_memory.USPTO/a1/out/sidecar.jsonl",
+            "sha256": "aa34be498fcaa71f0f3cf9bf17b790a4eb7c4b5136ec6f7fb5eac101e125e46e",
+            "job_key": "test.no_memory.USPTO",
+            "attempt": 1
+          },
+          "sidecar_seq": 6,
+          "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.no_memory.USPTO.a1",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory",
+          "operations": [
+            {
+              "call_id": "c-20261110T174252-1c961289c759",
+              "outcome": "completed",
+              "finish_reason": "stop",
+              "usage": {
+                "prompt_tokens": 445,
+                "completion_tokens": 1397,
+                "total_tokens": 1842,
+                "cached_tokens": 64,
+                "reasoning_tokens": 1143
+              },
+              "flags": {
+                "truncated_empty": false,
+                "empty_content": false,
+                "reasoning_present": true,
+                "model_mismatch": false
+              },
+              "cost_micro": 251,
+              "cost_basis": "usage"
+            }
+          ]
+        },
+        "fewshot_all": {
+          "was_correct": true,
+          "metrics": {
+            "jaccard_similarity": 1.0
+          },
+          "prediction_sha256": "cc4daedca3e982cafb8af171dbdaa908f985833bae8259b5c4b8e0a0259dc27b",
+          "target_sha256": "cc4daedca3e982cafb8af171dbdaa908f985833bae8259b5c4b8e0a0259dc27b",
+          "prediction_chars": 42,
+          "source": {
+            "path": "jobs/test.fewshot_all.USPTO/a1/out/sidecar.jsonl",
+            "sha256": "3d9f316e6da5ecd1067310d90c4d3a8cc9d5d2a0e2af1557065da91dbd8b97ec",
+            "job_key": "test.fewshot_all.USPTO",
+            "attempt": 1
+          },
+          "sidecar_seq": 12,
+          "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.fewshot_all.USPTO.a1",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all",
+          "operations": [
+            {
+              "call_id": "c-20261110T175016-f78804c3e938",
+              "outcome": "completed",
+              "finish_reason": "stop",
+              "usage": {
+                "prompt_tokens": 4761,
+                "completion_tokens": 974,
+                "total_tokens": 5735,
+                "cached_tokens": 64,
+                "reasoning_tokens": 785
+              },
+              "flags": {
+                "truncated_empty": false,
+                "empty_content": false,
+                "reasoning_present": true,
+                "model_mismatch": false
+              },
+              "cost_micro": 309,
+              "cost_basis": "usage"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataset": "USPTO",
+      "index": 37,
+      "example_sha256": "4e07cef57445be01562ac309308dc28a397ea443820eaba154bba854356dc18b",
+      "left_correct": true,
+      "right_correct": false,
+      "change": "loss",
+      "criterion": "Exact equality of lowercase, dot-separated reactant string sets; no chemical equivalence check.",
+      "arms": {
+        "no_memory": {
+          "was_correct": true,
+          "metrics": {
+            "jaccard_similarity": 1.0
+          },
+          "prediction_sha256": "b1ef91ed9dc3ccd8645e0b675cf3a725be363c722fa0e82786e61b29eef92010",
+          "target_sha256": "b1ef91ed9dc3ccd8645e0b675cf3a725be363c722fa0e82786e61b29eef92010",
+          "prediction_chars": 47,
+          "source": {
+            "path": "jobs/test.no_memory.USPTO/a1/out/sidecar.jsonl",
+            "sha256": "aa34be498fcaa71f0f3cf9bf17b790a4eb7c4b5136ec6f7fb5eac101e125e46e",
+            "job_key": "test.no_memory.USPTO",
+            "attempt": 1
+          },
+          "sidecar_seq": 28,
+          "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.no_memory.USPTO.a1",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory",
+          "operations": [
+            {
+              "call_id": "c-20261110T174309-59a8d286ac8b",
+              "outcome": "completed",
+              "finish_reason": "stop",
+              "usage": {
+                "prompt_tokens": 450,
+                "completion_tokens": 1055,
+                "total_tokens": 1505,
+                "cached_tokens": 96,
+                "reasoning_tokens": 835
+              },
+              "flags": {
+                "truncated_empty": false,
+                "empty_content": false,
+                "reasoning_present": true,
+                "model_mismatch": false
+              },
+              "cost_micro": 193,
+              "cost_basis": "usage"
+            }
+          ]
+        },
+        "fewshot_all": {
+          "was_correct": false,
+          "metrics": {
+            "jaccard_similarity": 0.0
+          },
+          "prediction_sha256": "1eef06b339d35c08171ac57269c7c5a77267e047a4d91af464935b6b22417dc0",
+          "target_sha256": "b1ef91ed9dc3ccd8645e0b675cf3a725be363c722fa0e82786e61b29eef92010",
+          "prediction_chars": 48,
+          "source": {
+            "path": "jobs/test.fewshot_all.USPTO/a1/out/sidecar.jsonl",
+            "sha256": "3d9f316e6da5ecd1067310d90c4d3a8cc9d5d2a0e2af1557065da91dbd8b97ec",
+            "job_key": "test.fewshot_all.USPTO",
+            "attempt": 1
+          },
+          "sidecar_seq": 48,
+          "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.fewshot_all.USPTO.a1",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all",
+          "operations": [
+            {
+              "call_id": "c-20261110T175024-d3a350b92796",
+              "outcome": "completed",
+              "finish_reason": "stop",
+              "usage": {
+                "prompt_tokens": 4766,
+                "completion_tokens": 1010,
+                "total_tokens": 5776,
+                "cached_tokens": 96,
+                "reasoning_tokens": 821
+              },
+              "flags": {
+                "truncated_empty": false,
+                "empty_content": false,
+                "reasoning_present": true,
+                "model_mismatch": false
+              },
+              "cost_micro": 315,
+              "cost_basis": "usage"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataset": "USPTO",
+      "index": 0,
+      "example_sha256": "01412c2418342bf38f4fb4134870634b8b41c1bd3d41366a05367ad9632d42e2",
+      "left_correct": false,
+      "right_correct": false,
+      "change": "both_wrong",
+      "criterion": "Exact equality of lowercase, dot-separated reactant string sets; no chemical equivalence check.",
+      "arms": {
+        "no_memory": {
+          "was_correct": false,
+          "metrics": {
+            "jaccard_similarity": 0.0
+          },
+          "prediction_sha256": "f0e78c6e1d855206dbbff3acdcedc0cd6ffed00c8f048aed23fe2e24bea63a55",
+          "target_sha256": "f6e57149cae4170dee918beebb2e90d258ae8a44f763525a05caeee516263fdf",
+          "prediction_chars": 54,
+          "source": {
+            "path": "jobs/test.no_memory.USPTO/a1/out/sidecar.jsonl",
+            "sha256": "aa34be498fcaa71f0f3cf9bf17b790a4eb7c4b5136ec6f7fb5eac101e125e46e",
+            "job_key": "test.no_memory.USPTO",
+            "attempt": 1
+          },
+          "sidecar_seq": 100,
+          "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.no_memory.USPTO.a1",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory",
+          "operations": [
+            {
+              "call_id": "c-20261110T174252-13fb03d6aad9",
+              "outcome": "completed",
+              "finish_reason": "stop",
+              "usage": {
+                "prompt_tokens": 458,
+                "completion_tokens": 2711,
+                "total_tokens": 3169,
+                "cached_tokens": 96,
+                "reasoning_tokens": 2429
+              },
+              "flags": {
+                "truncated_empty": false,
+                "empty_content": false,
+                "reasoning_present": true,
+                "model_mismatch": false
+              },
+              "cost_micro": 475,
+              "cost_basis": "usage"
+            }
+          ]
+        },
+        "fewshot_all": {
+          "was_correct": false,
+          "metrics": {
+            "jaccard_similarity": 0.0
+          },
+          "prediction_sha256": "665faa4378fd72e7817a5558e5477ee566c8fd7bfc317c00edc61371414fa5f2",
+          "target_sha256": "f6e57149cae4170dee918beebb2e90d258ae8a44f763525a05caeee516263fdf",
+          "prediction_chars": 55,
+          "source": {
+            "path": "jobs/test.fewshot_all.USPTO/a1/out/sidecar.jsonl",
+            "sha256": "3d9f316e6da5ecd1067310d90c4d3a8cc9d5d2a0e2af1557065da91dbd8b97ec",
+            "job_key": "test.fewshot_all.USPTO",
+            "attempt": 1
+          },
+          "sidecar_seq": 64,
+          "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.fewshot_all.USPTO.a1",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all",
+          "operations": [
+            {
+              "call_id": "c-20261110T175016-b10fb8a51433",
+              "outcome": "completed",
+              "finish_reason": "stop",
+              "usage": {
+                "prompt_tokens": 4774,
+                "completion_tokens": 1707,
+                "total_tokens": 6481,
+                "cached_tokens": 64,
+                "reasoning_tokens": 1468
+              },
+              "flags": {
+                "truncated_empty": false,
+                "empty_content": false,
+                "reasoning_present": true,
+                "model_mismatch": false
+              },
+              "cost_micro": 434,
+              "cost_basis": "usage"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "post_hoc_diagnostic": {
+    "name": "LawBench gains whose left labels match after removing a trailing 罪 per label",
+    "count": 12,
+    "gain_count": 23,
+    "evaluation_indices": [
+      3,
+      9,
+      10,
+      12,
+      32,
+      50,
+      55,
+      64,
+      68,
+      82,
+      83,
+      98
+    ],
+    "limitation": "String-format diagnostic only; official scores unchanged; not an assessment of legal correctness."
+  }
+}

@@ -76,7 +76,7 @@
     "source_manifest_sha256": "26b5bf3202209f47474957c77459b42f651a1f61975fbf3afe54627ba5e8aca2",
     "right_campaign": "mh-forge-preflight-b-20261110",
     "right_manifest_sha256": "26b5bf3202209f47474957c77459b42f651a1f61975fbf3afe54627ba5e8aca2",
-    "analysis_sha256": "ad8aa489bdf49ae047779deb5aa35092b59bbd1a28704392f1a20ee03c782794",
+    "analysis_sha256": "092d7e536960cd4cbc31e46b067294de96beadde914275e643bf8e1b8d2e4777",
     "datasets": {
       "LawBench": {
         "total": 100,
@@ -126,10 +126,18 @@
     "excluded_test_indices": {
       "USPTO": [],
       "Symptom2Disease": [
+        11
+      ],
+      "LawBench": []
+    },
+    "excluded_source_file_indices": {
+      "USPTO": [],
+      "Symptom2Disease": [
         140
       ],
       "LawBench": []
     },
+    "index_mapping": "Source file order mapped through the pinned loader shuffle; every task identity verified.",
     "split_audit_sha256": "594a5617417818a62090dc61c048c8d1040765e86d915844a48dbfb1f901031e",
     "datasets": {
       "LawBench": {
@@ -165,8 +173,8 @@
     },
     "macro_delta": 0.14213270142180096,
     "macro_delta_ci95": [
-      0.10265402843601895,
-      0.18319115323854662
+      0.1015955766192733,
+      0.18213704581358606
     ],
     "bootstrap": {
       "method": "paired task bootstrap stratified by dataset; equal dataset weighting",
@@ -177,5 +185,10 @@
     }
   },
   "qualification_complete": false,
-  "limitation": "Calibration evidence only; no optimized harness or proposer inference has been measured."
+  "limitation": "Calibration evidence only; no optimized harness or proposer inference has been measured.",
+  "additional_verification": {
+    "task_identities_checked": 824,
+    "predictions_host_regraded": 824,
+    "mismatches": 0
+  }
 }

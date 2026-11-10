@@ -1,0 +1,29 @@
+{
+  "schema": "mhforge.figure-validation/1",
+  "renderer": "matplotlib 3.10.8",
+  "source_sha256": "46294879e50014b6bb53e1d0919261261f6afe226bc71a7c5c155ede66b54cf8",
+  "checks": [
+    "counts reconcile to paired task outcomes",
+    "primary macro and interval match analysis",
+    "SVG PDF and PNG generated from one data source",
+    "desktop render visually inspected",
+    "600-pixel preview visually inspected",
+    "equivalent CSV and text alternative included",
+    "no raw questions or predictions exported"
+  ],
+  "case_audit": {
+    "illustrative_cases": 12,
+    "post_hoc_law_suffix_diagnostic_count": 12,
+    "law_gain_denominator": 23,
+    "official_scores_unchanged": true
+  },
+  "files": {
+    "calibration-paired.png": "b2fe15a8f55d9d33e939361d596f12ab7eb979bdfb59b1d77344c2640cbf1dc2",
+    "calibration-paired.pdf": "868f89c8a7fae0c57684026e9bddecc2118d19947031bc10701bafb1fd7a19df",
+    "calibration-paired.svg": "4d04b69e770e2b018f78b994658878ba83c24216544802a2941426ef1bdbce20",
+    "calibration-paired.evidence.json": "dd082d9c791f3cfd357966381b8fef1b29b3fe24cbc4a51d5a2305db3bd078cc",
+    "calibration-paired-analysis.json": "46294879e50014b6bb53e1d0919261261f6afe226bc71a7c5c155ede66b54cf8",
+    "calibration-case-audit.json": "a6ccdf21e05a8c400aae2f090b00bdbe43f46bd157ee8acd19b6db6015d5900c",
+    "calibration-paired.csv": "d1b6b86febdb711c75d8412b97bda66a0d01a499c5e57adc6fa2d8075eb91417"
+  }
+}
