@@ -418,13 +418,17 @@ class Exporter:
                 job_id, attempt = ok
                 out = self._out_dir(f"{split}.{cand}.{ds}", attempt)
                 evidence[ds] = {}
-                for name, stem in (("memory.json", "memory_json"), ("log.jsonl", "log_jsonl")):
+                for name, stem in (("memory.json", "memory_json"), ("log.jsonl", "log_jsonl"),
+                                   ("sidecar.jsonl", "sidecar_jsonl"), (f"{split}.json", "result_json")):
                     p = out / name
                     if p.is_file() and not p.is_symlink():
                         evidence[ds][f"{stem}_sha256"], evidence[ds][f"{stem}_bytes"] = util.sha256_file(p), p.stat().st_size
                 if rec.get("status") != "succeeded":
                     continue
                 calls = self._calls(job_id)
+                evidence[ds]['empty_content_calls'] = sum(
+                    c.get('outcome') == 'completed' and (c.get('flags') or {}).get('empty_content') is True
+                    for c in calls)
                 rows = util.read_jsonl(out / "sidecar.jsonl")
                 examples[ds] = join.join_examples(join.parse_sidecar(rows), calls, dataset=ds, split=split) if rows else []
                 results[ds] = rec.get("result") if isinstance(rec.get("result"), Mapping) else {}
@@ -472,6 +476,11 @@ class Exporter:
                 if sha != f.get("sha256"):
                     raise PlanError(problems=[f"{src}: changed since it was planned"])
                 upload.append((path, sha, nbytes))
+        frozen = self._doc(self.paths.manifest)
+        runs['run']['config'].update({
+            'frozen_manifest_sha256': manifest_mod.manifest_sha256(frozen) if frozen else None,
+            'effective_manifest_sha256': manifest_mod.manifest_sha256(m),
+            'export_amendment': dict(self.amendment)})
         doc = {"runs": runs, "tables": tables_doc}
         return _Built(sha=_sha(doc), runs=runs, tables=tables_doc, tables_sent=sent, skipped_tables=skipped,
                       withheld=[{"name": n, **v} for n, v in sorted(withheld.items())], upload=upload)
@@ -579,9 +588,10 @@ class Exporter:
             stale = built.sha is not None and built.sha != old.get("plan_sha256")
             # Eventual consistency can repair a partial readback without another
             # upload. Re-read the same immutable plan before spending a retry.
-            if old["status"] == "partial" and built.sha == old.get("plan_sha256") and not self.dry_run:
+            if old["status"] == "partial" and self._saved_plan_matches(old) and not self.dry_run:
+                old['stale_plan_sha256'] = built.sha if stale else None
                 old = self._read_back(old, None)
-                if old["status"] == "verified":
+                if old["status"] == "verified" and not (supersede and stale):
                     return old
             restart = (retry_partial and old["status"] in ("partial", "failed")) or (supersede and stale)
             if not restart or self.dry_run or k >= MAX_EXPORT_ATTEMPTS:
@@ -799,9 +809,20 @@ class Exporter:
             self._ces = bool(self.wandb.feature_ces())               # type: ignore[union-attr]
         return self._ces
 
+    def _saved_plan_matches(self, r: Mapping) -> bool:
+        directory = self.paths.plan_dir(r['unit'])
+        if r['surface'] == 'agent_lens':
+            doc = self._doc(directory/'spans.json')
+        else:
+            doc = {'runs':self._doc(directory/'runs.json'), 'tables':self._doc(directory/'tables.json')}
+        return doc is not None and _sha(doc) == r.get('plan_sha256')
+
     def _read_back(self, r: dict, plan: Mapping | None) -> dict:
         if r.get("readback") is not None:
             r.setdefault("readback_history", []).append(dict(r["readback"]))
+        if not self._saved_plan_matches(r):
+            r['readback'] = {'checked_utc':self._now(),'mismatches':['saved_plan_digest_mismatch']}
+            return self._save(r,'partial')
         if r["surface"] == "wandb":
             rem = r["remote"]
             try:

@@ -99,6 +99,22 @@ class QueryBodyTest(unittest.TestCase):
 
 
 class VerifyTest(unittest.TestCase):
+    def test_rejected_usage_projection_requires_absent_raw_counts_and_explicit_unknown(self):
+        attrs={'metaharness.outcome':'provider_rejected','metaharness.provider_attempts':1,
+               'metaharness.usage_available':False}
+        time='2026-11-10T00:00:00Z'
+        planned={'started_utc':time,'ended_utc':time,'usage':None,'attributes':attrs}
+        stored={'started_at':time,'ended_at':time,'input_tokens':0,'output_tokens':0,
+                'raw_span_dump':json.dumps({'attributes':attrs})}
+        self.assertEqual(rb._compare('llm','c',planned,stored),[])
+        stored['input_tokens']=1
+        self.assertIn('llm:c:input_tokens',rb._compare('llm','c',planned,stored))
+        stored['input_tokens']=0
+        stored['raw_span_dump']=json.dumps({'attributes':{**attrs,'gen_ai.usage.input_tokens':0}})
+        self.assertIn('llm:c:input_tokens',rb._compare('llm','c',planned,stored))
+        stored['raw_span_dump']=json.dumps({'attributes':{**attrs,'metaharness.usage_available':True}})
+        self.assertIn('llm:c:input_tokens',rb._compare('llm','c',planned,stored))
+
     def setUp(self):
         self.manifest = helpers.make_manifest(full_rules(*ALL))
         self.solver = ps.plan_solver_job(job_record(), 1, fixture_records(), sidecar_fixture(), self.manifest)

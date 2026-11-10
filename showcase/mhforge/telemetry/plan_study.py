@@ -126,5 +126,6 @@ def plan(name, paths, manifest, lens_url, *, export_attempt):
         job_type='study', name=f'{campaign}-{name}', tags=['mhforge', name, 'hash-only'], resume=False,
         config=plan_runs._config(manifest, {'study': name, 'evidence_sha256': digest}),
         summary={**summary, 'study/rows': len(rows), 'study/evidence_sha256': digest},
-        define_metrics=[], history=[], tables=[key], artifacts=[artifact], export_attempt=export_attempt)
+        define_metrics=[], history=[{**summary, 'study/rows': len(rows)}], tables=[key],
+        artifacts=[artifact], export_attempt=export_attempt)
     return run, table_doc

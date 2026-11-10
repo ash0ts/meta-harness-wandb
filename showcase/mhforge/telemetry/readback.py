@@ -192,19 +192,22 @@ def _compare(kind: str, ident: str, planned: Mapping, row: Mapping) -> list[str]
         if (row.get("response_model") or "") != (planned.get("response_model") or ""):   # missing becomes ""
             out.append(f"{tag}:response_model")
         usage = planned.get("usage")
-        # Agent Lens projects absent token fields as zero for replay spans. Accept
-        # that representation only when both the planned and stored attributes
-        # explicitly say replayed, no provider attempt, and no usage available.
+        # Agent Lens projects absent token fields as zero. Live evidence covers
+        # replay and rejected-provider spans. Require matching outcome/attempt
+        # attributes, explicit unavailable usage, and absent raw usage fields;
+        # the ledger's missing-usage reservation is never changed here.
         pa, ra = planned.get("attributes") or {}, _row_attrs(row)
-        replay_zero = usage is None and any(
-            k.endswith(".outcome") and v == "replayed"
+        absent_zero = usage is None and not any(k.startswith('gen_ai.usage.') for k in ra) and any(
+            k.endswith(".outcome") and v in ("replayed", "provider_rejected")
+            and type(pa.get(prefix + '.provider_attempts')) is int
+            and pa[prefix + '.provider_attempts'] >= 0
             and all(pa.get(prefix + suffix) == value and ra.get(prefix + suffix) == value
-                    for suffix, value in ((".outcome", "replayed"), (".provider_attempts", 0),
+                    for suffix, value in ((".outcome", v), (".provider_attempts", pa[prefix + '.provider_attempts']),
                                           (".usage_available", False)))
             for k, v in pa.items() for prefix in [k.rsplit(".", 1)[0]])
         for stored, key in (("input_tokens", "input_tokens"), ("output_tokens", "output_tokens")):
             want = usage.get(key) if isinstance(usage, Mapping) else None
-            if row.get(stored) != want and not (replay_zero and type(row.get(stored)) is int and row[stored] == 0):
+            if row.get(stored) != want and not (absent_zero and type(row.get(stored)) is int and row[stored] == 0):
                 out.append(f"{tag}:{stored}")
         if isinstance(usage, Mapping):
             for key in ("cache_read_input_tokens", "reasoning_tokens"):

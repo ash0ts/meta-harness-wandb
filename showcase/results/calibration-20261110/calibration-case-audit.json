@@ -37,7 +37,7 @@
           },
           "sidecar_seq": 20,
           "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.no_memory.LawBench.a1",
-          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory-e2",
           "operations": [
             {
               "call_id": "c-20261110T174804-3d146fff1683",
@@ -82,7 +82,7 @@
           },
           "sidecar_seq": 40,
           "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.fewshot_all.LawBench.a1",
-          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all-e2",
           "operations": [
             {
               "call_id": "c-20261110T175514-cb37296c54e0",
@@ -138,7 +138,7 @@
           },
           "sidecar_seq": 36,
           "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.no_memory.LawBench.a1",
-          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory-e2",
           "operations": [
             {
               "call_id": "c-20261110T174804-6528401dd519",
@@ -183,7 +183,7 @@
           },
           "sidecar_seq": 6,
           "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.fewshot_all.LawBench.a1",
-          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all-e2",
           "operations": [
             {
               "call_id": "c-20261110T175514-0cdce4c60118",
@@ -239,7 +239,7 @@
           },
           "sidecar_seq": 46,
           "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.no_memory.LawBench.a1",
-          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory-e2",
           "operations": [
             {
               "call_id": "c-20261110T174807-fb998b58a1fd",
@@ -284,7 +284,7 @@
           },
           "sidecar_seq": 72,
           "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.fewshot_all.LawBench.a1",
-          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all-e2",
           "operations": [
             {
               "call_id": "c-20261110T175519-a70b35dffbba",
@@ -340,7 +340,7 @@
           },
           "sidecar_seq": 22,
           "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.no_memory.LawBench.a1",
-          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory-e2",
           "operations": [
             {
               "call_id": "c-20261110T174804-0b6e353391aa",
@@ -385,7 +385,7 @@
           },
           "sidecar_seq": 52,
           "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.fewshot_all.LawBench.a1",
-          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all-e2",
           "operations": [
             {
               "call_id": "c-20261110T175514-72a1fdf7f09c",
@@ -434,7 +434,7 @@
           },
           "sidecar_seq": 24,
           "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.no_memory.Symptom2Disease.a1.e2",
-          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory-e2",
           "operations": [
             {
               "call_id": "c-20261110T174544-71397b10a213",
@@ -472,7 +472,7 @@
           },
           "sidecar_seq": 58,
           "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.fewshot_all.Symptom2Disease.a1.e2",
-          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all-e2",
           "operations": [
             {
               "call_id": "c-20261110T175257-0613385d62e9",
@@ -521,7 +521,7 @@
           },
           "sidecar_seq": 22,
           "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.no_memory.Symptom2Disease.a1.e2",
-          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory-e2",
           "operations": [
             {
               "call_id": "c-20261110T174544-f51c8c12d2d7",
@@ -559,7 +559,7 @@
           },
           "sidecar_seq": 24,
           "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.fewshot_all.Symptom2Disease.a1.e2",
-          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all-e2",
           "operations": [
             {
               "call_id": "c-20261110T175257-cc559effa944",
@@ -608,7 +608,7 @@
           },
           "sidecar_seq": 96,
           "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.no_memory.Symptom2Disease.a1.e2",
-          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory-e2",
           "operations": [
             {
               "call_id": "c-20261110T174550-2ada206a97c4",
@@ -646,7 +646,7 @@
           },
           "sidecar_seq": 304,
           "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.fewshot_all.Symptom2Disease.a1.e2",
-          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all-e2",
           "operations": [
             {
               "call_id": "c-20261110T175303-daedd554dddc",
@@ -695,7 +695,7 @@
           },
           "sidecar_seq": 28,
           "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.no_memory.Symptom2Disease.a1.e2",
-          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory-e2",
           "operations": [
             {
               "call_id": "c-20261110T174544-1983ff49405b",
@@ -733,7 +733,7 @@
           },
           "sidecar_seq": 66,
           "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.fewshot_all.Symptom2Disease.a1.e2",
-          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all-e2",
           "operations": [
             {
               "call_id": "c-20261110T175257-ed04440a0b9f",
@@ -784,7 +784,7 @@
           },
           "sidecar_seq": 144,
           "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.no_memory.USPTO.a1",
-          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory-e2",
           "operations": [
             {
               "call_id": "c-20261110T174252-46ed841eea37",
@@ -824,7 +824,7 @@
           },
           "sidecar_seq": 16,
           "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.fewshot_all.USPTO.a1",
-          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all-e2",
           "operations": [
             {
               "call_id": "c-20261110T175016-f2fc0dbe0023",
@@ -875,7 +875,7 @@
           },
           "sidecar_seq": 6,
           "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.no_memory.USPTO.a1",
-          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory-e2",
           "operations": [
             {
               "call_id": "c-20261110T174252-1c961289c759",
@@ -915,7 +915,7 @@
           },
           "sidecar_seq": 12,
           "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.fewshot_all.USPTO.a1",
-          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all-e2",
           "operations": [
             {
               "call_id": "c-20261110T175016-f78804c3e938",
@@ -966,7 +966,7 @@
           },
           "sidecar_seq": 28,
           "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.no_memory.USPTO.a1",
-          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory-e2",
           "operations": [
             {
               "call_id": "c-20261110T174309-59a8d286ac8b",
@@ -1006,7 +1006,7 @@
           },
           "sidecar_seq": 48,
           "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.fewshot_all.USPTO.a1",
-          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all-e2",
           "operations": [
             {
               "call_id": "c-20261110T175024-d3a350b92796",
@@ -1057,7 +1057,7 @@
           },
           "sidecar_seq": 100,
           "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.no_memory.USPTO.a1",
-          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory-e2",
           "operations": [
             {
               "call_id": "c-20261110T174252-13fb03d6aad9",
@@ -1097,7 +1097,7 @@
           },
           "sidecar_seq": 64,
           "trace_url": "https://forge.coreweave.com/agent-lens/wandb/mh-forge-preflight-20261110/conversations/mh-forge-preflight-b-20261110.test.fewshot_all.USPTO.a1",
-          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all",
+          "evaluation_run_url": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all-e2",
           "operations": [
             {
               "call_id": "c-20261110T175016-b10fb8a51433",

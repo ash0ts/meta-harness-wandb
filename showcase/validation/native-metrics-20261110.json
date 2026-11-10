@@ -1,0 +1,259 @@
+{
+  "schema": "mhforge.native-metrics-validation/1",
+  "tests": {
+    "count": 116,
+    "passed": true,
+    "seconds": 13.644
+  },
+  "study_history_targeted_tests": {
+    "count": 3,
+    "passed": true
+  },
+  "receipts": [
+    {
+      "unit": "eval:test.fewshot_all",
+      "export_attempt": 2,
+      "status": "verified",
+      "urls": [
+        "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-fewshot_all-e2"
+      ],
+      "readback": {
+        "checked_utc": "2026-11-10T18:24:47.144858Z",
+        "table_contents_checked": true,
+        "mismatches": []
+      },
+      "amendment": {
+        "seq": 1,
+        "row_sha256": "e7172ed432fc8117b9fe04a0dffb5b44ba8b3c87259dd849bb2a4642d8dd132c"
+      },
+      "config_lineage": {
+        "frozen_manifest_sha256": "a578d63baceedac3c7cb3130a052ed7e05750f9a4ece21f2e047d81f2a41761a",
+        "effective_manifest_sha256": "cf0c9b5ba33e9cc2aeeb6d36ce62d82bb7d9da166b8b5a106b29a91610a040ba",
+        "export_amendment": {
+          "seq": 1,
+          "row_sha256": "e7172ed432fc8117b9fe04a0dffb5b44ba8b3c87259dd849bb2a4642d8dd132c"
+        }
+      },
+      "numeric_history": [
+        {
+          "test/USPTO/accuracy": 0.18,
+          "test/Symptom2Disease/accuracy": 0.8349056603773585,
+          "test/LawBench/accuracy": 0.28,
+          "test/macro_accuracy_all_datasets": 0.431635,
+          "datasets_complete": 3,
+          "datasets_failed": 0,
+          "solver_cost_usd": 0.187415,
+          "truncated_empty_calls": 0,
+          "empty_content_calls": 5
+        }
+      ]
+    },
+    {
+      "unit": "eval:test.no_memory",
+      "export_attempt": 2,
+      "status": "verified",
+      "urls": [
+        "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-test-no_memory-e2"
+      ],
+      "readback": {
+        "checked_utc": "2026-11-10T18:24:50.453436Z",
+        "table_contents_checked": true,
+        "mismatches": []
+      },
+      "amendment": {
+        "seq": 1,
+        "row_sha256": "e7172ed432fc8117b9fe04a0dffb5b44ba8b3c87259dd849bb2a4642d8dd132c"
+      },
+      "config_lineage": {
+        "frozen_manifest_sha256": "a578d63baceedac3c7cb3130a052ed7e05750f9a4ece21f2e047d81f2a41761a",
+        "effective_manifest_sha256": "cf0c9b5ba33e9cc2aeeb6d36ce62d82bb7d9da166b8b5a106b29a91610a040ba",
+        "export_amendment": {
+          "seq": 1,
+          "row_sha256": "e7172ed432fc8117b9fe04a0dffb5b44ba8b3c87259dd849bb2a4642d8dd132c"
+        }
+      },
+      "numeric_history": [
+        {
+          "test/USPTO/accuracy": 0.13,
+          "test/Symptom2Disease/accuracy": 0.6792452830188679,
+          "test/LawBench/accuracy": 0.06,
+          "test/macro_accuracy_all_datasets": 0.289748,
+          "datasets_complete": 3,
+          "datasets_failed": 0,
+          "solver_cost_usd": 0.055287,
+          "truncated_empty_calls": 0,
+          "empty_content_calls": 0
+        }
+      ]
+    },
+    {
+      "unit": "eval:val.fewshot_all",
+      "export_attempt": 3,
+      "status": "verified",
+      "urls": [
+        "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-val-fewshot_all-e3"
+      ],
+      "readback": {
+        "checked_utc": "2026-11-10T18:24:53.884498Z",
+        "table_contents_checked": true,
+        "mismatches": []
+      },
+      "amendment": {
+        "seq": 1,
+        "row_sha256": "e7172ed432fc8117b9fe04a0dffb5b44ba8b3c87259dd849bb2a4642d8dd132c"
+      },
+      "config_lineage": {
+        "frozen_manifest_sha256": "a578d63baceedac3c7cb3130a052ed7e05750f9a4ece21f2e047d81f2a41761a",
+        "effective_manifest_sha256": "cf0c9b5ba33e9cc2aeeb6d36ce62d82bb7d9da166b8b5a106b29a91610a040ba",
+        "export_amendment": {
+          "seq": 1,
+          "row_sha256": "e7172ed432fc8117b9fe04a0dffb5b44ba8b3c87259dd849bb2a4642d8dd132c"
+        }
+      },
+      "numeric_history": [
+        {
+          "val/USPTO/accuracy": 0.1,
+          "val/Symptom2Disease/accuracy": 0.82,
+          "val/LawBench/accuracy": 0.3,
+          "val/macro_accuracy_all_datasets": 0.406667,
+          "datasets_complete": 3,
+          "datasets_failed": 0,
+          "solver_cost_usd": 0.06884,
+          "truncated_empty_calls": 0,
+          "empty_content_calls": 1
+        }
+      ]
+    },
+    {
+      "unit": "eval:val.no_memory",
+      "export_attempt": 3,
+      "status": "verified",
+      "urls": [
+        "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/mh-forge-preflight-b-20261110-eval-val-no_memory-e3"
+      ],
+      "readback": {
+        "checked_utc": "2026-11-10T18:24:56.985534Z",
+        "table_contents_checked": true,
+        "mismatches": []
+      },
+      "amendment": {
+        "seq": 1,
+        "row_sha256": "e7172ed432fc8117b9fe04a0dffb5b44ba8b3c87259dd849bb2a4642d8dd132c"
+      },
+      "config_lineage": {
+        "frozen_manifest_sha256": "a578d63baceedac3c7cb3130a052ed7e05750f9a4ece21f2e047d81f2a41761a",
+        "effective_manifest_sha256": "cf0c9b5ba33e9cc2aeeb6d36ce62d82bb7d9da166b8b5a106b29a91610a040ba",
+        "export_amendment": {
+          "seq": 1,
+          "row_sha256": "e7172ed432fc8117b9fe04a0dffb5b44ba8b3c87259dd849bb2a4642d8dd132c"
+        }
+      },
+      "numeric_history": [
+        {
+          "val/USPTO/accuracy": 0.16666666666666666,
+          "val/Symptom2Disease/accuracy": 0.62,
+          "val/LawBench/accuracy": 0.06,
+          "val/macro_accuracy_all_datasets": 0.282222,
+          "datasets_complete": 3,
+          "datasets_failed": 0,
+          "solver_cost_usd": 0.018216,
+          "truncated_empty_calls": 0,
+          "empty_content_calls": 0
+        }
+      ]
+    }
+  ],
+  "empty_fewshot_lawbench_calls": [
+    {
+      "call_id": "c-20261110T175519-a70b35dffbba",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 22944,
+        "completion_tokens": 288,
+        "total_tokens": 23232,
+        "cached_tokens": 64,
+        "reasoning_tokens": 285
+      },
+      "flags": {
+        "truncated_empty": false,
+        "empty_content": true,
+        "reasoning_present": true,
+        "model_mismatch": false
+      },
+      "cost_micro": 738
+    },
+    {
+      "call_id": "c-20261110T175514-49a07c0ba62b",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 24776,
+        "completion_tokens": 249,
+        "total_tokens": 25025,
+        "cached_tokens": 64,
+        "reasoning_tokens": 246
+      },
+      "flags": {
+        "truncated_empty": false,
+        "empty_content": true,
+        "reasoning_present": true,
+        "model_mismatch": false
+      },
+      "cost_micro": 786
+    },
+    {
+      "call_id": "c-20261110T175514-d1cdd18c99d8",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 25177,
+        "completion_tokens": 654,
+        "total_tokens": 25831,
+        "cached_tokens": 64,
+        "reasoning_tokens": 651
+      },
+      "flags": {
+        "truncated_empty": false,
+        "empty_content": true,
+        "reasoning_present": true,
+        "model_mismatch": false
+      },
+      "cost_micro": 867
+    },
+    {
+      "call_id": "c-20261110T175514-bb526248fe56",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 19808,
+        "completion_tokens": 370,
+        "total_tokens": 20178,
+        "cached_tokens": 64,
+        "reasoning_tokens": 367
+      },
+      "flags": {
+        "truncated_empty": false,
+        "empty_content": true,
+        "reasoning_present": true,
+        "model_mismatch": false
+      },
+      "cost_micro": 658
+    },
+    {
+      "call_id": "c-20261110T175522-703d7e9829ca",
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 26651,
+        "completion_tokens": 301,
+        "total_tokens": 26952,
+        "cached_tokens": 64,
+        "reasoning_tokens": 298
+      },
+      "flags": {
+        "truncated_empty": false,
+        "empty_content": true,
+        "reasoning_present": true,
+        "model_mismatch": false
+      },
+      "cost_micro": 851
+    }
+  ],
+  "unknown_cost_accounting": "Readback normalization never changes ledger reservations or resolves unknown spend."
+}

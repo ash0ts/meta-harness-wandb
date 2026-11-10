@@ -526,6 +526,32 @@ class EmitAndReadBack(ExporterCase):
         self.assertEqual([c["conversation_id"] for c in lens.emitted[0]["conversations"]],
                          ["mh-test.val.no_memory.USPTO.a1.e2"])
 
+    def test_historical_partial_rechecks_saved_plan_even_after_job_record_changes(self):
+        self.c.job()
+        lens=FakeLensSink(drop=1)
+        first=self.export(JOB,lens=lens)['agent_lens']
+        p=self.st.paths.job_dir('val.no_memory.USPTO')/'job.json'
+        job=util.read_json(p);job['phase']='recovery';util.write_json(p,job)
+        lens.drop=0
+        second=self.export(JOB,lens=lens,retry_partial=True)['agent_lens']
+        self.assertEqual(second['status'],'verified')
+        self.assertEqual(second['export_attempt'],1)
+        self.assertEqual(second['plan_sha256'],first['plan_sha256'])
+        self.assertIsNotNone(second['stale_plan_sha256'])
+        self.assertEqual(len(lens.emitted),1)
+
+    def test_mutated_saved_plan_cannot_be_read_back_as_verified(self):
+        self.c.job()
+        lens=FakeLensSink(drop=1)
+        first=self.export(JOB,lens=lens)['agent_lens']
+        p=self.st.paths.plan_dir(JOB)/'spans.json'
+        plan=util.read_json(p);plan['planned_bytes']+=1;util.write_json(p,plan)
+        lens.drop=0
+        ex=self.c.exporter(lens=lens)
+        result=ex._read_back(first,None)
+        self.assertEqual(result['status'],'partial')
+        self.assertEqual(result['readback']['mismatches'],['saved_plan_digest_mismatch'])
+
     def test_verified_export_is_idempotent(self):
         self.c.everything()
         lens, wb = FakeLensSink(), FakeWandbSink()

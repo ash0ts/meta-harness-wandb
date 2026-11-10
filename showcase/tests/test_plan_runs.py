@@ -226,6 +226,11 @@ class EvaluateAndPropose(unittest.TestCase):
                                  "log_jsonl_sha256": "4" * 64, "log_jsonl_bytes": 7}}
         p = eval_plan(evidence=evidence)
         got = json.loads(p["run"]["summary"]["evidence_hashes"])
+        for values in got.values():
+            self.assertEqual(values.pop('sidecar_jsonl_sha256'), None)
+            self.assertEqual(values.pop('sidecar_jsonl_bytes'), None)
+            self.assertEqual(values.pop('result_json_sha256'), None)
+            self.assertEqual(values.pop('result_json_bytes'), None)
         self.assertEqual(got["USPTO"], {"memory_json_sha256": "2" * 64, "memory_json_bytes": 2,
                                         "log_jsonl_sha256": "3" * 64, "log_jsonl_bytes": 5120})
         self.assertEqual(got["LawBench"], {"memory_json_sha256": None, "memory_json_bytes": None,
@@ -235,6 +240,18 @@ class EvaluateAndPropose(unittest.TestCase):
             self.assertNotIn(forbidden, text)
         names = [f["name"] for a in p["run"]["artifacts"] for f in a.get("files", [])]
         self.assertEqual(names, ["no_memory.py"])                 # candidate files only, never evidence files
+
+    def test_evaluation_history_exposes_scores_and_empty_content_without_raw_text(self):
+        evidence={ds:{'empty_content_calls':n, 'sidecar_jsonl_sha256':'a'*64, 'sidecar_jsonl_bytes':128,
+                      'result_json_sha256':'b'*64,'result_json_bytes':64}
+                  for ds,n in [('USPTO',0),('Symptom2Disease',0),('LawBench',5)]}
+        p=eval_plan(evidence=evidence);run=p['run']
+        self.assertEqual(run['summary']['empty_content_calls'],5)
+        self.assertEqual(run['history'][0]['empty_content_calls'],5)
+        self.assertEqual(run['history'][0]['val/macro_accuracy_all_datasets'],run['summary']['val/macro_accuracy_all_datasets'])
+        self.assertNotIn('evidence_hashes',run['history'][0])
+        self.assertEqual(json.loads(run['summary']['evidence_hashes'])['USPTO']['sidecar_jsonl_sha256'],'a'*64)
+        self.assertNotIn('empty_content_calls',eval_plan()['run']['summary'])
 
     def test_artifact_metadata_guarded(self):
         index = scan.build_verbatim_index([QUOTE], run_chars=40)

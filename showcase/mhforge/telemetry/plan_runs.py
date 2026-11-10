@@ -47,7 +47,8 @@ SEARCH_HISTORY_KEYS = (
     "search/evidence_exposed", "search/propose_s", "search/bench_s",
 )
 
-_EVIDENCE_PAIRS = (("memory_json_sha256", "memory_json_bytes"), ("log_jsonl_sha256", "log_jsonl_bytes"))
+_EVIDENCE_PAIRS = (("memory_json_sha256", "memory_json_bytes"), ("log_jsonl_sha256", "log_jsonl_bytes"),
+                   ("sidecar_jsonl_sha256", "sidecar_jsonl_bytes"), ("result_json_sha256", "result_json_bytes"))
 _HEX64 = re.compile(r"[0-9a-f]{64}")
 _CANDIDATE_FILE = re.compile(r"candidates/([a-z][a-z0-9_]{0,47})\.py")
 
@@ -263,6 +264,9 @@ def plan_evaluate_run(candidate: str, split: str, job_records: Mapping[str, Mapp
                 hashes[ds][sha_key] = _hex(ev.get(sha_key))
                 hashes[ds][bytes_key] = ev.get(bytes_key) if _is_int(ev.get(bytes_key)) else None
     summary["evidence_hashes"] = json.dumps(hashes, sort_keys=True)
+    empty = [evidence.get(ds, {}).get('empty_content_calls') for ds in datasets]
+    if empty and all(_is_int(n) for n in empty):
+        summary['empty_content_calls'] = sum(empty)
 
     sha = (_hex(entry.get("sha256")) or _hex(entry.get("file_sha256"))) if entry else None
     sha = sha or job_sha
@@ -284,7 +288,8 @@ def plan_evaluate_run(candidate: str, split: str, job_records: Mapping[str, Mapp
     return _run(manifest, unit=f"eval:{split}.{candidate}",
                 rid=run_id(campaign, "evaluate", candidate=candidate, split=split, export_attempt=k),
                 job_type="evaluate", name=f"{candidate} ({split})", tags=["baseline" if is_baseline else "candidate"],
-                resume=False, config=_config(manifest, identity), summary=summary, define_metrics=[], history=[],
+                resume=False, config=_config(manifest, identity), summary=summary, define_metrics=[],
+                history=[{key: value for key, value in summary.items() if _finite(value)}],
                 tables=[t for t in table_keys if isinstance(t, str)], artifacts=artifacts, export_attempt=k)
 
 

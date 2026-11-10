@@ -1,0 +1,32 @@
+{
+  "schema": "mhforge.repeatability-analysis/1",
+  "campaign": "mh-forge-controls-20261110",
+  "temperature": 0.0,
+  "repeats": 5,
+  "task_system_groups": 260,
+  "task_outcomes_regraded": 1300,
+  "groups_with_identical_requests": 260,
+  "groups_with_correctness_changes": 31,
+  "groups_with_normalized_label_changes": 126,
+  "macro_validation_accuracy": {
+    "fewshot_all": {
+      "macro_min": 40.888889,
+      "macro_max": 43.777778,
+      "macro_std": 1.23128
+    },
+    "no_memory": {
+      "macro_min": 22.666667,
+      "macro_max": 25.333333,
+      "macro_std": 1.139634
+    }
+  },
+  "limitation": "Five repetitions describe this endpoint and these tasks; they do not estimate universal model variance. Seed controls loader shuffle, not a provider API seed.",
+  "script_sha256": "2c11c729404167786843d8d815f79ca407d4ec8c5fbaa8e950dc1282813e7d98",
+  "dependencies": {
+    "analyze_campaign.py": "092d7e536960cd4cbc31e46b067294de96beadde914275e643bf8e1b8d2e4777",
+    "mhforge/controls.py": "bf93ff0fa7c9c096bff21cf662b61461338b54c481b5bbd8a0ef38b515b663fb",
+    "mhforge/telemetry/plan_study.py": "69523ba7a3789467e1b1b016d074e19fccf83645e2901531321fd51d853216bf",
+    "mhforge/telemetry/join.py": "d717202167cd37849db433755e25b697e63509e82c57749c16dd073534161bbd"
+  },
+  "noise_export_plan": "30 rows; dry-run scan clean; live aggregate export awaits completion of active controls runner and explicit backend amendment"
+}
