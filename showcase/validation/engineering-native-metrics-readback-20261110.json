@@ -1,0 +1,16 @@
+{
+  "schema": "mhforge.native-metrics-readback/1",
+  "checks": [
+    {
+      "unit": "study:engineering",
+      "numeric_history_verified": true,
+      "summary_values_verified": true,
+      "manifest_lineage_verified": true,
+      "history_rows": 1
+    }
+  ],
+  "passed": true,
+  "verification_method": "Authorized SDK readback of persisted history, summaries and frozen manifest lineage.",
+  "source_receipt_sha256": "3dbc81e6c0e62b23b6a05340dc439105d5e36ab473eaf59f5fafad6400bc948a",
+  "private_run_locators_retained_in_original_receipt": true
+}

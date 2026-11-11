@@ -17,5 +17,8 @@
   "tests_passed": 97,
   "readback_module_sha256": "38baafe341daed29028fe5013833e5927f055d4e669c6d565e681fe19359edab",
   "test_log_sha256": "6988df050ad59bc8810445d0c030648da7350945bccadf429c64d5edd609eb17",
-  "remote_reread_pending": true
+  "remote_reread_pending": false,
+  "remote_reread_verified": true,
+  "all_export_units_verified": 74,
+  "completion_receipt_sha256": "9fc388a43d78a7e358b3e77609832546440df9ee5f8e1e29773b8fe021c02897"
 }

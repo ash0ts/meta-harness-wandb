@@ -34,3 +34,6 @@ result['repeatability']={'groups':len(groups),'outcomes':len(val),'correctness_c
 result['voting_diagnostics']={'all_five_wrong':sum(int(r['correct_samples'])==0 for r in rows),'available_correct_missed':sum(int(r['correct_samples'])>0 and not int(r['vote_correct']) for r in rows),'unanimous_wrong':sum(int(r['vote_count'])==5 and not int(r['vote_correct']) for r in rows)}
 assert result['voting_diagnostics']=={'all_five_wrong':156,'available_correct_missed':25,'unanimous_wrong':33}
 print(json.dumps(result,indent=2));print('PASS: saved headline estimates and all five paired intervals reproduced.')
+
+from reproduce_engineering import main as engineering_main
+engineering_main()

@@ -1,0 +1,571 @@
+{
+  "systems": {
+    "context_0": {
+      "mean_accuracy_percent": 30.959748427672956,
+      "per_dataset_mean_accuracy_percent": {
+        "LawBench": 10.8,
+        "Symptom2Disease": 68.67924528301886,
+        "USPTO": 13.4
+      },
+      "vote_accuracy_percent": {
+        "1": 31.113207547169814,
+        "3": 31.761006289308174,
+        "5": 31.62264150943396
+      },
+      "single_draw_macro_percent": [
+        31.113207547169814,
+        31.584905660377355,
+        31.289308176100626,
+        31.150943396226417,
+        29.660377358490564
+      ],
+      "empty_answers": 1,
+      "strict_json_valid_fraction": 0.9995145631067961,
+      "examples_mean": 0,
+      "examples_range": [
+        0,
+        0
+      ]
+    },
+    "context_5": {
+      "mean_accuracy_percent": 33.5748427672956,
+      "per_dataset_mean_accuracy_percent": {
+        "LawBench": 19.8,
+        "Symptom2Disease": 67.9245283018868,
+        "USPTO": 13.0
+      },
+      "vote_accuracy_percent": {
+        "1": 33.9748427672956,
+        "3": 34.327044025157235,
+        "5": 34.44654088050314
+      },
+      "single_draw_macro_percent": [
+        33.9748427672956,
+        32.698113207547166,
+        34.77987421383648,
+        34.09433962264151,
+        32.32704402515723
+      ],
+      "empty_answers": 1,
+      "strict_json_valid_fraction": 0.9995145631067961,
+      "examples_mean": 5,
+      "examples_range": [
+        5,
+        5
+      ]
+    },
+    "context_all": {
+      "mean_accuracy_percent": 41.08679245283019,
+      "per_dataset_mean_accuracy_percent": {
+        "LawBench": 27.200000000000003,
+        "Symptom2Disease": 80.66037735849056,
+        "USPTO": 15.4
+      },
+      "vote_accuracy_percent": {
+        "1": 40.924528301886795,
+        "3": 42.39622641509434,
+        "5": 43.534591194968556
+      },
+      "single_draw_macro_percent": [
+        40.924528301886795,
+        41.23899371069182,
+        41.515723270440255,
+        41.0440251572327,
+        40.71069182389937
+      ],
+      "empty_answers": 83,
+      "strict_json_valid_fraction": 0.9597087378640776,
+      "examples_mean": 116.07766990291262,
+      "examples_range": [
+        31,
+        178
+      ]
+    },
+    "context_all_t1": {
+      "mean_accuracy_percent": 39.45911949685535,
+      "per_dataset_mean_accuracy_percent": {
+        "LawBench": 22.2,
+        "Symptom2Disease": 80.37735849056604,
+        "USPTO": 15.8
+      },
+      "vote_accuracy_percent": {
+        "1": 40.06289308176101,
+        "3": 41.22012578616352,
+        "5": 43.04402515723271
+      },
+      "single_draw_macro_percent": [
+        40.06289308176101,
+        39.59119496855346,
+        39.18238993710692,
+        39.062893081761004,
+        39.39622641509434
+      ],
+      "empty_answers": 93,
+      "strict_json_valid_fraction": 0.9538834951456311,
+      "examples_mean": 116.07766990291262,
+      "examples_range": [
+        31,
+        178
+      ]
+    }
+  },
+  "paired": {
+    "context_5_minus_context_0": {
+      "delta_pp": 2.6150943396226416,
+      "ci95_pp": [
+        0.6389937106918238,
+        4.656603773584905
+      ],
+      "method": "paired task bootstrap within datasets; all draws of a task remain together",
+      "repeats": 10000,
+      "seed": 20261111
+    },
+    "context_all_minus_context_5": {
+      "delta_pp": 7.511949685534591,
+      "ci95_pp": [
+        4.986163522012578,
+        10.140880503144654
+      ],
+      "method": "paired task bootstrap within datasets; all draws of a task remain together",
+      "repeats": 10000,
+      "seed": 20261111
+    },
+    "context_all_minus_context_0": {
+      "delta_pp": 10.127044025157234,
+      "ci95_pp": [
+        7.3899371069182385,
+        13.012578616352203
+      ],
+      "method": "paired task bootstrap within datasets; all draws of a task remain together",
+      "repeats": 10000,
+      "seed": 20261111
+    },
+    "context_all_vote3_minus_vote1": {
+      "delta_pp": 1.471698113207547,
+      "ci95_pp": [
+        -0.33333333333333337,
+        3.4339622641509435
+      ],
+      "method": "paired task bootstrap within datasets; all draws of a task remain together",
+      "repeats": 10000,
+      "seed": 20261111
+    },
+    "context_all_vote5_minus_vote1": {
+      "delta_pp": 2.610062893081761,
+      "ci95_pp": [
+        0.610062893081761,
+        4.786163522012579
+      ],
+      "method": "paired task bootstrap within datasets; all draws of a task remain together",
+      "repeats": 10000,
+      "seed": 20261111
+    },
+    "context_all_vote5_minus_vote3": {
+      "delta_pp": 1.1383647798742138,
+      "ci95_pp": [
+        0.15723270440251572,
+        2.4339622641509435
+      ],
+      "method": "paired task bootstrap within datasets; all draws of a task remain together",
+      "repeats": 10000,
+      "seed": 20261111
+    },
+    "context_all_t1_vote3_minus_vote1": {
+      "delta_pp": 1.1572327044025157,
+      "ci95_pp": [
+        -0.49056603773584906,
+        2.9433962264150946
+      ],
+      "method": "paired task bootstrap within datasets; all draws of a task remain together",
+      "repeats": 10000,
+      "seed": 20261111
+    },
+    "context_all_t1_vote5_minus_vote1": {
+      "delta_pp": 2.9811320754716983,
+      "ci95_pp": [
+        0.8238993710691824,
+        5.295597484276731
+      ],
+      "method": "paired task bootstrap within datasets; all draws of a task remain together",
+      "repeats": 10000,
+      "seed": 20261111
+    },
+    "context_all_t1_vote5_minus_vote3": {
+      "delta_pp": 1.8238993710691824,
+      "ci95_pp": [
+        0.03773584905660381,
+        3.8050314465408803
+      ],
+      "method": "paired task bootstrap within datasets; all draws of a task remain together",
+      "repeats": 10000,
+      "seed": 20261111
+    }
+  },
+  "unique_tasks": 412,
+  "scored_outputs": 8240,
+  "sensitivity": {
+    "systems": {
+      "context_0": {
+        "mean_accuracy_percent": 30.91026856240126,
+        "per_dataset_mean_accuracy_percent": {
+          "LawBench": 10.8,
+          "Symptom2Disease": 68.5308056872038,
+          "USPTO": 13.4
+        },
+        "vote_accuracy_percent": {
+          "1": 31.064770932069514,
+          "3": 31.714060031595576,
+          "5": 31.573459715639814
+        },
+        "single_draw_macro_percent": [
+          31.064770932069514,
+          31.538704581358605,
+          31.240126382306478,
+          31.09952606635071,
+          29.608214849921012
+        ],
+        "empty_answers": 1,
+        "strict_json_valid_fraction": 0.9995133819951338,
+        "examples_mean": 0,
+        "examples_range": [
+          0,
+          0
+        ]
+      },
+      "context_5": {
+        "mean_accuracy_percent": 33.52417061611375,
+        "per_dataset_mean_accuracy_percent": {
+          "LawBench": 19.8,
+          "Symptom2Disease": 67.77251184834124,
+          "USPTO": 13.0
+        },
+        "vote_accuracy_percent": {
+          "1": 33.92417061611375,
+          "3": 34.274881516587676,
+          "5": 34.39810426540284
+        },
+        "single_draw_macro_percent": [
+          33.92417061611375,
+          32.64296998420221,
+          34.73143759873618,
+          34.047393364928915,
+          32.274881516587676
+        ],
+        "empty_answers": 1,
+        "strict_json_valid_fraction": 0.9995133819951338,
+        "examples_mean": 5,
+        "examples_range": [
+          5,
+          5
+        ]
+      },
+      "context_all": {
+        "mean_accuracy_percent": 41.056240126382306,
+        "per_dataset_mean_accuracy_percent": {
+          "LawBench": 27.200000000000003,
+          "Symptom2Disease": 80.56872037914692,
+          "USPTO": 15.4
+        },
+        "vote_accuracy_percent": {
+          "1": 40.89099526066351,
+          "3": 42.36492890995261,
+          "5": 43.505529225908376
+        },
+        "single_draw_macro_percent": [
+          40.89099526066351,
+          41.206951026856245,
+          41.48815165876777,
+          41.014218009478675,
+          40.68088467614534
+        ],
+        "empty_answers": 83,
+        "strict_json_valid_fraction": 0.9596107055961071,
+        "examples_mean": 115.93673965936739,
+        "examples_range": [
+          31,
+          178
+        ]
+      },
+      "context_all_t1": {
+        "mean_accuracy_percent": 39.42812006319115,
+        "per_dataset_mean_accuracy_percent": {
+          "LawBench": 22.2,
+          "Symptom2Disease": 80.28436018957346,
+          "USPTO": 15.8
+        },
+        "vote_accuracy_percent": {
+          "1": 40.031595576619274,
+          "3": 41.18957345971564,
+          "5": 43.014218009478675
+        },
+        "single_draw_macro_percent": [
+          40.031595576619274,
+          39.55766192733017,
+          39.154818325434434,
+          39.031595576619274,
+          39.36492890995261
+        ],
+        "empty_answers": 93,
+        "strict_json_valid_fraction": 0.9537712895377128,
+        "examples_mean": 115.93673965936739,
+        "examples_range": [
+          31,
+          178
+        ]
+      }
+    },
+    "paired": {
+      "context_5_minus_context_0": {
+        "delta_pp": 2.61390205371248,
+        "ci95_pp": [
+          0.6944707740916272,
+          4.6812006319115325
+        ],
+        "method": "paired task bootstrap within datasets; all draws of a task remain together",
+        "repeats": 10000,
+        "seed": 20261111
+      },
+      "context_all_minus_context_5": {
+        "delta_pp": 7.532069510268563,
+        "ci95_pp": [
+          4.96998420221169,
+          10.157030015797789
+        ],
+        "method": "paired task bootstrap within datasets; all draws of a task remain together",
+        "repeats": 10000,
+        "seed": 20261111
+      },
+      "context_all_minus_context_0": {
+        "delta_pp": 10.145971563981043,
+        "ci95_pp": [
+          7.352290679304898,
+          13.016429699842021
+        ],
+        "method": "paired task bootstrap within datasets; all draws of a task remain together",
+        "repeats": 10000,
+        "seed": 20261111
+      },
+      "context_all_vote3_minus_vote1": {
+        "delta_pp": 1.4739336492890993,
+        "ci95_pp": [
+          -0.3507109004739335,
+          3.439178515007899
+        ],
+        "method": "paired task bootstrap within datasets; all draws of a task remain together",
+        "repeats": 10000,
+        "seed": 20261111
+      },
+      "context_all_vote5_minus_vote1": {
+        "delta_pp": 2.6145339652448656,
+        "ci95_pp": [
+          0.49131121642969994,
+          4.895734597156398
+        ],
+        "method": "paired task bootstrap within datasets; all draws of a task remain together",
+        "repeats": 10000,
+        "seed": 20261111
+      },
+      "context_all_vote5_minus_vote3": {
+        "delta_pp": 1.1406003159557663,
+        "ci95_pp": [
+          0.15797788309636654,
+          2.439178515007899
+        ],
+        "method": "paired task bootstrap within datasets; all draws of a task remain together",
+        "repeats": 10000,
+        "seed": 20261111
+      },
+      "context_all_t1_vote3_minus_vote1": {
+        "delta_pp": 1.1579778830963665,
+        "ci95_pp": [
+          -0.4913112164296999,
+          2.9652448657187995
+        ],
+        "method": "paired task bootstrap within datasets; all draws of a task remain together",
+        "repeats": 10000,
+        "seed": 20261111
+      },
+      "context_all_t1_vote5_minus_vote1": {
+        "delta_pp": 2.9826224328594,
+        "ci95_pp": [
+          0.8420221169036334,
+          5.315955766192733
+        ],
+        "method": "paired task bootstrap within datasets; all draws of a task remain together",
+        "repeats": 10000,
+        "seed": 20261111
+      },
+      "context_all_t1_vote5_minus_vote3": {
+        "delta_pp": 1.8246445497630333,
+        "ci95_pp": [
+          0.0347551342812006,
+          3.807266982622433
+        ],
+        "method": "paired task bootstrap within datasets; all draws of a task remain together",
+        "repeats": 10000,
+        "seed": 20261111
+      }
+    },
+    "unique_tasks": 411,
+    "scored_outputs": 8220,
+    "overlap_excluded": true
+  },
+  "costs": {
+    "context_0": {
+      "all_jobs": {
+        "provider_attempts": {
+          "complete": 2190
+        },
+        "usage_priced_micro_usd": 280524,
+        "unknown_cost_upper_micro_usd": 0,
+        "cost_range_micro_usd": [
+          280524,
+          280524
+        ],
+        "known_usage": {
+          "prompt_tokens": 944723,
+          "completion_tokens": 1477122,
+          "cached_tokens": 439232
+        }
+      },
+      "policies": {
+        "1": {
+          "usage_priced_micro_usd": 53854,
+          "unknown_cost_upper_micro_usd": 0
+        },
+        "3": {
+          "usage_priced_micro_usd": 157991,
+          "unknown_cost_upper_micro_usd": 0
+        },
+        "5": {
+          "usage_priced_micro_usd": 263436,
+          "unknown_cost_upper_micro_usd": 0
+        }
+      }
+    },
+    "context_5": {
+      "all_jobs": {
+        "provider_attempts": {
+          "bounded_unknown": 65,
+          "complete": 2190,
+          "rejected": 1
+        },
+        "usage_priced_micro_usd": 356503,
+        "unknown_cost_upper_micro_usd": 201578,
+        "cost_range_micro_usd": [
+          356503,
+          558081
+        ],
+        "known_usage": {
+          "prompt_tokens": 2692082,
+          "completion_tokens": 1615709,
+          "cached_tokens": 673600
+        }
+      },
+      "policies": {
+        "1": {
+          "usage_priced_micro_usd": 65793,
+          "unknown_cost_upper_micro_usd": 43275
+        },
+        "3": {
+          "usage_priced_micro_usd": 201458,
+          "unknown_cost_upper_micro_usd": 201578
+        },
+        "5": {
+          "usage_priced_micro_usd": 334281,
+          "unknown_cost_upper_micro_usd": 201578
+        }
+      }
+    },
+    "context_all": {
+      "all_jobs": {
+        "provider_attempts": {
+          "complete": 2190
+        },
+        "usage_priced_micro_usd": 1035263,
+        "unknown_cost_upper_micro_usd": 0,
+        "cost_range_micro_usd": [
+          1035263,
+          1035263
+        ],
+        "known_usage": {
+          "prompt_tokens": 24404478,
+          "completion_tokens": 1776728,
+          "cached_tokens": 15819296
+        }
+      },
+      "policies": {
+        "1": {
+          "usage_priced_micro_usd": 194003,
+          "unknown_cost_upper_micro_usd": 0
+        },
+        "3": {
+          "usage_priced_micro_usd": 578919,
+          "unknown_cost_upper_micro_usd": 0
+        },
+        "5": {
+          "usage_priced_micro_usd": 964910,
+          "unknown_cost_upper_micro_usd": 0
+        }
+      }
+    },
+    "context_all_t1": {
+      "all_jobs": {
+        "provider_attempts": {
+          "complete": 2190
+        },
+        "usage_priced_micro_usd": 1042707,
+        "unknown_cost_upper_micro_usd": 0,
+        "cost_range_micro_usd": [
+          1042707,
+          1042707
+        ],
+        "known_usage": {
+          "prompt_tokens": 24404478,
+          "completion_tokens": 1820576,
+          "cached_tokens": 11740032
+        }
+      },
+      "policies": {
+        "1": {
+          "usage_priced_micro_usd": 193160,
+          "unknown_cost_upper_micro_usd": 0
+        },
+        "3": {
+          "usage_priced_micro_usd": 583104,
+          "unknown_cost_upper_micro_usd": 0
+        },
+        "5": {
+          "usage_priced_micro_usd": 973189,
+          "unknown_cost_upper_micro_usd": 0
+        }
+      }
+    }
+  },
+  "cost_scope": "Observed frozen-price inference usage; all attempts retained; prefix costs are attributed estimates, all five samples were executed and paid for.",
+  "latency_scope": "Request duration and queue delay only; no end-to-end deployed policy latency estimate.",
+  "method": {
+    "context": "Per-task mean of five draws; equal dataset weights",
+    "sampling": "First 1/3/5 draws; plurality of normalized labels; earliest tied sample",
+    "bootstrap": "10000 paired task resamples within datasets; seed 20261111; retain all five draws of a task",
+    "temperature": "0 primary; 1 supporting full-context arm",
+    "context_limit": "30000 characters in reference examples",
+    "execution": "Reviewed local workers with a loopback network guard; Forge inference and Agent Lens/W&B telemetry",
+    "generation_limit": 16384,
+    "prices_usd_per_million": {
+      "input_per_million": "0.03",
+      "cached_per_million": "0.03",
+      "output_per_million": "0.17"
+    },
+    "evaluation_status": "Prospective follow-up on previously inspected released test tasks; no untouched holdout or optimization result",
+    "setup_inference_excluded_from_policy_costs": {
+      "abandoned_B_observed_usd": 0.026605,
+      "abandoned_D_observed_usd": 0.053627,
+      "abandoned_D_unknown_upper_usd": 0.003342
+    },
+    "other_setup_costs": {
+      "abandoned_B_sandbox_usd_estimate": 0.040651,
+      "local_hardware_cost": "not priced"
+    }
+  }
+}

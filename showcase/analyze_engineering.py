@@ -18,6 +18,33 @@ from mhforge.paths import StatePaths
 from mhforge.telemetry import join, plan_study
 
 
+def response_source(paths, call):
+    """Resolve a recovery replay to its original response, within one frozen sample."""
+    current=call; seen=set()
+    while current.get('response') is None:
+        if current['call_id'] in seen: raise ValueError('cyclic replay evidence')
+        seen.add(current['call_id'])
+        replay=current.get('replay') or {}
+        if current.get('outcome') not in ('replayed','coalesced') or replay.get('scope')!='job':
+            raise ValueError('response missing without job-scoped replay evidence')
+        source_id=util.safe_component(replay.get('source_call_id'))
+        key=util.safe_component(call['job']['job_key'])
+        candidates=list(paths.calls_root.glob(key+'.a*/'+source_id+'.json'))
+        if len(candidates)!=1: raise ValueError('replay source missing or ambiguous')
+        source=util.read_json(candidates[0])
+        if source.get('outcome') not in ('completed','replayed','coalesced'):
+            raise ValueError('replay source is not a completed response')
+        for field in ('job_key','sample','candidate','dataset','split','campaign'):
+            if source['job'].get(field)!=call['job'].get(field): raise ValueError('replay crosses a sample or task group')
+        if (source['request_sha256']!=call['request_sha256'] or source.get('reuse_salt')!=call.get('reuse_salt')
+                or util.sha256_bytes(util.canonical_json(source['request']))!=source['request_sha256']):
+            raise ValueError('replay source request differs')
+        for field in ('response_id','response_model','finish_reason','usage'):
+            if source.get(field)!=call.get(field): raise ValueError('replayed response facts differ from source')
+        current=source
+    return current
+
+
 def prompt_examples(request, examples, limit):
     template = next(ast.literal_eval(n.value) for n in ast.parse(engineering.candidate_source(limit)).body
                     if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='PROMPT' for t in n.targets))
@@ -76,7 +103,8 @@ def inspect(root, output, *, offline=False):
             if request.get('temperature')!=temp or 'seed' in request: raise ValueError('solver parameters differ')
             if call['reuse_salt']!='s'+str(sample) or call['job']['sample']!=sample: raise ValueError('sample namespace differs')
             count,chars=prompt_examples(request,memory['examples'],limit)
-            content=call['response']['choices'][0]['message']['content'] or ''
+            original=response_source(paths,call)
+            content=original['response']['choices'][0]['message']['content'] or ''
             try:
                 parsed=json.loads(content);valid=isinstance(parsed,dict) and isinstance(parsed.get('final_answer'),str)
             except (ValueError,TypeError):valid=False
@@ -89,7 +117,9 @@ def inspect(root, output, *, offline=False):
             old=identities.setdefault(system,{}).setdefault(ds,{}).setdefault(i,r)
             if old['example_sha256']!=r['example_sha256']: raise ValueError('draw task identity differs')
             private.append({'system':system,'dataset':ds,'index':i,'sample':sample,'call_id':call['call_id'],
-                            'job_id':jid,'sidecar_seq':r['seq'],'trace_url':url(jid),'request_sha256':call['request_sha256']})
+                            'job_id':jid,'sidecar_seq':r['seq'],'trace_url':url(jid),'request_sha256':call['request_sha256'],
+                            'response_source_call_id':original['call_id'],'response_source_job_id':original['job']['job_id'],
+                            'response_source_trace_url':url(original['job']['job_id'])})
             timings.append({'system':system,'dataset':ds,'sample':sample,'queue_s':call['queue_s'],
                             'received_utc':call['received_utc'],'ended_utc':call['ended_utc'],'outcome':call['outcome']})
     rows=[]
@@ -116,7 +146,8 @@ def inspect(root, output, *, offline=False):
         if abs(result['mean_accuracy_percent']/100-native[f'engineering/{system}/macro_mean_accuracy'])>1e-12:raise ValueError('native table mean differs')
         for k,v in result['vote_accuracy_percent'].items():
             if abs(v/100-native[f'engineering/{system}/macro_vote{k}_accuracy'])>1e-12:raise ValueError('native table vote differs')
-    summary.update(trace_readback_verified=not offline,provider=manifest['provider']['kind'],costs=costs,plan=util.read_json(paths.root/'engineering/plan.json'),
+    summary.update(campaign=manifest['campaign'], frozen_manifest_sha256=util.sha256_bytes(util.canonical_json(manifest)),
+                   trace_readback_verified=not offline,provider=manifest['provider']['kind'],costs=costs,plan=util.read_json(paths.root/'engineering/plan.json'),
                    sensitivity=summarize(rows,exclude_overlap=True),all_outputs_regraded=len(rows),
                    identical_request_groups=len(groups),cost_scope='Observed frozen-price inference usage; all attempts retained; prefix costs are attributed estimates, all five samples were executed and paid for.',
                    latency_scope='Request duration and queue delay only; no end-to-end deployed policy latency estimate.')

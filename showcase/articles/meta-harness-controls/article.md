@@ -1,12 +1,12 @@
 # Before we let an agent optimize the harness
 
-*We measured ordinary prompting, labeled examples and repeated sampling while preparing a Meta-Harness experiment. The largest gain came from the examples. Extra sampling exposed a separate problem: sometimes the model produced a correct answer and the voting rule threw it away.*
+*On these tasks, a larger example context helped much more than five demonstrations. Five-answer voting added a smaller gain at roughly five times the inference cost. We measured both before giving an agent credit for improving its harness.*
 
 In our [Harness² recreation](https://forge.coreweave.com/wandb/wandb/harness2-agent-lens-v4/reports/Recreating-Harness%C2%B2--VmlldzoxODE5OTAxNQ), an agent wrote a checking script, repaired the instructions for finding it, tried another revision and selected the earlier version. We could follow those changes into the next solver execution. On fresh coding tasks, though, we didn't establish an average improvement over the original harness.
 
 That distinction carries into our next experiment. Before giving an agent credit for improving its harness, we need to know what it improved on. A weak starting prompt, a fortunate model response and a larger sampling budget can each make a new version look promising.
 
-While preparing a separate study using Meta-Harness's text-task example, we measured those alternatives. We ran two supplied baselines, repeated unchanged requests, and tested a five-answer voting policy. We connected execution and accounting to Forge so we could check the individual attempts behind the scores.
+While preparing a separate study using Meta-Harness's text-task example, we measured those alternatives. We ran two supplied baselines, repeated unchanged requests, and tested a five-answer voting policy. Then we ran a common-prompt context comparison and a fixed-temperature sampling comparison to separate effects the first pass mixed together. We connected execution and accounting to Forge so we could check the individual attempts behind the scores.
 
 This article covers those completed controls. We haven't completed Meta-Harness's agent-driven search, so there is no optimized harness result here. The model and tasks also differ from our Harness² study; these numbers don't explain or revise its coding results.
 
@@ -18,7 +18,7 @@ The simplest baseline sends the problem directly to the model and extracts its f
 
 The third setup uses that same example-based prompt to generate five fresh answers. It groups normalized answer labels, chooses the most common, and breaks a tie by taking the earliest sample in a tied group. We grade the selected original answer. This is a vote over model outputs; it has no access to the correct answer when choosing.
 
-Here is what happened on the same 412 test tasks:
+Our initial comparison used the same 412 test tasks for all three setups:
 
 | Setup | Temperature | Answers per task | Mean dataset accuracy | Marginal inference cost |
 |---|---:|---:|---:|---:|
@@ -32,7 +32,7 @@ The example-based baseline gained **14.19 percentage points** over the direct pr
 
 Every dataset's score rose: USPTO from 13/100 to 18/100, Symptom2Disease from 144/212 to 177/212, and LawBench from 6/100 to 28/100. The gain belongs to these baseline implementations, including their different instructions and example context. We didn't isolate the effect of examples from the surrounding prompt wording.
 
-For a future harness search, I would use the example-based baseline as the main comparator. Beating the direct prompt alone would leave a large, already demonstrated alternative unexplained.
+That made the example-based baseline a comparator to take seriously. Before attributing its whole gain to demonstrations, though, we needed to hold the surrounding instructions fixed.
 
 ## We need to know what “correct” means
 
@@ -43,6 +43,30 @@ The USPTO scorer compares sets of dot-separated reactant strings after lowercasi
 That limits the claim we can make about examples. They may help the model solve a problem, match the expected naming convention, or both. The measured gain is agreement with the frozen scorers. We haven't separated those mechanisms, and changing the scorer after seeing the outputs would answer a different question.
 
 We also found one exact validation–test overlap in Symptom2Disease. Removing it leaves 411 test tasks and changes the examples-versus-direct difference from 14.19 to **14.21 points**. We retain the declared 412-task result and report that sensitivity separately. These are released benchmark examples, with no claim that they were absent from the model's training data.
+
+## A handful of examples wasn’t enough
+
+We followed up with one set of neutral instructions and three context sizes: zero examples, five examples, and a larger pool under the same 30,000-character cap. Each task uses one deterministic shuffle of the training examples; the five-example condition is a prefix of that same ordering. The solver, generation settings and native scorers stayed fixed.
+
+We generated five fresh answers per task and condition at temperature zero. Each task contributes its mean correctness across those five draws, then we average the three dataset scores equally. This measures the single-answer behavior we observed across repeats; no vote is involved in this table.
+
+| Context | USPTO | Symptom2Disease | LawBench | Mean dataset accuracy | Mean inference cost per pass |
+|---|---:|---:|---:|---:|---:|
+| 0 examples | 13.40% | 68.68% | 10.80% | 30.96% | $0.0527 |
+| 5 examples | 13.00% | 67.92% | 19.80% | 33.57% | $0.0669–$0.1072 |
+| Larger pool, capped | 15.40% | 80.66% | 27.20% | 41.09% | $0.1930 |
+
+*Each cost is the five-draw test-inference total divided by five: an average pass over all 412 tasks. Scores weight datasets equally; costs sum their actual requests. The five-example range retains missing usage from interrupted attempts. Compute, preparation and telemetry are outside these marginal inference estimates.*
+
+Five examples added **2.62 points**, with a conditional 95% task-bootstrap interval of **0.64 to 4.66**. The improvement came from LawBench; USPTO and Symptom2Disease declined slightly with five examples in this run.
+
+The larger context added **10.13 points** over zero examples, with an interval of **7.39 to 13.01**. It also beat five examples by **7.51 points**, with an interval of **4.99 to 10.14**. Holding the instructions fixed preserved a substantial example-context effect, although it was smaller than the original implementations’ 14.19-point difference. Those are separate comparisons with separate model draws.
+
+The cap mattered. The larger condition actually supplied 50 USPTO examples, 172–178 Symptom2Disease examples, and 31–75 LawBench examples per request. Calling all of these “200-shot” would misdescribe what the model saw.
+
+I’d test a small and a larger example budget before treating a few-shot prompt as a strong baseline. On this suite, stopping at five demonstrations would miss most of the measured gain. The larger context cost about 3.66 times the zero-example pass; that is a tradeoff to measure, not a free improvement.
+
+We froze these comparisons before running them, but the 412 released test tasks had already been inspected in the earlier controls. This is a prospective follow-up on that task set, not an untouched final evaluation.
 
 ## Repeating the same request changed the result
 
@@ -60,7 +84,7 @@ The example-based validation mean ranged from 40.89% to 43.78%; the direct-promp
 
 The task-bootstrap intervals in this article hold the saved model outputs fixed. They do not include this additional variation from rerunning the model, or the uncertainty introduced by searching over many harness candidates. Five repeats describe a baseline we can observe; they aren't a universal noise threshold for accepting edits.
 
-## Five answers cost more. The gain was uncertain.
+## The first voting comparison changed two things
 
 The voting policy reached 45.83%, **2.67 points** above the single example-based answer. Its paired 95% interval was **−0.20 to +5.65 points**. We haven't established a gain under this comparison, and an interval crossing zero doesn't establish equivalence either.
 
@@ -74,11 +98,29 @@ This comparison changes both the number of samples and temperature. As a seconda
 
 The voting run used **5.08–5.38 times** the marginal inference cost of the single example-based answer. Fourteen provider attempts ended without complete usage, so we preserve their possible cost in the upper bound. Retrying them doesn't make the failed attempts free. The campaigns also overlapped and encountered throttling, so we don't use their wall times to claim a latency advantage.
 
-I wouldn't choose five-answer voting as the default from this evidence. It remains a comparison an optimizer should face if the proposed harness also spends extra inference per task.
+That first comparison left the sampling decision unresolved. We needed to compare different answer budgets while holding temperature fixed.
+
+## What three and five answers buy at fixed temperature
+
+For the larger-context prompt in the follow-up, we compared the first one, three and five answers at temperature zero. We also ran the same comparison at temperature one as supporting evidence. Sample positions were fixed in advance. We never picked the highest-scoring draw as the single-answer baseline, and the plurality rule never saw the correct label.
+
+| Answers per task | Temperature 0 accuracy | Temperature 0 cost | Temperature 1 accuracy | Temperature 1 cost |
+|---|---:|---:|---:|---:|
+| 1 answer | 40.92% | $0.1940 | 40.06% | $0.1932 |
+| 3 answers | 42.40% | $0.5789 | 41.22% | $0.5831 |
+| 5 answers | 43.53% | $0.9649 | 43.04% | $0.9732 |
+
+*All five draws were executed and paid for. The one- and three-answer costs are attributed to those prefixes of the saved run, not bills from separately deployed policies. This table starts with the first draw alone; the context table averages all five individual scores, so their single-answer summaries need not match.*
+
+At temperature zero, three answers gained **1.47 points** over the first answer, with a 95% interval of **−0.33 to 3.43**. Five answers gained **2.61 points**, with an interval of **0.61 to 4.79**. The supporting temperature-one comparison also favored five answers: **2.98 points**, with an interval of **0.82 to 5.30**.
+
+The matched experiment supports a gain that the first comparison couldn't establish: on these saved tasks and draws, five-answer voting improved on the fixed first-answer baseline at the same temperature. It cost about five times as much inference. I’d keep both policies as comparators, and make the extra accuracy justify its cost for the application. An editor that also spends five calls per task should have to beat the five-call control.
+
+These intervals resample tasks within each dataset, keeping a task’s five draws together. They condition on the saved answers, exclude future model reruns and search uncertainty, and are not adjusted for multiple comparisons. Removing the known validation–test overlap leaves the larger-context gain at **10.15 points** and the temperature-zero five-answer gain at **2.61 points**.
 
 ## Sometimes the correct answer was already there
 
-We kept all five outputs for every task, including the four that the vote didn't select. That lets us distinguish two problems a final accuracy number combines.
+In the earlier five-answer, temperature-one experiment, we kept all five outputs for every task, including the four that the vote didn't select. That cohort lets us distinguish two problems a final accuracy number combines; the counts below belong to that earlier run.
 
 On **156 of 412 tasks**, all five answers were wrong under the native scorer. A selector restricted to those answers had no correct answer available. On another **25 tasks**, at least one sample was correct but the vote selected a wrong answer.
 
@@ -96,24 +138,28 @@ This connects to the question left by our Harness² walkthrough, where the edito
 
 ## What Forge let us check
 
-We used CoreWeave Sandboxes for task execution, W&B Inference for solver calls, Agent Lens for stored execution traces, and W&B runs, Tables and artifacts for the results and their versions. The worker returned an answer and its task identity; our runner joined that result to the provider attempt, applied the frozen scorer, and kept the link through export.
+The original controls ran in CoreWeave Sandboxes, with W&B Inference for solver calls, Agent Lens for stored execution traces, and W&B runs, Tables and artifacts for results. For the added context and sampling study, Sandbox access began returning permission errors before measured tests. We ran every new arm through the same reviewed local workers, with worker network access restricted to loopback. That is host execution, not cloud sandbox isolation. Inference and telemetry stayed on Forge.
 
-That join mattered during recovery. One repeat failed after 49 of its 50 calls had completed. The retry reused those 49 saved responses and made the remaining call. We counted the reused responses as task outcomes and preserved the original attempts in the cost ledger. A resumed task result isn't another fresh model draw.
+The worker returned an answer and its task identity. Our runner joined it to the provider attempt, applied the frozen scorer, and kept that link through export. In the follow-up, one batch failed after 97 of its 100 calls completed. Recovery reused those 97 saved responses and requested only the missing three. We counted the reuses as task outcomes and retained the original calls in the cost ledger. They were not new model draws.
 
-We also saw HTTP-success responses whose streams were incomplete. Their status codes didn't establish that we had a complete answer or complete usage. We kept those attempts and their cost bounds separate from the successful retries used in the final comparison.
+Preparation had also exposed our own two-megabyte streaming-response limit. A request returned HTTP 200, but its stream exceeded our limit. We retained that partial attempt, raised the transport allowance before testing, and started the measured follow-up fresh. The model’s output-token budget stayed fixed. Retrying until a response happened to fit would have selected against long answers.
 
-For the repeatability and voting campaign, we verified all **53 export units: 48 Agent Lens exports and five W&B exports**. We read back the saved trace records, native run metrics, configuration lineage and table cells. This checks that the stored evidence matches what we exported. It doesn't validate the semantic meaning of the benchmark's labels.
+The completed follow-up retained **65 interrupted provider attempts with missing usage**. Its usage-priced inference estimate is **$2.7150–$2.9166**, including preparation and all five draws in all four arms. Earlier abandoned preparation costs are recorded separately in the download. Local hardware, telemetry and development time are outside that inference estimate. Connection interruptions also make these run times unsuitable for a deployed-policy latency comparison.
 
-Native EvalTables creation failed in this campaign. We recorded an explicit change to use W&B Tables, then verified that fallback. The Harness² report's working EvalTables panels are evidence from its own campaign; we aren't borrowing them to imply that the new integration succeeded. The new experiment's detailed traces remain access controlled, while the calculation download below contains scores and aggregates without task text or answer labels.
+For the earlier repeatability and voting campaign, we verified all **53 export units: 48 Agent Lens exports and five W&B exports**. For the new study, all **74 units** passed readback: **73 job-attempt exports in Agent Lens, including the failed attempt, and one W&B study export**. We regraded all **8,240 test outcomes**, checked task identities and identical requests within all **1,648 task-and-condition groups**, and read back native metrics, configuration lineage and the study table’s **1,648 rows**.
+
+Some exports were deferred when the first telemetry budget bucket filled. We recovered those saved records using the declared recovery allowance. Agent Lens also displayed zero token counts on failed calls whose usage was absent; we verified their failure metadata and absent raw usage fields while keeping their costs unknown in the ledger. A zero in a trace view was not evidence of a free request.
+
+Native EvalTables creation failed in the earlier campaign. We recorded a switch to W&B Tables and verified it; the follow-up selected W&B Tables from the start. The Harness² report’s working EvalTables panels belong to its own campaign. These readbacks establish that stored evidence matches the exported records, not that benchmark labels are chemically, clinically or legally valid. Detailed traces remain access controlled; the calculation download contains scores and numeric usage without task text or answer labels.
 
 ## The next harness experiment
 
-These controls give us a stronger starting point for agent-driven search. The example-based prompt is the primary baseline. Extra inference needs a comparable sampling control. Small validation gains need repeated measurements, and a selector needs evaluation separate from the generator that produced its candidates.
+For the next search, I’d use the larger example context under common instructions as the primary baseline, and retain both one-answer and five-answer policies with their costs. Five demonstrations did not capture the larger context’s benefit. Five-answer voting did earn a modest gain in the matched follow-up, so an expensive candidate should face that comparator too. Small validation gains still need repeated measurements, and a selector needs evaluation separate from its candidate generator.
 
 We have now inspected these released test outcomes, so I would not use them as an untouched final evaluation while tuning the next method. I'd develop the candidate and selector policies on development data, freeze them, and evaluate on a fresh reserved set with repeated runs. The retained attempt records would let us distinguish a changed procedure from a rerun that happened to go better.
 
 ## Inspect the calculations
 
-The [analysis download](assets/analysis.zip) contains paired correctness rows, validation-repeat outcomes, aggregate voting diagnostics, cost estimates and a small standard-library reproduction script. It recomputes the headline means and paired intervals without model calls. It doesn't contain the task prompts, target labels, private traces or raw model responses.
+The [analysis download](assets/analysis.zip) contains the earlier paired scores and validation repeats, the new 8,240 test outcomes, numeric records for all 8,826 provider attempts in the completed follow-up, and standard-library reproduction scripts. It recomputes the headline means, paired intervals and per-attempt usage prices without model calls. Ordinal answer classes let readers rebuild the votes without seeing answer labels. The download cannot independently regrade withheld answer text; it contains no task prompts, target labels, private traces or raw model responses.
 
 The setup follows the pinned [Meta-Harness text-task example](https://github.com/stanford-iris-lab/meta-harness/tree/f805ad3aa4ada290458c1e0deadbe132fbbdea4e/reference_examples/text_classification). Our scorer and data snapshots stayed fixed across these controls. The comparison is specific to this solver, provider, task selection and prompt implementations; testing a new editor or a new model requires another experiment.

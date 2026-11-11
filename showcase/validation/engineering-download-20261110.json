@@ -1,0 +1,21 @@
+{
+  "schema": "mhforge.article-download-verification/1",
+  "files": [
+    "README.md",
+    "aggregates.json",
+    "engineering-aggregates.json",
+    "engineering-costs.csv",
+    "engineering-scores.csv",
+    "engineering_stats.py",
+    "reproduce.py",
+    "reproduce_engineering.py",
+    "test-scores.csv",
+    "validation-scores.csv"
+  ],
+  "isolated_reproduction_passed": true,
+  "paired_intervals_reproduced": 23,
+  "credential_byte_scan_passed": true,
+  "private_field_scan_passed": true,
+  "local_links_resolve": true,
+  "analysis_zip_sha256": "a5e92349749cba37ac92eea0787075027d668de1ffd3127682de03800b1b1507"
+}

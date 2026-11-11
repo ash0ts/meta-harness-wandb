@@ -1,0 +1,49 @@
+{
+  "schema": "mhforge.engineering-completion/1",
+  "campaign": "mh-engineering-e-20261110",
+  "utc": "2026-11-11T02:35:27.480855+00:00",
+  "complete_jobs": 72,
+  "preparation_outcomes": 520,
+  "test_outcomes_regraded": 8240,
+  "unique_test_tasks": 412,
+  "identical_request_groups": 1648,
+  "export_units_verified": {
+    "agent_lens": 73,
+    "wandb": 1
+  },
+  "table_rows": 1648,
+  "native_numeric_history_summary_lineage_verified": true,
+  "provider_attempts": {
+    "bounded_unknown": 65,
+    "complete": 8760,
+    "rejected": 1
+  },
+  "observed_inference_micro_usd": 2714997,
+  "bounded_unknown_inference_micro_usd": 201578,
+  "audit": {
+    "bounded_unknown_micro": 201578,
+    "calls": 8860,
+    "listed": {
+      "admission_only": [],
+      "limit_exceeded": [],
+      "open_meters": [],
+      "reconciled": [],
+      "repeatable_provider_failure": []
+    },
+    "observed_micro": 2714997,
+    "ok": true,
+    "problems": []
+  },
+  "all_local_worker_exits_recorded": true,
+  "unanswered_relay_requests_at_exit": 0,
+  "open_ledger_jobs": 0,
+  "execution_boundary": "Reviewed local fixed workers with macOS loopback network guard; no cloud sandbox creation in this campaign. Forge Inference and Agent Lens/W&B telemetry.",
+  "source_commit": "f805ad3aa4ada290458c1e0deadbe132fbbdea4e",
+  "engine_sha256": "1364a77188d2b7fda1c2e45e190d44aadf80cfc09f7b4d0b1a682d714b5f9e10",
+  "manifest_sha256": "fbd8e9edfb8172d0c19a2d2bc9de151dfab6b16afe32d49e4d3d212508c749a0",
+  "full_search_executed": false,
+  "published": false,
+  "analysis_script_sha256": "00e122b8b5e76298fa773ecd06006c2812a398121eab9513139c9b2e212861c5",
+  "statistics_script_sha256": "8fce817f977175a39f272dc965410bcc8563925ab6e10856a3e5c35a258c690a",
+  "public_export_script_sha256": "68a0fddba220c5688ecec6bda2f9a4f973538b77b9a056499699713a4776da3a"
+}
