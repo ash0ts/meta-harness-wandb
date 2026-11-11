@@ -1,0 +1,11 @@
+# Adaptive-vote evidence checks and public calculations
+
+These tools do not modify the frozen experimental policy. The measured campaign is still running; this commit does not claim completed results.
+
+After execution, analysis and all Forge exports pass, `verify_adaptive_completion.py --state STATE --metrics NATIVE_METRICS_JSON --output RECEIPT` independently checks block membership, task/sample identities, conditional batch ordering, timed worker/call concurrency, serialized blocks, resource settlement, every planned persisted trace attribute, and the native study table denominator. Heartbeat gaps prevent interpreting the concurrency check as an unqualified timing guarantee. Interrupted decisions have no valid latency sample and remain failed assigned outcomes. Their attempts remain in the cost ledger.
+
+`export_adaptive_download.py --state STATE --metrics NATIVE_METRICS_JSON --output DOWNLOAD` refuses incomplete or unverified studies. It exports only numeric decisions, local ordinal answer classes, per-attempt usage, aggregates and the frozen standard-library estimators. Raw prompts, predictions, targets, task hashes, call identifiers and private trace links remain in protected state. Public numeric records cannot independently regrade withheld answer text.
+
+Copy `download_templates/reproduce_adaptive.py` into DOWNLOAD, then run it there. It recomputes both task-clustered paired intervals, policy accuracy/calls/costs, latency percentiles, every provider-attempt price, and the deterministic same-output vote audit. The three matching labels stopping rule preserves the selected sample for fixed complete outputs; independently executed arms may still return different answers. An interval spanning zero does not establish equivalence.
+
+Before measured execution, the existing full offline campaign reproduced 3,296 decisions with identical resume results. A separate crash-injection run retained one interrupted policy and five attempts with bounded unknown usage; 23 previously unstarted policies then completed without replay. Its public calculator passed on 24 decisions, 91 sample records and 96 provider attempts. The separate live smoke read back 24 turns, 108 LLM spans and 1,524 planned attributes. These are validation checks, not quality results for the measured study.
