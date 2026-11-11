@@ -193,14 +193,16 @@ def _compare(kind: str, ident: str, planned: Mapping, row: Mapping) -> list[str]
             out.append(f"{tag}:response_model")
         usage = planned.get("usage")
         # Agent Lens projects absent token fields as zero. Live evidence covers
-        # replay and rejected-provider spans. Require matching outcome/attempt
+        # replay, rejected-provider and exhausted failed-call spans. Require matching outcome/attempt
         # attributes, explicit unavailable usage, and absent raw usage fields;
         # the ledger's missing-usage reservation is never changed here.
         pa, ra = planned.get("attributes") or {}, _row_attrs(row)
         absent_zero = usage is None and not any(k.startswith('gen_ai.usage.') for k in ra) and any(
-            k.endswith(".outcome") and v in ("replayed", "provider_rejected")
+            k.endswith(".outcome") and v in ("replayed", "provider_rejected", "failed")
             and type(pa.get(prefix + '.provider_attempts')) is int
             and pa[prefix + '.provider_attempts'] >= 0
+            and (v != 'failed' or (pa[prefix + '.provider_attempts'] > 0
+                                  and planned.get('error') is not None and status == 'ERROR'))
             and all(pa.get(prefix + suffix) == value and ra.get(prefix + suffix) == value
                     for suffix, value in ((".outcome", v), (".provider_attempts", pa[prefix + '.provider_attempts']),
                                           (".usage_available", False)))

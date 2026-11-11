@@ -99,6 +99,24 @@ class QueryBodyTest(unittest.TestCase):
 
 
 class VerifyTest(unittest.TestCase):
+    def test_failed_usage_projection_requires_error_and_attempt_evidence(self):
+        attrs={'metaharness.outcome':'failed','metaharness.provider_attempts':3,
+               'metaharness.usage_available':False}
+        time='2026-11-10T00:00:00Z'
+        planned={'started_utc':time,'ended_utc':time,'usage':None,'attributes':attrs,
+                 'error':{'type':'provider_unavailable','message':'attempts exhausted'}}
+        stored={'started_at':time,'ended_at':time,'input_tokens':0,'output_tokens':0,
+                'status_code':'ERROR','raw_span_dump':json.dumps({'attributes':attrs})}
+        self.assertEqual(rb._compare('llm','c',planned,stored),[])
+        for changes in [{'input_tokens':1},{'status_code':'OK'},
+                        {'raw_span_dump':json.dumps({'attributes':{**attrs,'gen_ai.usage.input_tokens':0}})},
+                        {'raw_span_dump':json.dumps({'attributes':{**attrs,'metaharness.usage_available':True}})}]:
+            self.assertIn('llm:c:input_tokens',rb._compare('llm','c',planned,{**stored,**changes}))
+        self.assertIn('llm:c:input_tokens',rb._compare('llm','c',{**planned,'error':None},stored))
+        zero={**attrs,'metaharness.provider_attempts':0}
+        self.assertIn('llm:c:input_tokens',rb._compare('llm','c',{**planned,'attributes':zero},
+            {**stored,'raw_span_dump':json.dumps({'attributes':zero})}))
+
     def test_rejected_usage_projection_requires_absent_raw_counts_and_explicit_unknown(self):
         attrs={'metaharness.outcome':'provider_rejected','metaharness.provider_attempts':1,
                'metaharness.usage_available':False}

@@ -1,0 +1,21 @@
+{
+  "schema": "mhforge.failed-usage-readback/1",
+  "utc": "2026-11-11T02:31:39.202522+00:00",
+  "campaign": "mh-engineering-e-20261110",
+  "observed": "Agent Lens native input/output token columns are 0 for three exhausted failed calls with no raw gen_ai.usage attributes. Error status, failed outcome, provider_attempts=3 and usage_available=false match the immutable plans.",
+  "required_evidence": [
+    "usage is unavailable",
+    "no raw usage attributes",
+    "matching failed outcome and provider attempt count",
+    "positive provider attempt count",
+    "planned error and stored ERROR status"
+  ],
+  "accounting_unchanged": true,
+  "original_unknown_attempts": 65,
+  "original_bounded_unknown_micro_usd": 201578,
+  "saved_native_spans_verify_after_change": true,
+  "tests_passed": 97,
+  "readback_module_sha256": "38baafe341daed29028fe5013833e5927f055d4e669c6d565e681fe19359edab",
+  "test_log_sha256": "6988df050ad59bc8810445d0c030648da7350945bccadf429c64d5edd609eb17",
+  "remote_reread_pending": true
+}
