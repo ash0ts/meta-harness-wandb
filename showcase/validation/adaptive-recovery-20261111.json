@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "interrupted_policies": 1,
+  "bounded_unknown_attempts": 5,
+  "completed_unstarted_policies": 23,
+  "replayed_calls": 0,
+  "dry_exports_passed": true
+}

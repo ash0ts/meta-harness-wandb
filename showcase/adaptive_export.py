@@ -1,5 +1,6 @@
 """Hash-only per-decision Lens turns and a fully regraded W&B study table."""
 from pathlib import Path
+import sqlite3
 from adaptive_core import digest
 from analyze_adaptive import inspect
 from mhforge import util,manifest as mm,cli
@@ -21,7 +22,12 @@ class AdaptiveExporter(Exporter):
             candidate=f"{r['policy']}_t{r['temperature']}_i{r['index']:04}"
             key=f"test.{candidate}.{ds}"+('' if r['repeat']==1 else '.r'+str(r['repeat']))
             records=[util.read_json(p) for p in sorted(self.paths.calls_root.glob(key+'.s*.a1/*.json'))]
-            spans=[ps._llm_span(c,c['outcome'] or 'interrupted',r['example_sha256'],r['ended_utc'],policy.rules_for(m,ds),m,prefix,text) for c in records]
+            for c in records:
+                if not c.get('outcome'):
+                    db=sqlite3.connect('file:'+str(self.paths.ledger)+'?mode=ro',uri=True)
+                    c['attempts']=[{'n':n,'ledger_status':status} for n,status in db.execute('SELECT n,status FROM calls WHERE call_id=?',(c['call_id'],))]
+                    db.close()
+            spans=[ps._llm_span(c,c.get('outcome') or 'interrupted',r['example_sha256'],r['ended_utc'],policy.rules_for(m,ds),m,prefix,text) for c in records]
             attrs=ps._attrs(prefix,dataset=ds,policy=r['policy'],temperature=r['temperature'],repeat=r['repeat'],task_index=r['index'],was_correct=bool(r['correct']),status=r['status'],early_stop=r.get('early_stop',False),logical_calls=len(records),latency_s=r['latency_s'],request_sha256=r['request_sha256'])
             turns.append(ps._turn(f"task-{r['index']}",'fixed-adaptive-vote','1',r['started_utc'],r['ended_utc'],attrs,spans))
         conv={'conversation_id':self.campaign+'-'+digest(u.unit)[:20]+f'-e{k}','name':u.unit,'attributes':ps._attrs(prefix,campaign=self.campaign,cohort=util.read_json(self.paths.root/'adaptive/contract.json')['cohort']),'turns':turns}

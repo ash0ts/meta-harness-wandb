@@ -58,14 +58,18 @@ def inspect(paths,*,require_complete=True,bootstrap=True):
             for p,c in calls:
                 if c['call_id'] in call_ids:raise ValueError('Call counted twice')
                 call_ids.add(c['call_id'])
-                if c['outcome'] in ('replayed','coalesced'):raise ValueError('Fresh-call condition violated')
+                if c.get('outcome') in ('replayed','coalesced'):raise ValueError('Fresh-call condition violated')
                 if c['request_sha256']!=r['request_sha256'] or digest(c['request'])!=r['request_sha256']:raise ValueError('Call request changed')
-                for a in c['attempts']:
-                    match=next(x for x in by_call[c['call_id']] if x['id']==a['ledger_id'])
+                if c.get('outcome'):
+                    if {a['ledger_id'] for a in c['attempts']}!={x['id'] for x in by_call[c['call_id']]}:raise ValueError('Call/ledger attempt membership differs')
+                    for a in c['attempts']:
+                        match=next(x for x in by_call[c['call_id']] if x['id']==a['ledger_id'])
+                        if any(match[x]!=a[y] for x,y in [('status','ledger_status'),('spent_micro','spent_micro'),('reserved_micro','reserved_micro')]):raise ValueError('Ledger and call disagree')
+                # Admission-only gateway files deliberately predate provider execution;
+                # after interruption, the durable ledger owns their bounded attempt facts.
+                for match in by_call[c['call_id']]:
                     if match['id'] in seen:raise ValueError('Attempt counted twice')
-                    seen.add(match['id'])
-                    if c['outcome'] and any(match[x]!=a[y] for x,y in [('status','ledger_status'),('spent_micro','spent_micro'),('reserved_micro','reserved_micro')]):raise ValueError('Ledger and call disagree')
-                    costrows.append(match)
+                    seen.add(match['id']);costrows.append(match)
             costs=settle(costrows,prices)
             samples=r['samples'];labels=[];label_classes={}
             for s in samples:

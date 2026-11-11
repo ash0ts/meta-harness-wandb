@@ -35,6 +35,7 @@ def run(m,paths,contract,inputs,keys,*,offline=False,max_blocks=None):
         def task(block,index):
             task_input=inputs['tasks'][block['dataset']][str(index)];p=record_path(paths,block,index)
             if p.exists():return util.read_json(p)
+            if ledger.halted():raise RuntimeError('Campaign halted; no new policy admission')
             start=time.time();tick=time.monotonic();ds=block['dataset']
             base={k:block[k] for k in ('block_id','pair_id','dataset','temperature','repeat','policy')}
             base.update(index=index,status='started',started_utc=util.utc_iso(start),start_epoch=start,example_sha256=task_input['example_sha256'],target_sha256=task_input['target_sha256'],request_sha256=digest(request_for(task_input,block['temperature'])),samples=[])
@@ -71,6 +72,7 @@ def run(m,paths,contract,inputs,keys,*,offline=False,max_blocks=None):
         for ordinal,block in enumerate(contract['schedule']):
             marker=paths.root/'adaptive/blocks'/(block['block_id']+'.json')
             if marker.exists():continue
+            if ledger.halted():raise RuntimeError('Campaign halted; no new block admission')
             futures=[tasks.submit(task,block,i) for i in block['indices']]
             rows=[f.result() for f in futures]
             util.write_json(marker,{'block':block,'decisions':[str(record_path(paths,block,i).relative_to(paths.root)) for i in block['indices']]},fsync=True)
