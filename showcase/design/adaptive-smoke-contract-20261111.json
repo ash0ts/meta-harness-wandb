@@ -1,0 +1,370 @@
+{
+  "plan": {
+    "schema": "mhforge.adaptive-protocol/1",
+    "policies": [
+      "parallel5",
+      "stop3_else5"
+    ],
+    "temperatures": [
+      0,
+      1
+    ],
+    "repeats": [
+      1,
+      2
+    ],
+    "tasks_per_block": 16,
+    "concurrent_tasks": 4,
+    "concurrent_calls": 20,
+    "order_seed": 20261112,
+    "bootstrap_seed": 20261113,
+    "bootstrap_resamples": 10000,
+    "primary_temperature": 0,
+    "stopping": "Stop after three successful, nonempty, equal normalized labels; otherwise request two more. A transport failure makes the policy unsuccessful.",
+    "selection": "Normalized-label plurality; earliest sample position breaks ties. No target access during selection.",
+    "latency": "Admission to policy worker through answer selection; includes prompt-copy, gateway queue, provider retry/backoff and second batch; excludes waiting for a task-worker slot and export.",
+    "load": "Four admitted tasks at a time within a single-policy block, at most twenty simultaneous provider calls; no competing experimental policy block.",
+    "failure": "Keep every attempt. Transport-exhausted policies score zero and have a separate failure rate. Started policies are never relaunched after a host interruption; their latency is unavailable. Resume only unstarted tasks.",
+    "pause": "Heartbeat every second; gaps exceeding 10 seconds or wall/monotonic disagreement exceeding 5 seconds flag overlapping policies. Report all and unflagged latency separately.",
+    "population": "412 previously inspected released tasks; new model calls, not an untouched test or optimizer result.",
+    "inference": "Same capped large-context prompt, solver and native graders as engineering E; no response reuse across policies, repetitions, temperatures or sample positions.",
+    "execution": "Reviewed fixed Python orchestration on host through the existing metered gateway; no model-generated code, cloud sandbox or worker filesystem/network isolation claim."
+  },
+  "cohort": "smoke",
+  "inputs_sha256": "c061c2a867e08ff9dc6ba7670e0dc11b00ad7c7cbf2ae4b03a2d7b66ab885e7f",
+  "runtime_hashes": {
+    "adaptive_core.py": "a93659e59ef8aa11b02e4debad626afa8595802e341d25a0efda3bcf1ca2a19d",
+    "run_adaptive.py": "2de006e620e27c90fb287997937038549e75517cbfc382a5c03b3abfd37b8f77",
+    "prepare_adaptive.py": "55c0d6507bf437800fdd6f89bb6328cff2afe19653f51a025294193d9eb2064f",
+    "adaptive_export.py": "65d78090c9489ce7fc73c6eabe6b56f3e2137442b60c2d4be62af9e6fd000295",
+    "analyze_adaptive.py": "3f4a85f23ebe223a457e4e36b35a5a3d4bcb2ca12ac0003c01a3d0f279bad58a",
+    "mhforge/__init__.py": "a77c26bdd232fc0df8f0f1893cd6bd206454e2da896f01ca8b809286a24814b2",
+    "mhforge/__main__.py": "6e9e3e7493ca66f0208a2ba9af0fc645855909e374564be0016527763bacd353",
+    "mhforge/audit.py": "a74923341cc93c12d317175dabe348931c2e79ce394a6dd12d77294e1b4ded50",
+    "mhforge/bundle.py": "206f87f8427353c9c9c75982e6edd5e41ca77d3084b6494f039bc80708509254",
+    "mhforge/circuit.py": "de31d1dc7110c221bb7f769de8c0083819778d0967c36e9e35d8482491ab10a3",
+    "mhforge/cli.py": "7e7751d74faac3ffc184577e080e1c103c346995c6b474752ae1ffec4e5331d0",
+    "mhforge/controls.py": "bf93ff0fa7c9c096bff21cf662b61461338b54c481b5bbd8a0ef38b515b663fb",
+    "mhforge/driver.py": "f6a2e0e6cc530dc6146b987fdbff4371c9bc8493c0c918f08a3e7b674f6c0d21",
+    "mhforge/engineering.py": "4edae2bedc2ad6e5cf7591cd40668263091c6ff7af73315c974730c1fa11f4de",
+    "mhforge/errors.py": "0527a1afe348fa13b6a158b9d69025adc5bd9f677d00efc2b5771fbc03bc264a",
+    "mhforge/executors/__init__.py": "2a585147e0977a4e63f840b34084a10bd26282ec74b6e9f6b8c656819bd817a0",
+    "mhforge/executors/local.py": "c742a07e8efbb4790ab306a5af21c9096cff80714eba31856ed61ec45d4867bf",
+    "mhforge/executors/local_relay.py": "4d94784b9f4596349766bc7ff79791f88f80dc1d8777bd562d03b32bcb463722",
+    "mhforge/executors/sandbox.py": "4913493b1e354697de52b7d0fed8513e81338197354fbf69b75bc034791f685b",
+    "mhforge/executors/sandbox_client.py": "17fdf158aedaeeee8214a68ed9773e0da9739c6f77363c468c1f679d2eb44edc",
+    "mhforge/gateway.py": "3fc45f0a0a4115d2947340a7d70cbe922dea02a5b8d816c5808b061857ea3418",
+    "mhforge/ingress_http.py": "90f05d21251dbadc9af83f4d3cd81dbb62356ba1a49ff01b4f0dde3b1c6fc839",
+    "mhforge/insandbox/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "mhforge/insandbox/mhf_capture_entry.py": "765c6b43c4e59733df11b2a73080d00b224dce90fa6cb7036becbeb7216b63ec",
+    "mhforge/insandbox/mhf_frames.py": "b40fc3f859ed07da8fe57edd08773b7249420b661881229636a60de6aae74e85",
+    "mhforge/insandbox/mhf_relay_stub.py": "2fcda0e8d46589444d9e6f75d217b9eec960ef555c099b4808d94ebc142602e7",
+    "mhforge/insandbox/mhf_selfcheck.py": "6016a5903657b868c08fe25845a307ba26b64ba0de68f54ed0587283495bcdca",
+    "mhforge/jobs.py": "27e6f8b8ef998df4894ff20336e4cb6fd1de3191e747ad7aca0de93165071911",
+    "mhforge/journal.py": "3b1829ee9daaf6fb3a3701c87735069344a97a18770c02c589aecc32af48cd11",
+    "mhforge/ledger.py": "bed2c2561981a33838e8a1ace6897787e242481400ded99cbb564b0ca4cde67b",
+    "mhforge/live_probes.py": "94d80b0698f76d523850730568b05cc369303ddaeb2fac6a89a2bcd58e7cedf3",
+    "mhforge/manifest.py": "ff8a292f16ffd8f2f38a3f39623298fab4719a3dbcaee879b30a0054ddee0771",
+    "mhforge/paths.py": "3d225ae6e9bc735ffc1e559f10cc185ff91789e56b90d778a6f5a9fd8676f427",
+    "mhforge/preflight.py": "9c5c2d2ad43e82798c53b09242233b234cc393fc4aab367aede197e7f90da332",
+    "mhforge/procenv.py": "38c110d60fe8da3eeb28527eb131020de3f04ca71e413d11b41665b83c74e6ee",
+    "mhforge/proposer.py": "60c8be3ba4dedd6b275cb2e1a0aa0687637172c7fb574ffd18f1ab86f176d905",
+    "mhforge/proposer_probe.py": "7491468ba4f551621000a9b35bd4b9d84036d6f177776fd1f19005dac52e4b50",
+    "mhforge/proposer_shim.py": "89646594443acd0b1a1aee88e175720021e0eba74ce7f347ccae093a0cf692ea",
+    "mhforge/provider.py": "ac99f29f980da57eebfe45586229583ce3e8239a79cc785cdb3cdcc12825bfe1",
+    "mhforge/publish.py": "41f62903de1dc47780cf83d83990ce8ca2ff634cbeb7ae4e1014c60afa4a59f1",
+    "mhforge/qualification.py": "69fb4cc5da22007d290874b44f54f044a6856683eb03ae34c7fce84b8d18508f",
+    "mhforge/relay.py": "af15c24bf0c8447f89575e37020eac1d98a9472eaf762dcfb76b4361a7b96638",
+    "mhforge/replay.py": "6a721d1caa05e193dae1df31a77576f790bbbcc59a88ea783b15624856a8a9f9",
+    "mhforge/scan.py": "f631be752618f9403b2688b8f7ab6d33f1a3707c8de15b9c2c0025ef5263ea65",
+    "mhforge/smoke.py": "fa41540c80848889b50ca70146b5d9b83ee690a574d96ca9e8f653876233d141",
+    "mhforge/sse.py": "38f6adfc51469ad21aeae290f97aaad9e67c7f6ab82cf95d6dd461838bd60bb1",
+    "mhforge/state.py": "103afaa1b26746913a987966214d06e6be2c0dedebd4e564696e91fe9b0f338a",
+    "mhforge/stubprovider.py": "283dab81fecfee3b4c17220217bc5cf560bfb56f1ce3ee98c946f13fefe92391",
+    "mhforge/telemetry/__init__.py": "5be230fa13a76b43315ce684e1e849c7104db7aa30af69f7d91144b4b665e2d3",
+    "mhforge/telemetry/adapter_agentlens.py": "2afbe13d9ef331a57cdfaf3880fa2eeea788d7e065db86d4a5de0e2a36838e35",
+    "mhforge/telemetry/adapter_wandb.py": "f1d8af6bcf102456db79526da3ad191a680f12bf5896d49d8cdf5697e1fb0ed3",
+    "mhforge/telemetry/exporter.py": "7add06bcc7cd6e8d485abda33d542fa32a09f6333a8f82c168ce73d447201ca9",
+    "mhforge/telemetry/join.py": "d717202167cd37849db433755e25b697e63509e82c57749c16dd073534161bbd",
+    "mhforge/telemetry/plan_runs.py": "82a08f7eb057d5c799443c2f2705ae42934510be6d709d5589ad188784c17edb",
+    "mhforge/telemetry/plan_spans.py": "a4ae80ac2aa71b3db7758207245645fc7038235191a055f93580fcf413d0e1af",
+    "mhforge/telemetry/plan_study.py": "162c1de41095c143516a02e9d7190d57970101916878f6309385c97b00ad1a5f",
+    "mhforge/telemetry/plan_tables.py": "e2a8e0e10f1153c5eecfba8007f53081ee3868486fff2381a22500168efc6d4d",
+    "mhforge/telemetry/policy.py": "8c28a564b46a5edd8c9439666069da093dd7f162f7ea23e1e0f9f9eebd73b875",
+    "mhforge/telemetry/probe.py": "5f07baa7bc86d49662528cbf3d59661a0c3b75249fbcd83c1fcbab59949a476e",
+    "mhforge/telemetry/readback.py": "38baafe341daed29028fe5013833e5927f055d4e669c6d565e681fe19359edab",
+    "mhforge/telemetry/spawn.py": "74fedeff13842c39717c56f671c6c2cb3de39ba81c28ba055b4c8c99f391ae12",
+    "mhforge/telemetry/transcript.py": "5727e66fe012c73abdabc5ded17ca47991c5c6bf71c8eccf20fb3eefb73c7638",
+    "mhforge/util.py": "aea51f362ab1e4365b8b192fcd0acda55782386d2b7f5c79d0edc3b7688bca05",
+    "mhforge/wire.py": "19430ee3caaca5203cdb310fc721c0045768ff076d8239d3497a35c6d5dba6ef",
+    "mhforge/workspace.py": "36ae2b5219d733025d170e7c7ac8f456ca9b489ac7dee2aa99aac06356108d2d"
+  },
+  "schedule": [
+    {
+      "block_id": "USPTO.t0.r1.b000.parallel5",
+      "pair_id": "USPTO.t0.r1.b000",
+      "dataset": "USPTO",
+      "temperature": 0,
+      "repeat": 1,
+      "policy": "parallel5",
+      "indices": [
+        0
+      ]
+    },
+    {
+      "block_id": "USPTO.t0.r1.b000.stop3_else5",
+      "pair_id": "USPTO.t0.r1.b000",
+      "dataset": "USPTO",
+      "temperature": 0,
+      "repeat": 1,
+      "policy": "stop3_else5",
+      "indices": [
+        0
+      ]
+    },
+    {
+      "block_id": "LawBench.t1.r1.b000.stop3_else5",
+      "pair_id": "LawBench.t1.r1.b000",
+      "dataset": "LawBench",
+      "temperature": 1,
+      "repeat": 1,
+      "policy": "stop3_else5",
+      "indices": [
+        0
+      ]
+    },
+    {
+      "block_id": "LawBench.t1.r1.b000.parallel5",
+      "pair_id": "LawBench.t1.r1.b000",
+      "dataset": "LawBench",
+      "temperature": 1,
+      "repeat": 1,
+      "policy": "parallel5",
+      "indices": [
+        0
+      ]
+    },
+    {
+      "block_id": "USPTO.t1.r1.b000.stop3_else5",
+      "pair_id": "USPTO.t1.r1.b000",
+      "dataset": "USPTO",
+      "temperature": 1,
+      "repeat": 1,
+      "policy": "stop3_else5",
+      "indices": [
+        0
+      ]
+    },
+    {
+      "block_id": "USPTO.t1.r1.b000.parallel5",
+      "pair_id": "USPTO.t1.r1.b000",
+      "dataset": "USPTO",
+      "temperature": 1,
+      "repeat": 1,
+      "policy": "parallel5",
+      "indices": [
+        0
+      ]
+    },
+    {
+      "block_id": "LawBench.t1.r2.b000.parallel5",
+      "pair_id": "LawBench.t1.r2.b000",
+      "dataset": "LawBench",
+      "temperature": 1,
+      "repeat": 2,
+      "policy": "parallel5",
+      "indices": [
+        0
+      ]
+    },
+    {
+      "block_id": "LawBench.t1.r2.b000.stop3_else5",
+      "pair_id": "LawBench.t1.r2.b000",
+      "dataset": "LawBench",
+      "temperature": 1,
+      "repeat": 2,
+      "policy": "stop3_else5",
+      "indices": [
+        0
+      ]
+    },
+    {
+      "block_id": "Symptom2Disease.t0.r1.b000.stop3_else5",
+      "pair_id": "Symptom2Disease.t0.r1.b000",
+      "dataset": "Symptom2Disease",
+      "temperature": 0,
+      "repeat": 1,
+      "policy": "stop3_else5",
+      "indices": [
+        0
+      ]
+    },
+    {
+      "block_id": "Symptom2Disease.t0.r1.b000.parallel5",
+      "pair_id": "Symptom2Disease.t0.r1.b000",
+      "dataset": "Symptom2Disease",
+      "temperature": 0,
+      "repeat": 1,
+      "policy": "parallel5",
+      "indices": [
+        0
+      ]
+    },
+    {
+      "block_id": "USPTO.t1.r2.b000.stop3_else5",
+      "pair_id": "USPTO.t1.r2.b000",
+      "dataset": "USPTO",
+      "temperature": 1,
+      "repeat": 2,
+      "policy": "stop3_else5",
+      "indices": [
+        0
+      ]
+    },
+    {
+      "block_id": "USPTO.t1.r2.b000.parallel5",
+      "pair_id": "USPTO.t1.r2.b000",
+      "dataset": "USPTO",
+      "temperature": 1,
+      "repeat": 2,
+      "policy": "parallel5",
+      "indices": [
+        0
+      ]
+    },
+    {
+      "block_id": "USPTO.t0.r2.b000.stop3_else5",
+      "pair_id": "USPTO.t0.r2.b000",
+      "dataset": "USPTO",
+      "temperature": 0,
+      "repeat": 2,
+      "policy": "stop3_else5",
+      "indices": [
+        0
+      ]
+    },
+    {
+      "block_id": "USPTO.t0.r2.b000.parallel5",
+      "pair_id": "USPTO.t0.r2.b000",
+      "dataset": "USPTO",
+      "temperature": 0,
+      "repeat": 2,
+      "policy": "parallel5",
+      "indices": [
+        0
+      ]
+    },
+    {
+      "block_id": "Symptom2Disease.t1.r1.b000.stop3_else5",
+      "pair_id": "Symptom2Disease.t1.r1.b000",
+      "dataset": "Symptom2Disease",
+      "temperature": 1,
+      "repeat": 1,
+      "policy": "stop3_else5",
+      "indices": [
+        0
+      ]
+    },
+    {
+      "block_id": "Symptom2Disease.t1.r1.b000.parallel5",
+      "pair_id": "Symptom2Disease.t1.r1.b000",
+      "dataset": "Symptom2Disease",
+      "temperature": 1,
+      "repeat": 1,
+      "policy": "parallel5",
+      "indices": [
+        0
+      ]
+    },
+    {
+      "block_id": "LawBench.t0.r1.b000.stop3_else5",
+      "pair_id": "LawBench.t0.r1.b000",
+      "dataset": "LawBench",
+      "temperature": 0,
+      "repeat": 1,
+      "policy": "stop3_else5",
+      "indices": [
+        0
+      ]
+    },
+    {
+      "block_id": "LawBench.t0.r1.b000.parallel5",
+      "pair_id": "LawBench.t0.r1.b000",
+      "dataset": "LawBench",
+      "temperature": 0,
+      "repeat": 1,
+      "policy": "parallel5",
+      "indices": [
+        0
+      ]
+    },
+    {
+      "block_id": "Symptom2Disease.t1.r2.b000.stop3_else5",
+      "pair_id": "Symptom2Disease.t1.r2.b000",
+      "dataset": "Symptom2Disease",
+      "temperature": 1,
+      "repeat": 2,
+      "policy": "stop3_else5",
+      "indices": [
+        0
+      ]
+    },
+    {
+      "block_id": "Symptom2Disease.t1.r2.b000.parallel5",
+      "pair_id": "Symptom2Disease.t1.r2.b000",
+      "dataset": "Symptom2Disease",
+      "temperature": 1,
+      "repeat": 2,
+      "policy": "parallel5",
+      "indices": [
+        0
+      ]
+    },
+    {
+      "block_id": "LawBench.t0.r2.b000.parallel5",
+      "pair_id": "LawBench.t0.r2.b000",
+      "dataset": "LawBench",
+      "temperature": 0,
+      "repeat": 2,
+      "policy": "parallel5",
+      "indices": [
+        0
+      ]
+    },
+    {
+      "block_id": "LawBench.t0.r2.b000.stop3_else5",
+      "pair_id": "LawBench.t0.r2.b000",
+      "dataset": "LawBench",
+      "temperature": 0,
+      "repeat": 2,
+      "policy": "stop3_else5",
+      "indices": [
+        0
+      ]
+    },
+    {
+      "block_id": "Symptom2Disease.t0.r2.b000.parallel5",
+      "pair_id": "Symptom2Disease.t0.r2.b000",
+      "dataset": "Symptom2Disease",
+      "temperature": 0,
+      "repeat": 2,
+      "policy": "parallel5",
+      "indices": [
+        0
+      ]
+    },
+    {
+      "block_id": "Symptom2Disease.t0.r2.b000.stop3_else5",
+      "pair_id": "Symptom2Disease.t0.r2.b000",
+      "dataset": "Symptom2Disease",
+      "temperature": 0,
+      "repeat": 2,
+      "policy": "stop3_else5",
+      "indices": [
+        0
+      ]
+    }
+  ],
+  "source_manifest_sha256": "fbd8e9edfb8172d0c19a2d2bc9de151dfab6b16afe32d49e4d3d212508c749a0",
+  "frozen_utc": "2026-11-11T16:45:49.363106Z"
+}
