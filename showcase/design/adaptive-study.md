@@ -25,3 +25,7 @@ Reproduction: `prepare_adaptive.py --source ENGINEERING_E_STATE --template ENGIN
 ## Pre-measurement implementation amendment B
 
 Code review found that an interrupted gateway admission file has no final outcome and may predate its provider-attempt list. Reconciliation now reads bounded attempt facts from the durable ledger for admission-only files without rewriting original call evidence, and Lens exposes their interrupted status. Explicit admission checks stop on a campaign halt. Policy semantics, prompts, membership, schedule and estimators are unchanged. The original full campaign was never executed; its contract remains retained. Smoke uses the original committed engine; the amended engine also gets crash-recovery validation before measured calls.
+
+## Pre-measurement telemetry amendment C
+
+The live smoke export rejected an incorrectly named conversation-name field before emitting any trace. Correct the SDK field and add numeric sample position, within-decision label class, selected-sample flag, chosen position and second-batch decision to Lens. All original smoke inference and failed export receipts remain retained; recover export only with an explicit amendment. No measured inference ran under A or B. C preserves policy semantics, all requests, load, schedule and estimators. The real installed SDK now constructs every conversation/turn/LLM object during offline validation before paid measured execution.

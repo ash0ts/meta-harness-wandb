@@ -8,6 +8,25 @@ from mhforge.ledger import Ledger
 from mhforge.telemetry.exporter import Exporter,ExportUnit,_Built,_sha
 from mhforge.telemetry import plan_spans as ps,plan_runs as pr,policy
 
+def enrich_decisions(plan, paths, manifest):
+    """Expose vote decisions as numeric/hash-only attributes, never answer labels."""
+    prefix=manifest['telemetry']['attribute_prefix']
+    block=plan['unit'].split(':',1)[1]
+    for conv in plan['conversations']:
+        if 'name' in conv:conv['conversation_name']=conv.pop('name')
+        for turn in conv['turns']:
+            index=turn['attributes'][prefix+'.task_index']
+            row=util.read_json(paths.root/'adaptive/decisions'/block/f'{index:04}.json')
+            classes={}; samples={}
+            for sample in row['samples']:
+                samples[sample['call_id']]={'position':sample['position'],'class':classes.setdefault(digest(sample['label']),len(classes)),'nonempty':bool(sample['label'])}
+            turn['attributes'].update(ps._attrs(prefix,turn_key=turn['turn_key'],chosen_position=row.get('chosen_position'),second_batch_requested=row['policy']=='stop3_else5' and len(row['samples'])==5))
+            for span in turn['spans']:
+                sample=samples.get(span['key'])
+                if sample:
+                    span['attributes'].update(ps._attrs(prefix,sample_position=sample['position'],normalized_label_class=sample['class'],normalized_label_nonempty=sample['nonempty'],selected=sample['position']==row.get('chosen_position')))
+    return plan
+
 class AdaptiveExporter(Exporter):
     def discover(self):
         units=[ExportUnit('adaptive:'+p.stem,'job',('agent_lens',),()) for p in sorted((self.paths.root/'adaptive/blocks').glob('*.json'))]
@@ -32,6 +51,7 @@ class AdaptiveExporter(Exporter):
             turns.append(ps._turn(f"task-{r['index']}",'fixed-adaptive-vote','1',r['started_utc'],r['ended_utc'],attrs,spans))
         conv={'conversation_id':self.campaign+'-'+digest(u.unit)[:20]+f'-e{k}','name':u.unit,'attributes':ps._attrs(prefix,campaign=self.campaign,cohort=util.read_json(self.paths.root/'adaptive/contract.json')['cohort']),'turns':turns}
         plan=ps._finish('job',u.unit,m,[conv],export_attempt=k,dataset=ds,text=text,sources=sources,problems=[])
+        plan=enrich_decisions(plan,self.paths,m)
         problems=ps.validate_plan(plan,m)
         if problems:raise ValueError(str(problems))
         return plan
