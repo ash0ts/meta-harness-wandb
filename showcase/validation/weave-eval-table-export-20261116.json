@@ -1,0 +1,13 @@
+{
+  "project": "wandb/mh-forge-preflight-20261110",
+  "backend": "weave",
+  "rows_per_arm": 412,
+  "arms_logged": 4,
+  "total_cells": 1648,
+  "eval_table_run_urls": {
+    "direct-zero-shot": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/v1fjgza0",
+    "retrieved-fewshot": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/70tx4nry",
+    "retrieved-vote-5": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/dphijrid",
+    "retrieved-sample-1": "https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110/runs/r22jfuhh"
+  }
+}

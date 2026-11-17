@@ -1,6 +1,6 @@
 # Forge SDK reference (from installed source)
 
-Read from `/Users/ashah/rsi/forge-sdk-venv/lib/python3.13/site-packages` (written `SP/` below): coreweave 0.1.0b0, wandb 0.31.0,
+Read from `.venv/lib/python3.13/site-packages` (written `SP/` below): coreweave 0.1.0b0, wandb 0.31.0,
 cwevals 0.0.1b1 (import name `coreweave_evaluations`), wandb-workspaces 0.4.13, opentelemetry-sdk 1.45.2, exporter-otlp-proto-http 1.45.2,
 cwsandbox 1.27.0 (env vars only). Every statement cites `file:line`. Introspection ran isolated (`env -i`, `-I`, `WANDB_MODE=disabled`, empty HOME
 and cwd); nothing logged in, started a run or sent a request. [live] marks what only a live call can settle.

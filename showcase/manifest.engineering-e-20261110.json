@@ -18,10 +18,10 @@
   "upstream": {
     "repo": "https://github.com/stanford-iris-lab/meta-harness",
     "commit": "f805ad3aa4ada290458c1e0deadbe132fbbdea4e",
-    "example_dir": "/Users/ashah/rsi/meta-harness-wandb/reference_examples/text_classification",
+    "example_dir": "reference_examples/text_classification",
     "tree_sha256": "8f2e6831b4e0db92bf083f3161d6329a1279ba18637bffb33c7cac64a872f057",
     "worker_lock_sha256": "b4b08cf476c9963293879afbdc39b7b32f2919a577b563567632f8e03da19bd4",
-    "worker_python": "/Users/ashah/rsi/meta-harness-wandb/reference_examples/text_classification/.venv/bin/python",
+    "worker_python": "reference_examples/text_classification/.venv/bin/python",
     "expect": {
       "model": "openrouter/openai/gpt-oss-120b",
       "model_short": "gpt-oss-120b",
@@ -323,7 +323,7 @@
     "max_text_chars": 20000
   },
   "proposer": {
-    "cli_path": "/Users/ashah/Library/Application Support/Claude/claude-code/2.1.317/91184d3d9ba3/claude.app/Contents/MacOS/claude",
+    "cli_path": "claude",
     "cli_sha256": "577c8ac6411ef57dd741e3c491e89f57ff6f42bb835a5ac5d4f496c29f14c5d5",
     "cli_version": "2.1.317",
     "model": "opus",

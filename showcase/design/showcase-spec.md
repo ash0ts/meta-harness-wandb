@@ -10,7 +10,7 @@ An implementer gets this spec, the upstream code and the list of files they own.
 
 | Tag | Path |
 |---|---|
-| `REPO` | `/Users/ashah/rsi/meta-harness-wandb` |
+| `REPO` | `.` |
 | `EX` | `REPO/reference_examples/text_classification` (upstream example at `f805ad3`; never edited) |
 | `SC` | `REPO/showcase` (everything this build creates) |
 | `STATE` | `SC/state/<campaign>` (git-ignored run state) |

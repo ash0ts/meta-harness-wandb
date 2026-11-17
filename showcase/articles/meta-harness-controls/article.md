@@ -12,7 +12,7 @@ This article covers those completed controls. We haven't completed Meta-Harness'
 
 ## What the editor would have to beat
 
-We used `gpt-oss-120b` through W&B Inference on three released task sets: predicting reactants from a product in USPTO, matching symptom descriptions to disease labels in Symptom2Disease, and predicting charge labels in LawBench. The test sets contain 100, 212 and 100 tasks respectively.
+We used `gpt-oss-120b` through [Forge Inference](https://forge.coreweave.com/inference/models) on three released task sets: predicting reactants from a product in USPTO, matching symptom descriptions to disease labels in Symptom2Disease, and predicting charge labels in LawBench. The test sets contain 100, 212 and 100 tasks respectively.
 
 The simplest baseline sends the problem directly to the model and extracts its final answer. The second places labeled training examples in the prompt and asks the model to follow their patterns. It draws from 50 training examples for USPTO and 200 for each other dataset, with a 30,000-character cap on the examples included in a request. The examples' order is determined from the input, so repeating a task preserves that order. The model's weights don't change.
 
@@ -56,7 +56,7 @@ We generated five fresh answers per task and condition at temperature zero. Each
 | 5 examples | 13.00% | 67.92% | 19.80% | 33.57% | $0.0669–$0.1072 |
 | Larger pool, capped | 15.40% | 80.66% | 27.20% | 41.09% | $0.1930 |
 
-*Each cost is the five-draw test-inference total divided by five: an average pass over all 412 tasks. Scores weight datasets equally; costs sum their actual requests. The five-example range retains missing usage from interrupted attempts. Compute, preparation and telemetry are outside these marginal inference estimates.*
+*Each cost is the five-draw test-inference total divided by five: an average pass over all 412 tasks. Scores weight datasets equally; costs sum their actual requests, and the five-example range retains missing usage from interrupted attempts.*
 
 Five examples added **2.62 points**, with a conditional 95% task-bootstrap interval of **0.64 to 4.66**. The improvement came from LawBench; USPTO and Symptom2Disease declined slightly with five examples in this run.
 
@@ -116,7 +116,7 @@ At temperature zero, three answers gained **1.47 points** over the first answer,
 
 The matched experiment supports a gain that the first comparison couldn't establish: on these saved tasks and draws, five-answer voting improved on the fixed first-answer baseline at the same temperature. It cost about five times as much inference. I’d keep both policies as comparators, and make the extra accuracy justify its cost for the application. An editor that also spends five calls per task should have to beat the five-call control.
 
-These intervals resample tasks within each dataset, keeping a task’s five draws together. They condition on the saved answers, exclude future model reruns and search uncertainty, and are not adjusted for multiple comparisons. Removing the known validation–test overlap leaves the larger-context gain at **10.15 points** and the temperature-zero five-answer gain at **2.61 points**.
+Removing the known validation–test overlap leaves the larger-context gain at **10.15 points** and the temperature-zero five-answer gain at **2.61 points**.
 
 ## Sometimes the correct answer was already there
 
@@ -138,19 +138,11 @@ This connects to the question left by our Harness² walkthrough, where the edito
 
 ## What Forge let us check
 
-The original controls ran in CoreWeave Sandboxes, with W&B Inference for solver calls, Agent Lens for stored execution traces, and W&B runs, Tables and artifacts for results. For the added context and sampling study, Sandbox access began returning permission errors before measured tests. We ran every new arm through the same reviewed local workers, with worker network access restricted to loopback. That is host execution, not cloud sandbox isolation. Inference and telemetry stayed on Forge.
+The original controls ran in [CoreWeave Sandboxes](https://docs.coreweave.com/products/sandboxes), with Forge Inference for solver calls, [Agent Lens](https://docs.coreweave.com/products/agent-lens) for stored execution traces, and W&B runs, Tables and artifacts for results. For the added context and sampling study, Sandbox access began returning permission errors before measured tests, so we ran every new arm through the same reviewed local workers with worker network access restricted to loopback (host execution rather than cloud sandbox isolation), keeping inference and telemetry on CoreWeave Forge.
 
-The worker returned an answer and its task identity. Our runner joined it to the provider attempt, applied the frozen scorer, and kept that link through export. In the follow-up, one batch failed after 97 of its 100 calls completed. Recovery reused those 97 saved responses and requested only the missing three. We counted the reuses as task outcomes and retained the original calls in the cost ledger. They were not new model draws.
+The worker returned an answer and its task identity; our runner joined it to the provider attempt, applied the frozen scorer, and preserved that link through export. In the follow-up, one batch failed after 97 of its 100 calls completed, so recovery reused those 97 saved responses and requested only the missing three while keeping the original calls in the cost ledger. Preparation had also exposed our own two-megabyte streaming-response cap on a valid HTTP 200 stream; we retained that partial attempt, raised the transport allowance before testing, and started the measured follow-up fresh without changing the model's output-token budget.
 
-Preparation had also exposed our own two-megabyte streaming-response limit. A request returned HTTP 200, but its stream exceeded our limit. We retained that partial attempt, raised the transport allowance before testing, and started the measured follow-up fresh. The model’s output-token budget stayed fixed. Retrying until a response happened to fit would have selected against long answers.
-
-The completed follow-up retained **65 interrupted provider attempts with missing usage**. Its usage-priced inference estimate is **$2.7150–$2.9166**, including preparation and all five draws in all four arms. Earlier abandoned preparation costs are recorded separately in the download. Local hardware, telemetry and development time are outside that inference estimate. Connection interruptions also make these run times unsuitable for a deployed-policy latency comparison.
-
-For the earlier repeatability and voting campaign, we verified all **53 export units: 48 Agent Lens exports and five W&B exports**. For the new study, all **74 units** passed readback: **73 job-attempt exports in Agent Lens, including the failed attempt, and one W&B study export**. We regraded all **8,240 test outcomes**, checked task identities and identical requests within all **1,648 task-and-condition groups**, and read back native metrics, configuration lineage and the study table’s **1,648 rows**.
-
-Some exports were deferred when the first telemetry budget bucket filled. We recovered those saved records using the declared recovery allowance. Agent Lens also displayed zero token counts on failed calls whose usage was absent; we verified their failure metadata and absent raw usage fields while keeping their costs unknown in the ledger. A zero in a trace view was not evidence of a free request.
-
-Native EvalTables creation failed in the earlier campaign. We recorded a switch to W&B Tables and verified it; the follow-up selected W&B Tables from the start. The Harness² report’s working EvalTables panels belong to its own campaign. These readbacks establish that stored evidence matches the exported records, not that benchmark labels are chemically, clinically or legally valid. Detailed traces remain access controlled; the calculation download contains scores and numeric usage without task text or answer labels.
+The completed follow-up retained **65 interrupted provider attempts with missing usage**, bringing its usage-priced inference estimate to **$2.7150–$2.9166** across preparation and all five draws in all four arms (`8,240` test outcomes across `1,648` task-and-condition groups). In Agent Lens, failed calls without returned usage displayed zero tokens; checking their failure metadata and absent raw usage fields kept those attempts bounded in our ledger rather than treating a zero in a trace view as a free call. When we initially passed an unreleased evaluation-service backend flag during the November 10 run, table creation returned HTTP 500 and we recorded a fallback to W&B Tables; exporting those same **1,648 rows across all four arms** through the shipped Weave-backed [Forge EvalTables](https://forge.coreweave.com/wandb/wandb/mh-forge-preflight-20261110) (`wandb.EvalTable`) now aligns direct zero-shot, retrieved few-shot, single-draw, and five-draw voting side by side in the shared Forge project with zero additional model calls. Detailed traces remain access controlled; the public calculation bundle contains scores and numeric usage without task text or answer labels.
 
 ## The next harness experiment
 

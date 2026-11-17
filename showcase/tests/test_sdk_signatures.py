@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 """The two adapters against the installed SDKs (wandb 0.31.0, coreweave 0.1.0b0, cwevals 0.0.1b1, OpenTelemetry 1.45.2).
 
-Skipped as a whole when the SDKs are not importable (the system python3). Under /Users/ashah/rsi/forge-sdk-venv it runs
+Skipped as a whole when the SDKs are not importable (the system python3). Under .venv it runs
 every SDK operation the adapters make with the adapters' own code, against the real classes and signatures:
 
 - Agent Lens span objects, messages, parts and usage are the real pydantic models (they validate every plan of the test
@@ -14,7 +14,7 @@ every SDK operation the adapters make with the adapters' own code, against the r
   name, primitive-type and type-merge functions and its constants.
 
 Run it isolated:  cd <empty dir> && env -i HOME=<empty> PATH=/usr/bin:/bin WANDB_MODE=disabled \
-    /Users/ashah/rsi/forge-sdk-venv/bin/python -I -m unittest discover -s <showcase>/tests -t <showcase> -p test_sdk_signatures.py
+    .venv/bin/python -I -m unittest discover -s <showcase>/tests -t <showcase> -p test_sdk_signatures.py
 """
 
 from __future__ import annotations

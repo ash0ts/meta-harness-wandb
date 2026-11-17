@@ -1,9 +1,9 @@
 # SDK conformance: Forge telemetry adapters
 
 Scope: `mhforge/telemetry/adapter_agentlens.py`, `mhforge/telemetry/adapter_wandb.py`, `mhforge/telemetry/spawn.py`,
-`procenv.exporter_env`, checked against the installed SDKs in `/Users/ashah/rsi/forge-sdk-venv` (wandb 0.31.0,
+`procenv.exporter_env`, checked against the installed SDKs in `.venv` (wandb 0.31.0,
 coreweave 0.1.0b0, cwevals 0.0.1b1 as `coreweave_evaluations`, OpenTelemetry 1.45.2, pydantic 2.14.3). `SP/` =
-`/Users/ashah/rsi/forge-sdk-venv/lib/python3.13/site-packages`; `AL/` = `SP/coreweave/forge/agentlens/tracing/`;
+`.venv/lib/python3.13/site-packages`; `AL/` = `SP/coreweave/forge/agentlens/tracing/`;
 `WB/` = `SP/wandb/`; `OT/` = `SP/opentelemetry/`. Reference: `sdk-reference.md`; decisions: `lead-decisions.md` LD7-LD9.
 
 Introspection ran isolated (`env -i`, `-I`, empty HOME and cwd, `WANDB_MODE=disabled`). Nothing logged in, started a run,
